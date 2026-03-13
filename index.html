@@ -296,7 +296,12 @@
             font-size: 0.9rem;
         }
 
-        input, select, textarea {
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
             width: 100%;
             padding: 12px 14px;
             border: 2px solid var(--border-color);
@@ -309,10 +314,23 @@
             appearance: none;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: var(--primary-yellow);
             box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        input[type="checkbox"] {
+            width: 24px !important;
+            height: 24px !important;
+            cursor: pointer;
+            accent-color: var(--primary-yellow);
+            margin-right: 0.8rem;
         }
 
         .form-row {
@@ -336,7 +354,7 @@
         /* BOYA BÖLÜMÜ */
         .legend {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 1rem;
             margin: 1.5rem 0;
             padding: 1rem;
@@ -351,33 +369,35 @@
         }
 
         .legend-color {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 4px;
+            border: 2px solid #000;
         }
 
         .car-diagram {
             background: var(--white);
-            padding: 2rem;
+            padding: 2rem 1rem;
             border-radius: 8px;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             border: 2px solid var(--border-color);
+            text-align: center;
         }
 
         .car-view {
-            text-align: center;
             margin-bottom: 2rem;
         }
 
         .car-view h5 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--primary-black);
             font-weight: 700;
+            font-size: 1.1rem;
         }
 
         .car-svg {
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
             height: auto;
             margin: 0 auto;
             display: block;
@@ -386,6 +406,7 @@
         .damage-table-section {
             overflow-x: auto;
             margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         .damage-table {
@@ -395,20 +416,20 @@
         }
 
         .damage-table thead {
-            background: var(--primary-yellow);
-            color: var(--primary-black);
+            background: #DC143C;
+            color: white;
         }
 
         .damage-table th {
-            padding: 1rem;
+            padding: 12px 8px;
             font-weight: 700;
             text-align: center;
             border: 1px solid var(--border-color);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .damage-table td {
-            padding: 0.8rem;
+            padding: 10px 8px;
             border: 1px solid var(--border-color);
             text-align: center;
         }
@@ -417,13 +438,15 @@
             text-align: left;
             font-weight: 600;
             background: var(--light-bg);
+            padding: 10px 12px;
         }
 
         .damage-table input[type="radio"] {
             width: 20px;
             height: 20px;
             cursor: pointer;
-            accent-color: var(--primary-yellow);
+            accent-color: #4169E1;
+            margin: 0;
         }
 
         .damage-table tbody tr:hover {
@@ -464,9 +487,9 @@
         }
 
         .tramer-option input[type="radio"]:checked + label {
-            background: var(--primary-yellow);
-            color: var(--primary-black);
-            border-color: var(--primary-yellow);
+            background: #4169E1;
+            color: white;
+            border-color: #4169E1;
         }
 
         .tramer-details {
@@ -480,9 +503,12 @@
             display: block;
         }
 
-        .tramer-details textarea {
-            min-height: 80px;
-            resize: vertical;
+        .tramer-details .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .tramer-details input[type="number"] {
+            width: 100%;
         }
 
         .btn-container {
@@ -608,16 +634,15 @@
 
         .checkbox-wrapper {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 0.8rem;
             margin: 1.5rem 0;
         }
 
         .checkbox-wrapper input[type="checkbox"] {
-            width: 24px;
-            height: 24px;
+            width: 24px !important;
+            height: 24px !important;
             cursor: pointer;
-            margin-top: 2px;
             flex-shrink: 0;
             accent-color: var(--primary-yellow);
         }
@@ -626,6 +651,7 @@
             margin-bottom: 0;
             cursor: pointer;
             font-weight: 500;
+            margin: 0;
         }
 
         @media (max-width: 768px) {
@@ -634,11 +660,17 @@
             }
 
             .damage-table {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
 
-            .damage-table th, .damage-table td {
-                padding: 0.5rem;
+            .damage-table th,
+            .damage-table td {
+                padding: 6px 4px;
+            }
+
+            .damage-table input[type="radio"] {
+                width: 16px;
+                height: 16px;
             }
         }
 
@@ -891,7 +923,7 @@
                                 <h4>Ekspertiz Tanımları</h4>
                                 <div class="legend">
                                     <div class="legend-item">
-                                        <div class="legend-color" style="background-color: #ffffff; border: 2px solid #000;"></div>
+                                        <div class="legend-color" style="background-color: #ffffff;"></div>
                                         <span>Orijinal</span>
                                     </div>
                                     <div class="legend-item">
@@ -915,40 +947,89 @@
                                 <div class="car-diagram">
                                     <div class="car-view">
                                         <h5>ARKA</h5>
-                                        <svg viewBox="0 0 300 400" class="car-svg">
-                                            <circle cx="60" cy="80" r="35" fill="none" stroke="#000" stroke-width="2"/>
-                                            <circle cx="60" cy="80" r="30" fill="none" stroke="#000" stroke-width="1"/>
-                                            <circle cx="240" cy="80" r="35" fill="none" stroke="#000" stroke-width="2"/>
-                                            <circle cx="240" cy="80" r="30" fill="none" stroke="#000" stroke-width="1"/>
-                                            <rect x="80" y="40" width="140" height="30" fill="#999" stroke="#000" stroke-width="2" rx="5"/>
-                                            <rect x="70" y="70" width="160" height="200" fill="#ddd" stroke="#000" stroke-width="2" rx="5"/>
-                                            <rect x="85" y="80" width="65" height="60" fill="#e0e0ff" stroke="#000" stroke-width="1"/>
-                                            <rect x="150" y="80" width="65" height="60" fill="#e0e0ff" stroke="#000" stroke-width="1"/>
-                                            <rect x="70" y="150" width="75" height="90" fill="none" stroke="#000" stroke-width="2" id="left-rear-door"/>
-                                            <rect x="155" y="150" width="75" height="90" fill="none" stroke="#000" stroke-width="2" id="right-rear-door"/>
-                                            <rect x="85" y="260" width="130" height="50" fill="none" stroke="#000" stroke-width="2" id="trunk"/>
-                                            <path d="M 70 130 L 60 200 L 70 220" fill="none" stroke="#000" stroke-width="2" id="left-rear-fender"/>
-                                            <path d="M 230 130 L 240 200 L 230 220" fill="none" stroke="#000" stroke-width="2" id="right-rear-fender"/>
+                                        <svg viewBox="0 0 300 500" class="car-svg">
+                                            <!-- Tekerler -->
+                                            <circle cx="80" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="80" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="80" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
+                                            <circle cx="220" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="220" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="220" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Alt tekerler -->
+                                            <circle cx="80" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="80" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="80" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
+                                            <circle cx="220" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="220" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="220" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Araç gövdesi -->
+                                            <path d="M 50 100 L 50 180 L 40 220 L 40 360 L 50 380 L 50 420 L 60 430 L 240 430 L 250 420 L 250 380 L 260 360 L 260 220 L 250 180 L 250 100 Z" fill="#ccc" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Üst kısım -->
+                                            <path d="M 70 140 L 70 180 L 230 180 L 230 140 Q 150 120 150 120 Q 150 120 70 140" fill="#999" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Cam -->
+                                            <rect x="75" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
+                                            <rect x="155" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Kapılar -->
+                                            <rect id="left-rear-door" x="50" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
+                                            <rect id="right-rear-door" x="170" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Bagaj -->
+                                            <rect id="trunk" x="70" y="350" width="160" height="70" fill="none" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Çamurluklar -->
+                                            <path id="left-rear-fender" d="M 40 180 L 30 280 L 40 360" fill="none" stroke="#000" stroke-width="2"/>
+                                            <path id="right-rear-fender" d="M 260 180 L 270 280 L 260 360" fill="none" stroke="#000" stroke-width="2"/>
                                         </svg>
                                         <h5 style="margin-top: 1rem;">ÖN</h5>
                                     </div>
 
                                     <div class="car-view">
                                         <h5>ÖN</h5>
-                                        <svg viewBox="0 0 300 400" class="car-svg">
-                                            <circle cx="60" cy="80" r="35" fill="none" stroke="#000" stroke-width="2"/>
-                                            <circle cx="60" cy="80" r="30" fill="none" stroke="#000" stroke-width="1"/>
-                                            <circle cx="240" cy="80" r="35" fill="none" stroke="#000" stroke-width="2"/>
-                                            <circle cx="240" cy="80" r="30" fill="none" stroke="#000" stroke-width="1"/>
-                                            <rect x="80" y="40" width="140" height="30" fill="#999" stroke="#000" stroke-width="2" rx="5"/>
-                                            <rect x="70" y="70" width="160" height="200" fill="#ddd" stroke="#000" stroke-width="2" rx="5"/>
-                                            <rect x="85" y="50" width="130" height="25" fill="none" stroke="#000" stroke-width="2" id="hood"/>
-                                            <rect x="85" y="80" width="65" height="60" fill="#e0e0ff" stroke="#000" stroke-width="1"/>
-                                            <rect x="150" y="80" width="65" height="60" fill="#e0e0ff" stroke="#000" stroke-width="1"/>
-                                            <rect x="70" y="150" width="75" height="90" fill="none" stroke="#000" stroke-width="2" id="left-front-door"/>
-                                            <rect x="155" y="150" width="75" height="90" fill="none" stroke="#000" stroke-width="2" id="right-front-door"/>
-                                            <path d="M 70 130 L 60 200 L 70 220" fill="none" stroke="#000" stroke-width="2" id="left-front-fender"/>
-                                            <path d="M 230 130 L 240 200 L 230 220" fill="none" stroke="#000" stroke-width="2" id="right-front-fender"/>
+                                        <svg viewBox="0 0 300 500" class="car-svg">
+                                            <!-- Tekerler -->
+                                            <circle cx="80" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="80" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="80" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
+                                            <circle cx="220" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="220" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="220" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Alt tekerler -->
+                                            <circle cx="80" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="80" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="80" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
+                                            <circle cx="220" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
+                                            <circle cx="220" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
+                                            <circle cx="220" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Araç gövdesi -->
+                                            <path d="M 50 100 L 50 180 L 40 220 L 40 360 L 50 380 L 50 420 L 60 430 L 240 430 L 250 420 L 250 380 L 260 360 L 260 220 L 250 180 L 250 100 Z" fill="#ccc" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Kaput -->
+                                            <rect id="hood" x="70" y="100" width="160" height="40" fill="none" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Üst kısım -->
+                                            <path d="M 70 140 L 70 180 L 230 180 L 230 140 Q 150 120 150 120 Q 150 120 70 140" fill="#999" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Cam -->
+                                            <rect x="75" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
+                                            <rect x="155" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
+
+                                            <!-- Kapılar -->
+                                            <rect id="left-front-door" x="50" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
+                                            <rect id="right-front-door" x="170" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Çamurluklar -->
+                                            <path id="left-front-fender" d="M 40 180 L 30 280 L 40 360" fill="none" stroke="#000" stroke-width="2"/>
+                                            <path id="right-front-fender" d="M 260 180 L 270 280 L 260 360" fill="none" stroke="#000" stroke-width="2"/>
+
+                                            <!-- Ön tampon -->
+                                            <rect x="45" y="420" width="210" height="10" fill="#555" stroke="#000" stroke-width="1"/>
                                         </svg>
                                         <h5 style="margin-top: 1rem;">ÖN</h5>
                                     </div>
@@ -1075,8 +1156,10 @@
                                 </div>
 
                                 <div id="tramerDetails" class="tramer-details">
-                                    <label for="tramerInfo">Tramer hasarı hakkında bilgi giriniz</label>
-                                    <textarea id="tramerInfo" placeholder="Örn: Ön tampon çizik, arka çamurluk deformasyonu..."></textarea>
+                                    <div class="form-group">
+                                        <label for="tramerPrice">Tahmini Tramer Fiyatı (₺)</label>
+                                        <input type="number" id="tramerPrice" placeholder="Fiyat giriniz" min="0">
+                                    </div>
                                 </div>
                             </div>
 
@@ -1165,7 +1248,7 @@
                             <div id="summaryContent" style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; font-size: 0.9rem;"></div>
 
                             <div class="checkbox-wrapper">
-                                <input type="checkbox" id="agreement" required>
+                                <input type="checkbox" id="agreement">
                                 <label for="agreement">Bilgilerim doğru ve gönderilmesini onaylıyorum</label>
                             </div>
 
@@ -1250,7 +1333,7 @@
             });
         }
 
-        function toggleTramerDetails() {
+                function toggleTramerDetails() {
             const selected = document.querySelector('input[name="tramerStatus"]:checked');
             const tramerDetailsDiv = document.getElementById('tramerDetails');
             
@@ -1258,7 +1341,7 @@
                 tramerDetailsDiv.classList.add('show');
             } else {
                 tramerDetailsDiv.classList.remove('show');
-                document.getElementById('tramerInfo').value = '';
+                document.getElementById('tramerPrice').value = '';
             }
         }
 
@@ -1337,7 +1420,7 @@
 
         function generateSummary() {
             const summary = document.getElementById('summaryContent');
-            const tramerInfo = document.getElementById('tramerInfo').value;
+            const tramerPrice = document.getElementById('tramerPrice').value;
             
             const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
             
@@ -1356,7 +1439,95 @@
                 paintInfo = '<strong>🎨 Boya Durumu:</strong> Tümü Orijinal<br>';
             }
 
+            let tramerInfo = '<strong>⚙️ Tramer:</strong> ' + document.querySelector('input[name="tramerStatus"]:checked').value;
+            if (tramerPrice) {
+                tramerInfo += ' (₺' + tramerPrice + ')';
+            }
+
             summary.innerHTML = `
                 <strong>🚗 Araç:</strong> ${document.getElementById('brand').value} ${document.getElementById('model').value}<br>
                 <strong>📅 Yıl:</strong> ${document.getElementById('year').value}<br>
-                <strong>
+                <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
+                <strong>🔧 Motor:</strong> ${document.getElementById('engineSize').value}<br>
+                <strong>💨 Beygir:</strong> ${document.getElementById('horsepower').value}<br>
+                ${paintInfo}
+                ${tramerInfo}<br>
+                <strong>📋 Ad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+                <strong>📱 Tel:</strong> ${document.getElementById('phone').value}
+            `;
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.textContent = '⚠️ ' + message;
+            errorBox.style.display = 'block';
+            setTimeout(() => {
+                errorBox.style.display = 'none';
+            }, 4000);
+        }
+
+        function submitForm() {
+            if (!document.getElementById('agreement').checked) {
+                showError('Lütfen koşulları onaylayınız');
+                return;
+            }
+
+            const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
+            
+            let paintData = {};
+            parts.forEach(part => {
+                const selected = document.querySelector(`input[name="${part}"]:checked`);
+                if (selected) {
+                    paintData[part] = selected.value;
+                }
+            });
+
+            const formData = {
+                referenceCode: 'OS-' + Date.now(),
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                year: document.getElementById('year').value,
+                mileage: document.getElementById('mileage').value,
+                bodyType: document.getElementById('bodyType').value,
+                color: document.getElementById('color').value,
+                fuel: document.getElementById('fuel').value,
+                transmission: document.getElementById('transmission').value,
+                engineSize: document.getElementById('engineSize').value,
+                horsepower: document.getElementById('horsepower').value,
+                wheelDrive: document.getElementById('wheelDrive').value,
+                paintData: JSON.stringify(paintData),
+                tramerStatus: document.querySelector('input[name="tramerStatus"]:checked').value,
+                tramerPrice: document.getElementById('tramerPrice').value || '0',
+                hasAccident: document.getElementById('hasAccident').value,
+                interiorCondition: document.getElementById('interiorCondition').value,
+                defects: document.getElementById('defects').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+                district: document.getElementById('district').value,
+                submittedAt: new Date().toLocaleString('tr-TR')
+            };
+
+            let submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
+            submissions.push(formData);
+            localStorage.setItem('otosellSubmissions', JSON.stringify(submissions));
+
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            document.getElementById('displayPhone').textContent = formData.phone;
+            
+            if (formData.email) {
+                document.getElementById('emailDisplay').style.display = 'block';
+                document.getElementById('displayEmail').textContent = formData.email;
+            }
+            
+            document.getElementById('referenceCode').textContent = formData.referenceCode;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        loadYears();
+    </script>
+</body>
+</html>
