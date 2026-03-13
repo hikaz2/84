@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTOSELL - Araç Değerleme Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-black: #1a1a1a;
+            --text-dark: #2a2a2a;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+            --light-bg: #f5f5f5;
+            --white: #fff;
+            --shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+            letter-spacing: 3px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23FFD700" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="1200" height="600" fill="%231a1a1a"/><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--white);
+            padding: 200px 20px 150px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '🚗';
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 150px;
+            opacity: 0.15;
+            animation: driveCar 15s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(40px); }
+        }
+
+        @keyframes driveCar {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1200px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: #ddd;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--primary-black);
+            border: none;
+            padding: 18px 60px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(255,215,0,0.4);
+        }
+
+        /* FORM SECTION */
+        .form-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #f5f5f5 0%, #fff 50%, #f5f5f5 100%);
+        }
+
+        .form-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+            font-weight: 900;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        .form-container {
+            background: var(--white);
+            padding: 4rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 5px solid var(--primary-yellow);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            width: 20%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px rgba(255,215,0,0.3);
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--light-bg);
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 0.7rem;
+            color: var(--text-light);
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .step.active .step-number {
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+            transform: scale(1.1);
+        }
+
+        .step.completed .step-number {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--primary-black);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            font-size: 0.97rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 12px rgba(255,215,0,0.2);
+            background: #fffef5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* HASAR SEÇENEKLERİ */
+        .damage-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .damage-option {
+            position: relative;
+        }
+
+        .damage-option input[type="radio"] {
+            display: none;
+        }
+
+        .damage-option label {
+            display: block;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0;
+            background: var(--light-bg);
+            font-weight: 600;
+        }
+
+        .damage-option input[type="radio"]:checked + label {
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+        }
+
+        .btn-secondary {
+            background: var(--light-bg);
+            color: var(--primary-black);
+            border: 2px solid var(--border-color);
+            padding: 14px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            flex: 1;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+            border-color: var(--primary-black);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--primary-black);
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            flex: 1;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.2);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,215,0,0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            flex: 1;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76,175,80,0.4);
+        }
+
+        /* SUCCESS MESSAGE */
+        .success-message {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            box-shadow: var(--shadow);
+            border-top: 5px solid #fff;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: successAnim 0.6s ease-out;
+        }
+
+        @keyframes successAnim {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: successBounce 0.6s ease-out;
+        }
+
+        @keyframes successBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .success-message h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        .success-info {
+            background: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid white;
+        }
+
+        .success-info strong {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .error-box {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #c62828;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 3rem 20px 1rem;
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .form-section h2 {
+                font-size: 2rem;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">OTOSELL</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#form">Değerleme</a></li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ARAÇINIZI DEĞERLENDİRİN</h1>
+            <p>Profesyonel değerleme sistemi ile güvenilir fiyat teklifi alın</p>
+            <button class="btn-primary" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Başla</button>
+        </div>
+    </section>
+
+    <section class="form-section" id="form">
+        <div class="container">
+            <h2>Araç Değerleme Formu</h2>
+            <p class="form-subtitle">Araç bilgilerinizi doldurun ve profesyonel bir değerleme alın</p>
+
+            <div class="form-container">
+                <div class="error-box" id="errorBox"></div>
+
+                <div id="formContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Araç</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Motor</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Durum</div>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-title">İletişim</div>
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Onayla</div>
+                        </div>
+                    </div>
+
+                    <form id="offerForm">
+                        <!-- STEP 1 -->
+                        <div class="form-step active" data-step="1">
+                            <h3>Araç Bilgileri</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="brand">Marka *</label>
+                                    <select id="brand" required onchange="loadModels()">
+                                        <option value="">Seçiniz</option>
+                                        <option value="Toyota">Toyota</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <option value="Kia">Kia</option>
+                                        <option value="Volkswagen">Volkswagen</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Renault">Renault</option>
+                                        <option value="Peugeot">Peugeot</option>
+                                        <option value="Citroen">Citroen</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Nissan">Nissan</option>
+                                        <option value="Mazda">Mazda</option>
+                                        <option value="Fiat">Fiat</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model">Model *</label>
+                                    <select id="model" required>
+                                        <option value="">Marka seçiniz</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="year">Yıl *</label>
+                                    <select id="year" required></select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="bodyType">Araç Türü *</label>
+                                    <select id="bodyType" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="Station Wagon">Station Wagon</option>
+                                        <option value="Minivan">Minivan</option>
+                                        <option value="Pickup">Pickup</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mileage">Kilometre *</label>
+                                    <input type="number" id="mileage" placeholder="Km" min="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="color">Renk *</label>
+                                    <select id="color" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Siyah">Siyah</option>
+                                        <option value="Beyaz">Beyaz</option>
+                                        <option value="Gümüş">Gümüş</option>
+                                        <option value="Gri">Gri</option>
+                                        <option value="Kırmızı">Kırmızı</option>
+                                        <option value="Mavi">Mavi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="btn-container">
+                                <button type="button" class="btn-next" onclick="goToStep(2)">İleri</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div class="form-step" data-step="2">
+                            <h3>Motor & Özellikleri</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fuel">Yakıt *</label>
+                                    <select id="fuel" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Benzin">Benzin</option>
+                                        <option value="Dizel">Dizel</option>
+                                        <option value="LPG">LPG</option>
+                                        <option value="Elektrik">Elektrik</option>
+                                        <option value="Hibrit">Hibrit</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="transmission">Şanzıman *</label>
+                                    <select id="transmission" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Manuel">Manuel</option>
+                                        <option value="Otomatik">Otomatik</option>
+                                        <option value="CVT">CVT</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="engineSize">Motor Hacmi (cc) *</label>
+                                    <input type="number" id="engineSize" placeholder="cc" min="0" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="horsepower">Beygir Gücü *</label>
+                                    <input type="number" id="horsepower" placeholder="BG" min="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="wheelDrive">Çekiş Sistemi *</label>
+                                    <select id="wheelDrive" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Ön">Ön Çekişli</option>
+                                        <option value="Arka">Arka Çekişli</option>
+                                        <option value="Dört">Dört Çekişli</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="btn-container">
+                                <button type="button" class="btn-secondary" onclick="goToStep(1)">Geri</button>
+                                <button type="button" class="btn-next" onclick="goToStep(3)">İleri</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="form-step" data-step="3">
+                            <h3>Araç Durumu</h3>
+
+                            <div class="form-group">
+                                <label>Boya Durumu *</label>
+                                <div class="damage-options">
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint1" name="paintCondition" value="Orijinal" required>
+                                        <label for="paint1">Orijinal</label>
+                                    </div>
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint2" name="paintCondition" value="Kısmi Boyalı" required>
+                                        <label for="paint2">Kısmi Boyalı</label>
+                                    </div>
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint3" name="paintCondition" value="Tamamen Boyalı" required>
+                                        <label for="paint3">Tamamen Boyalı</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hasAccident">Kaza Geçmişi *</label>
+                                <select id="hasAccident" required>
+                                    <option value="">Seçiniz</option>
+                                    <option value="Hayır">Hayır</option>
+                                    <option value="Hafif">Hafif Hasar</option>
+                                    <option value="Orta">Orta Hasar</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="interiorCondition">İç Durumu *</label>
+                                <select id="interiorCondition" required>
+                                    <option value="">Seçiniz</option>
+                                    <option value="Mükemmel">Mükemmel</option>
+                                    <option value="İyi">İyi</option>
+                                    <option value="Orta">Orta</option>
+                                    <option value="Kötü">Kötü</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="defects">Kusurlar / Hatalar</label>
+                                <textarea id="defects" placeholder="Varsa yazınız..." style="min-height: 100px;"></textarea>
+                            </div>
+
+                            <div class="btn-container">
+                                <button type="button" class="btn-secondary" onclick="goToStep(2)">Geri</button>
+                                <button type="button" class="btn-next" onclick="goToStep(4)">İleri</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4 -->
+                        <div class="form-step" data-step="4">
+                            <h3>İletişim Bilgileri</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">Ad *</label>
+                                    <input type="text" id="firstName" placeholder="Adınız" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lastName">Soyad *</label>
+                                    <input type="text" id="lastName" placeholder="Soyadınız" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" placeholder="email@örnek.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Telefon *</label>
+                                    <input type="tel" id="phone" placeholder="05XX XXX XX XX" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Şehir *</label>
+                                    <input type="text" id="city" placeholder="Şehir" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="district">İlçe *</label>
+                                    <input type="text" id="district" placeholder="İlçe" required>
+                                </div>
+                            </div>
+
+                            <div class="btn-container">
+                                <button type="button" class="btn-secondary" onclick="goToStep(3)">Geri</button>
+                                <button type="button" class="btn-next" onclick="goToStep(5)">İleri</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 5 -->
+                        <div class="form-step" data-step="5">
+                            <h3>Bilgilerinizi Kontrol Edin</h3>
+
+                            <div id="summaryContent" style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 350px; overflow-y: auto;"></div>
+
+                            <div class="form-group">
+                                <input type="checkbox" id="agreement" required style="width: auto; margin-right: 0.8rem; width: 20px; height: 20px; cursor: pointer;">
+                                <label for="agreement" style="display: inline; margin-bottom: 0; cursor: pointer;">Bilgilerim doğru ve gönderilmesini onaylıyorum</label>
+                            </div>
+
+                            <div class="btn-container">
+                                <button type="button" class="btn-secondary" onclick="goToStep(4)">Geri</button>
+                                <button type="button" class="btn-submit" onclick="submitForm()">Gönder</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- SUCCESS -->
+                <div id="successMessage" class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h3>Teklif Başarıyla Gönderildi</h3>
+                    
+                    <div class="success-info">
+                        <p style="margin-bottom: 1rem;">Araç değerleme talebiniz başarıyla alınmıştır. En kısa sürede tarafımızdan gözden geçirilecek ve size geri dönüş yapılacaktır.</p>
+                        
+                        <p style="margin-top: 1.5rem; margin-bottom: 0.3rem;">İletişim Bilgileri:</p>
+                        <strong>📱 <span id="displayPhone"></span></strong>
+                        <div id="emailDisplay" style="display:none; margin-top: 0.5rem;">
+                            <strong>📧 <span id="displayEmail"></span></strong>
+                        </div>
+                    </div>
+
+                    <div class="success-info">
+                        <p style="margin-bottom: 0.5rem;">Referans Kodunuz:</p>
+                        <strong style="font-size: 1.3rem; color: white; font-family: monospace;" id="referenceCode"></strong>
+                        <p style="margin-top: 0.8rem; font-size: 0.9rem; opacity: 0.9;">Bu kodu saklayınız. Takip için kullanabilirsiniz.</p>
+                    </div>
+
+                    <button type="button" class="btn-primary" onclick="location.reload()" style="margin-top: 2rem;">Geri Dön</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 OTOSELL - Profesyonel Araç Değerleme Sistemi</p>
+        <p>Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <script>
+        const models = {
+            "Toyota": ["Corolla", "Camry", "Yaris", "RAV4", "Highlander"],
+            "Honda": ["Civic", "Accord", "CR-V", "Jazz"],
+            "Hyundai": ["i10", "i20", "i30", "Elantra", "Tucson"],
+            "Kia": ["Picanto", "Cerato", "Optima", "Sorento"],
+            "Volkswagen": ["Golf", "Passat", "Polo", "Tiguan"],
+            "Ford": ["Focus", "Fiesta", "Fusion", "Edge"],
+            "Renault": ["Clio", "Megane", "Scenic"],
+            "Peugeot": ["206", "307", "2008"],
+            "Citroen": ["C1", "C3", "C4"],
+            "BMW": ["116", "330", "X1", "X5"],
+            "Mercedes-Benz": ["A-Class", "C-Class", "E-Class"],
+            "Audi": ["A1", "A3", "A4", "Q3"],
+            "Nissan": ["Micra", "Qashqai", "X-Trail"],
+            "Mazda": ["2", "3", "6", "CX-5"],
+            "Fiat": ["500", "Panda", "Punto"]
+        };
+
+        let currentStep = 1;
+
+        function loadModels() {
+            const brand = document.getElementById('brand').value;
+            const modelSelect = document.getElementById('model');
+            modelSelect.innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (brand && models[brand]) {
+                models[brand].forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    opt.textContent = m;
+                    modelSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function loadYears() {
+            const yearSelect = document.getElementById('year');
+            yearSelect.innerHTML = '<option value="">Seçiniz</option>';
+            const currentYear = new Date().getFullYear();
+            
+            for (let i = currentYear; i >= 1980; i--) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                yearSelect.appendChild(opt);
+            }
+        }
+
+        function goToStep(step) {
+            if (validateStep(currentStep)) {
+                currentStep = step;
+                showStep(currentStep);
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('[data-step]').forEach((el) => {
+                const stepNum = parseInt(el.getAttribute('data-step'));
+                el.classList.remove('active', 'completed');
+                if (stepNum < step) el.classList.add('completed');
+                else if (stepNum === step) el.classList.add('active');
+            });
+
+            document.querySelectorAll('.form-step')[step - 1].classList.add('active');
+            document.getElementById('progressFill').style.width = (step / 5) * 100 + '%';
+
+            if (step === 5) generateSummary();
+            window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const formSteps = document.querySelectorAll('.form-step');
+            const formStep = formSteps[step - 1];
+            const fields = formStep.querySelectorAll('[required]');
+            let valid = true;
+
+            fields.forEach(field => {
+                if (!field.value) {
+                    field.style.borderColor = '#c62828';
+                    valid = false;
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+
+            if (!valid) showError('Tüm zorunlu alanları doldurunuz');
+            return valid;
+        }
+
+        function generateSummary() {
+            const summary = document.getElementById('summaryContent');
+            summary.innerHTML = `
+                <h4 style="color: var(--primary-black); margin-bottom: 1rem; font-weight: 700;">🚗 Araç Bilgileri</h4>
+                <p style="margin-bottom: 0.5rem;"><strong>${document.getElementById('brand').value} ${document.getElementById('model').value}</strong></p>
+                <p style="margin-bottom: 0.5rem;">${document.getElementById('year').value} - ${Number(document.getElementById('mileage').value).toLocaleString()} km</p>
+                <p style="margin-bottom: 0.5rem;">${document.getElementById('engineSize').value}cc / ${document.getElementById('horsepower').value}BG</p>
+                <p style="margin-bottom: 0.5rem;">${document.getElementById('fuel').value} / ${document.getElementById('transmission').value}</p>
+                <p style="margin-bottom: 0.5rem;">Boya: ${document.querySelector('input[name="paintCondition"]:checked').value}</p>
+                
+                <h4 style="color: var(--primary-black); margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700;">👤 İletişim</h4>
+                <p style="margin-bottom: 0.5rem;"><strong>${document.getElementById('firstName').value} ${document.getElementById('lastName').value}</strong></p>
+                <p style="margin-bottom: 0.5rem;">📱 ${document.getElementById('phone').value}</p>
+                ${document.getElementById('email').value ? `<p>📧 ${document.getElementById('email').value}</p>` : ''}
+            `;
+        }
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.textContent = '⚠️ ' + message;
+            errorBox.style.display = 'block';
+            setTimeout(() => {
+                errorBox.style.display = 'none';
+            }, 5000);
+        }
+
+        function submitForm() {
+            if (!document.getElementById('agreement').checked) {
+                showError('Lütfen koşulları onaylayınız');
+                return;
+            }
+
+            const formData = {
+                referenceCode: 'OS-' + Date.now(),
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                year: document.getElementById('year').value,
+                mileage: document.getElementById('mileage').value,
+                bodyType: document.getElementById('bodyType').value,
+                color: document.getElementById('color').value,
+                fuel: document.getElementById('fuel').value,
+                transmission: document.getElementById('transmission').value,
+                engineSize: document.getElementById('engineSize').value,
+                horsepower: document.getElementById('horsepower').value,
+                wheelDrive: document.getElementById('wheelDrive').value,
+                hasAccident: document.getElementById('hasAccident').value,
+                paintCondition: document.querySelector('input[name="paintCondition"]:checked').value,
+                interiorCondition: document.getElementById('interiorCondition').value,
+                defects: document.getElementById('defects').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+                district: document.getElementById('district').value,
+                submittedAt: new Date().toLocaleString('tr-TR')
+            };
+
+            // LocalStorage'e kaydet
+            let submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
+            submissions.push(formData);
+            localStorage.setItem('otosellSubmissions', JSON.stringify(submissions));
+
+            // Başarı mesajını göster
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            document.getElementById('displayPhone').textContent = formData.phone;
+            
+            if (formData.email) {
+                document.getElementById('emailDisplay').style.display = 'block';
+                document.getElementById('displayEmail').textContent = formData.email;
+            }
+            
+            document.getElementById('referenceCode').textContent = formData.referenceCode;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        loadYears();
+    </script>
+</body>
+</html>
