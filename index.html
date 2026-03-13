@@ -759,7 +759,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="brand">Marka *</label>
-                                    <select id="brand" required onchange="loadModels()">
+                                    <select id="brand" required>
                                         <option value="">Seçiniz</option>
                                         <option value="Toyota">Toyota</option>
                                         <option value="Honda">Honda</option>
@@ -782,13 +782,15 @@
                                 <div class="form-group">
                                     <label for="model">Model *</label>
                                     <select id="model" required>
-                                        <option value="">Seçiniz</option>
+                                        <option value="">Önce marka seçiniz</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="year">Yıl *</label>
-                                    <select id="year" required></select>
+                                    <select id="year" required>
+                                        <option value="">Seçiniz</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -948,40 +950,25 @@
                                     <div class="car-view">
                                         <h5>ARKA</h5>
                                         <svg viewBox="0 0 300 500" class="car-svg">
-                                            <!-- Tekerler -->
                                             <circle cx="80" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="80" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="80" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
                                             <circle cx="220" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="220" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="220" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Alt tekerler -->
                                             <circle cx="80" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="80" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="80" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
                                             <circle cx="220" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="220" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="220" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Araç gövdesi -->
                                             <path d="M 50 100 L 50 180 L 40 220 L 40 360 L 50 380 L 50 420 L 60 430 L 240 430 L 250 420 L 250 380 L 260 360 L 260 220 L 250 180 L 250 100 Z" fill="#ccc" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Üst kısım -->
                                             <path d="M 70 140 L 70 180 L 230 180 L 230 140 Q 150 120 150 120 Q 150 120 70 140" fill="#999" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Cam -->
                                             <rect x="75" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
                                             <rect x="155" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Kapılar -->
                                             <rect id="left-rear-door" x="50" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
                                             <rect id="right-rear-door" x="170" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Bagaj -->
                                             <rect id="trunk" x="70" y="350" width="160" height="70" fill="none" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Çamurluklar -->
                                             <path id="left-rear-fender" d="M 40 180 L 30 280 L 40 360" fill="none" stroke="#000" stroke-width="2"/>
                                             <path id="right-rear-fender" d="M 260 180 L 270 280 L 260 360" fill="none" stroke="#000" stroke-width="2"/>
                                         </svg>
@@ -991,44 +978,27 @@
                                     <div class="car-view">
                                         <h5>ÖN</h5>
                                         <svg viewBox="0 0 300 500" class="car-svg">
-                                            <!-- Tekerler -->
                                             <circle cx="80" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="80" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="80" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
                                             <circle cx="220" cy="100" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="220" cy="100" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="220" cy="100" r="28" fill="none" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Alt tekerler -->
                                             <circle cx="80" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="80" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="80" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
                                             <circle cx="220" cy="380" r="40" fill="none" stroke="#000" stroke-width="3"/>
                                             <circle cx="220" cy="380" r="35" fill="none" stroke="#000" stroke-width="2"/>
                                             <circle cx="220" cy="380" r="28" fill="none" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Araç gövdesi -->
                                             <path d="M 50 100 L 50 180 L 40 220 L 40 360 L 50 380 L 50 420 L 60 430 L 240 430 L 250 420 L 250 380 L 260 360 L 260 220 L 250 180 L 250 100 Z" fill="#ccc" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Kaput -->
                                             <rect id="hood" x="70" y="100" width="160" height="40" fill="none" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Üst kısım -->
                                             <path d="M 70 140 L 70 180 L 230 180 L 230 140 Q 150 120 150 120 Q 150 120 70 140" fill="#999" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Cam -->
                                             <rect x="75" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
                                             <rect x="155" y="145" width="70" height="35" fill="#e3f2fd" stroke="#000" stroke-width="1"/>
-
-                                            <!-- Kapılar -->
                                             <rect id="left-front-door" x="50" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
                                             <rect id="right-front-door" x="170" y="200" width="80" height="130" fill="none" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Çamurluklar -->
                                             <path id="left-front-fender" d="M 40 180 L 30 280 L 40 360" fill="none" stroke="#000" stroke-width="2"/>
                                             <path id="right-front-fender" d="M 260 180 L 270 280 L 260 360" fill="none" stroke="#000" stroke-width="2"/>
-
-                                            <!-- Ön tampon -->
                                             <rect x="45" y="420" width="210" height="10" fill="#555" stroke="#000" stroke-width="1"/>
                                         </svg>
                                         <h5 style="margin-top: 1rem;">ÖN</h5>
@@ -1292,24 +1262,52 @@
 
     <script>
         const models = {
-            "Toyota": ["Corolla", "Camry", "Yaris", "RAV4"],
-            "Honda": ["Civic", "Accord", "CR-V"],
-            "Hyundai": ["i10", "i20", "i30", "Tucson"],
-            "Kia": ["Picanto", "Cerato", "Sorento"],
-            "Volkswagen": ["Golf", "Passat", "Polo"],
-            "Ford": ["Focus", "Fiesta", "Edge"],
-            "Renault": ["Clio", "Megane", "Scenic"],
-            "Peugeot": ["206", "307", "2008"],
-            "Citroen": ["C1", "C3", "C4"],
-            "BMW": ["116", "330", "X1"],
-            "Mercedes-Benz": ["A-Class", "C-Class"],
-            "Audi": ["A1", "A3", "A4"],
-            "Nissan": ["Micra", "Qashqai"],
-            "Mazda": ["2", "3", "6"],
-            "Fiat": ["500", "Panda"]
+            "Toyota": ["Corolla", "Camry", "Yaris", "RAV4", "Prius", "Avensis", "Auris", "Aygo", "Proace"],
+            "Honda": ["Civic", "Accord", "CR-V", "Jazz", "HR-V", "City", "Odyssey", "Ridgeline"],
+            "Hyundai": ["i10", "i20", "i30", "Elantra", "Tucson", "Santa Fe", "Creta", "Venue", "Kona"],
+            "Kia": ["Picanto", "Cerato", "Optima", "Sorento", "Sportage", "Niro", "Stinger", "Soul"],
+            "Volkswagen": ["Golf", "Passat", "Polo", "Tiguan", "Jetta", "Beetle", "Caddy", "Touran"],
+            "Ford": ["Focus", "Fiesta", "Fusion", "Edge", "Mondeo", "EcoSport", "Ranger", "Mustang"],
+            "Renault": ["Clio", "Megane", "Scenic", "Fluence", "Duster", "Captur", "Kangoo", "Master"],
+            "Peugeot": ["206", "207", "307", "308", "2008", "3008", "5008", "Expert"],
+            "Citroen": ["C1", "C3", "C4", "C5", "Picasso", "Berlingo", "Jumpy"],
+            "BMW": ["116", "320", "330", "520", "X1", "X3", "X5", "Z4", "M340i"],
+            "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLC", "GLE", "GLA", "CLA"],
+            "Audi": ["A1", "A3", "A4", "A6", "Q3", "Q5", "Q7", "TT"],
+            "Nissan": ["Micra", "Qashqai", "X-Trail", "Altima", "Juke", "Navara", "Leaf"],
+            "Mazda": ["2", "3", "6", "CX-5", "CX-3", "CX-9", "MX-5"],
+            "Fiat": ["500", "Panda", "Punto", "Linea", "Bravo", "Tipo", "Ducato"]
         };
 
         let currentStep = 1;
+
+        function loadModels() {
+            const brand = document.getElementById('brand').value;
+            const modelSelect = document.getElementById('model');
+            modelSelect.innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (brand && models[brand]) {
+                models[brand].forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    opt.textContent = m;
+                                        modelSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function loadYears() {
+            const yearSelect = document.getElementById('year');
+            yearSelect.innerHTML = '<option value="">Seçiniz</option>';
+            const currentYear = new Date().getFullYear();
+            
+            for (let i = currentYear; i >= 1980; i--) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                yearSelect.appendChild(opt);
+            }
+        }
 
         function updateCarColor() {
             const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
@@ -1333,7 +1331,7 @@
             });
         }
 
-                function toggleTramerDetails() {
+        function toggleTramerDetails() {
             const selected = document.querySelector('input[name="tramerStatus"]:checked');
             const tramerDetailsDiv = document.getElementById('tramerDetails');
             
@@ -1342,34 +1340,6 @@
             } else {
                 tramerDetailsDiv.classList.remove('show');
                 document.getElementById('tramerPrice').value = '';
-            }
-        }
-
-        function loadModels() {
-            const brand = document.getElementById('brand').value;
-            const modelSelect = document.getElementById('model');
-            modelSelect.innerHTML = '<option value="">Seçiniz</option>';
-            
-            if (brand && models[brand]) {
-                models[brand].forEach(m => {
-                    const opt = document.createElement('option');
-                    opt.value = m;
-                    opt.textContent = m;
-                    modelSelect.appendChild(opt);
-                });
-            }
-        }
-
-        function loadYears() {
-            const yearSelect = document.getElementById('year');
-            yearSelect.innerHTML = '<option value="">Seçiniz</option>';
-            const currentYear = new Date().getFullYear();
-            
-            for (let i = currentYear; i >= 1980; i--) {
-                const opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = i;
-                yearSelect.appendChild(opt);
             }
         }
 
@@ -1527,7 +1497,15 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        loadYears();
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            loadYears();
+            
+            const brandSelect = document.getElementById('brand');
+            if (brandSelect) {
+                brandSelect.addEventListener('change', loadModels);
+            }
+        });
     </script>
 </body>
 </html>
