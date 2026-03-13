@@ -326,65 +326,19 @@
             }
         }
 
-        /* HASAR SEÇENEKLERİ */
-        .damage-parts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .part-card {
+        /* HASAR BÖLÜMÜ */
+        .damage-section {
             background: var(--light-bg);
-            border: 2px solid var(--border-color);
+            padding: 1.5rem;
             border-radius: 8px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .part-card:hover {
-            border-color: var(--primary-yellow);
-        }
-
-        .part-card.active {
-            background: #fff3cd;
-            border-color: var(--primary-yellow);
-        }
-
-        .part-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .part-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .damage-select {
-            display: none;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .part-card.active .damage-select {
-            display: block;
-        }
-
-        .damage-select select {
-            width: 100%;
-            padding: 8px;
-            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
         }
 
         .damage-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 0.8rem;
-            margin-top: 1rem;
+            margin: 1rem 0;
         }
 
         .damage-option {
@@ -403,15 +357,87 @@
             text-align: center;
             cursor: pointer;
             margin: 0;
-            background: var(--light-bg);
+            background: var(--white);
             font-weight: 600;
             font-size: 0.85rem;
+            transition: all 0.3s;
         }
 
         .damage-option input[type="radio"]:checked + label {
             background: var(--primary-yellow);
             color: var(--primary-black);
             border-color: var(--primary-yellow);
+        }
+
+        .damage-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .damage-details.show {
+            display: block;
+        }
+
+        .damage-details textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* TRAMER BÖLÜMÜ */
+        .tramer-section {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tramer-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .tramer-option input[type="radio"] {
+            display: none;
+        }
+
+        .tramer-option label {
+            display: block;
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            margin: 0;
+            background: var(--white);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .tramer-option input[type="radio"]:checked + label {
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            border-color: var(--primary-yellow);
+        }
+
+        .tramer-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .tramer-details.show {
+            display: block;
+        }
+
+        .tramer-details textarea {
+            min-height: 80px;
+            resize: vertical;
         }
 
         .btn-container {
@@ -535,23 +561,44 @@
             font-size: 0.9rem;
         }
 
-        .checkbox-group {
+        .checkbox-wrapper {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
             cursor: pointer;
+            margin-top: 2px;
             flex-shrink: 0;
+            accent-color: var(--primary-yellow);
         }
 
-        .checkbox-group label {
+        .checkbox-wrapper label {
             margin-bottom: 0;
             cursor: pointer;
-            font-weight: 400;
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 15px 50px;
+            }
+
+            .form-section {
+                padding: 40px 15px;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -781,11 +828,53 @@
                         <div class="form-step" data-step="3">
                             <h3>Araç Durumu</h3>
 
-                            <div class="form-group">
-                                <label>Boya Hasarları *</label>
-                                <div class="damage-parts" id="damageParts"></div>
+                            <!-- BOYA BÖLÜMÜ -->
+                            <div class="damage-section">
+                                <label>Araç Boyası *</label>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Araç boyasının durumunu seçiniz</p>
+                                <div class="damage-options">
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint1" name="paintCondition" value="Orijinal" required onchange="toggleDamageDetails()">
+                                        <label for="paint1">Orijinal</label>
+                                    </div>
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint2" name="paintCondition" value="Kısmi Boyalı" required onchange="toggleDamageDetails()">
+                                        <label for="paint2">Kısmi Boyalı</label>
+                                    </div>
+                                    <div class="damage-option">
+                                        <input type="radio" id="paint3" name="paintCondition" value="Tamamen Boyalı" required onchange="toggleDamageDetails()">
+                                        <label for="paint3">Tamamen Boyalı</label>
+                                    </div>
+                                </div>
+
+                                <div id="damageDetails" class="damage-details">
+                                    <label for="paintDetails">Hangi bölümler boyalı olduğunu yazınız</label>
+                                    <textarea id="paintDetails" placeholder="Örn: Ön kaput, sol çamurluk..."></textarea>
+                                </div>
                             </div>
 
+                            <!-- TRAMER BÖLÜMÜ -->
+                            <div class="tramer-section">
+                                <label>Tramer Durumu *</label>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Araçta tramer hasarı var mı?</p>
+                                <div class="tramer-options">
+                                    <div class="tramer-option">
+                                        <input type="radio" id="tramer1" name="tramerStatus" value="Hayır" required onchange="toggleTramerDetails()">
+                                        <label for="tramer1">Hayır</label>
+                                    </div>
+                                    <div class="tramer-option">
+                                        <input type="radio" id="tramer2" name="tramerStatus" value="Evet" required onchange="toggleTramerDetails()">
+                                        <label for="tramer2">Evet</label>
+                                    </div>
+                                </div>
+
+                                <div id="tramerDetails" class="tramer-details">
+                                    <label for="tramerInfo">Tramer hasarı hakkında bilgi giriniz</label>
+                                    <textarea id="tramerInfo" placeholder="Örn: Ön tampon çizik, arka çamurluk deformasyonu..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- DİĞER DURUMLAR -->
                             <div class="form-group">
                                 <label for="hasAccident">Kaza Geçmişi *</label>
                                 <select id="hasAccident" required>
@@ -870,7 +959,7 @@
 
                             <div id="summaryContent" style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; font-size: 0.9rem;"></div>
 
-                            <div class="checkbox-group">
+                            <div class="checkbox-wrapper">
                                 <input type="checkbox" id="agreement" required>
                                 <label for="agreement">Bilgilerim doğru ve gönderilmesini onaylıyorum</label>
                             </div>
@@ -886,19 +975,21 @@
                 <!-- SUCCESS -->
                 <div id="successMessage" class="success-message">
                     <div class="success-icon">✓</div>
-                    <h3>Başarılı!</h3>
+                    <h3>Talebiniz Başarıyla Alındı!</h3>
                     
                     <div class="success-info">
-                        <p>Talebiniz alınmıştır. En kısa sürede geri dönüş yapılacaktır.</p>
+                        <p><strong>En kısa sürede fiyat teklifi SMS olarak gönderilecektir.</strong></p>
+                        <p style="margin-top: 0.8rem; font-size: 0.9rem;">Lütfen SMS'ler için mobil telefonunuzu kontrol ediniz.</p>
                         
-                        <p style="margin-top: 1rem; margin-bottom: 0.3rem;">📱 <strong id="displayPhone"></strong></p>
+                        <p style="margin-top: 1.2rem; margin-bottom: 0.3rem;">📱 <strong id="displayPhone"></strong></p>
                         <div id="emailDisplay" style="display:none;">
                             <p style="margin-top: 0.3rem;">📧 <strong id="displayEmail"></strong></p>
                         </div>
                     </div>
 
                     <div class="success-info">
-                        <p>Referans: <strong id="referenceCode" style="font-family: monospace;"></strong></p>
+                        <p>Referans Kodu: <strong id="referenceCode" style="font-family: monospace;"></strong></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9;">Bu kodu saklayınız</p>
                     </div>
 
                     <button type="button" class="btn-primary" onclick="location.reload()" style="margin-top: 1rem;">Geri Dön</button>
@@ -908,7 +999,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 OTOSELL</p>
+        <p>&copy; 2024 OTOSELL - Profesyonel Araç Değerleme Sistemi</p>
     </footer>
 
     <script>
@@ -930,54 +1021,29 @@
             "Fiat": ["500", "Panda"]
         };
 
-        const damageParts = [
-            { id: 'front-left', name: 'Sol Ön Çamurlu', icon: '🚗' },
-            { id: 'front-right', name: 'Sağ Ön Çamurlu', icon: '🚗' },
-            { id: 'hood', name: 'Kaput', icon: '🛡️' },
-            { id: 'left-front-door', name: 'Sol Ön Kapı', icon: '🚪' },
-            { id: 'roof', name: 'Tavan', icon: '⛱️' },
-            { id: 'right-front-door', name: 'Sağ Ön Kapı', icon: '🚪' },
-            { id: 'rear-left', name: 'Sol Arka Çamurlu', icon: '🚗' },
-            { id: 'left-rear-door', name: 'Sol Arka Kapı', icon: '🚪' },
-            { id: 'trunk', name: 'Bagaj', icon: '🚕' },
-            { id: 'rear-right', name: 'Sağ Arka Çamurlu', icon: '🚗' },
-            { id: 'right-rear-door', name: 'Sağ Arka Kapı', icon: '🚪' }
-        ];
-
         let currentStep = 1;
-        let selectedDamages = {};
 
-        function initDamageParts() {
-            const container = document.getElementById('damageParts');
-            container.innerHTML = damageParts.map(part => `
-                <div class="part-card" onclick="togglePart('${part.id}', this)">
-                    <div class="part-icon">${part.icon}</div>
-                    <div class="part-name">${part.name}</div>
-                    <div class="damage-select">
-                        <select onchange="updateDamage('${part.id}', this.value)" onclick="event.stopPropagation()">
-                            <option value="">Hasarsız</option>
-                            <option value="Hafif">Hafif</option>
-                            <option value="Orta">Orta</option>
-                            <option value="Ağır">Ağır</option>
-                        </select>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function togglePart(id, element) {
-            element.classList.toggle('active');
-            if (!element.classList.contains('active')) {
-                delete selectedDamages[id];
-                element.querySelector('select').value = '';
+        function toggleDamageDetails() {
+            const selected = document.querySelector('input[name="paintCondition"]:checked');
+            const damageDetailsDiv = document.getElementById('damageDetails');
+            
+            if (selected && selected.value !== 'Orijinal') {
+                damageDetailsDiv.classList.add('show');
+            } else {
+                damageDetailsDiv.classList.remove('show');
+                document.getElementById('paintDetails').value = '';
             }
         }
 
-        function updateDamage(id, value) {
-            if (value) {
-                selectedDamages[id] = value;
+        function toggleTramerDetails() {
+            const selected = document.querySelector('input[name="tramerStatus"]:checked');
+            const tramerDetailsDiv = document.getElementById('tramerDetails');
+            
+            if (selected && selected.value === 'Evet') {
+                tramerDetailsDiv.classList.add('show');
             } else {
-                delete selectedDamages[id];
+                tramerDetailsDiv.classList.remove('show');
+                document.getElementById('tramerInfo').value = '';
             }
         }
 
@@ -1056,17 +1122,8 @@
 
         function generateSummary() {
             const summary = document.getElementById('summaryContent');
-            let damageInfo = '';
-            
-            if (Object.keys(selectedDamages).length > 0) {
-                damageInfo = '<strong>Hasarlar:</strong><br>';
-                for (const [id, damage] of Object.entries(selectedDamages)) {
-                    const part = damageParts.find(p => p.id === id);
-                    if (part) {
-                        damageInfo += `${part.name}: ${damage}<br>`;
-                    }
-                }
-            }
+            const paintDetails = document.getElementById('paintDetails').value;
+            const tramerInfo = document.getElementById('tramerInfo').value;
 
             summary.innerHTML = `
                 <strong>🚗 Araç:</strong> ${document.getElementById('brand').value} ${document.getElementById('model').value}<br>
@@ -1074,7 +1131,8 @@
                 <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
                 <strong>🔧 Motor:</strong> ${document.getElementById('engineSize').value}<br>
                 <strong>💨 Beygir:</strong> ${document.getElementById('horsepower').value}<br>
-                ${damageInfo}
+                <strong>🎨 Boya:</strong> ${document.querySelector('input[name="paintCondition"]:checked').value}${paintDetails ? ' (' + paintDetails.substring(0, 20) + '...)' : ''}<br>
+                <strong>⚙️ Tramer:</strong> ${document.querySelector('input[name="tramerStatus"]:checked').value}${tramerInfo ? ' (' + tramerInfo.substring(0, 20) + '...)' : ''}<br>
                 <strong>📋 Ad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
                 <strong>📱 Tel:</strong> ${document.getElementById('phone').value}
             `;
@@ -1108,8 +1166,11 @@
                 engineSize: document.getElementById('engineSize').value,
                 horsepower: document.getElementById('horsepower').value,
                 wheelDrive: document.getElementById('wheelDrive').value,
+                paintCondition: document.querySelector('input[name="paintCondition"]:checked').value,
+                paintDetails: document.getElementById('paintDetails').value,
+                tramerStatus: document.querySelector('input[name="tramerStatus"]:checked').value,
+                tramerInfo: document.getElementById('tramerInfo').value,
                 hasAccident: document.getElementById('hasAccident').value,
-                damages: JSON.stringify(selectedDamages),
                 interiorCondition: document.getElementById('interiorCondition').value,
                 defects: document.getElementById('defects').value,
                 firstName: document.getElementById('firstName').value,
@@ -1139,7 +1200,6 @@
         }
 
         loadYears();
-        initDamageParts();
     </script>
 </body>
 </html>
