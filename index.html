@@ -36,7 +36,6 @@
             padding: 0 15px;
         }
 
-        /* HEADER */
         header {
             background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
             color: var(--white);
@@ -83,7 +82,6 @@
             background: rgba(255,215,0,0.1);
         }
 
-        /* HERO */
         .hero {
             background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
             background-attachment: fixed;
@@ -92,7 +90,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: auto;
         }
 
         .hero::before {
@@ -114,17 +111,11 @@
             right: 20px;
             font-size: 80px;
             opacity: 0.1;
-            animation: driveCar 15s infinite linear;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(40px); }
-        }
-
-        @keyframes driveCar {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100vw); }
         }
 
         .hero-content {
@@ -138,13 +129,7 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             font-weight: 900;
-            animation: slideDown 0.8s ease-out;
             line-height: 1.2;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero p {
@@ -152,7 +137,6 @@
             margin-bottom: 2rem;
             color: #ddd;
             font-weight: 300;
-            line-height: 1.5;
         }
 
         .btn-primary {
@@ -173,10 +157,8 @@
 
         .btn-primary:active {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(255,215,0,0.4);
         }
 
-        /* FORM SECTION */
         .form-section {
             padding: 60px 20px;
             background: linear-gradient(180deg, #f5f5f5 0%, #fff 50%, #f5f5f5 100%);
@@ -195,7 +177,6 @@
             font-size: 1rem;
             color: var(--text-light);
             margin-bottom: 2rem;
-            font-weight: 300;
         }
 
         .form-container {
@@ -213,14 +194,6 @@
                 max-width: 900px;
                 padding: 3rem;
             }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .form-section h2 {
-                font-size: 2.8rem;
-            }
         }
 
         .form-step {
@@ -233,8 +206,8 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .progress-bar {
@@ -262,7 +235,6 @@
         .step {
             flex: 1;
             text-align: center;
-            min-width: 60px;
         }
 
         .step-number {
@@ -277,7 +249,6 @@
             font-weight: 700;
             margin: 0 auto 0.5rem;
             color: var(--text-light);
-            transition: all 0.3s;
             font-size: 0.9rem;
         }
 
@@ -285,8 +256,6 @@
             background: var(--primary-yellow);
             color: var(--primary-black);
             border-color: var(--primary-yellow);
-            box-shadow: 0 3px 10px rgba(255,215,0,0.2);
-            transform: scale(1.05);
         }
 
         .step.completed .step-number {
@@ -299,14 +268,6 @@
             font-size: 0.75rem;
             color: var(--text-light);
             font-weight: 600;
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .step-title {
-                display: block;
-                font-size: 0.85rem;
-            }
         }
 
         h3 {
@@ -341,19 +302,10 @@
             appearance: none;
         }
 
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 20px;
-            padding-right: 40px;
-        }
-
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-yellow);
             box-shadow: 0 0 10px rgba(255,215,0,0.15);
-            background: #fffef5;
         }
 
         .form-row {
@@ -375,6 +327,59 @@
         }
 
         /* HASAR SEÇENEKLERİ */
+        .damage-parts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .part-card {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .part-card:hover {
+            border-color: var(--primary-yellow);
+        }
+
+        .part-card.active {
+            background: #fff3cd;
+            border-color: var(--primary-yellow);
+        }
+
+        .part-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .part-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .damage-select {
+            display: none;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .part-card.active .damage-select {
+            display: block;
+        }
+
+        .damage-select select {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.85rem;
+        }
+
         .damage-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -397,7 +402,6 @@
             border-radius: 6px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
             margin: 0;
             background: var(--light-bg);
             font-weight: 600;
@@ -408,7 +412,6 @@
             background: var(--primary-yellow);
             color: var(--primary-black);
             border-color: var(--primary-yellow);
-            box-shadow: 0 3px 10px rgba(255,215,0,0.2);
         }
 
         .btn-container {
@@ -429,14 +432,8 @@
             font-weight: 700;
             flex: 1;
             min-width: 120px;
-            transition: all 0.3s;
             text-transform: uppercase;
             font-size: 0.85rem;
-        }
-
-        .btn-secondary:active {
-            background: var(--border-color);
-            border-color: var(--primary-black);
         }
 
         .btn-next {
@@ -449,15 +446,8 @@
             font-weight: 700;
             flex: 1;
             min-width: 120px;
-            transition: all 0.3s;
             text-transform: uppercase;
             font-size: 0.85rem;
-            box-shadow: 0 3px 10px rgba(255,215,0,0.2);
-        }
-
-        .btn-next:active {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
         }
 
         .btn-submit {
@@ -470,18 +460,10 @@
             font-weight: 700;
             flex: 1;
             min-width: 120px;
-            transition: all 0.3s;
             text-transform: uppercase;
             font-size: 0.85rem;
-            box-shadow: 0 3px 10px rgba(76,175,80,0.2);
         }
 
-        .btn-submit:active {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(76,175,80,0.3);
-        }
-
-        /* SUCCESS MESSAGE */
         .success-message {
             background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
@@ -506,12 +488,6 @@
         .success-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            animation: successBounce 0.6s ease-out;
-        }
-
-        @keyframes successBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
         }
 
         .success-message h3 {
@@ -534,13 +510,6 @@
             border-left: 4px solid white;
         }
 
-        .success-info strong {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            word-break: break-word;
-        }
-
         .error-box {
             background: #ffebee;
             color: #c62828;
@@ -553,7 +522,6 @@
             font-size: 0.9rem;
         }
 
-        /* FOOTER */
         footer {
             background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
             color: var(--white);
@@ -564,47 +532,26 @@
 
         footer p {
             margin-bottom: 0.3rem;
-            font-weight: 400;
             font-size: 0.9rem;
         }
 
-        @media (max-width: 480px) {
-            .hero {
-                padding: 60px 15px 50px;
-            }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-            .form-section {
-                padding: 40px 15px;
-            }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
 
-            .form-container {
-                padding: 1.5rem;
-                border-radius: 8px;
-            }
-
-            .btn-container {
-                gap: 0.6rem;
-            }
-
-            h3 {
-                font-size: 1.1rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .damage-options {
-                gap: 0.6rem;
-            }
-
-            .step-indicator {
-                gap: 0.3rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .step-number {
-                width: 35px;
-                height: 35px;
-                font-size: 0.8rem;
-            }
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 400;
         }
     </style>
 </head>
@@ -774,15 +721,43 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="engineSize">Motor Hacmi (cc) *</label>
-                                    <input type="number" id="engineSize" placeholder="cc" min="0" required>
+                                    <label for="engineSize">Motor Hacmi *</label>
+                                    <select id="engineSize" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="1.0">1.0 L</option>
+                                        <option value="1.2">1.2 L</option>
+                                        <option value="1.3">1.3 L</option>
+                                        <option value="1.4">1.4 L</option>
+                                        <option value="1.5">1.5 L</option>
+                                        <option value="1.6">1.6 L</option>
+                                        <option value="1.8">1.8 L</option>
+                                        <option value="2.0">2.0 L</option>
+                                        <option value="2.2">2.2 L</option>
+                                        <option value="2.5">2.5 L</option>
+                                        <option value="3.0">3.0 L</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="horsepower">Beygir Gücü *</label>
-                                    <input type="number" id="horsepower" placeholder="BG" min="0" required>
+                                    <select id="horsepower" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="60">60 BG</option>
+                                        <option value="75">75 BG</option>
+                                        <option value="90">90 BG</option>
+                                        <option value="110">110 BG</option>
+                                        <option value="130">130 BG</option>
+                                        <option value="150">150 BG</option>
+                                        <option value="170">170 BG</option>
+                                        <option value="190">190 BG</option>
+                                        <option value="210">210 BG</option>
+                                        <option value="250">250 BG</option>
+                                        <option value="300">300 BG</option>
+                                        <option value="350">350 BG</option>
+                                        <option value="400">400 BG</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -807,21 +782,8 @@
                             <h3>Araç Durumu</h3>
 
                             <div class="form-group">
-                                <label>Boya Durumu *</label>
-                                <div class="damage-options">
-                                    <div class="damage-option">
-                                        <input type="radio" id="paint1" name="paintCondition" value="Orijinal" required>
-                                        <label for="paint1">Orijinal</label>
-                                    </div>
-                                    <div class="damage-option">
-                                        <input type="radio" id="paint2" name="paintCondition" value="Kısmi Boyalı" required>
-                                        <label for="paint2">Kısmi</label>
-                                    </div>
-                                    <div class="damage-option">
-                                        <input type="radio" id="paint3" name="paintCondition" value="Tamamen Boyalı" required>
-                                        <label for="paint3">Tamamen</label>
-                                    </div>
-                                </div>
+                                <label>Boya Hasarları *</label>
+                                <div class="damage-parts" id="damageParts"></div>
                             </div>
 
                             <div class="form-group">
@@ -908,9 +870,9 @@
 
                             <div id="summaryContent" style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; font-size: 0.9rem;"></div>
 
-                            <div class="form-group">
-                                <input type="checkbox" id="agreement" required style="width: 18px; height: 18px; margin-right: 0.5rem; cursor: pointer; vertical-align: middle;">
-                                <label for="agreement" style="display: inline; margin-bottom: 0; cursor: pointer;">Onaylıyorum</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreement" required>
+                                <label for="agreement">Bilgilerim doğru ve gönderilmesini onaylıyorum</label>
                             </div>
 
                             <div class="btn-container">
@@ -968,7 +930,56 @@
             "Fiat": ["500", "Panda"]
         };
 
+        const damageParts = [
+            { id: 'front-left', name: 'Sol Ön Çamurlu', icon: '🚗' },
+            { id: 'front-right', name: 'Sağ Ön Çamurlu', icon: '🚗' },
+            { id: 'hood', name: 'Kaput', icon: '🛡️' },
+            { id: 'left-front-door', name: 'Sol Ön Kapı', icon: '🚪' },
+            { id: 'roof', name: 'Tavan', icon: '⛱️' },
+            { id: 'right-front-door', name: 'Sağ Ön Kapı', icon: '🚪' },
+            { id: 'rear-left', name: 'Sol Arka Çamurlu', icon: '🚗' },
+            { id: 'left-rear-door', name: 'Sol Arka Kapı', icon: '🚪' },
+            { id: 'trunk', name: 'Bagaj', icon: '🚕' },
+            { id: 'rear-right', name: 'Sağ Arka Çamurlu', icon: '🚗' },
+            { id: 'right-rear-door', name: 'Sağ Arka Kapı', icon: '🚪' }
+        ];
+
         let currentStep = 1;
+        let selectedDamages = {};
+
+        function initDamageParts() {
+            const container = document.getElementById('damageParts');
+            container.innerHTML = damageParts.map(part => `
+                <div class="part-card" onclick="togglePart('${part.id}', this)">
+                    <div class="part-icon">${part.icon}</div>
+                    <div class="part-name">${part.name}</div>
+                    <div class="damage-select">
+                        <select onchange="updateDamage('${part.id}', this.value)" onclick="event.stopPropagation()">
+                            <option value="">Hasarsız</option>
+                            <option value="Hafif">Hafif</option>
+                            <option value="Orta">Orta</option>
+                            <option value="Ağır">Ağır</option>
+                        </select>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function togglePart(id, element) {
+            element.classList.toggle('active');
+            if (!element.classList.contains('active')) {
+                delete selectedDamages[id];
+                element.querySelector('select').value = '';
+            }
+        }
+
+        function updateDamage(id, value) {
+            if (value) {
+                selectedDamages[id] = value;
+            } else {
+                delete selectedDamages[id];
+            }
+        }
 
         function loadModels() {
             const brand = document.getElementById('brand').value;
@@ -1018,7 +1029,9 @@
             document.getElementById('progressFill').style.width = (step / 5) * 100 + '%';
 
             if (step === 5) generateSummary();
-            window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 50, behavior: 'smooth' });
+            setTimeout(() => {
+                window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 50, behavior: 'smooth' });
+            }, 100);
         }
 
         function validateStep(step) {
@@ -1028,6 +1041,7 @@
             let valid = true;
 
             fields.forEach(field => {
+                if (field.type === 'checkbox') return;
                 if (!field.value) {
                     field.style.borderColor = '#c62828';
                     valid = false;
@@ -1042,11 +1056,25 @@
 
         function generateSummary() {
             const summary = document.getElementById('summaryContent');
+            let damageInfo = '';
+            
+            if (Object.keys(selectedDamages).length > 0) {
+                damageInfo = '<strong>Hasarlar:</strong><br>';
+                for (const [id, damage] of Object.entries(selectedDamages)) {
+                    const part = damageParts.find(p => p.id === id);
+                    if (part) {
+                        damageInfo += `${part.name}: ${damage}<br>`;
+                    }
+                }
+            }
+
             summary.innerHTML = `
                 <strong>🚗 Araç:</strong> ${document.getElementById('brand').value} ${document.getElementById('model').value}<br>
                 <strong>📅 Yıl:</strong> ${document.getElementById('year').value}<br>
                 <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
-                <strong>🔧 Motor:</strong> ${document.getElementById('engineSize').value}cc<br>
+                <strong>🔧 Motor:</strong> ${document.getElementById('engineSize').value}<br>
+                <strong>💨 Beygir:</strong> ${document.getElementById('horsepower').value}<br>
+                ${damageInfo}
                 <strong>📋 Ad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
                 <strong>📱 Tel:</strong> ${document.getElementById('phone').value}
             `;
@@ -1081,7 +1109,7 @@
                 horsepower: document.getElementById('horsepower').value,
                 wheelDrive: document.getElementById('wheelDrive').value,
                 hasAccident: document.getElementById('hasAccident').value,
-                paintCondition: document.querySelector('input[name="paintCondition"]:checked').value,
+                damages: JSON.stringify(selectedDamages),
                 interiorCondition: document.getElementById('interiorCondition').value,
                 defects: document.getElementById('defects').value,
                 firstName: document.getElementById('firstName').value,
@@ -1111,6 +1139,7 @@
         }
 
         loadYears();
+        initDamageParts();
     </script>
 </body>
 </html>
