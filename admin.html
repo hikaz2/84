@@ -19,11 +19,12 @@
             --border-color: #e0e0e0;
             --light-bg: #f5f5f5;
             --white: #fff;
+            --shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
         }
 
         .container {
@@ -43,19 +44,29 @@
 
         .login-box {
             background: var(--white);
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            padding: 3.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            max-width: 420px;
             width: 100%;
+            border-top: 5px solid var(--primary-yellow);
         }
 
         .login-box h1 {
             color: var(--primary-yellow);
             text-align: center;
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            font-weight: 900;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: var(--primary-black);
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .form-group {
@@ -65,724 +76,40 @@
         label {
             display: block;
             margin-bottom: 0.7rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-black);
         }
 
         input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         input:focus {
             outline: none;
             border-color: var(--primary-yellow);
-            box-shadow: 0 0 8px rgba(255,215,0,0.2);
+            box-shadow: 0 0 12px rgba(255,215,0,0.2);
         }
 
         .btn-login {
             width: 100%;
-            background: var(--primary-yellow);
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
             color: var(--primary-black);
             border: none;
-            padding: 12px 30px;
+            padding: 14px 30px;
             font-size: 1rem;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.2);
         }
 
         .btn-login:hover {
-            background: #ffed4e;
             transform: translateY(-2px);
-        }
-
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            border-left: 4px solid #c62828;
-            display: none;
-        }
-
-        /* ADMIN PANEL */
-        header {
-            background: var(--primary-black);
-            color: var(--white);
-            padding: 1rem 0;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary-yellow);
-            letter-spacing: 2px;
-        }
-
-        .logout-btn {
-            background: var(--primary-yellow);
-            color: var(--primary-black);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .admin-content {
-            padding: 2rem 20px;
-            display: none;
-        }
-
-        .admin-content.show {
-            display: block;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            border-left: 4px solid var(--primary-yellow);
-        }
-
-        .stat-card h4 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .stat-card .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary-black);
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-        }
-
-        .btn-search {
-            background: var(--primary-yellow);
-            color: var(--primary-black);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .table-container {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: var(--primary-black);
-            color: var(--white);
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        tbody tr:hover {
-            background: var(--light-bg);
-        }
-
-        .ref-code {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 0.4rem 0.8rem;
-            border-radius: 3px;
-            font-weight: 600;
-            font-family: monospace;
-            font-size: 0.85rem;
-        }
-
-        .btn-detail {
-            background: #2196F3;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-right: 0.5rem;
-            font-weight: 600;
-        }
-
-        .btn-detail:hover {
-            background: #1976d2;
-        }
-
-        .btn-delete {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .btn-delete:hover {
-            background: #c82333;
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal.show {
-            display: block;
-        }
-
-        .modal-content {
-            background: var(--white);
-            margin: 2% auto;
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--primary-yellow);
-            padding-bottom: 1rem;
-        }
-
-        .modal-header h3 {
-            margin: 0;
-            color: var(--primary-black);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .detail-item label {
-            color: var(--primary-black);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            display: block;
-        }
-
-        .detail-item p {
-            color: var(--text-dark);
-            margin: 0;
-            background: var(--light-bg);
-            padding: 0.5rem;
-            border-radius: 4px;
-            word-break: break-word;
-        }
-
-        .section-title {
-            color: var(--primary-black);
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin: 1.5rem 0 1rem 0;
-            border-bottom: 2px solid var(--primary-yellow);
-            padding-bottom: 0.5rem;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-
-        .damage-list {
-            background: var(--light-bg);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 0.5rem;
-        }
-
-        .damage-item {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .damage-item:last-child {
-            border-bottom: none;
-        }
-
-        @media (max-width: 768px) {
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-bar {
-                flex-direction: column;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 0.75rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- LOGIN -->
-    <div id="loginPage" class="login-container">
-        <div class="login-box">
-            <h1>OTOSELL</h1>
-            <h2 style="text-align: center; color: var(--primary-black); margin-bottom: 2rem; font-size: 1.3rem;">Admin Paneli</h2>
-            <div id="errorMessage" class="error-message"></div>
-            <div class="form-group">
-                <label for="username">Kullanıcı Adı</label>
-                <input type="text" id="username" placeholder="admin" onkeypress="if(event.key==='Enter') login()">
-            </div>
-            <div class="form-group">
-                <label for="password">Şifre</label>
-                <input type="password" id="password" placeholder="1234" onkeypress="if(event.key==='Enter') login()">
-            </div>
-            <button class="btn-login" onclick="login()">Giriş Yap</button>
-        </div>
-    </div>
-
-    <!-- ADMIN PANEL -->
-    <div id="adminPage">
-        <header>
-            <div class="container">
-                <div class="logo">OTOSELL</div>
-                <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
-            </div>
-        </header>
-
-        <div class="admin-content show">
-            <div class="container">
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="color: var(--primary-black); margin-bottom: 0.5rem;">Gönderilen Teklifler</h2>
-                    <p style="color: var(--text-light);">Sistem yönetimi ve araç tekliflerinin takibi</p>
-                </div>
-
-                <!-- İSTATİSTİKLER -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>Toplam Teklif</h4>
-                        <div class="number" id="statTotal">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Bugün</h4>
-                        <div class="number" id="statToday">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Bu Hafta</h4>
-                        <div class="number" id="statWeek">0</div>
-                    </div>
-                </div>
-
-                <!-- ARAMA -->
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Referans kodu, ad, email ya da telefon ile ara...">
-                    <button class="btn-search" onclick="searchSubmissions()">Ara</button>
-                    <button class="btn-search" onclick="loadAllSubmissions()" style="background: var(--text-light);">Tümünü Göster</button>
-                </div>
-
-                <!-- TABLO -->
-                <div class="table-container">
-                    <div id="tableContent"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL -->
-    <div id="detailModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Detaylı Bilgiler</h3>
-                <button class="close-modal" onclick="closeModal()">✕</button>
-            </div>
-            <div id="detailContent"></div>
-        </div>
-    </div>
-
-    <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            if (username === 'admin' && password === '1234') {
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('adminPage').style.display = 'block';
-                loadAllSubmissions();
-            } else {
-                errorMessage.textContent = '❌ Hatalı kimlik bilgileri';
-                errorMessage.style.display = 'block';
-            }
-        }
-
-        function logout() {
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('errorMessage').style.display = 'none';
-            document.getElementById('loginPage').style.display = 'flex';
-            document.getElementById('adminPage').style.display = 'none';
-        }
-
-        function loadAllSubmissions() {
-            const token = 'Bearer otosell_token_' + Date.now();
-            fetch('/api/admin/submissions', {
-                headers: { 'Authorization': token }
-            })
-            .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    displaySubmissions(result.data);
-                    updateStats(result.data);
-                }
-            })
-            .catch(err => console.error(err));
-        }
-
-        function displaySubmissions(submissions) {
-            const container = document.getElementById('tableContent');
-
-            if (submissions.length === 0) {
-                container.innerHTML = '<div class="no-data">Henüz teklif bulunmamaktadır</div>';
-                return;
-            }
-
-            let html = `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Referans</th>
-                            <th>Ad Soyad</th>
-                            <th>Araç</th>
-                            <th>Telefon</th>
-                            <th>Email</th>
-                            <th>Tarih</th>
-                            <th>İşlem</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            submissions.forEach((item, index) => {
-                html += `
-                    <tr>
-                        <td><span class="ref-code">${item.referenceCode}</span></td>
-                        <td>${item.firstName} ${item.lastName}</td>
-                        <td>${item.brand} ${item.model}</td>
-                        <td>${item.phone}</td>
-                        <td>${item.email || '-'}</td>
-                        <td>${new Date(item.submittedAt).toLocaleDateString('tr-TR')}</td>
-                        <td>
-                            <button class="btn-detail" onclick="viewDetails(${item.id})">Detay</button>
-                            <button class="btn-delete" onclick="deleteSubmission(${item.id})">Sil</button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
-
-        function viewDetails(id) {
-            const token = 'Bearer otosell_token_' + Date.now();
-            fetch(`/api/admin/submissions/${id}`, {
-                headers: { 'Authorization': token }
-            })
-            .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    displayDetail(result.data);
-                }
-            });
-        }
-
-        function displayDetail(item) {
-            let paintDamage = '';
-            try {
-                const damages = JSON.parse(item.paintCondition);
-                if (Object.keys(damages).length > 0) {
-                    paintDamage = '<div class="damage-list">';
-                    for (const [part, damage] of Object.entries(damages)) {
-                        if (damage) {
-                            paintDamage += `<div class="damage-item"><strong>${part.replace(/-/g, ' ')}:</strong> ${damage}</div>`;
-                        }
-                    }
-                    paintDamage += '</div>';
-                }
-            } catch (e) {
-                paintDamage = '';
-            }
-
-            const detailContent = document.getElementById('detailContent');
-            detailContent.innerHTML = `
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Referans Kodu:</label>
-                        <p>${item.referenceCode}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Tarih:</label>
-                        <p>${new Date(item.submittedAt).toLocaleString('tr-TR')}</p>
-                    </div>
-                </div>
-
-                <div class="section-title">👤 Kişisel Bilgiler</div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Ad Soyad:</label>
-                        <p>${item.firstName} ${item.lastName}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Telefon:</label>
-                        <p>${item.phone}</p>
-                    </div>
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Email:</label>
-                        <p>${item.email || '-'}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Şehir/İlçe:</label>
-                        <p>${item.city} / ${item.district}</p>
-                    </div>
-                </div>
-
-                <div class="section-title">🚗 Araç Bilgileri</div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Marka/Model:</label>
-                        <p>${item.brand} ${item.model}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Yıl:</label>
-                        <p>${item.year}</p>
-                    </div>
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Kilometre:</label>
-                        <p>${Number(item.mileage).toLocaleString()} km</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Araç Türü:</label>
-                        <p>${item.bodyType}</p>
-                    </div>
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Renk:</label>
-                        <p>${item.color}</p>
-                    </div>
-                </div>
-
-                <div class="section-title">⚙️ Motor & Özellikleri</div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Yakıt Türü:</label>
-                        <p>${item.fuel}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Şanzıman:</label>
-                        <p>${item.transmission}</p>
-                    </div>
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Motor Hacmi:</label>
-                        <p>${item.engineSize} cc</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>Beygir Gücü:</label>
-                        <p>${item.horsepower} BG</p>
-                    </div>
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Çekiş Sistemi:</label>
-                        <p>${item.wheelDrive}</p>
-                    </div>
-                </div>
-
-                <div class="section-title">🔍 Araç Durumu</div>
-                <div class="detail-item">
-                    <label>Boya Hasarları:</label>
-                    ${paintDamage || '<p>Hasar yok</p>'}
-                </div>
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Kaza Geçmişi:</label>
-                        <p>${item.hasAccident}</p>
-                    </div>
-                    <div class="detail-item">
-                        <label>İç Durumu:</label>
-                        <p>${item.interiorCondition}</p>
-                    </div>
-                </div>
-
-                ${item.defects ? `
-                    <div class="detail-item">
-                        <label>Kusurlar / Hatalar:</label>
-                        <p>${item.defects}</p>
-                    </div>
-                ` : ''}
-            `;
-
-            document.getElementById('detailModal').classList.add('show');
-        }
-
-        function closeModal() {
-            document.getElementById('detailModal').classList.remove('show');
-        }
-
-        function deleteSubmission(id) {
-            if (confirm('Bu teklifi silmek istediğinize emin misiniz?')) {
-                const token = 'Bearer otosell_token_' + Date.now();
-                fetch(`/api/admin/submissions/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': token }
-                })
-                .then(res => res.json())
-                .then(result => {
-                    if (result.success) {
-                        loadAllSubmissions();
-                        closeModal();
-                    }
-                });
-            }
-        }
-
-        function searchSubmissions() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const token = 'Bearer otosell_token_' + Date.now();
-            
-            fetch('/api/admin/submissions', {
-                headers: { 'Authorization': token }
-            })
-            .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    const filtered = result.data.filter(item =>
-                        item.referenceCode.toLowerCase().includes(searchTerm) ||
-                        item.firstName.toLowerCase().includes(searchTerm) ||
-                        item.lastName.toLowerCase().includes(searchTerm) ||
-                        item.email.toLowerCase().includes(searchTerm) ||
-                        item.phone.includes(searchTerm)
-                    );
-                    displaySubmissions(filtered);
-                }
-            });
-        }
-
-        function updateStats(submissions) {
-            const today = new Date();
-            const thisWeekStart = new Date(today.setDate(today.getDate() - today.getDay()));
-
-            let todayCount = 0;
-            let weekCount = 0;
-
-            submissions.forEach(item => {
-                const itemDate = new Date(item.submittedAt);
-                const itemDateOnly = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
-                const todayDateOnly = new Date();
-
-                if (itemDateOnly.getTime() === todayDateOnly.getTime()) {
-                    todayCount++;
-                }
-
-                if (itemDate >= thisWeekStart) {
-                    weekCount++;
-                }
-            });
-
-            document.getElementById('statTotal').textContent = submissions.length;
-            document.getElementById('statToday').textContent = todayCount;
-            document.getElementById('statWeek').textContent = weekCount;
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('detailModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-    </script>
-</body>
-</html>
+            box-shadow: 0 8px 20px rgba(255,215,0,0.
