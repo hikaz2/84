@@ -25,6 +25,9 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         .container {
@@ -33,13 +36,23 @@
             padding: 0 20px;
         }
 
-        /* LOGIN */
-        .login-container {
+        /* LOGIN SECTION */
+        #loginSection {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+        }
+
+        #loginSection.hidden {
+            display: none !important;
         }
 
         .login-box {
@@ -48,7 +61,7 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
             max-width: 420px;
-            width: 100%;
+            width: 90%;
             border-top: 5px solid var(--primary-yellow);
         }
 
@@ -80,7 +93,8 @@
             color: var(--primary-black);
         }
 
-        input {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 14px 16px;
             border: 2px solid var(--border-color);
@@ -89,7 +103,8 @@
             transition: all 0.3s;
         }
 
-        input:focus {
+        input[type="text"]:focus,
+        input[type="password"]:focus {
             outline: none;
             border-color: var(--primary-yellow);
             box-shadow: 0 0 12px rgba(255,215,0,0.2);
@@ -106,13 +121,12 @@
             cursor: pointer;
             font-weight: 700;
             text-transform: uppercase;
-            transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(255,215,0,0.2);
+            transition: all 0.3s;
         }
 
-        .btn-login:hover {
+        .btn-login:active {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,215,0,0.3);
         }
 
         .error-message {
@@ -126,7 +140,15 @@
             font-weight: 600;
         }
 
-        /* ADMIN PANEL */
+        /* ADMIN SECTION */
+        #adminSection {
+            display: none;
+        }
+
+        #adminSection.show {
+            display: block;
+        }
+
         header {
             background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
             color: var(--white);
@@ -159,17 +181,24 @@
             transition: all 0.3s;
         }
 
-        .logout-btn:hover {
+        .logout-btn:active {
             transform: translateY(-2px);
         }
 
         .admin-content {
             padding: 2rem 20px;
-            display: none;
         }
 
-        .admin-content.show {
-            display: block;
+        h2 {
+            color: var(--primary-black);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
         }
 
         .stats-grid {
@@ -208,18 +237,37 @@
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
+            flex-wrap: wrap;
         }
 
         .search-bar input {
             flex: 1;
+            min-width: 200px;
             padding: 12px 15px;
             border: 2px solid var(--border-color);
             border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
         }
 
         .btn-search {
             background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
             color: var(--primary-black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-reset {
+            background: var(--text-light);
+            color: white;
             border: none;
             padding: 12px 30px;
             border-radius: 8px;
@@ -257,9 +305,14 @@
             color: var(--white);
         }
 
-        th, td {
+        th {
             padding: 1rem;
             text-align: left;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -271,7 +324,7 @@
             background: #e3f2fd;
             color: #1976d2;
             padding: 0.4rem 0.8rem;
-            border-radius: 3px;
+            border-radius: 4px;
             font-weight: 700;
             font-family: monospace;
             font-size: 0.85rem;
@@ -298,6 +351,13 @@
             font-weight: 600;
         }
 
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
         /* MODAL */
         .modal {
             display: none;
@@ -308,6 +368,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
         }
 
         .modal.show {
@@ -321,9 +382,9 @@
             border-radius: 12px;
             width: 90%;
             max-width: 900px;
+            box-shadow: var(--shadow);
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: var(--shadow);
         }
 
         .modal-header {
@@ -338,6 +399,7 @@
         .modal-header h3 {
             margin: 0;
             color: var(--primary-black);
+            font-size: 1.5rem;
         }
 
         .close-modal {
@@ -370,6 +432,7 @@
             padding: 0.7rem;
             border-radius: 5px;
             word-break: break-word;
+            font-size: 0.95rem;
         }
 
         .section-title {
@@ -381,11 +444,21 @@
             padding-bottom: 0.5rem;
         }
 
-        .no-data {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-light);
-            font-size: 1.1rem;
+        .damage-list {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .damage-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .damage-item:last-child {
+            border-bottom: none;
         }
 
         @media (max-width: 768px) {
@@ -397,50 +470,61 @@
                 flex-direction: column;
             }
 
+            .search-bar input,
+            .search-bar button {
+                width: 100%;
+            }
+
             table {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             th, td {
                 padding: 0.75rem;
             }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- LOGIN -->
-    <div id="loginPage" class="login-container">
+    <!-- LOGIN BÖLÜMÜ -->
+    <div id="loginSection">
         <div class="login-box">
             <h1>OTOSELL</h1>
             <h2>Admin Paneli</h2>
             <div id="errorMessage" class="error-message"></div>
+            
             <div class="form-group">
                 <label for="username">Kullanıcı Adı</label>
-                <input type="text" id="username" placeholder="admin" onkeypress="if(event.key==='Enter') login()">
+                <input type="text" id="username" placeholder="admin">
             </div>
+            
             <div class="form-group">
                 <label for="password">Şifre</label>
-                <input type="password" id="password" placeholder="1234" onkeypress="if(event.key==='Enter') login()">
+                <input type="password" id="password" placeholder="1234">
             </div>
-            <button class="btn-login" onclick="login()">Giriş Yap</button>
+            
+            <button class="btn-login" onclick="adminLogin()">Giriş Yap</button>
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <div id="adminPage">
+    <!-- ADMIN BÖLÜMÜ -->
+    <div id="adminSection">
         <header>
             <div class="container">
                 <div class="logo">OTOSELL</div>
-                <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
+                <button class="logout-btn" onclick="adminLogout()">Çıkış Yap</button>
             </div>
         </header>
 
-        <div class="admin-content show">
+        <div class="admin-content">
             <div class="container">
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="color: var(--primary-black); margin-bottom: 0.5rem; font-size: 2.5rem;">Gönderilen Teklifler</h2>
-                    <p style="color: var(--text-light);">Sistem yönetimi ve araç tekliflerinin takibi</p>
-                </div>
+                <h2>Gönderilen Teklifler</h2>
+                <p class="subtitle">Araç tekliflerinin yönetimi ve takibi</p>
 
                 <!-- İSTATİSTİKLER -->
                 <div class="stats-grid">
@@ -458,11 +542,11 @@
                     </div>
                 </div>
 
-                <!-- ARAMA -->
+                <!-- ARAMA BARI -->
                 <div class="search-bar">
                     <input type="text" id="searchInput" placeholder="Referans kodu, ad, email ya da telefon ile ara...">
                     <button class="btn-search" onclick="searchSubmissions()">Ara</button>
-                    <button class="btn-search" onclick="loadAllSubmissions()" style="background: var(--text-light);">Tümünü Göster</button>
+                    <button class="btn-reset" onclick="loadAllSubmissions()">Tümünü Göster</button>
                     <button class="btn-delete-all" onclick="deleteAllSubmissions()">Hepsini Sil</button>
                 </div>
 
@@ -474,25 +558,33 @@
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- DETAY MODAL -->
     <div id="detailModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Detaylı Bilgiler</h3>
-                <button class="close-modal" onclick="closeModal()">✕</button>
+                <button class="close-modal" onclick="closeDetailModal()">✕</button>
             </div>
             <div id="detailContent"></div>
         </div>
     </div>
 
     <script>
-        function login() {
+        // ADMIN GİRİŞİ
+        function adminLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
 
+            if (!username || !password) {
+                errorMessage.textContent = '⚠️ Kullanıcı adı ve şifre girin';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
             if (username === 'admin' && password === '1234') {
-                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.add('show');
                 loadAllSubmissions();
             } else {
                 errorMessage.textContent = '❌ Hatalı kimlik bilgileri';
@@ -500,25 +592,28 @@
             }
         }
 
-        function logout() {
+        // ADMIN ÇIKIŞ
+        function adminLogout() {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('errorMessage').style.display = 'none';
-            document.getElementById('loginPage').style.display = 'flex';
-            loadAllSubmissions();
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('adminSection').classList.remove('show');
         }
 
+        // TÜM TEKLİFLERİ YÜKLE
         function loadAllSubmissions() {
             const submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
             displaySubmissions(submissions);
             updateStats(submissions);
         }
 
+        // TEKLİFLERİ GÖSTER
         function displaySubmissions(submissions) {
             const container = document.getElementById('tableContent');
 
             if (submissions.length === 0) {
-                container.innerHTML = '<div class="no-data">Henüz teklif bulunmamaktadır</div>';
+                container.innerHTML = '<div class="no-data">📭 Henüz teklif bulunmamaktadır</div>';
                 return;
             }
 
@@ -546,4 +641,237 @@
                         <td>${item.brand} ${item.model}</td>
                         <td>${item.phone}</td>
                         <td>${item.email || '-'}</td>
-                        <td>${
+                        <td>${item.submittedAt}</td>
+                        <td>
+                            <button class="btn-detail" onclick="viewDetails(${index})">Detay</button>
+                            <button class="btn-delete" onclick="deleteSubmission(${index})">Sil</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+        }
+
+        // DETAY GÖR
+        function viewDetails(index) {
+            const submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
+            const item = submissions[index];
+
+            if (!item) return;
+
+            let damageInfo = '';
+            try {
+                const damages = JSON.parse(item.damages || '{}');
+                if (Object.keys(damages).length > 0) {
+                    damageInfo = '<div class="damage-list">';
+                    for (const [id, damage] of Object.entries(damages)) {
+                        damageInfo += `<div class="damage-item"><strong>${id}:</strong> ${damage}</div>`;
+                    }
+                    damageInfo += '</div>';
+                }
+            } catch (e) {
+                damageInfo = '';
+            }
+
+            const detailContent = document.getElementById('detailContent');
+            detailContent.innerHTML = `
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Referans Kodu:</label>
+                        <p>${item.referenceCode}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Tarih:</label>
+                        <p>${item.submittedAt}</p>
+                    </div>
+                </div>
+
+                <div class="section-title">👤 Kişisel Bilgiler</div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Ad Soyad:</label>
+                        <p>${item.firstName} ${item.lastName}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Telefon:</label>
+                        <p>${item.phone}</p>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Email:</label>
+                        <p>${item.email || '-'}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Şehir/İlçe:</label>
+                        <p>${item.city} / ${item.district}</p>
+                    </div>
+                </div>
+
+                <div class="section-title">🚗 Araç Bilgileri</div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Marka/Model:</label>
+                        <p>${item.brand} ${item.model}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Yıl:</label>
+                        <p>${item.year}</p>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Kilometre:</label>
+                        <p>${Number(item.mileage).toLocaleString()} km</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Araç Türü:</label>
+                        <p>${item.bodyType}</p>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Renk:</label>
+                        <p>${item.color}</p>
+                    </div>
+                </div>
+
+                <div class="section-title">⚙️ Motor & Özellikleri</div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Yakıt Türü:</label>
+                        <p>${item.fuel}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Şanzıman:</label>
+                        <p>${item.transmission}</p>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Motor Hacmi:</label>
+                        <p>${item.engineSize} L</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>Beygir Gücü:</label>
+                        <p>${item.horsepower} BG</p>
+                    </div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Çekiş Sistemi:</label>
+                        <p>${item.wheelDrive}</p>
+                    </div>
+                </div>
+
+                <div class="section-title">🔍 Araç Durumu</div>
+                <div class="detail-item">
+                    <label>Boya Hasarları:</label>
+                    ${damageInfo || '<p>Hasar yok</p>'}
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Kaza Geçmişi:</label>
+                        <p>${item.hasAccident}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label>İç Durumu:</label>
+                        <p>${item.interiorCondition}</p>
+                    </div>
+                </div>
+
+                ${item.defects ? `
+                    <div class="detail-item">
+                        <label>Kusurlar / Hatalar:</label>
+                        <p>${item.defects}</p>
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        // MODAL KAPAT
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('show');
+        }
+
+        // TEKLİF SİL
+        function deleteSubmission(index) {
+            if (confirm('Bu teklifi silmek istediğinize emin misiniz?')) {
+                let submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
+                submissions.splice(index, 1);
+                localStorage.setItem('otosellSubmissions', JSON.stringify(submissions));
+                loadAllSubmissions();
+                closeDetailModal();
+            }
+        }
+
+        // ARAMA YAP
+        function searchSubmissions() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (!searchTerm) {
+                loadAllSubmissions();
+                return;
+            }
+
+            let submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
+            const filtered = submissions.filter(item =>
+                item.referenceCode.toLowerCase().includes(searchTerm) ||
+                item.firstName.toLowerCase().includes(searchTerm) ||
+                item.lastName.toLowerCase().includes(searchTerm) ||
+                item.email.toLowerCase().includes(searchTerm) ||
+                item.phone.includes(searchTerm)
+            );
+            displaySubmissions(filtered);
+        }
+
+        // İSTATİSTİKLERİ GÜNCELLE
+        function updateStats(submissions) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const thisWeekStart = new Date(today);
+            thisWeekStart.setDate(thisWeekStart.getDate() - thisWeekStart.getDay());
+
+            let todayCount = 0;
+            let weekCount = 0;
+
+            submissions.forEach(item => {
+                const itemDate = new Date(item.submittedAt);
+                itemDate.setHours(0, 0, 0, 0);
+
+                if (itemDate.getTime() === today.getTime()) {
+                    todayCount++;
+                }
+
+                if (itemDate >= thisWeekStart) {
+                    weekCount++;
+                }
+            });
+
+            document.getElementById('statTotal').textContent = submissions.length;
+            document.getElementById('statToday').textContent = todayCount;
+            document.getElementById('statWeek').textContent = weekCount;
+        }
+
+        // HEPSİNİ SİL
+        function deleteAllSubmissions() {
+            if (confirm('Tüm teklifleri silmek istediğinize emin misiniz? Bu işlem geri alınamaz!')) {
+                localStorage.removeItem('otosellSubmissions');
+                loadAllSubmissions();
+            }
+        }
+
+        // MODAL DIŞINDA KAPANSIN
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeDetailModal();
+            }
+        }
+    </script>
+</body>
+</html>
