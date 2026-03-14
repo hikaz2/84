@@ -4873,34 +4873,29 @@
             }
             
             if (step === 2) {
-                const mileage = document.getElementById('mileage').value;
-                const carColor = document.getElementById('carColor').value;
-                const tramerStatus = document.querySelector('input[name="tramerStatus"]:checked');
-                const interiorCondition = document.getElementById('interiorCondition').value;
-                const color = document.getElementById('color').value;
-                
-                if (!mileage || !carColor || !tramerStatus || !interiorCondition || !color) {
-                    showError('Lütfen tüm alanları doldurunuz!');
-                    return false;
-                }
+    const mileage = document.getElementById('mileage').value;
+    const carColor = document.getElementById('carColor').value;
+    const tramerStatus = document.querySelector('input[name="tramerStatus"]:checked');
+    const interiorCondition = document.getElementById('interiorCondition').value;
+    
+    if (!mileage || !carColor || !tramerStatus || !interiorCondition) {
+        showError('Lütfen tüm alanları doldurunuz!');
+        return false;
+    }
 
-                if (tramerStatus.value === 'Evet') {
-                    const tramerPrice = document.getElementById('tramerPrice').value;
-                    if (!tramerPrice) {
-                        showError('Tramer tutar zorunludur!');
-                        return false;
-                    }
-                    if (tramerPrice.length > 7) {
-                        showError('Tramer tutar maksimum 7 rakam olabilir!');
-                        return false;
-                    }
-                }
+    if (tramerStatus && tramerStatus.value === 'Evet') {
+        const tramerPrice = document.getElementById('tramerPrice').value;
+        if (!tramerPrice) {
+            showError('Tramer tutar zorunludur!');
+            return false;
+        }
+    }
 
-                if (!mileage || mileage.length === 0 || mileage.length > 6) {
-                    showError('Kilometre geçerli olmalıdır (max 6 rakam)!');
-                    return false;
-                }
-            }
+    if (!mileage || mileage.length === 0 || mileage.length > 6) {
+        showError('Kilometre geçerli olmalıdır (max 6 rakam)!');
+        return false;
+    }
+}
             
             if (step === 3) {
                 const firstName = document.getElementById('firstName').value;
