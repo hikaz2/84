@@ -366,11 +366,6 @@
             background: #45a049;
         }
 
-        .btn-approve:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
         .btn-reject {
             background: var(--red);
             color: white;
@@ -378,11 +373,6 @@
 
         .btn-reject:hover {
             background: #b71c1c;
-        }
-
-        .btn-reject:disabled {
-            background: #ccc;
-            cursor: not-allowed;
         }
 
         .btn-delete {
@@ -579,7 +569,8 @@
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab('dashboard')">📊 İstatistikler</button>
                 <button class="tab-btn" onclick="switchTab('pending')">⏳ Bekleyen Teklifler</button>
-                <button class="tab-btn" onclick="switchTab('resolved')">✔️ Onaylanan ve Reddedilen</button>
+                <button class="tab-btn" onclick="switchTab('approved')">✅ Onaylanan Teklifler</button>
+                <button class="tab-btn" onclick="switchTab('rejected')">❌ Reddedilen Teklifler</button>
             </div>
 
             <!-- DASHBOARD -->
@@ -615,13 +606,24 @@
                 </div>
             </div>
 
-            <!-- RESOLVED OFFERS -->
-            <div id="resolved" class="tab-content">
+            <!-- APPROVED OFFERS -->
+            <div id="approved" class="tab-content">
                 <div class="section">
-                    <h2>✔️ Onaylanan ve Reddedilen Teklifler</h2>
-                    <div id="resolvedContainer" class="offers-grid"></div>
-                    <div id="emptyResolved" class="empty" style="display: none;">
-                        <p>😴 Henüz hiç onaylanan veya reddedilen teklif yok</p>
+                    <h2>✅ Onaylanan Teklifler</h2>
+                    <div id="approvedContainer" class="offers-grid"></div>
+                    <div id="emptyApproved" class="empty" style="display: none;">
+                        <p>😴 Henüz hiç onaylanan teklif yok</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REJECTED OFFERS -->
+            <div id="rejected" class="tab-content">
+                <div class="section">
+                    <h2>❌ Reddedilen Teklifler</h2>
+                    <div id="rejectedContainer" class="offers-grid"></div>
+                    <div id="emptyRejected" class="empty" style="display: none;">
+                        <p>😴 Henüz hiç reddedilen teklif yok</p>
                     </div>
                 </div>
             </div>
@@ -777,7 +779,8 @@
 
             if (tabName === 'dashboard') loadDashboard();
             if (tabName === 'pending') loadPending();
-            if (tabName === 'resolved') loadResolved();
+            if (tabName === 'approved') loadApproved();
+            if (tabName === 'rejected') loadRejected();
         }
 
         // LOAD DASHBOARD
@@ -814,8 +817,8 @@
 
             emptyMsg.style.display = 'none';
 
-            pendingOffers.forEach((offer) => {
-                const actualIndex = offers.findIndex(o => o.referenceCode === offer.referenceCode);
+            offers.forEach((offer, index) => {
+                if (statuses[index]) return;
                 
                 const card = `
                     <div class="offer-card">
@@ -841,9 +844,9 @@
                         </div>
 
                         <div class="offer-actions">
-                            <button class="btn btn-view" onclick="showDetail(${actualIndex})">Detay</button>
-                            <button class="btn btn-approve" onclick="approveOffer(${actualIndex})">Onayla</button>
-                            <button class="btn btn-reject" onclick="rejectOffer(${actualIndex})">Reddet</button>
+                            <button class="btn btn-view" onclick="showDetail(${index})">Detay</button>
+                            <button class="btn btn-approve" onclick="approveOffer(${index})">Onayla</button>
+                            <button class="btn btn-reject" onclick="rejectOffer(${index})">Reddet</button>
                         </div>
                     </div>
                 `;
@@ -851,30 +854,26 @@
             });
         }
 
-        // LOAD RESOLVED OFFERS
-        function loadResolved() {
+        // LOAD APPROVED OFFERS
+        function loadApproved() {
             const offers = JSON.parse(localStorage.getItem('offers') || '[]');
             const statuses = JSON.parse(localStorage.getItem('offerStatuses') || '{}');
-            const container = document.getElementById('resolvedContainer');
-            const emptyMsg = document.getElementById('emptyResolved');
+            const container = document.getElementById('approvedContainer');
+            const emptyMsg = document.getElementById('emptyApproved');
 
             container.innerHTML = '';
 
-            const resolvedOffers = offers.filter((_, i) => statuses[i]);
+            const approvedOffers = offers.filter((_, i) => statuses[i] === 'approved');
 
-            if (resolvedOffers.length === 0) {
+            if (approvedOffers.length === 0) {
                 emptyMsg.style.display = 'block';
                 return;
             }
 
             emptyMsg.style.display = 'none';
 
-            resolvedOffers.forEach((offer) => {
-                const actualIndex = offers.findIndex(o => o.referenceCode === offer.referenceCode);
-                const status = statuses[actualIndex];
-                const statusText = status === 'approved' ? 'Onaylandı' : 'Reddedildi';
-                const statusClass = status === 'approved' ? 'approved' : 'rejected';
-                const icon = status === 'approved' ? '✅' : '❌';
+            offers.forEach((offer, index) => {
+                if (statuses[index] !== 'approved') return;
                 
                 const card = `
                     <div class="offer-card">
@@ -883,7 +882,7 @@
                                 <h4>${offer.firstName} ${offer.lastName}</h4>
                                 <div class="offer-info">📱 ${offer.phone}</div>
                             </div>
-                            <span class="offer-status ${statusClass}">${icon} ${statusText}</span>
+                            <span class="offer-status approved">✅ Onaylandı</span>
                         </div>
 
                         <div class="offer-vehicle">
@@ -900,8 +899,62 @@
                         </div>
 
                         <div class="offer-actions">
-                            <button class="btn btn-view" onclick="showDetail(${actualIndex})" style="flex: 1;">Detay</button>
-                            <button class="btn btn-delete" onclick="deleteOffer(${actualIndex})">Sil</button>
+                            <button class="btn btn-view" onclick="showDetail(${index})" style="flex: 1;">Detay</button>
+                            <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // LOAD REJECTED OFFERS
+        function loadRejected() {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const statuses = JSON.parse(localStorage.getItem('offerStatuses') || '{}');
+            const container = document.getElementById('rejectedContainer');
+            const emptyMsg = document.getElementById('emptyRejected');
+
+            container.innerHTML = '';
+
+            const rejectedOffers = offers.filter((_, i) => statuses[i] === 'rejected');
+
+            if (rejectedOffers.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+
+            offers.forEach((offer, index) => {
+                if (statuses[index] !== 'rejected') return;
+                
+                const card = `
+                    <div class="offer-card">
+                        <div class="offer-header">
+                            <div>
+                                <h4>${offer.firstName} ${offer.lastName}</h4>
+                                <div class="offer-info">📱 ${offer.phone}</div>
+                            </div>
+                            <span class="offer-status rejected">❌ Reddedildi</span>
+                        </div>
+
+                        <div class="offer-vehicle">
+                            <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
+                            <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
+                            <p>Kilometre: ${offer.mileage} km</p>
+                        </div>
+
+                        <div class="offer-info">
+                            📍 ${offer.city}, ${offer.district}
+                        </div>
+                        <div class="offer-info" style="font-size: 0.8rem; color: #999;">
+                            📅 ${new Date(offer.date).toLocaleDateString('tr-TR')}
+                        </div>
+
+                        <div class="offer-actions">
+                            <button class="btn btn-view" onclick="showDetail(${index})" style="flex: 1;">Detay</button>
+                            <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
                         </div>
                     </div>
                 `;
@@ -948,8 +1001,7 @@
                 localStorage.setItem('offerStatuses', JSON.stringify(statuses));
                 
                 showMessage('✅ Teklif onaylandı!', 'success');
-                loadDashboard();
-                loadPending();
+                refreshAll();
             }
         }
 
@@ -961,8 +1013,7 @@
                 localStorage.setItem('offerStatuses', JSON.stringify(statuses));
                 
                 showMessage('❌ Teklif reddedildi!', 'success');
-                loadDashboard();
-                loadPending();
+                refreshAll();
             }
         }
 
@@ -975,7 +1026,7 @@
                 // Teklifi sil
                 offers.splice(index, 1);
                 
-                // Status'ları düzelt (silinen index'ten sonrakileri bir kaydır)
+                // Status'ları düzelt
                 const newStatuses = {};
                 for (let i = 0; i < offers.length; i++) {
                     if (statuses[i < index ? i : i + 1]) {
@@ -986,10 +1037,17 @@
                 localStorage.setItem('offers', JSON.stringify(offers));
                 localStorage.setItem('offerStatuses', JSON.stringify(newStatuses));
                 
-                loadDashboard();
-                loadResolved();
                 showMessage('✅ Teklif silindi!', 'success');
+                refreshAll();
             }
+        }
+
+        // REFRESH ALL
+        function refreshAll() {
+            loadDashboard();
+            loadPending();
+            loadApproved();
+            loadRejected();
         }
 
         // MESSAGE
