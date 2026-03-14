@@ -791,109 +791,2830 @@
     <script>
         // TÜM VERİLER - SAHIBINDEN.COM'DAN ÇEKILEN
         const DB = {
-            "Otomobil": {
-                "Toyota": {
-                    "Corolla": {"Sedan": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["L", "LE", "S", "XLE"]}, "Otomatik-1.6": {"Ön Çekişli": ["L", "LE", "S", "XLE"]}, "Otomatik-1.8": {"Ön Çekişli": ["ECO", "LE", "S", "XLE"]}, "Otomatik-2.0": {"Ön Çekişli": ["L", "LE", "S", "XLE"]}}}},
-                    "Camry": {"Sedan": {"Benzin": {"Manuel-2.0": {"Ön Çekişli": ["LE", "SE", "XLE", "XSE"], "Arka Çekişli": ["Limited"]}, "Otomatik-2.0": {"Ön Çekişli": ["LE", "SE"], "Arka Çekişli": ["XLE", "XSE"]}, "Otomatik-2.5": {"Ön Çekişli": ["L", "LE", "SE"], "Arka Çekişli": ["XLE", "XSE"]}, "Otomatik-3.5": {"Arka Çekişli": ["L", "LE", "SE", "XLE", "XSE"]}}}},
-                    "Yaris": {"Hatchback": {"Benzin": {"Manuel-1.3": {"Ön Çekişli": ["L", "LE", "XLE"]}, "Otomatik-1.3": {"Ön Çekişli": ["L", "LE", "XLE"]}, "Otomatik-1.5": {"Ön Çekişli": ["L", "LE", "S", "XLE"]}}}},
-                    "Prius": {"Sedan": {"Hibrit": {"Otomatik-1.8": {"Ön Çekişli": ["L", "LE", "XLE", "Four"]}}}},
-                    "Altis": {"Sedan": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["GL", "GLX", "SE"]}, "Otomatik-1.6": {"Ön Çekişli": ["GL", "GLX", "SE"]}, "Otomatik-1.8": {"Ön Çekişli": ["GL", "GLX", "SE", "XLE"]}, "Otomatik-2.0": {"Ön Çekişli": ["GL", "GLX", "SE"]}}}},
-                    "Mark X": {"Sedan": {"Benzin": {"Otomatik-2.5": {"Arka Çekişli": ["G", "G Executive", "250G"]}, "Otomatik-3.0": {"Arka Çekişli": ["G", "G Executive", "300G", "Premium"]}}}},
-                    "Crown": {"Sedan": {"Benzin": {"Otomatik-2.5": {"Arka Çekişli": ["G", "G Executive", "Royal"]}, "Otomatik-3.0": {"Arka Çekişli": ["Premium", "Royal Premium"]}}}}
-                },
-                "Honda": {
-                    "Accord": {"Sedan": {"Benzin": {"Otomatik-1.5": {"Ön Çekişli": ["LX", "Sport", "EX", "EX-L"]}, "Otomatik-2.0": {"Ön Çekişli": ["Sport", "EX", "EX-L"]}, "Otomatik-3.5": {"Arka Çekişli": ["LX", "EX", "EX-L"]}}}},
-                    "Civic": {"Sedan": {"Benzin": {"Manuel-1.5": {"Ön Çekişli": ["DX", "LX", "EX", "EX-T"]}, "Otomatik-1.5": {"Ön Çekişli": ["DX", "LX", "EX", "EX-T"]}, "Otomatik-1.6": {"Ön Çekişli": ["S", "EX", "LX"]}, "Otomatik-2.0": {"Ön Çekişli": ["Si", "Type R"]}}}},
-                    "Insight": {"Sedan": {"Hibrit": {"Otomatik-1.5": {"Ön Çekişli": ["LX", "EX", "EX-L"]}}}}
-                },
-                "BMW": {
-                    "3 Serisi": {"Sedan": {"Benzin": {"Manuel-2.0": {"Arka Çekişli": ["Standard", "Sport"]}, "Otomatik-2.0": {"Arka Çekişli": ["Standard", "Sport"]}, "Otomatik-3.0": {"Arka Çekişli": ["Sport", "M340i"]}}, "Dizel": {"Manuel-2.0": {"Arka Çekişli": ["Standard"]}, "Otomatik-2.0": {"Arka Çekişli": ["Standard", "Sport"]}}}},
-                    "5 Serisi": {"Sedan": {"Benzin": {"Otomatik-2.0": {"Arka Çekişli": ["Standart", "Luxury"]}, "Otomatik-3.0": {"Arka Çekişli": ["Standart", "Luxury", "M550i"]}}, "Dizel": {"Otomatik-2.0": {"Arka Çekişli": ["Standart"]}, "Otomatik-3.0": {"Arka Çekişli": ["Standart", "Luxury"]}}}},
-                    "7 Serisi": {"Sedan": {"Benzin": {"Otomatik-3.0": {"Arka Çekişli": ["Standart", "Luxury"]}, "Otomatik-4.4": {"Arka Çekişli": ["Luxury", "M760i"]}}, "Dizel": {"Otomatik-3.0": {"Arka Çekişli": ["Standart", "Luxury"]}}}}
-                },
-                "Mercedes-Benz": {
-                    "C Serisi": {"Sedan": {"Benzin": {"Manuel-2.0": {"Arka Çekişli": ["Classic", "Elegance"]}, "Otomatik-2.0": {"Arka Çekişli": ["Classic", "Elegance", "AMG"]}, "Otomatik-3.0": {"Arka Çekişli": ["AMG"]}}, "Dizel": {"Otomatik-2.0": {"Arka Çekişli": ["Classic", "Elegance"]}}}},
-                    "E Serisi": {"Sedan": {"Benzin": {"Otomatik-2.0": {"Arka Çekişli": ["Classic", "Elegance"]}, "Otomatik-3.0": {"Arka Çekişli": ["Elegance", "AMG"]}}, "Dizel": {"Otomatik-2.0": {"Arka Çekişli": ["Classic", "Elegance"]}, "Otomatik-3.0": {"Arka Çekişli": ["Elegance"]}}}},
-                    "A Serisi": {"Sedan": {"Benzin": {"Manuel-1.3": {"Ön Çekişli": ["Classic"]}, "Otomatik-1.5": {"Ön Çekişli": ["Classic", "Sport"]}, "Otomatik-2.0": {"Ön Çekişli": ["Sport", "AMG"]}}}}
-                },
-                "Volkswagen": {
-                    "Golf": {"Hatchback": {"Benzin": {"Manuel-1.2": {"Ön Çekişli": ["TSI", "Trendline"]}, "Otomatik-1.4": {"Ön Çekişli": ["Comfortline"]}, "Otomatik-1.8": {"Ön Çekişli": ["R"]}}, "Dizel": {"Manuel-1.6": {"Ön Çekişli": ["TDI"]}}}},
-                    "Jetta": {"Sedan": {"Benzin": {"Manuel-1.4": {"Ön Çekişli": ["TSI"]}, "Otomatik-1.6": {"Ön Çekişli": ["Comfortline"]}}, "Dizel": {"Manuel-1.6": {"Ön Çekişli": ["TDI"]}}}},
-                    "Passat": {"Sedan": {"Benzin": {"Manuel-1.8": {"Ön Çekişli": ["TSI"]}, "Otomatik-2.0": {"Ön Çekişli": ["Highline"]}}, "Dizel": {"Manuel-2.0": {"Ön Çekişli": ["TDI"]}, "Otomatik-2.0": {"Ön Çekişli": ["Highline"]}}}}
-                },
-                "Ford": {
-                    "Focus": {"Hatchback": {"Benzin": {"Manuel-1.5": {"Ön Çekişli": ["Trend"]}, "Otomatik-1.6": {"Ön Çekişli": ["Trend", "Titanium"]}}, "Dizel": {"Manuel-1.5": {"Ön Çekişli": ["Trend"]}}}},
-                    "Fusion": {"Sedan": {"Benzin": {"Manuel-1.5": {"Ön Çekişli": ["S"]}, "Otomatik-2.0": {"Ön Çekişli": ["S", "SEL"]}}}},
-                    "Mondeo": {"Sedan": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["ECO"]}, "Otomatik-2.0": {"Ön Çekişli": ["Trend"]}}, "Dizel": {"Manuel-2.0": {"Ön Çekişli": ["TDCi"]}, "Otomatik-2.0": {"Ön Çekişli": ["Trend"]}}}}
-                },
-                "Hyundai": {
-                    "Elantra": {"Sedan": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["GL"]}, "Otomatik-1.8": {"Ön Çekişli": ["GL", "GLS"]}}}},
-                    "Sonata": {"Sedan": {"Benzin": {"Otomatik-2.0": {"Ön Çekişli": ["GL", "GLS"]}}, "Dizel": {"Otomatik-2.0": {"Ön Çekişli": ["GL"]}}}},
-                    "i30": {"Hatchback": {"Benzin": {"Manuel-1.4": {"Ön Çekişli": ["GL"]}, "Otomatik-1.6": {"Ön Çekişli": ["GL", "GLS"]}}}}
-                },
-                "Kia": {
-                    "K5": {"Sedan": {"Benzin": {"Manuel-2.0": {"Ön Çekişli": ["LX"]}, "Otomatik-2.0": {"Ön Çekişli": ["LX", "EX"]}}}},
-                    "Cerato": {"Sedan": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["S"]}, "Otomatik-1.8": {"Ön Çekişli": ["S", "EX"]}}}},
-                    "Forte": {"Sedan": {"Benzin": {"Manuel-2.0": {"Ön Çekişli": ["LX"]}, "Otomatik-2.0": {"Ön Çekişli": ["LX", "EX"]}}}}
+    "Otomobil": {
+        "Audi": {
+            "A1": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.0": {"Ön Çekişli": ["25 TFSI", "30 TFSI"]},
+                        "Otomatik-1.0": {"Ön Çekişli": ["25 TFSI", "30 TFSI"]},
+                        "Otomatik-1.2": {"Ön Çekişli": ["30 TFSI", "35 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.5": {"Ön Çekişli": ["25 TDI"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["25 TDI", "30 TDI"]}
+                    }
                 }
             },
-            "SUV": {
-                "Toyota": {
-                    "RAV4": {"SUV": {"Benzin": {"Manuel-2.0": {"Ön Çekişli": ["LE", "XLE"]}, "Otomatik-2.0": {"Ön Çekişli": ["LE", "XLE"], "Dört Çekişli": ["LE", "XLE", "Limited"]}, "Otomatik-2.5": {"Dört Çekişli": ["Limited", "Prime"]}}, "Hibrit": {"Otomatik-2.5": {"Dört Çekişli": ["Limited", "Prime"]}}}},
-                    "Highlander": {"SUV": {"Benzin": {"Otomatik-3.5": {"Dört Çekişli": ["LE", "XLE", "Limited"]}, "Otomatik-3.5": {"Hibrit": {"Dört Çekişli": ["LE", "XLE", "Limited"]}}}}},
-                    "Fortuner": {"SUV": {"Dizel": {"Manuel-2.4": {"Dört Çekişli": ["Standard", "G"]}, "Otomatik-2.4": {"Dört Çekişli": ["Standard", "G"]}}, "Benzin": {"Otomatik-2.7": {"Dört Çekişli": ["Standard", "G"]}}}}
+            "A3": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["30 TFSI", "35 TFSI"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["30 TFSI", "35 TFSI", "40 TFSI"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.6": {"Ön Çekişli": ["30 TDI", "35 TDI"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TDI", "40 TDI"]}
+                    }
                 },
-                "Honda": {
-                    "CR-V": {"SUV": {"Benzin": {"Manuel-1.5": {"Ön Çekişli": ["LX"]}, "Otomatik-1.5": {"Ön Çekişli": ["LX", "EX"], "Dört Çekişli": ["LX", "EX", "EX-L"]}, "Otomatik-2.0": {"Dört Çekişli": ["EX", "EX-L"]}}, "Hibrit": {"Otomatik-2.0": {"Dört Çekişli": ["EX", "EX-L"]}}}},
-                    "Pilot": {"SUV": {"Benzin": {"Otomatik-3.5": {"Dört Çekişli": ["LX", "EX", "Touring"]}}}},
-                    "HR-V": {"SUV": {"Benzin": {"Manuel-1.8": {"Ön Çekişli": ["LX"]}, "Otomatik-1.8": {"Ön Çekişli": ["LX", "EX"], "Dört Çekişli": ["EX", "Touring"]}}}}
-                },
-                "BMW": {
-                    "X1": {"SUV": {"Benzin": {"Otomatik-2.0": {"Ön Çekişli": ["sDrive", "xDrive"], "Dört Çekişli": ["xDrive"]}}, "Dizel": {"Otomatik-2.0": {"Ön Çekişli": ["sDrive"], "Dört Çekişli": ["xDrive"]}}}},
-                    "X3": {"SUV": {"Benzin": {"Otomatik-2.0": {"Dört Çekişli": ["Standart", "Luxury"]}, "Otomatik-3.0": {"Dört Çekişli": ["M340i", "M"]}}, "Dizel": {"Otomatik-2.0": {"Dört Çekişli": ["Standart", "Luxury"]}}}},
-                    "X5": {"SUV": {"Benzin": {"Otomatik-3.0": {"Dört Çekişli": ["Standart", "Luxury"]}, "Otomatik-4.4": {"Dört Çekişli": ["Luxury", "M"]}}, "Dizel": {"Otomatik-3.0": {"Dört Çekişli": ["Standart", "Luxury"]}}}}
-                },
-                "Mercedes-Benz": {
-                    "GLC": {"SUV": {"Benzin": {"Otomatik-2.0": {"Dört Çekişli": ["Classic", "Elegance"]}, "Otomatik-3.0": {"Dört Çekişli": ["AMG"]}}, "Dizel": {"Otomatik-2.0": {"Dört Çekişli": ["Classic", "Elegance"]}}}},
-                    "GLE": {"SUV": {"Benzin": {"Otomatik-2.0": {"Dört Çekişli": ["Classic"]}, "Otomatik-3.0": {"Dört Çekişli": ["Elegance", "AMG"]}}, "Dizel": {"Otomatik-3.0": {"Dört Çekişli": ["Elegance"]}}}},
-                    "GLA": {"SUV": {"Benzin": {"Manuel-1.3": {"Ön Çekişli": ["Classic"]}, "Otomatik-2.0": {"Ön Çekişli": ["Elegance"], "Dört Çekişli": ["AMG"]}}}}
-                },
-                "Hyundai": {
-                    "Santa Fe": {"SUV": {"Benzin": {"Otomatik-2.0": {"Ön Çekişli": ["GL"]}, "Otomatik-2.4": {"Dört Çekişli": ["GL", "GLS"]}}, "Dizel": {"Otomatik-2.2": {"Dört Çekişli": ["GL"]}}}},
-                    "Tucson": {"SUV": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["GL"]}, "Otomatik-1.8": {"Ön Çekişli": ["GL"], "Dört Çekişli": ["GL", "GLS"]}}, "Dizel": {"Otomatik-2.0": {"Dört Çekişli": ["GL"]}}}},
-                    "Venue": {"SUV": {"Benzin": {"Manuel-1.0": {"Ön Çekişli": ["L"]}, "Otomatik-1.2": {"Ön Çekişli": ["L", "S"]}}}}
-                },
-                "Kia": {
-                    "Sorento": {"SUV": {"Benzin": {"Manuel-2.4": {"Ön Çekişli": ["L"]}, "Otomatik-2.4": {"Dört Çekişli": ["L", "EX"]}}, "Dizel": {"Otomatik-2.2": {"Dört Çekişli": ["L"]}}}},
-                    "Sportage": {"SUV": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["L"]}, "Otomatik-1.8": {"Ön Çekişli": ["L"], "Dört Çekişli": ["L", "EX"]}}, "Dizel": {"Manuel-2.0": {"Dört Çekişli": ["L"]}, "Otomatik-2.0": {"Dört Çekişli": ["L", "EX"]}}}},
-                    "Seltos": {"SUV": {"Benzin": {"Manuel-1.4": {"Ön Çekişli": ["L"]}, "Otomatik-1.6": {"Ön Çekişli": ["L"], "Dört Çekişli": ["EX"]}}}}
-                },
-                "Ford": {
-                    "Edge": {"SUV": {"Benzin": {"Otomatik-3.5": {"Dört Çekişli": ["SE", "SEL"]}}}},
-                    "Explorer": {"SUV": {"Benzin": {"Otomatik-3.0": {"Dört Çekişli": ["Base", "XLT"]}}}},
-                    "Escape": {"SUV": {"Benzin": {"Manuel-1.6": {"Ön Çekişli": ["S"]}, "Otomatik-1.6": {"Ön Çekişli": ["S"], "Dört Çekişli": ["SE"]}, "Otomatik-2.0": {"Dört Çekişli": ["SE", "Titanium"]}}, "Hibrit": {"Otomatik-2.0": {"Ön Çekişli": ["S"], "Dört Çekişli": ["SE"]}}}}
-                },
-                "Volkswagen": {
-                    "Tiguan": {"SUV": {"Benzin": {"Manuel-1.4": {"Ön Çekişli": ["Trend"]}, "Otomatik-2.0": {"Ön Çekişli": ["Trend"], "Dört Çekişli": ["Highline"]}}, "Dizel": {"Manuel-2.0": {"Dört Çekişli": ["Trend"]}, "Otomatik-2.0": {"Dört Çekişli": ["Highline"]}}}},
-                    "Touareg": {"SUV": {"Benzin": {"Otomatik-3.6": {"Dört Çekişli": ["V6"]}}, "Dizel": {"Otomatik-3.0": {"Dört Çekişli": ["V6"]}}}},
-                    "T-Roc": {"SUV": {"Benzin": {"Manuel-1.0": {"Ön Çekişli": ["TSI"]}, "Otomatik-1.4": {"Dört Çekişli": ["TSI"]}}}}
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["30 TFSI"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["30 TFSI", "35 TFSI", "40 TFSI"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["40 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TDI", "40 TDI"]}
+                    }
                 }
             },
-            "Minivan": {
-                "Honda": {
-                    "Odyssey": {"Minivan": {"Benzin": {"Otomatik-3.5": {"Ön Çekişli": ["LX", "EX", "Touring"]}}}}
+            "A4": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["35 TFSI"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TFSI", "40 TFSI"], "Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Manuel-2.0": {"Ön Çekişli": ["35 TDI"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TDI", "40 TDI"], "Dört Çekişli": ["40 TDI", "45 TDI"]}
+                    }
                 },
-                "Toyota": {
-                    "Sienna": {"Minivan": {"Benzin": {"Otomatik-2.5": {"Hibrit": {"Ön Çekişli": ["LE", "XLE", "Limited"]}}}, "Dizel": {"Otomatik-2.2": {"Ön Çekişli": ["LE", "XLE"]}}}}
+                "Avant": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TFSI", "40 TFSI"], "Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["35 TDI", "40 TDI"], "Dört Çekişli": ["40 TDI", "45 TDI"]}
+                    }
+                }
+            },
+            "A5": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["40 TFSI"], "Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["40 TDI"], "Dört Çekişli": ["40 TDI", "45 TDI"]}
+                    }
                 },
-                "Kia": {
-                    "Carnival": {"Minivan": {"Benzin": {"Otomatik-3.5": {"Ön Çekişli": ["LX", "EX"]}}}}
-                },
-                "Hyundai": {
-                    "H-1": {"Minivan": {"Dizel": {"Manuel-2.5": {"Ön Çekişli": ["GL"]}, "Otomatik-2.5": {"Ön Çekişli": ["GL", "GLS"]}}}}
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["40 TFSI"], "Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    }
+                }
+            },
+            "A6": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["40 TFSI"], "Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Dört Çekişli": ["40 TDI", "45 TDI"]}
+                    }
+                }
+            },
+            "A7": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Dört Çekişli": ["40 TDI", "45 TDI"]}
+                    }
+                }
+            },
+            "A8": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Dört Çekişli": ["50 TFSI", "60 TFSI"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-3.0": {"Dört Çekişli": ["50 TDI", "55 TDI"]}
+                    }
                 }
             }
-        };
+        },
+        "BMW": {
+            "116i": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["116i", "118i"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["116i", "118i", "120i"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["120i", "M140i"]}
+                    }
+                }
+            },
+            "1 Serisi": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["116i", "118i"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["116i", "118i", "120i"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["M135i", "M140i"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.5": {"Ön Çekişli": ["116d", "118d"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["116d", "118d", "120d"]}
+                    }
+                }
+            },
+            "2 Serisi": {
+                "Coupe": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Arka Çekişli": ["220i", "230i", "M240i"]},
+                        "Otomatik-2.0": {"Arka Çekişli": ["220i", "230i", "M240i"]}
+                    }
+                },
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Dört Çekişli": ["220i", "230i"]}
+                    }
+                }
+            },
+            "3 Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Arka Çekişli": ["320i", "330i", "M340i"]},
+                        "Otomatik-2.0": {"Arka Çekişli": ["320i", "330i", "M340i"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["330i", "M340i", "M350i"]}
+                    },
+                    "Dizel": {
+                        "Manuel-2.0": {"Arka Çekişli": ["320d", "330d"]},
+                        "Otomatik-2.0": {"Arka Çekişli": ["320d", "330d"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["330d", "M340d"]}
+                    }
+                },
+                "Touring": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["320i", "330i"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["330i", "M340i"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["320d", "330d"]}
+                    }
+                }
+            },
+            "4 Serisi": {
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["420i", "430i", "M440i"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["M440i", "M440i xDrive"]}
+                    }
+                }
+            },
+            "5 Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["520i", "530i", "540i", "M550i"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["530i", "540i", "M550i"]},
+                        "Otomatik-4.4": {"Arka Çekişli": ["M550i", "M5"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["520d", "530d"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["530d", "540d", "M550d"]}
+                    }
+                }
+            },
+            "6 Serisi": {
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["620i", "630i"]},
+                        "Otomatik-4.4": {"Arka Çekişli": ["M650i", "M6"]}
+                    }
+                }
+            },
+            "7 Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["730i", "740i", "750i", "M760i"]},
+                        "Otomatik-4.4": {"Arka Çekişli": ["750i", "M760i", "M7"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["730d", "740d", "750d"]}
+                    }
+                }
+            },
+            "8 Serisi": {
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["840i", "M840i"]},
+                        "Otomatik-4.4": {"Arka Çekişli": ["M850i", "M8"]}
+                    }
+                }
+            },
+            "i3": {
+                "Hatchback": {
+                    "Elektrik": {
+                        "Otomatik-Elektrik": {"Ön Çekişli": ["eDrive35", "eDrive40", "M340i"]}
+                    }
+                }
+            }
+        },
+        "Mercedes-Benz": {
+            "A Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["A160", "A180", "A200"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["A160", "A180", "A200", "A250"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["A200", "A250", "AMG A35", "AMG A45"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.5": {"Ön Çekişli": ["A160d", "A180d"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["A160d", "A180d", "A200d"]}
+                    }
+                },
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["A160", "A180"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["A180", "A200", "A250"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["A250", "AMG A35", "AMG A45"]}
+                    }
+                }
+            },
+            "B Serisi": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["B160", "B180"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["B180", "B200"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["B250", "AMG B35"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-1.5": {"Ön Çekişli": ["B180d", "B200d"]}
+                    }
+                }
+            },
+            "C Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Arka Çekişli": ["C200", "C300", "C63"]},
+                        "Otomatik-2.0": {"Arka Çekişli": ["C200", "C300", "C63"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["C300", "C63", "AMG C63"]}
+                    },
+                    "Dizel": {
+                        "Manuel-2.0": {"Arka Çekişli": ["C200d", "C220d"]},
+                        "Otomatik-2.0": {"Arka Çekişli": ["C200d", "C220d", "C300d"]}
+                    }
+                },
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["C200", "C300", "C63"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["C63", "AMG C63"]}
+                    }
+                }
+            },
+            "E Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["E200", "E300", "E450", "AMG E53", "AMG E63"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["E300", "E450", "AMG E53", "AMG E63"]},
+                        "Otomatik-4.0": {"Arka Çekişli": ["AMG E63", "AMG E63 S"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["E200d", "E220d", "E300d"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["E300d", "E350d"]}
+                    }
+                },
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["E200", "E300"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["E450", "AMG E53"]}
+                    }
+                },
+                "Cabrio": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["E200", "E300"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["E450", "E63 AMG"]}
+                    }
+                }
+            },
+            "S Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["S450", "S500", "S580", "AMG S63"]},
+                        "Otomatik-4.0": {"Arka Çekişli": ["AMG S63", "AMG S63 S", "AMG S65"]}
+                    }
+                }
+            },
+            "CLA Serisi": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-1.5": {"Ön Çekişli": ["CLA200"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["CLA250", "AMG CLA35"], "Dört Çekişli": ["CLA250", "AMG CLA35", "AMG CLA45"]}
+                    }
+                }
+            }
+        },
+        "Chevrolet": {
+            "Aveo": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["LS", "LT"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["LT", "LTZ"]}
+                    }
+                },
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["LS"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["LT"]}
+                    }
+                }
+            },
+            "Lacetti": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["LS"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["LT", "LTZ"]}
+                    }
+                }
+            },
+            "Cruze": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["LT"]},
+                        "Otomatik-1.8": {"Ön Çekişli": ["LT", "LTZ"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.7": {"Ön Çekişli": ["LT"]},
+                        "Otomatik-1.7": {"Ön Çekişli": ["LTZ"]}
+                    }
+                }
+            },
+            "Malibu": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.4": {"Ön Çekişli": ["LT", "LTZ"]},
+                        "Otomatik-3.5": {"Ön Çekişli": ["LTZ"]}
+                    }
+                }
+            },
+            "Caprice": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.6": {"Arka Çekişli": ["LT", "LTZ"]}
+                    }
+                }
+            }
+        },
+        "Chrysler": {
+            "300C": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.6": {"Arka Çekişli": ["Limited", "Executive", "SRT"]},
+                        "Otomatik-5.7": {"Arka Çekişli": ["SRT", "SRT8"]}
+                    }
+                }
+            },
+            "Sebring": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.4": {"Ön Çekişli": ["LX"]},
+                        "Otomatik-2.7": {"Ön Çekişli": ["LX", "Limited"]}
+                    }
+                },
+                "Cabrio": {
+                    "Benzin": {
+                        "Otomatik-2.7": {"Ön Çekişli": ["Limited", "GTC"]}
+                    }
+                }
+            }
+        },
+        "Citroen": {
+            "C3": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.1": {"Ön Çekişli": ["Pure", "Feel"]},
+                        "Manuel-1.4": {"Ön Çekişli": ["Feel", "Shine"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Shine"]}
+                    }
+                }
+            },
+            "C4": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["Pure"]},
+                        "Otomatik-1.8": {"Ön Çekişli": ["Feel", "Shine"]}
+                    },
+                    "Dizel": {
+                        "Manuel-2.0": {"Ön Çekişli": ["BlueHDi"]}
+                    }
+                }
+            },
+            "C5": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.8": {"Ön Çekişli": ["Pure"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Feel", "Shine"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["BlueHDi"]}
+                    }
+                }
+            }
+        },
+        "Dacia": {
+            "Sandero": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.0": {"Ön Çekişli": ["Essential", "Expression"]},
+                        "Manuel-1.2": {"Ön Çekişli": ["Expression", "Laureate"]},
+                        "Otomatik-1.0": {"Ön Çekişli": ["Laureate"]}
+                    }
+                }
+            },
+            "Logan": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.0": {"Ön Çekişli": ["Essential"]},
+                        "Manuel-1.2": {"Ön Çekişli": ["Expression", "Laureate"]},
+                        "Otomatik-1.2": {"Ön Çekişli": ["Laureate"]}
+                    }
+                }
+            }
+        },
+        "Daihatsu": {
+            "Ayla": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.0": {"Ön Çekişli": ["X", "X Plus", "R"]},
+                        "Otomatik-1.0": {"Ön Çekişli": ["R Deluxe"]}
+                    }
+                }
+            },
+            "Sirion": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["X", "D"]},
+                        "Otomatik-1.3": {"Ön Çekişli": ["D"]}
+                    }
+                }
+            }
+        },
+        "Dodge": {
+            "Caliber": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["SE"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["SXT"], "Dört Çekişli": ["SXT"]}
+                    }
+                }
+            },
+            "Avenger": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.4": {"Ön Çekişli": ["SE"]},
+                        "Otomatik-2.7": {"Ön Çekişli": ["SXT"], "Arka Çekişli": ["R/T"]}
+                    }
+                }
+            }
+        },
+        "FAW": {
+            "Oley": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["Standard", "Comfort"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "Besturn": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["Standard", "Comfort"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            }
+        },
+        "Fiat": {
+            "Linea": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["Pop", "Easy"]},
+                        "Otomatik-1.4": {"Ön Çekişli": ["Easy", "Elegance"]}
+                    }
+                }
+            },
+            "Punto": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.2": {"Ön Çekişli": ["Pop", "Easy"]},
+                        "Otomatik-1.4": {"Ön Çekişli": ["Easy", "Elegance"]}
+                    }
+                }
+            },
+            "Palio": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["Fire", "ELX"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["ELX"]}
+                    }
+                }
+            }
+        },
+        "Ford": {
+            "Fiesta": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.0": {"Ön Çekişli": ["S", "S Plus", "SE"]},
+                        "Manuel-1.5": {"Ön Çekişli": ["SE", "SEL"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["SEL", "Titanium"]}
+                    }
+                }
+            },
+            "Focus": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["S", "S Plus", "Trend"]},
+                        "Manuel-1.6": {"Ön Çekişli": ["Trend", "Titanium"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Trend", "Titanium"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Trend"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Trend", "Titanium"]}
+                    }
+                },
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["S", "SE"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["SE", "Titanium"]}
+                    }
+                }
+            },
+            "Fusion": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["S", "S Plus"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["S", "SE", "SEL"]}
+                    }
+                }
+            },
+            "Mondeo": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["ECO", "Trend"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Trend", "Trend Plus", "Titanium"]}
+                    },
+                    "Dizel": {
+                        "Manuel-2.0": {"Ön Çekişli": ["TDCi", "Trend"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Trend", "Titanium"]}
+                    }
+                }
+            },
+            "Mustang": {
+                "Coupe": {
+                    "Benzin": {
+                        "Manuel-2.3": {"Arka Çekişli": ["EcoBoost", "GT"]},
+                        "Otomatik-3.7": {"Arka Çekişli": ["GT", "Shelby"]},
+                        "Otomatik-5.0": {"Arka Çekişli": ["Shelby GT500"]}
+                    }
+                }
+            },
+            "Taurus": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["SE", "Limited"]},
+                        "Otomatik-3.5": {"Ön Çekişli": ["Limited", "SHO"]}
+                    }
+                }
+            }
+        },
+        "GAC": {
+            "Aion": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Comfort", "Comfort Plus"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort Plus", "Premium"]}
+                    }
+                }
+            }
+        },
+        "Geely": {
+            "Emgrand EC7": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.3": {"Ön Çekişli": ["Standart", "Comfort"]},
+                        "Manuel-1.5": {"Ön Çekişli": ["Comfort", "Premium"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Premium", "Executive"]}
+                    }
+                }
+            },
+            "Emgrand EC8": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.8": {"Ön Çekişli": ["Comfort"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Premium", "Executive"]}
+                    }
+                }
+            },
+            "GC6": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standart"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            }
+        },
+        "Great Wall": {
+            "Voleex": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standard", "Comfort"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "Florid": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standard"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort"]}
+                    }
+                }
+            }
+        },
+        "Haval": {
+            "H2": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standart", "Comfort"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "H6": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Comfort"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            }
+        },
+        "Honda": {
+            "Civic": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Comfort", "Comfort Plus", "Premium"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Comfort Plus", "Premium", "Elegance"]},
+                        "Otomatik-1.8": {"Ön Çekişli": ["Premium", "Elegance"]}
+                    }
+                },
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Comfort"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "Accord": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["Standart", "Comfort"], "Arka Çekişli": ["Premium"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Standart", "Comfort", "Premium"], "Arka Çekişli": ["Premium", "Executive"]},
+                        "Otomatik-2.4": {"Arka Çekişli": ["Premium", "Executive"]}
+                    }
+                }
+            },
+            "Insight": {
+                "Sedan": {
+                    "Hibrit": {
+                        "Otomatik-1.5": {"Ön Çekişli": ["LX", "EX", "Touring"]}
+                    }
+                }
+            },
+            "CR-Z": {
+                "Coupe": {
+                    "Hibrit": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standard", "Comfort"]},
+                        "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            }
+        },
+        "Hyundai": {
+            "Accent": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["GL", "GL+", "GLS"]},
+                        "Manuel-1.6": {"Ön Çekişli": ["GLS"]},
+                        "Otomatik-1.4": {"Ön Çekişli": ["GL+", "GLS"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["GLS", "GLSMATIC"]}
+                    }
+                },
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["GL"]},
+                        "Otomatik-1.4": {"Ön Çekişli": ["GL+", "GLS"]}
+                    }
+                }
+            },
+            "Elantra": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["Standart", "Comfort", "Premium"]},
+                        "Otomatik-1.8": {"Ön Çekişli": ["Comfort", "Premium", "Elegance"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.6": {"Ön Çekişli": ["Standart"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Comfort"]}
+                    }
+                }
+            },
+            "Sonata": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["Standart", "Comfort"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium", "Elegance"]},
+                        "Otomatik-2.4": {"Ön Çekişli": ["Premium", "Elegance", "Executive"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "i30": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["Standart", "Comfort"]},
+                        "Manuel-1.6": {"Ön Çekişli": ["Comfort", "Premium"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.5": {"Ön Çekişli": ["Standart"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Comfort"]}
+                    }
+                },
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["Standart"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "Matrix": {
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["Standart", "Comfort"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                    }
+                }
+            },
+            "Coupe": {
+                "Coupe": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["GL"]},
+                        "Otomatik-2.7": {"Ön Çekişli": ["GLS"]}
+                    }
+                }
+            },
+            "Tiburon": {
+                "Coupe": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["Base"]},
+                        "Otomatik-2.7": {"Ön Çekişli": ["SE", "Limited"]}
+                    }
+                }
+            }
+        },
+        "Infiniti": {
+            "Q45": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-4.5": {"Arka Çekişli": ["Base", "Premium"]}
+                    }
+                }
+            },
+            "Q50": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.7": {"Arka Çekişli": ["Pure", "Luxury"]},
+                        "Otomatik-3.8": {"Arka Çekişli": ["Red Sport", "Red Sport 400"]}
+                    }
+                }
+            },
+            "Q60": {
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["Pure", "Luxury"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["Red Sport", "Red Sport 400"]}
+                    }
+                }
+            }
+        },
+        "Jaguar": {
+            "XE": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["Pure", "Prestige"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["R-Sport", "SVR"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["Pure", "Prestige"]}
+                    }
+                }
+            },
+            "XF": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["Pure", "Prestige"]},
+                        "Otomatik-3.0": {"Arka Çekişli": ["R-Sport", "SVR"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-2.0": {"Arka Çekişli": ["Pure", "Prestige"]}
+                    }
+                }
+            }
+        },
+        "Jeep": {
+            "Compass": {
+                "SUV": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["S"], "Dört Çekişli": ["S", "Sport"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Sport"], "Dört Çekişli": ["Sport", "Limited"]}
+                    }
+                }
+            },
+            "Wrangler": {
+                "SUV": {
+                    "Benzin": {
+                        "Manuel-3.6": {"Dört Çekişli": ["Sport", "Sahara", "Rubicon"]},
+                        "Otomatik-3.6": {"Dört Çekişli": ["Sport", "Sahara", "Rubicon"]}
+                    }
+                }
+            }
+        },
+        "Kia": {
+            "K5": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["LX", "EX"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["LX", "EX", "SX"]},
+                        "Otomatik-2.4": {"Ön Çekişli": ["SX", "SX Plus"]}
+                    }
+                }
+            },
+            "Cerato": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.6": {"Ön Çekişli": ["S", "S Plus", "SX"]},
+                        "Otomatik-1.8": {"Ön Çekişli": ["S", "S Plus", "SX", "SX Plus"]}
+                    },
+                    "Dizel": {
+                        "Manuel-1.6": {"Ön Çekişli": ["S"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["SX"]}
+                    }
+                }
+            },
+            "Forte": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.0": {"Ön Çekişli": ["LX", "EX"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["LX", "EX", "SX"]}
+                    }
+                }
+            },
+            "Rio": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["L", "LX"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["LX", "EX"]}
+                    }
+                },
+                "Hatchback": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["L"]},
+                        "Otomatik-1.6": {"Ön Çekişli": ["LX", "EX"]}
+                    }
+                }
+            },
+            "Optima": {
+                "Sedan": {
+                    "Benzin": {
+                        "Manuel-2.4": {"Ön Çekişli": ["LX"]},
+                        "Otomatik-2.4": {"Ön Çekişli": ["LX", "EX", "SX"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Turbo SX"]}
+                    }
+                }
+            }
+        },
+        "Lamborghini": {
+            "Gallardo": {
+                "Coupe": {
+                    "Benzin": {
+                        "Manuel-5.0": {"Arka Çekişli": ["LP560", "LP570"]},
+                        "Otomatik-5.2": {"Arka Çekişli": ["LP560", "LP570 Performante"]}
+                    }
+                }
+            }
+        },
+        "Land Rover": {
+            "Discovery": {
+                "SUV": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Dört Çekişli": ["S", "HSE"]},
+                        "Otomatik-5.0": {"Dört Çekişli": ["HSE", "Supercharged"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-3.0": {"Dört Çekişli": ["S", "HSE"]}
+                    }
+                }
+            },
+            "Freelander": {
+                "SUV": {
+                    "Benzin": {
+                        "Manuel-2.2": {"Dört Çekişli": ["S", "SE"]},
+                        "Otomatik-3.2": {"Dört Çekişli": ["SE", "HSE"]}
+                    }
+                }
+            },
+            "Range Rover": {
+                "SUV": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]},
+                        "Otomatik-5.0": {"Dört Çekişli": ["Sport", "Autobiography"]}
+                    }
+                }
+            }
+        },
+        "Lexus": {
+            "ES": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.5": {"Ön Çekişli": ["ES250", "ES350"]},
+                        "Otomatik-3.5": {"Ön Çekişli": ["ES350", "ES350 Ultra"]}
+                    },
+                    "Hibrit": {
+                        "Otomatik-2.5": {"Ön Çekişli": ["ES300h", "ES300h Premium"]}
+                    }
+                }
+            },
+            "GS": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.5": {"Arka Çekişli": ["GS250", "GS350"]},
+                        "Otomatik-4.6": {"Arka Çekişli": ["GS460"]}
+                    }
+                }
+            },
+            "LS": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.5": {"Arka Çekişli": ["LS350", "LS460"]},
+                        "Otomatik-4.6": {"Arka Çekişli": ["LS460", "LS600h"]}
+                    },
+                    "Hibrit": {
+                        "Otomatik-3.5": {"Arka Çekişli": ["LS300h", "LS450h"]}
+                    }
+                }
+            },
+            "RC": {
+                "Coupe": {
+                    "Benzin": {
+                        "Otomatik-2.5": {"Arka Çekişli": ["RC250", "RC350"]},
+                        "Otomatik-5.0": {"Arka Çekişli": ["RC-F"]}
+                    }
+                }
+            },
+            "IS": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-2.5": {"Arka Çekişli": ["IS250", "IS350"]},
+                        "Otomatik-3.5": {"Arka Çekişli": ["IS350", "IS-F"]}
+                    }
+                }
+            },
+            "CT": {
+                "Hatchback": {
+                    "Hibrit": {
+                        "Otomatik-1.8": {"Ön Çekişli": ["CT200h", "CT200h Premium"]}
+                    }
+                }
+            }
+        },
+        "Maserati": {
+            "Ghibli": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["Standard", "S", "SQ4"]},
+                        "Otomatik-4.2": {"Arka Çekişli": ["Granturismo", "MC Stradale"]}
+                    }
+                }
+            },
+            "Quattroporte": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-3.0": {"Arka Çekişli": ["Standard", "S"]},
+                        "Otomatik-4.2": {"Arka Çekişli": ["Executive", "Granturismo"]}
+                    }
+                }
+            }
+        },
+        "Maybach": {
+            "62": {
+                "Sedan": {
+                    "Benzin": {
+                        "Otomatik-5.5": {"Arka Çekişli": ["Standard", "57", "62"]}
+                    }
+                }
+            }
+        }
+    },
+        "Nissan": {
+        "Altima": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["S", "SV", "SL"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["S", "SV", "SL", "SR"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["SR", "Platinum"]}
+                }
+            }
+        },
+        "Sentra": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.8": {"Ön Çekişli": ["S", "SV"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["S", "SV", "SR", "Platinum"]}
+                }
+            }
+        },
+        "Teana": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["Standart", "Comfort", "Premium"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["Premium", "Elegance"]}
+                }
+            }
+        },
+        "Maxima": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Arka Çekişli": ["S", "SV", "SL", "Platinum"]}
+                }
+            }
+        },
+        "Skyline": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-3.7": {"Arka Çekişli": ["Base", "Premium"]},
+                    "Otomatik-3.8": {"Arka Çekişli": ["GT", "GT-R"]}
+                }
+            }
+        },
+        "GT-R": {
+            "Coupe": {
+                "Benzin": {
+                    "Otomatik-3.8": {"Dört Çekişli": ["Pure", "Premium", "Track Edition", "Nismo"]}
+                }
+            }
+        }
+    },
+    "Peugeot": {
+        "206": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.1": {"Ön Çekişli": ["XN", "XR"]},
+                    "Manuel-1.4": {"Ön Çekişli": ["XR", "XT"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["XT"]}
+                }
+            }
+        },
+        "207": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["X-Line", "Comfort"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Elegance"]}
+                },
+                "Dizel": {
+                    "Manuel-1.4": {"Ön Çekişli": ["HDi"]}
+                }
+            }
+        },
+        "208": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Active", "Allure"]},
+                    "Manuel-1.2": {"Ön Çekişli": ["Allure", "GT"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Allure", "GT"]}
+                },
+                "Dizel": {
+                    "Manuel-1.4": {"Ön Çekişli": ["BlueHDi"]}
+                }
+            }
+        },
+        "301": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["Standart", "Comfort"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                }
+            }
+        },
+        "308": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["Active", "Allure"]},
+                    "Manuel-1.6": {"Ön Çekişli": ["Allure", "GT"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Allure", "GT"]}
+                },
+                "Dizel": {
+                    "Manuel-1.5": {"Ön Çekişli": ["BlueHDi"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["BlueHDi"]}
+                }
+            }
+        },
+        "406": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.8": {"Ön Çekişli": ["X-Line", "Comfort"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["HDi"]}
+                }
+            }
+        },
+        "407": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["Standart"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["Premium"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["HDi"]}
+                }
+            }
+        }
+    },
+    "Porsche": {
+        "911": {
+            "Coupe": {
+                "Benzin": {
+                    "Manuel-3.4": {"Arka Çekişli": ["Carrera", "Carrera S"]},
+                    "Otomatik-3.8": {"Arka Çekişli": ["Turbo", "Turbo S"]},
+                    "Otomatik-4.0": {"Arka Çekişli": ["GT2", "GT3"]}
+                }
+            },
+            "Cabrio": {
+                "Benzin": {
+                    "Otomatik-3.4": {"Arka Çekişli": ["Carrera", "Carrera S"]},
+                    "Otomatik-3.8": {"Arka Çekişli": ["Turbo", "Turbo S"]}
+                }
+            }
+        },
+        "Boxster": {
+            "Cabrio": {
+                "Benzin": {
+                    "Manuel-2.7": {"Arka Çekişli": ["Base", "S"]},
+                    "Otomatik-3.2": {"Arka Çekişli": ["S", "Spyder"]}
+                }
+            }
+        },
+        "Cayenne": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["Base", "S"]},
+                    "Otomatik-4.8": {"Dört Çekişli": ["S", "Turbo"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["V6 TDI"]}
+                }
+            }
+        },
+        "Panamera": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-3.6": {"Arka Çekişli": ["Base", "S"]},
+                    "Otomatik-4.8": {"Arka Çekişli": ["Turbo", "Turbo S"]}
+                }
+            }
+        }
+    },
+    "Renault": {
+        "Clio": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Pure", "Feel", "Play"]},
+                    "Manuel-1.2": {"Ön Çekişli": ["Feel", "Play", "RS"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Play", "Dynamique"]}
+                },
+                "Dizel": {
+                    "Manuel-1.5": {"Ön Çekişli": ["dCi"]}
+                }
+            }
+        },
+        "Megane": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["TCe", "Standart", "Comfort"]},
+                    "Manuel-1.4": {"Ön Çekişli": ["Comfort", "Premium"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Premium", "RS"]}
+                },
+                "Dizel": {
+                    "Manuel-1.5": {"Ön Çekişli": ["dCi", "Standart"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["dCi", "Comfort"]}
+                }
+            },
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["Standart"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                }
+            }
+        },
+        "Laguna": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["Pure"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["dCi"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["dCi", "Comfort"]}
+                }
+            }
+        },
+        "Fluence": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["Standart", "Comfort"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Premium"]}
+                },
+                "Dizel": {
+                    "Manuel-1.5": {"Ön Çekişli": ["dCi", "Standart"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["dCi", "Comfort"]}
+                }
+            }
+        },
+        "Latitude": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["Dynamique"]},
+                    "Otomatik-3.5": {"Ön Çekişli": ["Privilege"]}
+                }
+            }
+        }
+    },
+    "Rolls-Royce": {
+        "Ghost": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-6.6": {"Arka Çekişli": ["Standard", "Extended"]}
+                }
+            }
+        },
+        "Phantom": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-6.7": {"Arka Çekişli": ["Standard", "Extended", "Drophead"]}
+                }
+            }
+        }
+    },
+    "Seat": {
+        "Ibiza": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Reference", "Style"]},
+                    "Manuel-1.2": {"Ön Çekişli": ["Style", "Sportage"]},
+                    "Otomatik-1.4": {"Ön Çekişli": ["Sportage"]}
+                }
+            }
+        },
+        "Leon": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["Reference", "Style"]},
+                    "Manuel-1.8": {"Ön Çekişli": ["Style", "FR"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["FR", "Cupra"]}
+                },
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["TDI"]}
+                }
+            },
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["Reference"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["Style"]}
+                }
+            }
+        },
+        "Toledo": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["Reference"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Style"]}
+                }
+            }
+        }
+    },
+    "Skoda": {
+        "Fabia": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["S", "S Plus"]},
+                    "Manuel-1.2": {"Ön Çekişli": ["S Plus", "Elegance"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Elegance", "RS"]}
+                },
+                "Dizel": {
+                    "Manuel-1.4": {"Ön Çekişli": ["TDI"]}
+                }
+            }
+        },
+        "Octavia": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["S", "S Plus"]},
+                    "Manuel-1.8": {"Ön Çekişli": ["S Plus", "Elegance", "RS"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Elegance", "RS"]}
+                },
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["TDI"]},
+                    "Otomatik-1.9": {"Ön Çekişli": ["TDI"]}
+                }
+            },
+            "Combi": {
+                "Station Wagon": {
+                    "Benzin": {
+                        "Manuel-1.4": {"Ön Çekişli": ["S"]},
+                        "Otomatik-2.0": {"Ön Çekişli": ["Elegance"]}
+                    },
+                    "Dizel": {
+                        "Otomatik-1.9": {"Ön Çekişli": ["TDI"]}
+                    }
+                }
+            }
+        },
+        "Superb": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.8": {"Ön Çekişli": ["Elegance"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Elegance", "Premium"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "Premium"]}
+                }
+            }
+        }
+    },
+    "Smart": {
+        "Fortwo": {
+            "Coupe": {
+                "Benzin": {
+                    "Manuel-1.0": {"Arka Çekişli": ["Pure", "Passion"]},
+                    "Otomatik-1.0": {"Arka Çekişli": ["Passion", "Brabus"]}
+                }
+            },
+            "Cabrio": {
+                "Benzin": {
+                    "Otomatik-1.0": {"Arka Çekişli": ["Passion", "Brabus"]}
+                }
+            }
+        }
+    },
+    "Subaru": {
+        "Impreza": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.5": {"Dört Çekişli": ["2.0i", "2.5i", "WRX"]},
+                    "Otomatik-1.5": {"Dört Çekişli": ["2.0i", "2.5i"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["WRX", "STI"]}
+                }
+            },
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.5": {"Dört Çekişli": ["2.0i", "2.5i"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["2.5i"]}
+                }
+            }
+        },
+        "Legacy": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.5": {"Dört Çekişli": ["Base", "2.5GT"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["2.5GT", "3.6R"]}
+                }
+            }
+        },
+        "Outback": {
+            "Station Wagon": {
+                "Benzin": {
+                    "Manuel-2.5": {"Dört Çekişli": ["2.5i"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["2.5i", "3.6R"]}
+                }
+            }
+        },
+        "Forester": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Dört Çekişli": ["2.0X", "2.5XT"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["2.5X", "2.5XT", "2.5 Turbo"]}
+                }
+            }
+        }
+    },
+    "Suzuki": {
+        "Alto": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-0.8": {"Ön Çekişli": ["Standart", "Comfort"]},
+                    "Manuel-1.0": {"Ön Çekişli": ["Comfort", "Premium"]},
+                    "Otomatik-1.0": {"Ön Çekişli": ["Premium"]}
+                }
+            }
+        },
+        "Celerio": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Standart", "VXi"]},
+                    "Otomatik-1.0": {"Ön Çekişli": ["VXi", "ZXi"]}
+                }
+            }
+        },
+        "Swift": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["Standart", "Comfort"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Comfort", "Premium"]}
+                }
+            }
+        },
+        "Wagon R": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Standart", "VXi"]},
+                    "Otomatik-1.0": {"Ön Çekişli": ["VXi", "ZXi"]}
+                }
+            }
+        },
+        "SX4": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["Standart"], "Dört Çekişli": ["Comfort"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Premium"]}
+                }
+            }
+        }
+    },
+    "Tata": {
+        "Indica": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["eV", "eV Plus"]},
+                    "Otomatik-1.4": {"Ön Çekişli": ["eV Plus"]}
+                },
+                "Dizel": {
+                    "Manuel-1.3": {"Ön Çekişli": ["eV"]}
+                }
+            }
+        },
+        "Indigo": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["eV", "LS"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["LS"]}
+                }
+            }
+        }
+    },
+    "Tesla": {
+        "Model S": {
+            "Sedan": {
+                "Elektrik": {
+                    "Otomatik-Elektrik": {"Arka Çekişli": ["60", "90D", "100D"], "Dört Çekişli": ["90D", "100D", "P100D"]}
+                }
+            }
+        },
+        "Model 3": {
+            "Sedan": {
+                "Elektrik": {
+                    "Otomatik-Elektrik": {"Arka Çekişli": ["Standard", "Long Range"], "Dört Çekişli": ["Long Range", "Performance"]}
+                }
+            }
+        },
+        "Model X": {
+            "SUV": {
+                "Elektrik": {
+                    "Otomatik-Elektrik": {"Dört Çekişli": ["60D", "90D", "100D", "P100D"]}
+                }
+            }
+        }
+    },
+    "Toyota": {
+        "Corolla": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L", "LE", "S", "SE", "XLE"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["L", "LE", "S", "SE"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["ECO", "LE", "S", "SE", "XLE"]}
+                }
+            },
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L", "LE"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["LE", "S"]}
+                }
+            }
+        },
+        "Camry": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["LE", "SE", "XLE"], "Arka Çekişli": ["XLE", "Limited"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["LE", "SE"], "Arka Çekişli": ["SE", "XLE", "Limited"]},
+                    "Otomatik-3.5": {"Arka Çekişli": ["Limited", "Premium", "Ultimate"]}
+                },
+                "Hibrit": {
+                    "Otomatik-2.5": {"Ön Çekişli": ["LE", "XLE"], "Arka Çekişli": ["XLE", "Limited"]}
+                }
+            }
+        },
+        "Yaris": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["L", "LE"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["LE", "S", "XLE"]}
+                }
+            },
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.3": {"Ön Çekişli": ["L", "LE"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["LE", "S", "XLE"]}
+                }
+            }
+        },
+        "Altis": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["GL", "GLX", "SE"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["GL", "GLX", "SE", "Premium"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["GL", "Premium"]}
+                }
+            }
+        },
+        "Mark X": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-2.5": {"Arka Çekişli": ["G", "G Executive", "250G"]},
+                    "Otomatik-3.0": {"Arka Çekişli": ["300G", "300G Executive", "Premium"]}
+                }
+            }
+        },
+        "Crown": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-2.5": {"Arka Çekişli": ["G", "G Executive", "Royal"]},
+                    "Otomatik-3.0": {"Arka Çekişli": ["Premium", "Royal Premium"]}
+                }
+            }
+        },
+        "Prius": {
+            "Sedan": {
+                "Hibrit": {
+                    "Otomatik-1.8": {"Ön Çekişli": ["L", "LE", "XLE", "Four"]}
+                }
+            }
+        },
+        "Vios": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.3": {"Ön Çekişli": ["J", "E", "G"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["G", "GR-S"]}
+                }
+            }
+        }
+    },
+    "Volkswagen": {
+        "Golf": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["TSI", "Trendline"]},
+                    "Manuel-1.4": {"Ön Çekişli": ["Trendline", "Comfortline"]},
+                    "Otomatik-1.4": {"Ön Çekişli": ["TSI", "Comfortline"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["Comfortline", "R", "R+"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["R", "R+", "GTI"]}
+                },
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["TDI", "Trendline"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "Comfortline"]}
+                }
+            }
+        },
+        "Jetta": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["TSI", "Standart"]},
+                    "Otomatik-1.4": {"Ön Çekişli": ["Comfort"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfortline", "Highline"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Highline", "Highline+"]}
+                },
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["TDI", "Standart"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "Comfortline"]}
+                }
+            }
+        },
+        "Passat": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.8": {"Ön Çekişli": ["TSI", "Comfort"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfort", "Comfort+", "Highline"]},
+                    "Otomatik-3.6": {"Ön Çekişli": ["Highline", "Highline+"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI", "Comfort"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "Comfort", "Highline"]}
+                }
+            }
+        },
+        "Polo": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["TSI", "Trendline"]},
+                    "Manuel-1.4": {"Ön Çekişli": ["Trendline", "Comfortline"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["TSI", "Comfortline"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfortline", "GTI"]}
+                }
+            }
+        },
+        "Beetle": {
+            "Coupe": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["TSI"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfortline"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfortline", "Turbo"]}
+                }
+            },
+            "Cabrio": {
+                "Benzin": {
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfortline"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Turbo"]}
+                }
+            }
+        }
+    },
+    "Volvo": {
+        "S40": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T", "R"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["T5", "R Design"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["D"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["D3", "D5"]}
+                }
+            }
+        },
+        "S60": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-2.4": {"Ön Çekişli": ["T"], "Arka Çekişli": ["T"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["T5"], "Arka Çekişli": ["T6", "R Design"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.4": {"Ön Çekişli": ["D"], "Arka Çekişli": ["D5"]}
+                }
+            }
+        },
+        "S80": {
+            "Sedan": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Ön Çekişli": ["T"], "Arka Çekişli": ["T6"]},
+                    "Otomatik-4.4": {"Arka Çekişli": ["T8", "Executive"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.4": {"Ön Çekişli": ["D5"]}
+                }
+            }
+        }
+    },
+    "Wuling": {
+        "Hongguang": {
+            "Hatchback": {
+                "Benzin": {
+                    "Manuel-1.2": {"Ön Çekişli": ["Standard", "Comfort"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Premium"]}
+                }
+            }
+        },
+        "Sunshine": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Standard"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Comfort"]}
+                }
+            }
+        }
+    },
+    "Zotye": {
+        "Z300": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["Standard", "Comfort"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Comfort", "Premium"]}
+                }
+            }
+        },
+        "T600": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["Standard"], "Dört Çekişli": ["Comfort"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Premium"]}
+                }
+            }
+        }
+    }
+},
+"SUV": {
+    "Audi": {
+        "Q3": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["30 TFSI"], "Dört Çekişli": ["35 TFSI"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["30 TFSI"], "Dört Çekişli": ["35 TFSI", "40 TFSI"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["40 TFSI", "45 TFSI"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["35 TDI", "40 TDI"]}
+                }
+            }
+        },
+        "Q5": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["35 TFSI"], "Dört Çekişli": ["35 TFSI", "40 TFSI"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["45 TFSI", "SQ5"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["35 TDI", "40 TDI"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["45 TDI"]}
+                }
+            }
+        },
+        "Q7": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["35 TFSI"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["45 TFSI", "50 TFSI", "SQ7"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["45 TDI", "SQ7"]}
+                }
+            }
+        },
+        "Q8": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["50 TFSI", "55 TFSI", "SQ8"]}
+                }
+            }
+        }
+    },
+    "BMW": {
+        "X1": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["sDrive20i"], "Dört Çekişli": ["xDrive20i"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["sDrive18i", "sDrive20i"], "Dört Çekişli": ["xDrive18i", "xDrive20i", "xDrive20i+", "M35i"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["sDrive18d"], "Dört Çekişli": ["xDrive18d"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["sDrive18d", "sDrive20d"], "Dört Çekişli": ["xDrive18d", "xDrive20d"]}
+                }
+            }
+        },
+        "X3": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["sDrive30i"], "Dört Çekişli": ["xDrive30i", "xDrive30i+"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive40i", "M40i", "M40i+", "M"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["xDrive20d", "xDrive20d+"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive30d", "xDrive30d+", "M40d"]}
+                }
+            }
+        },
+        "X4": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["xDrive30i"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive40i", "M40i", "M"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive30d", "M40d"]}
+                }
+            }
+        },
+        "X5": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive40i", "xDrive40i+"]},
+                    "Otomatik-4.4": {"Dört Çekişli": ["xDrive50i", "M50i", "M50i+", "M"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive30d", "xDrive30d+", "M40d"]},
+                    "Otomatik-4.4": {"Dört Çekişli": ["xDrive50d"]}
+                }
+            }
+        },
+        "X6": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive40i", "xDrive40i+"]},
+                    "Otomatik-4.4": {"Dört Çekişli": ["xDrive50i", "M50i", "M"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["xDrive30d", "M40d"]}
+                }
+            }
+        },
+        "iX": {
+            "SUV": {
+                "Elektrik": {
+                    "Otomatik-Elektrik": {"Dört Çekişli": ["xDrive40", "xDrive50"]}
+                }
+            }
+        }
+    },
+    "Mercedes-Benz": {
+        "GLA": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.3": {"Ön Çekişli": ["GLA160", "GLA180"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["GLA200", "GLA250"], "Dört Çekişli": ["GLA250", "AMG GLA35", "AMG GLA45"]}
+                }
+            }
+        },
+        "GLB": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-1.3": {"Ön Çekişli": ["GLB200"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["GLB200"], "Dört Çekişli": ["GLB250", "AMG GLB35"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["GLB200d"]}
+                }
+            }
+        },
+        "GLC": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["GLC200", "GLC300", "AMG GLC43"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["AMG GLC63", "AMG GLC63 S"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["GLC200d", "GLC220d", "GLC300d"]}
+                }
+            }
+        },
+        "GLE": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["GLE300", "GLE300+"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["GLE450", "AMG GLE53", "AMG GLE63"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["GLE300d", "GLE300d+", "GLE350d"]}
+                }
+            }
+        },
+        "GLK": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["GLK200", "GLK300", "GLK350"]},
+                    "Otomatik-3.5": {"Dört Çekişli": ["GLK350", "GLK63 AMG"]}
+                }
+            }
+        },
+        "GLS": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["GLS450", "AMG GLS53"]},
+                    "Otomatik-4.0": {"Dört Çekişli": ["AMG GLS63", "AMG GLS63 S"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["GLS350d"]}
+                }
+            }
+        }
+    },
+    "Chevrolet": {
+        "Captiva": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.4": {"Ön Çekişli": ["LS", "LT"], "Dört Çekişli": ["LT", "LTZ"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["LTZ"], "Dört Çekişli": ["LTZ"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["LT", "LTZ"]}
+                }
+            }
+        },
+        "Tahoe": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-5.3": {"Dört Çekişli": ["LS", "LT", "LTZ"]}
+                }
+            }
+        }
+    },
+    "Ford": {
+        "Edge": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["SE", "SEL"], "Dört Çekişli": ["SEL", "Limited", "Titanium"]}
+                }
+            }
+        },
+        "Explorer": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Ön Çekişli": ["Base", "XLT"], "Dört Çekişli": ["Base", "XLT", "Limited", "Platinum"]},
+                    "Otomatik-3.5": {"Dört Çekişli": ["Platinum", "King Ranch", "Titanium"]}
+                }
+            }
+        },
+        "Escape": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["S", "S+"], "Dört Çekişli": ["SE"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["S", "S+"], "Dört Çekişli": ["SE", "SE+"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["SE", "Titanium", "Titanium+"]}
+                },
+                "Hibrit": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["S"], "Dört Çekişli": ["S", "SE", "SE+"]}
+                }
+            }
+        },
+        "EcoSport": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["Standart", "Comfort"], "Dört Çekişli": ["Comfort+"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["Comfort", "Comfort+"], "Dört Çekişli": ["Comfort+", "Premium"]}
+                }
+            }
+        },
+        "Expedition": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-5.4": {"Dört Çekişli": ["XLT", "Limited", "King Ranch"]}
+                }
+            }
+        }
+    },
+    "Honda": {
+        "CR-V": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["LX"], "Dört Çekişli": ["EX", "EX-L"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["LX", "EX"], "Dört Çekişli": ["EX", "EX-L", "Touring"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Touring", "Touring+", "Hybrid"]}
+                },
+                "Hibrit": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["EX", "EX-L"], "Dört Çekişli": ["EX-L", "Touring"]}
+                }
+            }
+        },
+        "HR-V": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.8": {"Ön Çekişli": ["LX"], "Dört Çekişli": ["EX"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["LX", "EX"], "Dört Çekişli": ["EX", "Touring"]}
+                }
+            }
+        },
+        "Pilot": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["LX"], "Dört Çekişli": ["LX", "EX", "EX-L", "Touring"]}
+                }
+            }
+        },
+        "Ridgeline": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Dört Çekişli": ["RT", "RTL", "RTL-E", "RTX"]}
+                }
+            }
+        }
+    },
+    "Hyundai": {
+        "Santa Fe": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["GL", "GL+"], "Dört Çekişli": ["GLS", "GLS+", "Limited"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["GL"], "Dört Çekişli": ["GL", "GLS", "GLS+", "Limited"]},
+                    "Otomatik-2.4": {"Dört Çekişli": ["GLS", "GLS+", "Limited", "Executive"]}
+                },
+                "Dizel": {
+                    "Manuel-2.2": {"Dört Çekişli": ["GL", "GL+"]},
+                    "Otomatik-2.2": {"Dört Çekişli": ["GL", "GLS", "Limited"]}
+                }
+            }
+        },
+        "Tucson": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["GL", "GL+"], "Dört Çekişli": ["GLS"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["GL"], "Dört Çekişli": ["GL", "GLS", "GLS+", "Limited"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Limited", "Executive"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Dört Çekişli": ["GL", "GL+"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["GL", "GLS", "Limited"]}
+                }
+            }
+        },
+        "Venue": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["L", "L+", "S"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["L", "S", "S+"]}
+                }
+            }
+        },
+        "Creta": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.5": {"Ön Çekişli": ["E", "S"], "Dört Çekişli": ["S+"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["S"], "Dört Çekişli": ["S", "SX"]}
+                }
+            }
+        },
+        "Kona": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L", "L+"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["L", "L+"], "Dört Çekişli": ["L+", "S", "SX"]}
+                }
+            }
+        }
+    },
+    "Kia": {
+        "Sorento": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.4": {"Ön Çekişli": ["L", "L+"], "Dört Çekişli": ["EX", "EX+"]},
+                    "Otomatik-2.4": {"Ön Çekişli": ["L"], "Dört Çekişli": ["L", "EX", "EX+", "SX"]}
+                },
+                "Dizel": {
+                    "Manuel-2.2": {"Dört Çekişli": ["L", "L+"]},
+                    "Otomatik-2.2": {"Dört Çekişli": ["L", "EX"]}
+                }
+            }
+        },
+        "Sportage": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L", "L+"], "Dört Çekişli": ["EX"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["L"], "Dört Çekişli": ["L", "EX", "EX+"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["EX", "SX", "SX+"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Dört Çekişli": ["L", "L+"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["L", "EX", "EX+"]}
+                }
+            }
+        },
+        "Seltos": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["L", "L+"], "Dört Çekişli": ["EX"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["L"], "Dört Çekişli": ["L", "EX", "EX+", "SX"]}
+                }
+            }
+        },
+        "Niro": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["L", "EX"], "Dört Çekişli": ["EX", "SX"]}
+                }
+            }
+        },
+        "Telluride": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.8": {"Dört Çekişli": ["LX", "EX", "SX", "SX+"]}
+                }
+            }
+        }
+    },
+    "Jeep": {
+        "Compass": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["S"], "Dört Çekişli": ["S", "Sport"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Sport"], "Dört Çekişli": ["Sport", "Limited"]}
+                }
+            }
+        },
+        "Wrangler": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-3.6": {"Dört Çekişli": ["Sport", "Sahara", "Rubicon"]},
+                    "Otomatik-3.6": {"Dört Çekişli": ["Sport", "Sahara", "Rubicon"]}
+                }
+            }
+        },
+        "Cherokee": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-3.7": {"Ön Çekişli": ["Sport"], "Dört Çekişli": ["Sport", "Limited"]},
+                    "Otomatik-3.7": {"Ön Çekişli": ["Sport"], "Dört Çekişli": ["Sport", "Limited", "Overland"]}
+                }
+            }
+        },
+        "Grand Cherokee": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.6": {"Ön Çekişli": ["Laredo"], "Dört Çekişli": ["Laredo", "Limited", "Overland", "Summit"]},
+                    "Otomatik-5.7": {"Dört Çekişli": ["SRT", "SRT8"]}
+                }
+            }
+        }
+    },
+    "Nissan": {
+        "Qashqai": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["S", "SV"], "Dört Çekişli": ["SL"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["SV"], "Dört Çekişli": ["SV", "SL", "Platinum"]}
+                }
+            }
+        },
+        "Rogue": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.5": {"Ön Çekişli": ["S", "SV"], "Dört Çekişli": ["SV", "SL", "Platinum"]}
+                }
+            }
+        },
+        "X-Trail": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["S"], "Dört Çekişli": ["SV", "SL"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["SV", "SL", "Platinum"]}
+                }
+            }
+        },
+        "Murano": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["S", "SV"], "Dört Çekişli": ["SV", "SL", "Platinum"]}
+                }
+            }
+        }
+    },
+    "Porsche": {
+        "Cayenne": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["Base", "S"]},
+                    "Otomatik-4.8": {"Dört Çekişli": ["S", "Turbo", "Turbo S"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["V6 TDI"]}
+                }
+            }
+        },
+        "Macan": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["Base"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["S", "Turbo", "GTS"]}
+                }
+            }
+        }
+    },
+    "Range Rover": {
+        "Range Rover": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]},
+                    "Otomatik-5.0": {"Dört Çekişli": ["Sport", "Autobiography", "Autobiography Black"]}
+                }
+            }
+        },
+        "Range Rover Sport": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]},
+                    "Otomatik-5.0": {"Dört Çekişli": ["SVR"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]}
+                }
+            }
+        },
+        "Range Rover Evoque": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["Pure"], "Dört Çekişli": ["Pure", "S", "HSE"]}
+                }
+            }
+        },
+        "Discovery": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]},
+                    "Otomatik-5.0": {"Dört Çekişli": ["HSE", "Supercharged"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["SE", "HSE"]}
+                }
+            }
+        }
+    },
+    "Subaru": {
+        "Forester": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Dört Çekişli": ["2.0X", "2.5XT"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["2.5X", "2.5XT", "2.5 Turbo"]}
+                }
+            }
+        },
+        "Outback": {
+            "Station Wagon": {
+                "Benzin": {
+                    "Manuel-2.5": {"Dört Çekişli": ["2.5i"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["2.5i", "3.6R"]}
+                }
+            }
+        },
+        "Crosstrek": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Dört Çekişli": ["2.0i", "2.0i Limited"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["2.0i", "2.0i Limited", "2.0i Touring"]}
+                }
+            }
+        },
+        "Ascent": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.4": {"Dört Çekişli": ["Base", "Premium", "Limited", "Touring"]}
+                }
+            }
+        }
+    },
+    "Suzuki": {
+        "Vitara": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["GL"], "Dört Çekişli": ["GL+", "GLX"]},
+                    "Otomatik-1.6": {"Dört Çekişli": ["GLX", "GLX+"]}
+                }
+            }
+        },
+        "Grand Vitara": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["LX"], "Dört Çekişli": ["LX", "LX+"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["LX+", "JLX+"]},
+                    "Otomatik-2.7": {"Dört Çekişli": ["JLX+", "Limited"]}
+                },
+                "Dizel": {
+                    "Otomatik-1.9": {"Dört Çekişli": ["JLX"]}
+                }
+            }
+        },
+        "SX4": {
+            "Sedan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["Standart"], "Dört Çekişli": ["Comfort"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Premium"]}
+                }
+            }
+        }
+    },
+    "Toyota": {
+        "RAV4": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["LE", "XLE", "Adventure"], "Dört Çekişli": ["LE", "XLE", "Adventure", "Limited"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["LE", "XLE"], "Dört Çekişli": ["LE", "XLE", "Adventure", "Limited", "Prime"]},
+                    "Otomatik-2.5": {"Dört Çekişli": ["Adventure", "Limited", "Prime", "TRD"]}
+                },
+                "Hibrit": {
+                    "Otomatik-2.5": {"Ön Çekişli": ["LE", "XLE"], "Dört Çekişli": ["LE", "XLE", "Limited", "Prime"]}
+                }
+            }
+        },
+        "Highlander": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["LE", "XLE"], "Dört Çekişli": ["LE", "XLE", "Limited", "Platinum"]}
+                },
+                "Hibrit": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["LE"], "Dört Çekişli": ["LE", "XLE", "Limited"]}
+                }
+            }
+        },
+        "Fortuner": {
+            "SUV": {
+                "Dizel": {
+                    "Manuel-2.4": {"Dört Çekişli": ["Standart", "G", "G+", "Executive"]},
+                    "Otomatik-2.4": {"Dört Çekişli": ["Standart", "G", "G+", "Executive", "Premium"]}
+                },
+                "Benzin": {
+                    "Otomatik-2.7": {"Dört Çekişli": ["Standart", "G", "Executive"]}
+                }
+            }
+        },
+        "Vanguard": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["Standart"], "Dört Çekişli": ["Comfort"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Comfort"], "Dört Çekişli": ["Comfort", "Premium"]},
+                    "Otomatik-2.4": {"Dört Çekişli": ["Premium", "Executive"]}
+                }
+            }
+        },
+        "4Runner": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-4.0": {"Dört Çekişli": ["SR5", "TRD", "Limited"]},
+                    "Otomatik-4.7": {"Dört Çekişli": ["SR5", "Limited"]}
+                }
+            }
+        }
+    },
+    "Volkswagen": {
+        "Tiguan": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["Trend", "Trend+"], "Dört Çekişli": ["Highline"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["Trend"], "Dört Çekişli": ["Trend", "Trend+", "Highline", "Highline+", "R"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["Trend"], "Dört Çekişli": ["Trend", "Highline"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["Trend", "Trend+", "Highline"]}
+                }
+            }
+        },
+        "Touareg": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.6": {"Dört Çekişli": ["V6", "V6+", "Executive"]},
+                    "Otomatik-4.2": {"Dört Çekişli": ["V8", "V8+", "Executive", "Platinum"]}
+                },
+                "Dizel": {
+                    "Otomatik-3.0": {"Dört Çekişli": ["V6", "V6+", "Executive"]}
+                }
+            }
+        },
+        "T-Roc": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["TSI", "Standart"], "Dört Çekişli": ["TSI"]},
+                    "Otomatik-1.4": {"Ön Çekişli": ["TSI"], "Dört Çekişli": ["TSI", "Highline"]}
+                }
+            }
+        },
+        "Teramont": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-3.6": {"Dört Çekişli": ["S", "SE", "SEL"]}
+                }
+            }
+        }
+    },
+    "Volvo": {
+        "XC40": {
+            "SUV": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T3"], "Dört Çekişli": ["T4", "T5"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["T3"], "Dört Çekişli": ["T4", "T5", "T8"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Dört Çekişli": ["D3", "D4"]},
+                    "Otomatik-2.0": {"Dört Çekişli": ["D3", "D4", "D5"]}
+                }
+            }
+        },
+        "XC60": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["T"], "Dört Çekişli": ["T3", "T4", "T5", "T8"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["T6", "T8"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["D3", "D4", "D5"]}
+                }
+            }
+        },
+        "XC90": {
+            "SUV": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["T"], "Hibrit": ["T8"]},
+                    "Otomatik-3.0": {"Dört Çekişli": ["T5", "T6"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Dört Çekişli": ["D3", "D4", "D5"]}
+                }
+            }
+        }
+    }
+},
+"Minivan": {
+    "Chrysler": {
+        "Pacifica": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.6": {"Ön Çekişli": ["Touring", "Touring L", "Limited", "Pinnacle"]}
+                },
+                "Hibrit": {
+                    "Otomatik-3.6": {"Ön Çekişli": ["Touring", "Touring L", "Limited", "Pinnacle"]}
+                }
+            }
+        },
+        "Town Country": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.8": {"Ön Çekişli": ["LX", "Limited", "Touring"]},
+                    "Otomatik-4.0": {"Ön Çekişli": ["Touring", "Limited Platinum"]}
+                }
+            }
+        }
+    },
+    "Honda": {
+        "Odyssey": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["LX", "EX", "EX-L", "Touring", "Touring Plus"]}
+                }
+            }
+        }
+    },
+    "Hyundai": {
+        "H-1": {
+            "Minivan": {
+                "Dizel": {
+                    "Manuel-2.5": {"Ön Çekişli": ["GL", "GL Plus"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["GL", "GL Plus", "GLS", "Executive"]}
+                },
+                "Benzin": {
+                    "Manuel-2.4": {"Ön Çekişli": ["GL"]},
+                    "Otomatik-2.4": {"Ön Çekişli": ["GL", "Premium"]}
+                }
+            }
+        }
+    },
+    "Kia": {
+        "Carnival": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["LX", "EX", "EX Plus"]}
+                }
+            }
+        },
+        "Sedona": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.3": {"Ön Çekişli": ["LX", "EX", "Limited"]},
+                    "Otomatik-3.8": {"Ön Çekişli": ["Limited", "SX"]}
+                }
+            }
+        }
+    },
+    "Mercedes-Benz": {
+        "V-Serisi": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["Standart", "Elegance"]},
+                    "Otomatik-3.5": {"Ön Çekişli": ["Elegance", "Premium"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["Standart", "Elegance"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["Elegance", "Premium"]}
+                }
+            }
+        }
+    },
+    "Nissan": {
+        "Quest": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-3.5": {"Ön Çekişli": ["S", "SV", "SL", "Platinum"]}
+                }
+            }
+        },
+        "Serena": {
+            "Minivan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["S", "SV"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["S", "SV", "SL"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["SL", "Platinum"]}
+                },
+                "Hibrit": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["HV", "HV Premium"]}
+                }
+            }
+        }
+    },
+    "Toyota": {
+        "Sienna": {
+            "Minivan": {
+                "Hibrit": {
+                    "Otomatik-2.5": {"Ön Çekişli": ["LE", "XLE", "Limited", "Platinum"]}
+                }
+            }
+        },
+        "Alphard": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-2.4": {"Ön Çekişli": ["L", "G", "Hybrid L", "Hybrid G"]}
+                }
+            }
+        },
+        "Vellfire": {
+            "Minivan": {
+                "Benzin": {
+                    "Otomatik-2.4": {"Ön Çekişli": ["L", "Z", "Executive"]},
+                    "Otomatik-3.5": {"Ön Çekişli": ["Executive", "Z"]}
+                }
+            }
+        }
+    },
+    "Volkswagen": {
+        "Caravelle": {
+            "Minivan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T4", "T5"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["T5", "T6"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI", "T4"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "T5"]}
+                }
+            }
+        },
+        "Transporter": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T4", "T5"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["T5", "T6"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI", "T4"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "T5"]}
+                }
+            }
+        }
+    }
+},
+"Panelvan": {
+    "Chevrolet": {
+        "Express": {
+            "Panelvan": {
+                "Benzin": {
+                    "Otomatik-4.3": {"Ön Çekişli": ["Cargo", "Passenger"]},
+                    "Otomatik-5.3": {"Ön Çekişli": ["Passenger", "LS"]}
+                }
+            }
+        }
+    },
+    "Dacia": {
+        "Dokker": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-1.0": {"Ön Çekişli": ["Essential"]},
+                    "Manuel-1.2": {"Ön Çekişli": ["Expression", "Laureate"]},
+                    "Otomatik-1.2": {"Ön Çekişli": ["Laureate"]}
+                }
+            }
+        }
+    },
+    "Ford": {
+        "Transit": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T100", "T110"]},
+                    "Otomatik-3.2": {"Ön Çekişli": ["T110", "T115"]}
+                },
+                "Dizel": {
+                    "Manuel-2.4": {"Ön Çekişli": ["TDCi"]},
+                    "Otomatik-2.2": {"Ön Çekişli": ["TDCi", "Custom"]}
+                }
+            }
+        },
+        "Transit Connect": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["XL"]},
+                    "Otomatik-1.5": {"Ön Çekişli": ["XL", "XLT"]}
+                }
+            }
+        },
+        "E-Series": {
+            "Panelvan": {
+                "Benzin": {
+                    "Otomatik-4.6": {"Ön Çekişli": ["E-150", "E-250"]},
+                    "Otomatik-5.4": {"Ön Çekişli": ["E-250", "E-350"]}
+                }
+            }
+        }
+    },
+    "Hyundai": {
+        "H350": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-2.5": {"Ön Çekişli": ["Standard"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["Standard", "Premium"]}
+                }
+            }
+        }
+    },
+    "Isuzu": {
+        "NPR": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-4.8": {"Ön Çekişli": ["Standard", "Utility"]},
+                    "Otomatik-5.2": {"Ön Çekişli": ["Utility", "Premium"]}
+                }
+            }
+        },
+        "NQR": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-5.2": {"Ön Çekişli": ["Standard"]},
+                    "Otomatik-5.8": {"Ön Çekişli": ["Utility"]}
+                }
+            }
+        }
+    },
+    "Iveco": {
+        "Daily": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-2.3": {"Ön Çekişli": ["Standard", "Premium"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["Premium", "Executive"]}
+                }
+            }
+        }
+    },
+    "Mercedes-Benz": {
+        "Sprinter": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["311", "313"]},
+                    "Otomatik-2.4": {"Ön Çekişli": ["313", "315"]}
+                },
+                "Dizel": {
+                    "Manuel-2.1": {"Ön Çekişli": ["311CDI", "313CDI"]},
+                    "Otomatik-2.2": {"Ön Çekişli": ["313CDI", "315CDI"]}
+                }
+            }
+        },
+        "V-Class": {
+            "Panelvan": {
+                "Benzin": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["V200", "V250"]},
+                    "Otomatik-3.5": {"Ön Çekişli": ["V350"]}
+                },
+                "Dizel": {
+                    "Otomatik-2.0": {"Ön Çekişli": ["V220CDI", "V250CDI"]},
+                    "Otomatik-3.0": {"Ön Çekişli": ["V350CDI"]}
+                }
+            }
+        }
+    },
+    "MAN": {
+        "TGE": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TGE 3.140", "TGE 3.180"]},
+                    "Otomatik-2.3": {"Ön Çekişli": ["TGE 3.180", "TGE 3.250"]}
+                }
+            }
+        }
+    },
+    "Nissan": {
+        "NV200": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["S", "SV"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["SV", "SL"]}
+                }
+            }
+        },
+        "NV300": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["dCi"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["dCi"]}
+                }
+            }
+        }
+    },
+    "Peugeot": {
+        "Boxer": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["L1H1", "L2H2"]},
+                    "Otomatik-2.2": {"Ön Çekişli": ["L2H2", "L3H2"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["HDi", "L1H1"]},
+                    "Otomatik-2.2": {"Ön Çekişli": ["HDi", "L2H2"]}
+                }
+            }
+        },
+        "Expert": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-1.6": {"Ön Çekişli": ["L1H1", "L2H1"]},
+                    "Otomatik-1.8": {"Ön Çekişli": ["L2H1", "L2H2"]}
+                },
+                "Dizel": {
+                    "Manuel-1.6": {"Ön Çekişli": ["HDi"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["HDi"]}
+                }
+            }
+        }
+    },
+    "Renault": {
+        "Master": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["L1H1", "L2H2"]},
+                    "Otomatik-2.3": {"Ön Çekişli": ["L2H2", "L3H2"]}
+                },
+                "Dizel": {
+                    "Manuel-1.9": {"Ön Çekişli": ["dCi", "L1H1"]},
+                    "Otomatik-2.3": {"Ön Çekişli": ["dCi", "L2H2"]}
+                }
+            }
+        },
+        "Kangoo": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-1.4": {"Ön Çekişli": ["Express"]},
+                    "Otomatik-1.6": {"Ön Çekişli": ["Express"]}
+                },
+                "Dizel": {
+                    "Manuel-1.5": {"Ön Çekişli": ["dCi"]}
+                }
+            }
+        }
+    },
+    "Vauxhall": {
+        "Movano": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["L1H1", "L2H2"]},
+                    "Otomatik-2.3": {"Ön Çekişli": ["L2H2", "L3H2"]}
+                },
+                "Dizel": {
+                    "Manuel-1.9": {"Ön Çekişli": ["dCi"]},
+                    "Otomatik-2.3": {"Ön Çekişli": ["dCi"]}
+                }
+            }
+        }
+    },
+    "Volkswagen": {
+        "Transporter": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["T4", "T5"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["T5", "T6"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI", "T4"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "T5"]}
+                }
+            }
+        },
+        "Crafter": {
+            "Panelvan": {
+                "Benzin": {
+                    "Manuel-2.0": {"Ön Çekişli": ["L1H1", "L2H2"]},
+                    "Otomatik-2.5": {"Ön Çekişli": ["L2H2", "L3H2"]}
+                },
+                "Dizel": {
+                    "Manuel-2.0": {"Ön Çekişli": ["TDI", "L1H1"]},
+                    "Otomatik-2.0": {"Ön Çekişli": ["TDI", "L2H2"]}
+                }
+            }
+        }
+    },
+    "Volvo": {
+        "FL": {
+            "Panelvan": {
+                "Dizel": {
+                    "Manuel-4.2": {"Ön Çekişli": ["D6", "D7"]},
+                    "Otomatik-5.1": {"Ön Çekişli": ["D7", "D9"]}
+                }
+            }
+        }
+    }
+};
 
         let currentStep = 1;
 
