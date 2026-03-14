@@ -947,87 +947,158 @@
 
                                 <!-- ARAÇ HARITA SİSTEMİ -->
                                 <div class="car-diagram">
-                                                                        <svg viewBox="0 0 600 800" style="width: 100%; height: auto;">
-                                        <!-- BAŞLANTILER VE AYARLAR -->
+                                                                                                            <svg viewBox="0 0 600 900" style="width: 100%; height: auto;">
+                                        <!-- GRADIENTLER -->
                                         <defs>
                                             <linearGradient id="wheelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                <stop offset="0%" style="stop-color:#444;stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:#222;stop-opacity:1" />
+                                                <stop offset="0%" style="stop-color:#555;stop-opacity:1" />
+                                                <stop offset="50%" style="stop-color:#222;stop-opacity:1" />
+                                                <stop offset="100%" style="stop-color:#111;stop-opacity:1" />
                                             </linearGradient>
                                             <linearGradient id="carGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                <stop offset="0%" style="stop-color:#f0f0f0;stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:#d0d0d0;stop-opacity:1" />
+                                                <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:1" />
+                                                <stop offset="100%" style="stop-color:#cccccc;stop-opacity:1" />
                                             </linearGradient>
+                                            <filter id="shadow">
+                                                <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+                                            </filter>
                                         </defs>
 
-                                        <!-- BAŞLIK -->
-                                        <text x="300" y="35" font-size="28" font-weight="bold" text-anchor="middle" fill="#000">ARKA GÖRÜNÜŞ</text>
+                                        <!-- ===== ARKA GÖRÜNÜŞ ===== -->
+                                        <text x="300" y="30" font-size="26" font-weight="bold" text-anchor="middle" fill="#333">ARKA GÖRÜNÜŞ</text>
 
-                                        <!-- SOL TEKERLEK -->
-                                        <circle cx="100" cy="180" r="65" fill="url(#wheelGrad)" stroke="#1a1a1a" stroke-width="3"/>
-                                        <circle cx="100" cy="180" r="55" fill="#2a2a2a"/>
-                                        <circle cx="100" cy="180" r="50" fill="none" stroke="#444" stroke-width="2"/>
-                                        <circle cx="100" cy="180" r="45" fill="none" stroke="#555" stroke-width="1"/>
-                                        <circle cx="100" cy="180" r="35" fill="none" stroke="#666" stroke-width="1"/>
-                                        <circle cx="100" cy="180" r="15" fill="#333"/>
+                                        <!-- ARKA TEKERLEK SOL -->
+                                        <g filter="url(#shadow)">
+                                            <circle cx="100" cy="150" r="60" fill="url(#wheelGrad)" stroke="#000" stroke-width="3"/>
+                                            <circle cx="100" cy="150" r="52" fill="none" stroke="#333" stroke-width="2"/>
+                                            <circle cx="100" cy="150" r="45" fill="none" stroke="#555" stroke-width="1.5"/>
+                                            <circle cx="100" cy="150" r="38" fill="none" stroke="#666" stroke-width="1"/>
+                                            <circle cx="100" cy="150" r="12" fill="#222"/>
+                                        </g>
 
-                                        <!-- SAĞ TEKERLEK -->
-                                        <circle cx="500" cy="180" r="65" fill="url(#wheelGrad)" stroke="#1a1a1a" stroke-width="3"/>
-                                        <circle cx="500" cy="180" r="55" fill="#2a2a2a"/>
-                                        <circle cx="500" cy="180" r="50" fill="none" stroke="#444" stroke-width="2"/>
-                                        <circle cx="500" cy="180" r="45" fill="none" stroke="#555" stroke-width="1"/>
-                                        <circle cx="500" cy="180" r="35" fill="none" stroke="#666" stroke-width="1"/>
-                                        <circle cx="500" cy="180" r="15" fill="#333"/>
+                                        <!-- ARKA TEKERLEK SAĞ -->
+                                        <g filter="url(#shadow)">
+                                            <circle cx="500" cy="150" r="60" fill="url(#wheelGrad)" stroke="#000" stroke-width="3"/>
+                                            <circle cx="500" cy="150" r="52" fill="none" stroke="#333" stroke-width="2"/>
+                                            <circle cx="500" cy="150" r="45" fill="none" stroke="#555" stroke-width="1.5"/>
+                                            <circle cx="500" cy="150" r="38" fill="none" stroke="#666" stroke-width="1"/>
+                                            <circle cx="500" cy="150" r="12" fill="#222"/>
+                                        </g>
 
-                                        <!-- ANA GÖVDE - ARKA -->
-                                        <path d="M 80 250 L 80 350 L 60 450 L 60 700 L 540 700 L 540 450 L 520 350 L 520 250 Z" 
-                                              fill="url(#carGrad)" stroke="#000" stroke-width="3"/>
+                                        <!-- ARKA GÖVDE -->
+                                        <path d="M 85 220 L 85 300 L 70 380 L 70 620 L 530 620 L 530 380 L 515 300 L 515 220 Z" 
+                                              fill="url(#carGrad)" stroke="#000" stroke-width="2.5" filter="url(#shadow)"/>
 
-                                        <!-- ÇATISI - ARKA -->
-                                        <path d="M 120 250 L 120 220 L 480 220 L 480 250" 
-                                              fill="#b8b8b8" stroke="#000" stroke-width="2.5"/>
+                                        <!-- ARKA ÇATISI -->
+                                        <path d="M 130 220 L 130 195 L 470 195 L 470 220" 
+                                              fill="#9a9a9a" stroke="#000" stroke-width="2" rx="5"/>
 
-                                        <!-- CAMLAR - ARKA -->
-                                        <rect x="140" y="230" width="80" height="90" fill="#87CEEB" stroke="#000" stroke-width="2" rx="3"/>
-                                        <rect x="230" y="230" width="140" height="90" fill="#87CEEB" stroke="#000" stroke-width="2" rx="3"/>
-                                        <rect x="380" y="230" width="80" height="90" fill="#87CEEB" stroke="#000" stroke-width="2" rx="3"/>
+                                        <!-- ARKA CAMLAR -->
+                                        <rect x="150" y="205" width="70" height="85" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
+                                        <rect x="240" y="205" width="120" height="85" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
+                                        <rect x="380" y="205" width="70" height="85" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
 
                                         <!-- SOL ARKA KAPISI -->
-                                        <rect id="left-rear-door-car" x="80" y="350" width="130" height="160" 
-                                              fill="#ddd" stroke="#000" stroke-width="2.5" rx="2" style="cursor: pointer;"/>
-                                        <line x1="145" y1="350" x2="145" y2="510" stroke="#aaa" stroke-width="1"/>
-                                        <circle cx="205" cy="430" r="5" fill="#888"/>
+                                        <rect id="left-rear-door-car" x="85" y="310" width="115" height="155" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" rx="1" style="cursor: pointer;"/>
+                                        <line x1="142" y1="310" x2="142" y2="465" stroke="#aaa" stroke-width="1"/>
+                                        <circle cx="195" cy="388" r="4" fill="#888"/>
 
                                         <!-- SAĞ ARKA KAPISI -->
-                                        <rect id="right-rear-door-car" x="390" y="350" width="130" height="160" 
-                                              fill="#ddd" stroke="#000" stroke-width="2.5" rx="2" style="cursor: pointer;"/>
-                                        <line x1="455" y1="350" x2="455" y2="510" stroke="#aaa" stroke-width="1"/>
-                                        <circle cx="395" cy="430" r="5" fill="#888"/>
+                                        <rect id="right-rear-door-car" x="400" y="310" width="115" height="155" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" rx="1" style="cursor: pointer;"/>
+                                        <line x1="457" y1="310" x2="457" y2="465" stroke="#aaa" stroke-width="1"/>
+                                        <circle cx="405" cy="388" r="4" fill="#888"/>
 
                                         <!-- BAGAJ -->
-                                        <rect id="trunk-car" x="140" y="520" width="320" height="130" 
-                                              fill="#ddd" stroke="#000" stroke-width="2.5" rx="2" style="cursor: pointer;"/>
-                                        <line x1="300" y1="520" x2="300" y2="650" stroke="#aaa" stroke-width="1.5"/>
+                                        <rect id="trunk-car" x="130" y="475" width="340" height="120" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" rx="1" style="cursor: pointer;"/>
+                                        <line x1="300" y1="475" x2="300" y2="595" stroke="#aaa" stroke-width="1.5"/>
 
                                         <!-- SOL ARKA ÇAMURLU -->
-                                        <path id="left-rear-fender-car" d="M 60 350 L 40 480 L 60 550" 
-                                              fill="#ddd" stroke="#000" stroke-width="2.5" style="cursor: pointer;"/>
+                                        <path id="left-rear-fender-car" d="M 70 310 L 50 420 L 70 500" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
                                         <!-- SAĞ ARKA ÇAMURLU -->
-                                        <path id="right-rear-fender-car" d="M 540 350 L 560 480 L 540 550" 
-                                              fill="#ddd" stroke="#000" stroke-width="2.5" style="cursor: pointer;"/>
+                                        <path id="right-rear-fender-car" d="M 530 310 L 550 420 L 530 500" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
                                         <!-- TAVAN -->
-                                        <path id="roof-car" d="M 140 230 L 140 210 L 460 210 L 460 230" 
-                                              fill="#a0a0a0" stroke="#000" stroke-width="2.5" style="cursor: pointer;"/>
+                                        <path id="roof-car" d="M 150 205 L 150 185 L 450 185 L 450 205" 
+                                              fill="#8a8a8a" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                        <!-- AYRAÇ ÇİZGİSİ -->
-                                        <line x1="50" y1="720" x2="550" y2="720" stroke="#000" stroke-width="2"/>
+                                        <!-- ARKA TAMPON -->
+                                        <rect x="120" y="605" width="360" height="15" fill="#222" stroke="#000" stroke-width="1.5"/>
 
-                                        <!-- ÖN GÖRÜNÜŞ BAŞLIĞI -->
-                                        <text x="300" y="770" font-size="24" font-weight="bold" text-anchor="middle" fill="#666">ÖN GÖRÜNÜŞ</text>
+                                        <!-- ===== AYRAÇ ===== -->
+                                        <line x1="50" y1="650" x2="550" y2="650" stroke="#000" stroke-width="2"/>
+
+                                        <!-- ===== ÖN GÖRÜNÜŞ ===== -->
+                                        <text x="300" y="695" font-size="26" font-weight="bold" text-anchor="middle" fill="#333">ÖN GÖRÜNÜŞ</text>
+
+                                        <!-- ÖN TEKERLEK SOL -->
+                                        <g filter="url(#shadow)">
+                                            <circle cx="100" cy="800" r="60" fill="url(#wheelGrad)" stroke="#000" stroke-width="3"/>
+                                            <circle cx="100" cy="800" r="52" fill="none" stroke="#333" stroke-width="2"/>
+                                            <circle cx="100" cy="800" r="45" fill="none" stroke="#555" stroke-width="1.5"/>
+                                            <circle cx="100" cy="800" r="38" fill="none" stroke="#666" stroke-width="1"/>
+                                            <circle cx="100" cy="800" r="12" fill="#222"/>
+                                        </g>
+
+                                        <!-- ÖN TEKERLEK SAĞ -->
+                                        <g filter="url(#shadow)">
+                                            <circle cx="500" cy="800" r="60" fill="url(#wheelGrad)" stroke="#000" stroke-width="3"/>
+                                            <circle cx="500" cy="800" r="52" fill="none" stroke="#333" stroke-width="2"/>
+                                            <circle cx="500" cy="800" r="45" fill="none" stroke="#555" stroke-width="1.5"/>
+                                            <circle cx="500" cy="800" r="38" fill="none" stroke="#666" stroke-width="1"/>
+                                            <circle cx="500" cy="800" r="12" fill="#222"/>
+                                        </g>
+
+                                        <!-- ÖN GÖVDE -->
+                                        <path d="M 85 720 L 85 770 L 70 820 L 70 880 L 530 880 L 530 820 L 515 770 L 515 720 Z" 
+                                              fill="url(#carGrad)" stroke="#000" stroke-width="2.5" filter="url(#shadow)"/>
+
+                                        <!-- KAPUT -->
+                                        <rect id="hood-car" x="130" y="680" width="340" height="40" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
+                                        <line x1="300" y1="680" x2="300" y2="720" stroke="#aaa" stroke-width="1.5"/>
+
+                                        <!-- ÖN ÇATISI -->
+                                        <path d="M 140" y="720 L 140 690 L 460 690 L 460 720" 
+                                              fill="#9a9a9a" stroke="#000" stroke-width="2"/>
+
+                                        <!-- ÖN CAMLAR -->
+                                        <rect x="160" y="700" width="65" height="75" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
+                                        <rect x="245" y="700" width="110" height="75" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
+                                        <rect x="375" y="700" width="65" height="75" fill="#87CEEB" stroke="#000" stroke-width="1.5" rx="2" opacity="0.8"/>
+
+                                        <!-- SOL ÖN KAPISI -->
+                                        <rect id="left-front-door-car" x="85" y="780" width="110" height="140" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" rx="1" style="cursor: pointer;"/>
+                                        <line x1="140" y1="780" x2="140" y2="920" stroke="#aaa" stroke-width="1"/>
+                                        <circle cx="190" cy="850" r="4" fill="#888"/>
+
+                                        <!-- SAĞ ÖN KAPISI -->
+                                        <rect id="right-front-door-car" x="405" y="780" width="110" height="140" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" rx="1" style="cursor: pointer;"/>
+                                        <line x1="460" y1="780" x2="460" y2="920" stroke="#aaa" stroke-width="1"/>
+                                        <circle cx="410" cy="850" r="4" fill="#888"/>
+
+                                        <!-- SOL ÖN ÇAMURLU -->
+                                        <path id="left-front-fender-car" d="M 70 770 L 45 860 L 70 920" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
+
+                                        <!-- SAĞ ÖN ÇAMURLU -->
+                                        <path id="right-front-fender-car" d="M 530 770 L 555 860 L 530 920" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
+
+                                        <!-- ÖN TAVAN -->
+                                        <path id="roof-front-car" d="M 160 700 L 160 680 L 440 680 L 440 700" 
+                                              fill="#8a8a8a" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
+
+                                        <!-- ÖN TAMPON -->
+                                        <rect x="120" y="865" width="360" height="15" fill="#222" stroke="#000" stroke-width="1.5"/>
                                     </svg>
-
                                     <p style="text-align: center; color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
                                         👆 Araç parçalarına tıklayarak hasar türünü seçiniz
                                     </p>
@@ -1343,29 +1414,38 @@
 
         function updateCarColor() {
                         // SVG parçalarına tıklama ekle
+                        // SVG parçalarına tıklama ekle
             const svgParts = document.querySelectorAll('svg path[id$="-car"], svg rect[id$="-car"]');
+            
+            const partNames = {
+                'left-front-fender': 'Sol Ön Çamurlu',
+                'left-front-door': 'Sol Ön Kapı',
+                'left-rear-door': 'Sol Arka Kapı',
+                'left-rear-fender': 'Sol Arka Çamurlu',
+                'right-front-fender': 'Sağ Ön Çamurlu',
+                'right-front-door': 'Sağ Ön Kapı',
+                'right-rear-door': 'Sağ Arka Kapı',
+                'right-rear-fender': 'Sağ Arka Çamurlu',
+                'hood': 'Kaput',
+                'roof': 'Tavan',
+                'trunk': 'Bagaj'
+            };
             
             svgParts.forEach(element => {
                 element.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const partId = this.id.replace('-car', '');
-                    const partNames = {
-                        'left-rear-fender': 'Sol Arka Çamurlu',
-                        'left-rear-door': 'Sol Arka Kapı',
-                        'roof': 'Tavan',
-                        'right-rear-door': 'Sağ Arka Kapı',
-                        'right-rear-fender': 'Sağ Arka Çamurlu',
-                        'trunk': 'Bagaj'
-                    };
                     console.log('Seçilen: ' + (partNames[partId] || partId));
                 });
                 
                 element.style.cursor = 'pointer';
                 element.addEventListener('mouseenter', function() {
                     this.style.opacity = '0.7';
+                    this.style.filter = 'brightness(1.1)';
                 });
                 element.addEventListener('mouseleave', function() {
                     this.style.opacity = '1';
+                    this.style.filter = 'brightness(1)';
                 });
             });
             
