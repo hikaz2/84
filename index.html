@@ -1395,24 +1395,6 @@
     document.getElementById('referenceCode').textContent = referenceCode;
 }
 
-            // localStorage'a kaydet
-            let offers = JSON.parse(localStorage.getItem('offers') || '[]');
-            offers.push(offerData);
-            localStorage.setItem('offers', JSON.stringify(offers));
-            
-            // ✅ GÖSTERİ
-            document.getElementById('formContainer').style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('displayPhone').textContent = document.getElementById('phone').value;
-            
-            if (document.getElementById('email').value) {
-                document.getElementById('emailDisplay').style.display = 'block';
-                document.getElementById('displayEmail').textContent = document.getElementById('email').value;
-            }
-            
-            document.getElementById('referenceCode').textContent = referenceCode;
-        }
-
         function showError(message) {
             const errorBox = document.getElementById('errorBox');
             errorBox.textContent = message;
