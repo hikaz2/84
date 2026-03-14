@@ -1383,8 +1383,13 @@
         mileage: document.getElementById('mileage').value,
         carColor: document.getElementById('carColor').value,
         interiorCondition: document.getElementById('interiorCondition').value,
-        tramer: document.querySelector('input[name="tramerStatus"]:checked').value,
-        tramerPrice: document.getElementById('tramerPrice').value || '0',
+        tramer: document.querySelector('input[name="tramerStatus"]:checked') 
+    ? document.querySelector('input[name="tramerStatus"]:checked').value 
+    : 'Seçilmedi',
+tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') && 
+    document.querySelector('input[name="tramerStatus"]:checked').value === 'Evet'
+    ? document.getElementById('tramerPrice').value 
+    : '0',
         referenceCode: referenceCode,
         date: new Date().toISOString()
     };
