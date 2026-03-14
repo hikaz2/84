@@ -4939,11 +4939,13 @@
                 carPartsInfo += `${part.label}: ${status}<br>`;
             });
 
-            const tramerPrice = document.getElementById('tramerPrice').value;
-            const tramerInfo = document.querySelector('input[name="tramerStatus"]:checked').value === 'Evet' 
-                ? ` (₺${tramerPrice})` 
-                : '';
-
+            const tramerStatus = document.querySelector('input[name="tramerStatus"]:checked');
+const tramerPrice = tramerStatus && tramerStatus.value === 'Evet' 
+    ? document.getElementById('tramerPrice').value 
+    : '';
+const tramerInfo = tramerStatus && tramerStatus.value === 'Evet' 
+    ? ` (₺${tramerPrice})` 
+    : ''; 
             const summary = `
                 <strong>📋 ARAÇ BİLGİLERİ:</strong><br>
                 Araç Tipi: ${document.getElementById('vehicleType').value}<br>
