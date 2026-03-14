@@ -4836,17 +4836,18 @@ tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') &&
             }
         }
 
-        function goToStep(step) {
+                function goToStep(step) {
             if (!validateStep(currentStep)) {
                 return;
             }
             
-            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            // Eski adımı gizle
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).style.display = 'none';
             document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
             
+            // Yeni adımı göster
             currentStep = step;
-            
-            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).style.display = 'block';
             document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
             
             updateProgress();
@@ -4854,6 +4855,10 @@ tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') &&
             if (step === 4) {
                 generateSummary();
             }
+            
+            // Sayfayı üste scroll yap
+            window.scrollTo(0, 0);
+         }
         }
 
         function validateStep(step) {
