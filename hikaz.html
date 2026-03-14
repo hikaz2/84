@@ -172,6 +172,46 @@
             padding: 2rem;
         }
 
+        /* SEARCH BOX */
+        .search-box {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        .search-clear {
+            padding: 0.8rem 1.5rem;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .search-clear:hover {
+            background: #b71c1c;
+        }
+
         /* TABS */
         .tabs {
             display: flex;
@@ -526,6 +566,10 @@
             .tab-btn {
                 border-bottom: 2px solid var(--border) !important;
             }
+
+            .search-box {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -564,6 +608,12 @@
         <div class="container">
             <!-- MESSAGE -->
             <div id="message" class="message"></div>
+
+            <!-- SEARCH BOX -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Referans Kodu veya Ad Soyad Ara..." onkeyup="searchOffers()">
+                <button class="search-clear" onclick="clearSearch()">Temizle</button>
+            </div>
 
             <!-- TABS -->
             <div class="tabs">
@@ -826,6 +876,7 @@
                             <div>
                                 <h4>${offer.firstName} ${offer.lastName}</h4>
                                 <div class="offer-info">📱 ${offer.phone}</div>
+                                <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
                             </div>
                             <span class="offer-status pending">Beklemede</span>
                         </div>
@@ -881,6 +932,7 @@
                             <div>
                                 <h4>${offer.firstName} ${offer.lastName}</h4>
                                 <div class="offer-info">📱 ${offer.phone}</div>
+                                <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
                             </div>
                             <span class="offer-status approved">✅ Onaylandı</span>
                         </div>
@@ -935,6 +987,7 @@
                             <div>
                                 <h4>${offer.firstName} ${offer.lastName}</h4>
                                 <div class="offer-info">📱 ${offer.phone}</div>
+                                <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
                             </div>
                             <span class="offer-status rejected">❌ Reddedildi</span>
                         </div>
@@ -1040,6 +1093,101 @@
                 showMessage('✅ Teklif silindi!', 'success');
                 refreshAll();
             }
+        }
+
+        // SEARCH OFFERS
+        function searchOffers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const statuses = JSON.parse(localStorage.getItem('offerStatuses') || '{}');
+
+            if (!searchTerm) {
+                refreshAll();
+                return;
+            }
+
+            // Arama sonuçlarını filtrele
+            const results = offers.filter((offer, index) => {
+                const fullName = (offer.firstName + ' ' + offer.lastName).toLowerCase();
+                const referenceCode = offer.referenceCode.toLowerCase();
+                const brand = offer.brand.toLowerCase();
+                const model = offer.model.toLowerCase();
+                
+                return fullName.includes(searchTerm) || 
+                       referenceCode.includes(searchTerm) ||
+                       brand.includes(searchTerm) ||
+                       model.includes(searchTerm);
+            });
+
+            // Sonuçları göster
+            const allContainers = [
+                { id: 'pendingContainer', empty: 'emptyPending' },
+                { id: 'approvedContainer', empty: 'emptyApproved' },
+                { id: 'rejectedContainer', empty: 'emptyRejected' }
+            ];
+
+            allContainers.forEach(container => {
+                const elem = document.getElementById(container.id);
+                const emptyElem = document.getElementById(container.empty);
+                if (elem) elem.innerHTML = '';
+                if (emptyElem) emptyElem.style.display = 'none';
+            });
+
+            if (results.length === 0) {
+                document.getElementById('pendingContainer').innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #999;"><p>🔍 Sonuç bulunamadı</p></div>';
+                return;
+            }
+
+            results.forEach((offer) => {
+                const index = offers.findIndex(o => o.referenceCode === offer.referenceCode);
+                const status = statuses[index];
+                const statusText = status ? (status === 'approved' ? 'Onaylandı' : 'Reddedildi') : 'Beklemede';
+                const statusClass = status ? (status === 'approved' ? 'approved' : 'rejected') : 'pending';
+                const icon = status ? (status === 'approved' ? '✅' : '❌') : '⏳';
+                
+                const card = `
+                    <div class="offer-card">
+                        <div class="offer-header">
+                            <div>
+                                <h4>${offer.firstName} ${offer.lastName}</h4>
+                                <div class="offer-info">📱 ${offer.phone}</div>
+                                <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
+                            </div>
+                            <span class="offer-status ${statusClass}">${icon} ${statusText}</span>
+                        </div>
+
+                        <div class="offer-vehicle">
+                            <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
+                            <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
+                            <p>Kilometre: ${offer.mileage} km</p>
+                        </div>
+
+                        <div class="offer-info">
+                            📍 ${offer.city}, ${offer.district}
+                        </div>
+                        <div class="offer-info" style="font-size: 0.8rem; color: #999;">
+                            📅 ${new Date(offer.date).toLocaleDateString('tr-TR')}
+                        </div>
+
+                        <div class="offer-actions">
+                            <button class="btn btn-view" onclick="showDetail(${index})">Detay</button>
+                            ${!status ? `
+                                <button class="btn btn-approve" onclick="approveOffer(${index})">Onayla</button>
+                                <button class="btn btn-reject" onclick="rejectOffer(${index})">Reddet</button>
+                            ` : `
+                                <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                document.getElementById('pendingContainer').innerHTML += card;
+            });
+        }
+
+        // CLEAR SEARCH
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            refreshAll();
         }
 
         // REFRESH ALL
