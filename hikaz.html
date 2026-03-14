@@ -8,10 +8,11 @@
     <script>
         // Admin paneli erişim kontrolü
         window.addEventListener('load', () => {
-            if (localStorage.getItem('adminLogged') !== 'true') {
-                window.location.href = 'index.html';
-            }
-        });
+    console.log('Admin logged:', localStorage.getItem('adminLogged'));
+    // if (localStorage.getItem('adminLogged') !== 'true') {
+    //     window.location.href = 'index.html';
+    // }
+});
     </script>
     
     <style>
