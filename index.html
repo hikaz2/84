@@ -611,17 +611,38 @@
             .damage-table {
                 font-size: 0.7rem;
             }
-            /* Step 2'deki 3 alanı ortalamak için */
-.form-step[data-step="2"] .form-row:first-of-type {
+          /* Step 2 - Tüm form-row'u ortala */
+.form-step[data-step="2"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-step[data-step="2"] .form-row {
     display: flex;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 700px;
 }
 
-.form-step[data-step="2"] .form-row:first-of-type .form-group {
-    flex: 0 1 200px;
-    text-align: center;
+.form-step[data-step="2"] .form-row .form-group {
+    flex: 0 1 180px;
+}
+
+/* Tramer section'ı da ortala */
+.form-step[data-step="2"] .tramer-section {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Damage section'ı da ortala */
+.form-step[data-step="2"] .damage-section {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
         }
     </style>
