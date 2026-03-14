@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTOSELL - Admin Panel</title>
     
-     <script>
-        // Body'yi hemen göster
-        document.documentElement.style.display = 'block';
-    </script>
-    
     <style>
         * {
             margin: 0;
@@ -36,6 +31,107 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--light);
             color: var(--text);
+        }
+
+        /* LOGIN SCREEN */
+        .login-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-container.show {
+            display: flex;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-box h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .login-box p {
+            color: var(--text);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-form input {
+            padding: 0.9rem;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffed4e 100%);
+            color: var(--dark);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .login-error {
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        /* PANEL SCREEN */
+        .panel-container {
+            display: none;
+        }
+
+        .panel-container.show {
+            display: block;
         }
 
         /* HEADER */
@@ -179,7 +275,6 @@
             background: var(--light);
             padding: 1.5rem;
             border-radius: 12px;
-            border-left: 5px solid var(--primary);
             border: 1px solid var(--border);
             transition: all 0.3s;
         }
@@ -562,75 +657,100 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <h1>🔐 OTOSELL - Admin Panel</h1>
-        <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
-    </header>
-
-    <!-- CONTAINER -->
-    <div class="container">
-        <!-- MESSAGE -->
-        <div id="message" class="message"></div>
-
-        <!-- TABS -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-            <button class="tab-btn" onclick="switchTab('offers')">📋 Teklifler</button>
-            <button class="tab-btn" onclick="switchTab('inspection')">🔍 Araç İncelemesi</button>
+    <!-- LOGIN SCREEN -->
+    <div id="loginContainer" class="login-container show">
+        <div class="login-box">
+            <h1>OTOSELL</h1>
+            <p>🔐 Admin Paneli</p>
+            
+            <div id="loginError" class="login-error"></div>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input type="text" id="username" placeholder="Kullanıcı Adı" required autofocus>
+                <input type="password" id="password" placeholder="Şifre" required>
+                <button type="submit" class="login-btn">Giriş Yap</button>
+            </form>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #999;">
+                <strong>Demo Giriş:</strong><br>
+                Kullanıcı: <code style="background: #f0f0f0; padding: 0.2rem 0.5rem;">admin</code><br>
+                Şifre: <code style="background: #f0f0f0; padding: 0.2rem 0.5rem;">hikazcsk010</code>
+            </p>
         </div>
+    </div>
 
-        <!-- DASHBOARD -->
-        <div id="dashboard" class="tab-content active">
-            <div class="stats">
-                <div class="stat-card">
-                    <h3 id="totalOffers">0</h3>
-                    <p>📋 Toplam Teklif</p>
+    <!-- PANEL SCREEN -->
+    <div id="panelContainer" class="panel-container">
+        <!-- HEADER -->
+        <header>
+            <h1>🔐 OTOSELL - Admin Panel</h1>
+            <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
+        </header>
+
+        <!-- CONTAINER -->
+        <div class="container">
+            <!-- MESSAGE -->
+            <div id="message" class="message"></div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+                <button class="tab-btn" onclick="switchTab('offers')">📋 Teklifler</button>
+                <button class="tab-btn" onclick="switchTab('inspection')">🔍 Araç İncelemesi</button>
+            </div>
+
+            <!-- DASHBOARD -->
+            <div id="dashboard" class="tab-content active">
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3 id="totalOffers">0</h3>
+                        <p>📋 Toplam Teklif</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="pendingOffers">0</h3>
+                        <p>⏳ Bekleyen Teklifler</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="approvedOffers">0</h3>
+                        <p>✅ Onaylanan Teklifler</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="rejectedOffers">0</h3>
+                        <p>❌ Reddedilen Teklifler</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <h3 id="pendingOffers">0</h3>
-                    <p>⏳ Bekleyen Teklifler</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="approvedOffers">0</h3>
-                    <p>✅ Onaylanan Teklifler</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="rejectedOffers">0</h3>
-                    <p>❌ Reddedilen Teklifler</p>
+
+                <div class="section">
+                    <h2>📊 İstatistikler</h2>
+                    <p>Toplam <strong id="dashTotalOffers">0</strong> teklife karşı:</p>
+                    <ul style="margin-top: 1rem; margin-left: 1.5rem;">
+                        <li><strong id="dashPending">0</strong> teklif incelenmeyi bekliyor</li>
+                        <li><strong id="dashApproved">0</strong> teklif onaylanmış</li>
+                        <li><strong id="dashRejected">0</strong> teklif reddedilmiş</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="section">
-                <h2>📊 İstatistikler</h2>
-                <p>Toplam <strong id="dashTotalOffers">0</strong> teklife karşı:</p>
-                <ul style="margin-top: 1rem; margin-left: 1.5rem;">
-                    <li><strong id="dashPending">0</strong> teklif incelenmeyi bekliyor</li>
-                    <li><strong id="dashApproved">0</strong> teklif onaylanmış</li>
-                    <li><strong id="dashRejected">0</strong> teklif reddedilmiş</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- OFFERS -->
-        <div id="offers" class="tab-content">
-            <div class="section">
-                <h2>📋 Gelen Teklifler</h2>
-                <div id="offersContainer" class="offers-grid"></div>
-                <div id="emptyOffers" class="empty" style="display: none;">
-                    <p>😴 Henüz teklif yok</p>
+            <!-- OFFERS -->
+            <div id="offers" class="tab-content">
+                <div class="section">
+                    <h2>📋 Gelen Teklifler</h2>
+                    <div id="offersContainer" class="offers-grid"></div>
+                    <div id="emptyOffers" class="empty" style="display: none;">
+                        <p>😴 Henüz teklif yok</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- INSPECTION -->
-        <div id="inspection" class="tab-content">
-            <div class="section">
-                <h2>🔍 Araç İncelemesi</h2>
-                <p style="color: var(--text); margin-bottom: 1rem;">Bir teklifi seçerek araç incelemesi yapınız.</p>
-                <div id="inspectionOffers" class="offers-grid"></div>
-                <div id="emptyInspection" class="empty" style="display: none;">
-                    <p>😴 İncelenecek teklif yok</p>
+            <!-- INSPECTION -->
+            <div id="inspection" class="tab-content">
+                <div class="section">
+                    <h2>🔍 Araç İncelemesi</h2>
+                    <p style="color: var(--text); margin-bottom: 1rem;">Bir teklifi seçerek araç incelemesi yapınız.</p>
+                    <div id="inspectionOffers" class="offers-grid"></div>
+                    <div id="emptyInspection" class="empty" style="display: none;">
+                        <p>😴 İncelenecek teklif yok</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -754,7 +874,7 @@
             
             <div class="inspection-form">
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group" style="grid-column: 1/-1;">
                         <label>Araç Durumu Notu</label>
                         <textarea id="inspectionNotes" placeholder="Araç durumu hakkında notlar yazınız..."></textarea>
                     </div>
@@ -905,10 +1025,33 @@
     <script>
         let currentOfferIndex = -1;
 
-        // AUTH
+        // LOGIN HANDLER
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('loginError');
+            
+            if (username === 'admin' && password === 'hikazcsk010') {
+                localStorage.setItem('adminLogged', 'true');
+                document.getElementById('loginContainer').classList.remove('show');
+                document.getElementById('panelContainer').classList.add('show');
+                loadDashboard();
+            } else {
+                errorBox.textContent = '❌ Kullanıcı adı veya şifre yanlış!';
+                errorBox.classList.add('show');
+                setTimeout(() => errorBox.classList.remove('show'), 3000);
+            }
+        }
+
+        // LOGOUT
         function logout() {
             localStorage.removeItem('adminLogged');
-            window.location.href = 'index.html';
+            document.getElementById('panelContainer').classList.remove('show');
+            document.getElementById('loginContainer').classList.add('show');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
 
         // TAB SWITCH
@@ -1007,9 +1150,9 @@
             const container = document.getElementById('inspectionOffers');
             const emptyMsg = document.getElementById('emptyInspection');
 
-            const pendingOffers = offers.filter((_, index) => !inspections.find(i => i.offerIndex === index));
-
             container.innerHTML = '';
+
+            const pendingOffers = offers.filter((_, index) => !inspections.find(i => i.offerIndex === index));
 
             if (pendingOffers.length === 0) {
                 emptyMsg.style.display = 'block';
@@ -1020,7 +1163,7 @@
 
             offers.forEach((offer, index) => {
                 const inspection = inspections.find(i => i.offerIndex === index);
-                if (inspection) return; // Zaten incelenmiş olanı atla
+                if (inspection) return;
 
                 const card = `
                     <div class="offer-card">
@@ -1094,7 +1237,6 @@
             document.getElementById('estimatedPrice').value = '';
             document.getElementById('inspectionStatus').value = '';
 
-            // Damage inputs temizle
             document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
 
             document.getElementById('inspectionModal').classList.add('show');
@@ -1121,7 +1263,6 @@
                 return;
             }
 
-            // Damage bilgilerini topla
             const damages = {};
             document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
                 damages[radio.name] = radio.value;
@@ -1143,6 +1284,7 @@
             showMessage('✅ İnceleme başarıyla kaydedildi!', 'success');
             closeInspectionModal();
             loadDashboard();
+            loadOffers();
             loadInspectionTab();
         }
 
@@ -1150,10 +1292,32 @@
         function deleteOffer(index) {
             if (confirm('Bu teklifi silmek istediğinize emin misiniz?')) {
                 const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+                const inspections = JSON.parse(localStorage.getItem('inspections') || '[]');
+                
+                // Silinen teklifin incelemesini sil
+                const inspectionIndex = inspections.findIndex(i => i.offerIndex === index);
+                if (inspectionIndex !== -1) {
+                    inspections.splice(inspectionIndex, 1);
+                }
+                
+                // Kalan incelemelerde index'leri düzelt
+                const correctedInspections = inspections.map(i => {
+                    if (i.offerIndex > index) {
+                        return { ...i, offerIndex: i.offerIndex - 1 };
+                    }
+                    return i;
+                });
+                
+                // Teklifi sil
                 offers.splice(index, 1);
+                
+                // Kaydet
                 localStorage.setItem('offers', JSON.stringify(offers));
+                localStorage.setItem('inspections', JSON.stringify(correctedInspections));
+                
                 loadOffers();
                 loadDashboard();
+                loadInspectionTab();
                 showMessage('✅ Teklif silindi!', 'success');
             }
         }
@@ -1168,7 +1332,11 @@
 
         // LOAD ON STARTUP
         window.addEventListener('load', () => {
-            loadDashboard();
+            if (localStorage.getItem('adminLogged') === 'true') {
+                document.getElementById('loginContainer').classList.remove('show');
+                document.getElementById('panelContainer').classList.add('show');
+                loadDashboard();
+            }
         });
 
         // MODAL CLOSE ON OUTSIDE CLICK
