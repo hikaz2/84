@@ -4923,12 +4923,21 @@ tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') &&
             }
         }
 
-        function goToStep(step) {
+                function goToStep(step) {
             if (!validateStep(currentStep)) {
                 return;
             }
             
-            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            // Tüm form adımlarını gizle (mobilde sadece 1 tane görünür)
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.form-step').forEach(el => {
+                    el.classList.remove('active');
+                });
+            } else {
+                // PC'de sadece aktif olanı gizle
+                document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            }
+            
             document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
             
             currentStep = step;
