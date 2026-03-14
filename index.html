@@ -730,7 +730,7 @@
 
                                 <div class="form-group">
                                     <label for="model">Model *</label>
-                                    <select id="model" required>
+                                    <select id="model" required onchange="loadYearRange()">
                                         <option value="">Önce marka seçiniz</option>
                                     </select>
                                 </div>
@@ -776,46 +776,36 @@
 
                         <!-- STEP 2 -->
                         <div class="form-step" data-step="2">
-                            <h3>Motor & Paket</h3>
+                            <h3>Motor, Şanzıman & Paket</h3>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="engine">Motor *</label>
-                                    <select id="engine" required onchange="loadPackages()">
-                                        <option value="">Seçiniz</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="package">Paket *</label>
-                                    <select id="package" required>
+                                    <label for="fuel">Yakıt *</label>
+                                    <select id="fuel" required onchange="loadTransmissions()">
                                         <option value="">Seçiniz</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="transmission">Şanzıman *</label>
-                                    <select id="transmission" required>
+                                    <select id="transmission" required onchange="loadEngines()">
                                         <option value="">Seçiniz</option>
-                                        <option value="Manuel">Manuel</option>
-                                        <option value="Otomatik">Otomatik</option>
-                                        <option value="CVT">CVT</option>
-                                        <option value="Yarı-Otomatik">Yarı-Otomatik</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="engine">Motor *</label>
+                                    <select id="engine" required onchange="loadPackages()">
+                                        <option value="">Seçiniz</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="fuel">Yakıt *</label>
-                                    <select id="fuel" required>
+                                    <label for="package">Paket *</label>
+                                    <select id="package" required>
                                         <option value="">Seçiniz</option>
-                                        <option value="Benzin">Benzin</option>
-                                        <option value="Dizel">Dizel</option>
-                                        <option value="LPG">LPG</option>
-                                        <option value="Elektrik">Elektrik</option>
-                                        <option value="Hibrit">Hibrit</option>
-                                        <option value="Doğalgaz">Doğalgaz</option>
                                     </select>
                                 </div>
 
@@ -1074,9 +1064,9 @@
 
                         <!-- STEP 5 -->
                         <div class="form-step" data-step="5">
-                            <h3>Kontrol Edin</h3>
+                            <h3>Bilgileri Kontrol Edin</h3>
 
-                            <div id="summaryContent" style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; font-size: 0.9rem; line-height: 1.8;"></div>
+                            <div id="summaryContent" style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 400px; overflow-y: auto; font-size: 0.95rem; line-height: 2;"></div>
 
                             <div class="checkbox-wrapper">
                                 <input type="checkbox" id="agreement">
@@ -1107,11 +1097,11 @@
                     </div>
 
                     <div class="success-info">
-                        <p>Referans Kodu: <strong id="referenceCode" style="font-family: monospace;"></strong></p>
+                        <p>Referans Kodu: <strong id="referenceCode" style="font-family: monospace; font-size: 1.1rem;"></strong></p>
                         <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9;">Bu kodu saklayınız</p>
                     </div>
 
-                    <button type="button" class="btn-primary" onclick="location.reload()" style="margin-top: 1rem;">Geri Dön</button>
+                    <button type="button" class="btn-primary" onclick="location.reload()" style="margin-top: 1rem;">Yeni Değerleme</button>
                 </div>
             </div>
         </div>
@@ -1122,1505 +1112,1743 @@
     </footer>
 
     <script>
-        const vehicleData = {
+        const vehicleDataFull = {
             "Otomobil": {
                 "Toyota": {
                     "Camry": {
-                        "2.0": ["Le", "S", "SE", "XLE", "XSE"],
-                        "2.5": ["L", "LE", "SE", "XLE", "XSE"],
-                        "3.5": ["L", "LE", "SE", "XLE", "XSE"]
+                        "Benzin-Manuel-2.0": { packages: ["Le", "S", "SE", "XLE", "XSE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Le", "S", "SE", "XLE", "XSE"] },
+                        "Benzin-Otomatik-2.5": { packages: ["L", "LE", "SE", "XLE", "XSE"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "LE", "SE", "XLE", "XSE"] }
                     },
                     "Corolla": {
-                        "1.6": ["L", "LE", "S", "XLE", "XSE"],
-                        "1.8": ["ECO", "LE", "S", "XLE", "XSE"],
-                        "2.0": ["L", "LE", "S", "XLE", "XSE"]
+                        "Benzin-Manuel-1.6": { packages: ["L", "LE", "S", "XLE", "XSE"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "LE", "S", "XLE", "XSE"] },
+                        "Benzin-Otomatik-1.8": { packages: ["ECO", "LE", "S", "XLE", "XSE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "LE", "S", "XLE", "XSE"] }
                     },
                     "Yaris": {
-                        "1.3": ["L", "LE", "XLE"],
-                        "1.5": ["L", "LE", "S", "XLE"]
+                        "Benzin-Manuel-1.3": { packages: ["L", "LE", "XLE"] },
+                        "Benzin-Otomatik-1.3": { packages: ["L", "LE", "XLE"] },
+                        "Benzin-Otomatik-1.5": { packages: ["L", "LE", "S", "XLE"] }
                     },
                     "Prius": {
-                        "1.8 Hibrit": ["L", "LE", "XLE", "Four"],
-                        "1.8 Hibrit AWD": ["XLE"]
+                        "Hibrit-Otomatik-1.8": { packages: ["L", "LE", "XLE", "Four"] }
                     },
                     "Altis": {
-                        "1.6": ["GL", "GLX", "SE"],
-                        "1.8": ["GL", "GLX", "SE", "XLE"],
-                        "2.0": ["GL", "GLX", "SE"]
+                        "Benzin-Manuel-1.6": { packages: ["GL", "GLX", "SE"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLX", "SE"] },
+                        "Benzin-Otomatik-1.8": { packages: ["GL", "GLX", "SE", "XLE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLX", "SE"] }
                     },
                     "Mark X": {
-                        "2.5": ["Standard", "G", "250G"],
-                        "3.0": ["Standard", "G", "300G", "Premium"]
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "G", "250G"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standard", "G", "300G", "Premium"] }
                     },
                     "Crown": {
-                        "2.0": ["Standard"],
-                        "2.5": ["G", "G Executive", "Royal"],
-                        "3.0": ["Premium", "Royal Premium"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard"] },
+                        "Benzin-Otomatik-2.5": { packages: ["G", "G Executive", "Royal"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Premium", "Royal Premium"] }
                     }
                 },
                 "Honda": {
                     "Accord": {
-                        "1.5T": ["LX", "Sport", "EX", "EX-L"],
-                        "2.0T": ["Sport", "EX", "EX-L"],
-                        "3.5": ["LX", "EX", "EX-L"]
+                        "Benzin-Otomatik-1.5": { packages: ["LX", "Sport", "EX", "EX-L"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Sport", "EX", "EX-L"] },
+                        "Benzin-Otomatik-3.5": { packages: ["LX", "EX", "EX-L"] }
                     },
                     "Civic": {
-                        "1.5": ["DX", "LX", "EX", "EX-T"],
-                        "1.6": ["S", "EX", "LX"],
-                        "2.0": ["Si", "Type R"]
+                        "Benzin-Manuel-1.5": { packages: ["DX", "LX", "EX", "EX-T"] },
+                        "Benzin-Otomatik-1.5": { packages: ["DX", "LX", "EX", "EX-T"] },
+                        "Benzin-Manuel-1.6": { packages: ["S", "EX", "LX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["S", "EX", "LX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Si", "Type R"] }
                     },
                     "Insight": {
-                        "1.5 Hibrit": ["LX", "EX", "EX-L"]
+                        "Hibrit-Otomatik-1.5": { packages: ["LX", "EX", "EX-L"] }
                     }
                 },
                 "BMW": {
                     "320i": {
-                        "2.0": ["Standart", "Sport", "Luxury", "M Sport"]
+                        "Benzin-Manuel-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] }
                     },
                     "320d": {
-                        "2.0D": ["Standart", "Sport", "Luxury", "M Sport"]
+                        "Dizel-Manuel-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] }
                     },
                     "330i": {
-                        "2.0T": ["Standart", "Sport", "Luxury", "M Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] }
                     },
                     "330d": {
-                        "2.0D": ["Standart", "Sport", "Luxury", "M Sport"]
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Sport", "Luxury", "M Sport"] }
                     },
                     "520d": {
-                        "2.0D": ["Standart", "Luxury", "M Sport"],
-                        "2.5D": ["Standart", "Luxury", "M Sport"]
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Luxury", "M Sport"] },
+                        "Dizel-Otomatik-2.5": { packages: ["Standart", "Luxury", "M Sport"] }
                     },
                     "530i": {
-                        "2.0T": ["Standart", "Luxury", "M Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Luxury", "M Sport"] }
                     }
                 },
                 "Mercedes-Benz": {
                     "C200": {
-                        "1.5": ["Urban", "AMG Line"],
-                        "1.6": ["Urban", "AMG Line"]
+                        "Benzin-Otomatik-1.5": { packages: ["Urban", "AMG Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Urban", "AMG Line"] }
                     },
                     "C300": {
-                        "2.0": ["Urban", "Classic", "AMG Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Classic", "AMG Line"] }
                     },
                     "E200": {
-                        "1.5": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-1.5": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "E300": {
-                        "2.0": ["Urban", "Avantgarde", "AMG Line"],
-                        "2.0D": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "S500": {
-                        "3.0": ["Standart", "AMG Line", "Premium"],
-                        "3.5": ["Standart", "AMG Line", "Premium"]
+                        "Benzin-Otomatik-3.0": { packages: ["Standart", "AMG Line", "Premium"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Standart", "AMG Line", "Premium"] }
                     }
                 },
                 "Audi": {
                     "A4": {
-                        "1.4T": ["Urban", "Design", "S Line"],
-                        "1.5T": ["Urban", "Design", "S Line"],
-                        "2.0": ["Urban", "Design", "S Line"],
-                        "2.0D": ["Urban", "Design", "S Line"]
+                        "Benzin-Manuel-1.4": { packages: ["Urban", "Design", "S Line"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Urban", "Design", "S Line"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Urban", "Design", "S Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Design", "S Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Urban", "Design", "S Line"] }
                     },
                     "A6": {
-                        "2.0": ["Urban", "Design", "S Line"],
-                        "2.0D": ["Urban", "Design", "S Line"],
-                        "2.5": ["Urban", "Design", "S Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Design", "S Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Urban", "Design", "S Line"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Urban", "Design", "S Line"] }
                     },
                     "A8": {
-                        "3.0": ["Standart", "S Line", "Premium"],
-                        "4.0": ["Standart", "S Line", "Premium"]
+                        "Benzin-Otomatik-3.0": { packages: ["Standart", "S Line", "Premium"] },
+                        "Benzin-Otomatik-4.0": { packages: ["Standart", "S Line", "Premium"] }
                     }
                 },
                 "Volkswagen": {
                     "Golf": {
-                        "1.0": ["Trend", "Comfort", "Highline"],
-                        "1.4": ["Trend", "Comfort", "Highline"],
-                        "1.5": ["Trend", "Comfort", "Highline", "R Line"],
-                        "2.0": ["Trend", "Comfort", "Highline", "GTI"]
+                        "Benzin-Manuel-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Trend", "Comfort", "Highline", "R Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline", "GTI"] }
                     },
                     "Passat": {
-                        "1.4T": ["Trend", "Comfort", "Highline"],
-                        "1.5T": ["Trend", "Comfort", "Highline"],
-                        "2.0": ["Trend", "Comfort", "Highline"],
-                        "2.0D": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] }
                     },
                     "Jetta": {
-                        "1.4": ["Trend", "Comfort", "Highline"],
-                        "1.6": ["Trend", "Comfort", "Highline"],
-                        "2.0": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.6": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] }
                     }
                 },
                 "Ford": {
                     "Focus": {
-                        "1.0": ["Style", "Trend", "Titanium"],
-                        "1.5": ["Style", "Trend", "Titanium"],
-                        "1.6": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Titanium", "ST"]
+                        "Benzin-Manuel-1.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Titanium", "ST"] }
                     },
                     "Fiesta": {
-                        "1.0": ["Style", "Trend", "Titanium"],
-                        "1.1": ["Style", "Trend", "Titanium"],
-                        "1.25": ["Style", "Trend", "Titanium"],
-                        "1.6": ["Titanium", "ST"]
+                        "Benzin-Manuel-1.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.1": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.25": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.25": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Titanium", "ST"] }
                     },
                     "Mondeo": {
-                        "1.5T": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Style", "Trend", "Titanium"],
-                        "2.0D": ["Style", "Trend", "Titanium"]
+                        "Benzin-Otomatik-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] }
                     }
                 },
                 "Renault": {
                     "Clio": {
-                        "0.9": ["Life", "Joy", "Iconic"],
-                        "1.0": ["Life", "Joy", "Iconic"],
-                        "1.2": ["Life", "Joy", "Iconic"],
-                        "1.5D": ["Life", "Joy", "Iconic"]
+                        "Benzin-Manuel-0.9": { packages: ["Life", "Joy", "Iconic"] },
+                        "Benzin-Manuel-1.0": { packages: ["Life", "Joy", "Iconic"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Life", "Joy", "Iconic"] },
+                        "Benzin-Manuel-1.2": { packages: ["Life", "Joy", "Iconic"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Life", "Joy", "Iconic"] },
+                        "Dizel-Manuel-1.5": { packages: ["Life", "Joy", "Iconic"] }
                     },
                     "Megane": {
-                        "1.2": ["Life", "Trend", "Iconic"],
-                        "1.3": ["Life", "Trend", "Iconic"],
-                        "1.5D": ["Life", "Trend", "Iconic"],
-                        "1.6": ["Life", "Trend", "Iconic"]
+                        "Benzin-Manuel-1.2": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Manuel-1.3": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Life", "Trend", "Iconic"] },
+                        "Dizel-Manuel-1.5": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Manuel-1.6": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Iconic"] }
                     },
                     "Laguna": {
-                        "1.6": ["Life", "Trend", "Privilege"],
-                        "2.0": ["Life", "Trend", "Privilege"],
-                        "2.0D": ["Life", "Trend", "Privilege"]
+                        "Benzin-Manuel-1.6": { packages: ["Life", "Trend", "Privilege"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Privilege"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Life", "Trend", "Privilege"] },
+                        "Dizel-Manuel-2.0": { packages: ["Life", "Trend", "Privilege"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Life", "Trend", "Privilege"] }
                     }
                 },
                 "Peugeot": {
                     "208": {
-                        "1.2": ["Active", "Allure", "GT Line"],
-                        "1.4": ["Active", "Allure", "GT Line"],
-                        "1.5D": ["Active", "Allure", "GT Line"]
+                        "Benzin-Manuel-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.4": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] }
                     },
-                    "308": {
-                        "1.2": ["Active", "Allure", "GT Line"],
-                        "1.5": ["Active", "Allure", "GT Line"],
-                        "1.5D": ["Active", "Allure", "GT Line"],
-                        "1.6": ["Active", "Allure", "GT Line"]
+                                        "308": {
+                        "Benzin-Manuel-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Active", "Allure", "GT Line"] }
                     },
                     "408": {
-                        "1.6": ["Active", "Allure", "GT Line"],
-                        "1.6T": ["Active", "Allure", "GT Line"],
-                        "1.8": ["Active", "Allure", "GT Line"],
-                        "2.0": ["Active", "Allure", "GT Line"]
+                        "Benzin-Manuel-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-2.0": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Active", "Allure", "GT Line"] }
                     }
                 },
                 "Hyundai": {
                     "Accent": {
-                        "1.4": ["GL", "GLS", "GLX"],
-                        "1.5": ["GL", "GLS", "GLX"]
+                        "Benzin-Manuel-1.4": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.4": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.5": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Elantra": {
-                        "1.6": ["GL", "GLS", "GLX"],
-                        "1.8": ["GL", "GLS", "GLX"],
-                        "2.0": ["GL", "GLS", "GLX"]
+                        "Benzin-Manuel-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.8": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Sonata": {
-                        "2.0": ["GL", "GLS", "GLX"],
-                        "2.4": ["GL", "GLS", "GLX"],
-                        "2.7": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.7": { packages: ["GL", "GLS", "GLX"] }
                     }
                 },
                 "Kia": {
                     "Cerato": {
-                        "1.6": ["L", "S", "EX"],
-                        "1.8": ["L", "S", "EX"],
-                        "2.0": ["L", "S", "EX"]
+                        "Benzin-Manuel-1.6": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-1.8": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "S", "EX"] }
                     },
                     "Forte": {
-                        "1.6": ["L", "S", "EX"],
-                        "1.8": ["L", "S", "EX"],
-                        "2.0": ["L", "S", "EX"]
+                        "Benzin-Manuel-1.6": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-1.8": { packages: ["L", "S", "EX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "S", "EX"] }
                     },
                     "Optima": {
-                        "2.0": ["L", "S", "EX", "SX"],
-                        "2.4": ["L", "S", "EX", "SX"]
+                        "Benzin-Otomatik-2.0": { packages: ["L", "S", "EX", "SX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["L", "S", "EX", "SX"] }
                     }
                 },
                 "Nissan": {
                     "Sunny": {
-                        "1.5": ["S", "SV", "SL"],
-                        "1.6": ["S", "SV", "SL"]
+                        "Benzin-Manuel-1.5": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-1.5": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Manuel-1.6": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-1.6": { packages: ["S", "SV", "SL"] }
                     },
                     "Altima": {
-                        "2.5": ["S", "SV", "SL", "SR"],
-                        "3.5": ["S", "SV", "SL", "SR"]
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL", "SR"] },
+                        "Benzin-Otomatik-3.5": { packages: ["S", "SV", "SL", "SR"] }
                     },
                     "Teana": {
-                        "2.0": ["S", "SV", "SL"],
-                        "2.3": ["S", "SV", "SL"],
-                        "2.5": ["S", "SV", "SL"]
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.3": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL"] }
                     }
                 },
                 "Mazda": {
                     "2": {
-                        "1.3": ["i", "i Sport", "s Touring"],
-                        "1.5": ["i", "i Sport", "s Touring"],
-                        "1.6": ["i", "i Sport", "s Touring"]
+                        "Benzin-Manuel-1.3": { packages: ["i", "i Sport", "s Touring"] },
+                        "Benzin-Otomatik-1.3": { packages: ["i", "i Sport", "s Touring"] },
+                        "Benzin-Manuel-1.5": { packages: ["i", "i Sport", "s Touring"] },
+                        "Benzin-Otomatik-1.5": { packages: ["i", "i Sport", "s Touring"] },
+                        "Benzin-Manuel-1.6": { packages: ["i", "i Sport", "s Touring"] },
+                        "Benzin-Otomatik-1.6": { packages: ["i", "i Sport", "s Touring"] }
                     },
                     "3": {
-                        "1.5": ["i", "i Touring", "s Touring"],
-                        "1.6": ["i", "i Touring", "s Touring"],
-                        "2.0": ["i", "i Touring", "s Touring", "Speed3"]
+                        "Benzin-Manuel-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Manuel-1.6": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-1.6": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.0": { packages: ["i", "i Touring", "s Touring", "Speed3"] }
                     },
                     "6": {
-                        "2.0": ["i", "i Touring", "s Touring"],
-                        "2.5": ["i", "i Touring", "s Touring"],
-                        "3.0": ["i", "i Touring", "s Touring"]
+                        "Benzin-Manuel-2.0": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.0": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-3.0": { packages: ["i", "i Touring", "s Touring"] }
                     }
                 },
                 "Subaru": {
                     "Impreza": {
-                        "1.5": ["2.5i", "2.5i Premium", "2.5i Sport"],
-                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
-                        "2.5": ["2.5i Limited", "2.5i RS"]
+                        "Benzin-Manuel-1.5": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] },
+                        "Benzin-Otomatik-1.5": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] },
+                        "Benzin-Manuel-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i Limited", "2.5i RS"] }
                     },
                     "Legacy": {
-                        "2.5": ["2.5i", "2.5i Premium", "2.5i Limited"]
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i", "2.5i Premium", "2.5i Limited"] }
                     }
                 },
                 "Fiat": {
                     "Punto": {
-                        "1.2": ["Pop", "Easy", "Lounge"],
-                        "1.3": ["Pop", "Easy", "Lounge"],
-                        "1.4": ["Pop", "Easy", "Lounge"]
+                        "Benzin-Manuel-1.2": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Pop", "Easy", "Lounge"] }
                     },
                     "Tipo": {
-                        "1.3": ["Pop", "Easy", "Lounge"],
-                        "1.4": ["Pop", "Easy", "Lounge"],
-                        "1.6": ["Pop", "Easy", "Lounge"]
+                        "Benzin-Manuel-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.6": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Pop", "Easy", "Lounge"] }
                     },
                     "500": {
-                        "0.9": ["Pop", "Easy", "Lounge"],
-                        "1.2": ["Pop", "Easy", "Lounge"],
-                        "1.4": ["Pop", "Easy", "Lounge"]
+                        "Benzin-Manuel-0.9": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-0.9": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.2": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Pop", "Easy", "Lounge"] }
                     }
                 },
                 "Dacia": {
                     "Logan": {
-                        "1.0": ["Express", "Essential", "Comfort", "Laureate"],
-                        "1.2": ["Express", "Essential", "Comfort", "Laureate"],
-                        "1.4": ["Express", "Essential", "Comfort", "Laureate"],
-                        "1.5D": ["Express", "Essential", "Comfort", "Laureate"]
+                        "Benzin-Manuel-1.0": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Benzin-Manuel-1.2": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Benzin-Manuel-1.4": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Express", "Essential", "Comfort", "Laureate"] },
+                        "Dizel-Manuel-1.5": { packages: ["Express", "Essential", "Comfort", "Laureate"] }
                     }
                 },
                 "Chevrolet": {
                     "Cruze": {
-                        "1.4T": ["LS", "LT", "LTZ"],
-                        "1.5": ["LS", "LT", "LTZ"],
-                        "1.6": ["LS", "LT", "LTZ"],
-                        "1.8": ["LS", "LT", "LTZ"]
+                        "Benzin-Manuel-1.4": { packages: ["LS", "LT", "LTZ"] },
+                        "Benzin-Otomatik-1.4": { packages: ["LS", "LT", "LTZ"] },
+                        "Benzin-Otomatik-1.5": { packages: ["LS", "LT", "LTZ"] },
+                        "Benzin-Otomatik-1.6": { packages: ["LS", "LT", "LTZ"] },
+                        "Benzin-Otomatik-1.8": { packages: ["LS", "LT", "LTZ"] }
                     }
                 },
                 "Chrysler": {
                     "300": {
-                        "2.7": ["LX", "Limited", "300C"],
-                                                "3.5": ["LX", "Limited", "300C"],
-                        "5.7": ["LX", "Limited", "300C"]
+                        "Benzin-Otomatik-2.7": { packages: ["LX", "Limited", "300C"] },
+                        "Benzin-Otomatik-3.5": { packages: ["LX", "Limited", "300C"] },
+                        "Benzin-Otomatik-5.7": { packages: ["LX", "Limited", "300C"] }
                     }
                 },
                 "Alfa Romeo": {
                     "Giulia": {
-                        "2.0": ["Super", "Veloce", "Quadrifoglio"],
-                        "2.2D": ["Super", "Veloce", "Quadrifoglio"]
+                        "Benzin-Otomatik-2.0": { packages: ["Super", "Veloce", "Quadrifoglio"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Super", "Veloce", "Quadrifoglio"] }
                     },
                     "Giulietta": {
-                        "1.2": ["Progression", "Distinctive", "Distinctive Plus"],
-                        "1.4": ["Progression", "Distinctive", "Distinctive Plus"],
-                        "1.6D": ["Progression", "Distinctive", "Distinctive Plus"]
+                        "Benzin-Manuel-1.2": { packages: ["Progression", "Distinctive", "Distinctive Plus"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Progression", "Distinctive", "Distinctive Plus"] },
+                        "Benzin-Manuel-1.4": { packages: ["Progression", "Distinctive", "Distinctive Plus"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Progression", "Distinctive", "Distinctive Plus"] },
+                        "Dizel-Manuel-1.6": { packages: ["Progression", "Distinctive", "Distinctive Plus"] }
                     },
                     "MiTo": {
-                        "1.3": ["Junior", "Junior Plus", "Business"],
-                        "1.4": ["Junior", "Junior Plus", "Business"]
+                        "Benzin-Manuel-1.3": { packages: ["Junior", "Junior Plus", "Business"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Junior", "Junior Plus", "Business"] },
+                        "Benzin-Manuel-1.4": { packages: ["Junior", "Junior Plus", "Business"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Junior", "Junior Plus", "Business"] }
                     }
                 },
                 "Lancia": {
                     "Ypsilon": {
-                        "0.9": ["Life", "Gold", "Platinum"],
-                        "1.0": ["Life", "Gold", "Platinum"],
-                        "1.2": ["Life", "Gold", "Platinum"]
+                        "Benzin-Manuel-0.9": { packages: ["Life", "Gold", "Platinum"] },
+                        "Benzin-Otomatik-0.9": { packages: ["Life", "Gold", "Platinum"] },
+                        "Benzin-Manuel-1.0": { packages: ["Life", "Gold", "Platinum"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Life", "Gold", "Platinum"] },
+                        "Benzin-Manuel-1.2": { packages: ["Life", "Gold", "Platinum"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Life", "Gold", "Platinum"] }
                     }
                 },
                 "Geely": {
                     "Emgrand": {
-                        "1.3": ["Standard", "Elite", "Luxury"],
-                        "1.5": ["Standard", "Elite", "Luxury"],
-                        "1.8": ["Standard", "Elite", "Luxury"]
+                        "Benzin-Manuel-1.3": { packages: ["Standard", "Elite", "Luxury"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Standard", "Elite", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Elite", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Standard", "Elite", "Luxury"] }
                     }
                 },
                 "MG": {
                     "3": {
-                        "1.2": ["Standard", "Active", "Comfort"],
-                        "1.5": ["Standard", "Active", "Comfort"]
+                        "Benzin-Manuel-1.2": { packages: ["Standard", "Active", "Comfort"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Standard", "Active", "Comfort"] },
+                        "Benzin-Manuel-1.5": { packages: ["Standard", "Active", "Comfort"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Active", "Comfort"] }
                     },
                     "5": {
-                        "1.5": ["Standard", "Active", "Comfort"],
-                        "1.6": ["Standard", "Active", "Comfort"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Active", "Comfort"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Active", "Comfort"] }
                     },
                     "6": {
-                        "1.5": ["Standard", "Active", "Comfort", "Luxury"],
-                        "1.8": ["Standard", "Active", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Active", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Standard", "Active", "Comfort", "Luxury"] }
                     }
                 },
                 "Chery": {
                     "Arrizo": {
-                        "1.5": ["Standard", "Active", "Comfort"],
-                        "1.6": ["Standard", "Active", "Comfort"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Active", "Comfort"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Active", "Comfort"] }
                     }
                 },
                 "FAW": {
                     "Besturn": {
-                        "1.6": ["Standard", "Comfort", "Luxury"],
-                        "2.0": ["Standard", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Comfort", "Luxury"] }
                     }
                 },
                 "Lexus": {
                     "IS": {
-                        "2.0": ["Standard", "Luxury", "F Sport"],
-                        "2.5": ["Standard", "Luxury", "F Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Luxury", "F Sport"] }
                     },
                     "ES": {
-                        "2.5": ["Standard", "Luxury", "Premium Plus"],
-                        "3.5": ["Standard", "Luxury", "Premium Plus"]
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Luxury", "Premium Plus"] }
                     },
                     "GS": {
-                        "2.0": ["Standard", "Luxury", "F Sport"],
-                        "3.0": ["Standard", "Luxury", "F Sport"],
-                        "4.6": ["Standard", "Luxury", "F Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-4.6": { packages: ["Standard", "Luxury", "F Sport"] }
                     }
                 },
                 "Tesla": {
                     "Model 3": {
-                        "Standard Range": ["Standard", "Plus", "Performance"],
-                        "Long Range": ["Standard", "Plus", "Performance"]
+                        "Elektrik-Otomatik-Standard Range": { packages: ["Standard", "Plus", "Performance"] },
+                        "Elektrik-Otomatik-Long Range": { packages: ["Standard", "Plus", "Performance"] }
                     },
                     "Model S": {
-                        "Long Range": ["Standard", "Plaid"],
-                        "Plaid": ["Plaid", "Plaid+"]
+                        "Elektrik-Otomatik-Long Range": { packages: ["Standard", "Plaid"] },
+                        "Elektrik-Otomatik-Plaid": { packages: ["Plaid", "Plaid+"] }
                     }
                 },
                 "Porsche": {
                     "Taycan": {
-                        "2.0 Elektrik": ["Base", "4S", "Turbo S"],
-                        "2.2 Elektrik": ["Base", "4S", "Turbo S"]
+                        "Elektrik-Otomatik-2.0": { packages: ["Base", "4S", "Turbo S"] },
+                        "Elektrik-Otomatik-2.2": { packages: ["Base", "4S", "Turbo S"] }
                     }
                 },
                 "Rolls-Royce": {
                     "Ghost": {
-                        "6.6": ["Standard", "Silver", "Diamond"],
-                        "6.75": ["Standard", "Silver", "Diamond"]
+                        "Benzin-Otomatik-6.6": { packages: ["Standard", "Silver", "Diamond"] },
+                        "Benzin-Otomatik-6.75": { packages: ["Standard", "Silver", "Diamond"] }
                     },
                     "Phantom": {
-                        "6.75": ["Standard", "Extended", "Drophead"]
+                        "Benzin-Otomatik-6.75": { packages: ["Standard", "Extended", "Drophead"] }
                     },
                     "Wraith": {
-                        "6.6": ["Standard", "Black Badge"]
+                        "Benzin-Otomatik-6.6": { packages: ["Standard", "Black Badge"] }
                     }
                 },
                 "Maserati": {
                     "Ghibli": {
-                        "2.8": ["Modena", "Levante", "Trofeo"],
-                        "3.0": ["Modena", "Levante", "Trofeo"]
+                        "Benzin-Otomatik-2.8": { packages: ["Modena", "Levante", "Trofeo"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Modena", "Levante", "Trofeo"] }
                     },
                     "Quattroporte": {
-                        "3.0": ["Modena", "Levante", "Trofeo"],
-                        "3.8": ["Modena", "Levante", "Trofeo"]
+                        "Benzin-Otomatik-3.0": { packages: ["Modena", "Levante", "Trofeo"] },
+                        "Benzin-Otomatik-3.8": { packages: ["Modena", "Levante", "Trofeo"] }
                     }
                 },
-                "Bugatti": {},
-                "Lamborghini": {},
-                "Ferrari": {},
                 "Mini": {
                     "Cooper": {
-                        "1.2": ["One", "Cooper", "Cooper S"],
-                        "1.5": ["One", "Cooper", "Cooper S"],
-                        "1.6": ["One", "Cooper", "Cooper S", "JCW"]
+                        "Benzin-Manuel-1.2": { packages: ["One", "Cooper", "Cooper S"] },
+                        "Benzin-Otomatik-1.2": { packages: ["One", "Cooper", "Cooper S"] },
+                        "Benzin-Manuel-1.5": { packages: ["One", "Cooper", "Cooper S"] },
+                        "Benzin-Otomatik-1.5": { packages: ["One", "Cooper", "Cooper S"] },
+                        "Benzin-Manuel-1.6": { packages: ["One", "Cooper", "Cooper S", "JCW"] },
+                        "Benzin-Otomatik-1.6": { packages: ["One", "Cooper", "Cooper S", "JCW"] }
                     }
                 },
                 "Mitsubishi": {
                     "Lancer": {
-                        "1.5": ["GS", "GT", "SE"],
-                        "1.6": ["GS", "GT", "SE"],
-                        "2.0": ["GS", "GT", "SE", "Evolution"]
+                        "Benzin-Manuel-1.5": { packages: ["GS", "GT", "SE"] },
+                        "Benzin-Otomatik-1.5": { packages: ["GS", "GT", "SE"] },
+                        "Benzin-Manuel-1.6": { packages: ["GS", "GT", "SE"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GS", "GT", "SE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GS", "GT", "SE", "Evolution"] }
                     },
                     "Colt": {
-                        "1.3": ["CJ", "GL", "GLX"],
-                        "1.5": ["CJ", "GL", "GLX"]
-                    }
-                },
-                "Skoda": {
-                    "Fabia": {
-                        "1.0": ["Active", "Ambition", "Elegance"],
-                        "1.2": ["Active", "Ambition", "Elegance"],
-                        "1.5": ["Active", "Ambition", "Elegance"]
-                    },
-                    "Octavia": {
-                        "1.0": ["Active", "Ambition", "Elegance"],
-                        "1.4": ["Active", "Ambition", "Elegance"],
-                        "1.5": ["Active", "Ambition", "Elegance"],
-                        "1.8T": ["Active", "Ambition", "Elegance"]
+                        "Benzin-Manuel-1.3": { packages: ["CJ", "GL", "GLX"] },
+                        "Benzin-Otomatik-1.3": { packages: ["CJ", "GL", "GLX"] },
+                        "Benzin-Manuel-1.5": { packages: ["CJ", "GL", "GLX"] },
+                        "Benzin-Otomatik-1.5": { packages: ["CJ", "GL", "GLX"] }
                     }
                 }
             },
             "SUV": {
                 "Toyota": {
                     "RAV4": {
-                        "2.0": ["L", "LE", "XLE", "Limited"],
-                        "2.5": ["L", "LE", "XLE", "Limited"],
-                        "3.5": ["L", "LE", "XLE", "Limited"]
+                        "Benzin-Manuel-2.0": { packages: ["L", "LE", "XLE", "Limited"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "LE", "XLE", "Limited"] },
+                        "Benzin-Otomatik-2.5": { packages: ["L", "LE", "XLE", "Limited"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "LE", "XLE", "Limited"] }
                     },
                     "Prado": {
-                        "2.7": ["TX", "TX Limited", "VX"],
-                        "3.0D": ["TX", "TX Limited", "VX"],
-                        "4.0": ["TX", "TX Limited", "VX"]
+                        "Benzin-Otomatik-2.7": { packages: ["TX", "TX Limited", "VX"] },
+                        "Dizel-Otomatik-3.0": { packages: ["TX", "TX Limited", "VX"] },
+                        "Benzin-Otomatik-4.0": { packages: ["TX", "TX Limited", "VX"] }
                     },
                     "Land Cruiser": {
-                        "4.0": ["Standard", "VX", "ZX"],
-                        "4.5D": ["Standard", "VX", "ZX"]
+                        "Benzin-Otomatik-4.0": { packages: ["Standard", "VX", "ZX"] },
+                        "Dizel-Otomatik-4.5": { packages: ["Standard", "VX", "ZX"] }
                     },
                     "Fortuner": {
-                        "2.4D": ["Standard", "Mid", "Premium"],
-                        "2.7": ["Standard", "Mid", "Premium"],
-                        "2.8": ["Standard", "Mid", "Premium"]
+                        "Dizel-Manuel-2.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.7": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.8": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "Highlander": {
-                        "2.7": ["L", "LE", "Limited"],
-                        "3.5": ["L", "LE", "Limited"]
+                        "Benzin-Otomatik-2.7": { packages: ["L", "LE", "Limited"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "LE", "Limited"] }
                     },
                     "Rush": {
-                        "1.5": ["Standard", "Mid", "Premium"],
-                        "1.6": ["Standard", "Mid", "Premium"]
+                        "Benzin-Manuel-1.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "Raize": {
-                        "1.0T": ["Standard", "Mid", "Premium"],
-                        "1.2": ["Standard", "Mid", "Premium"]
+                        "Benzin-Otomatik-1.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Standard", "Mid", "Premium"] }
                     }
                 },
                 "Honda": {
                     "CR-V": {
-                        "1.5": ["LX", "EX", "EX-L"],
-                        "2.0": ["LX", "EX", "EX-L"],
-                        "2.4": ["LX", "EX", "EX-L"]
+                        "Benzin-Manuel-1.5": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-1.5": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-2.0": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-2.4": { packages: ["LX", "EX", "EX-L"] }
                     },
                     "Pilot": {
-                        "3.0": ["LX", "EX", "EX-L"],
-                        "3.5": ["LX", "EX", "EX-L"]
+                        "Benzin-Otomatik-3.0": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-3.5": { packages: ["LX", "EX", "EX-L"] }
                     },
                     "HR-V": {
-                        "1.5": ["LX", "EX", "EX-L"],
-                        "1.8": ["LX", "EX", "EX-L"]
+                        "Benzin-Manuel-1.5": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-1.5": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-1.8": { packages: ["LX", "EX", "EX-L"] }
                     }
                 },
                 "BMW": {
                     "X1": {
-                        "2.0": ["sDrive18i", "sDrive20i", "xDrive20i", "M Sport"],
-                        "2.0D": ["sDrive18d", "xDrive20d", "M Sport"]
+                        "Benzin-Manuel-2.0": { packages: ["sDrive18i", "sDrive20i", "xDrive20i", "M Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["sDrive18i", "sDrive20i", "xDrive20i", "M Sport"] },
+                        "Dizel-Otomatik-2.0": { packages: ["sDrive18d", "xDrive20d", "M Sport"] }
                     },
                     "X3": {
-                        "2.0T": ["xDrive20i", "xDrive30i", "M40i", "M Sport"],
-                        "2.0D": ["xDrive20d", "xDrive30d", "M Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["xDrive20i", "xDrive30i", "M40i", "M Sport"] },
+                        "Dizel-Otomatik-2.0": { packages: ["xDrive20d", "xDrive30d", "M Sport"] }
                     },
                     "X5": {
-                        "3.0": ["xDrive30i", "xDrive40i", "M50i", "M Sport"],
-                        "3.0D": ["xDrive30d", "xDrive40d", "M Sport"]
+                        "Benzin-Otomatik-3.0": { packages: ["xDrive30i", "xDrive40i", "M50i", "M Sport"] },
+                        "Dizel-Otomatik-3.0": { packages: ["xDrive30d", "xDrive40d", "M Sport"] }
                     },
                     "X7": {
-                        "3.0": ["xDrive40i", "xDrive50i", "M50i"],
-                        "3.0D": ["xDrive40d"]
+                        "Benzin-Otomatik-3.0": { packages: ["xDrive40i", "xDrive50i", "M50i"] },
+                        "Dizel-Otomatik-3.0": { packages: ["xDrive40d"] }
                     }
                 },
                 "Mercedes-Benz": {
                     "GLA": {
-                        "1.3": ["Urban", "Avantgarde", "AMG Line"],
-                        "1.4T": ["Urban", "Avantgarde", "AMG Line"],
-                        "2.0": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-1.3": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "GLB": {
-                        "1.3": ["Urban", "Avantgarde", "AMG Line"],
-                        "2.0": ["Urban", "Avantgarde", "AMG Line"],
-                        "2.0D": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-1.3": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "GLC": {
-                        "2.0T": ["Urban", "Avantgarde", "AMG Line"],
-                        "2.0D": ["Urban", "Avantgarde", "AMG Line"],
-                        "3.0": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "GLE": {
-                        "2.0T": ["Urban", "Avantgarde", "AMG Line"],
-                        "3.0": ["Urban", "Avantgarde", "AMG Line"],
-                        "3.0D": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     },
                     "GLS": {
-                        "3.0": ["Urban", "Avantgarde", "AMG Line"],
-                        "3.0D": ["Urban", "Avantgarde", "AMG Line"]
+                        "Benzin-Otomatik-3.0": { packages: ["Urban", "Avantgarde", "AMG Line"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Urban", "Avantgarde", "AMG Line"] }
                     }
                 },
                 "Audi": {
                     "Q2": {
-                        "1.0": ["Standart", "Design", "S Line"],
-                        "1.4T": ["Standart", "Design", "S Line"],
-                        "2.0D": ["Standart", "Design", "S Line"]
+                        "Benzin-Otomatik-1.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Standart", "Design", "S Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] }
                     },
                     "Q3": {
-                        "1.4": ["Standart", "Design", "S Line"],
-                        "2.0": ["Standart", "Design", "S Line"],
-                        "2.0D": ["Standart", "Design", "S Line"]
+                        "Benzin-Otomatik-1.4": { packages: ["Standart", "Design", "S Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] }
                     },
                     "Q5": {
-                        "2.0T": ["Standart", "Design", "S Line"],
-                        "2.0D": ["Standart", "Design", "S Line"],
-                        "3.0": ["Standart", "Design", "S Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standart", "Design", "S Line"] }
                     },
                     "Q7": {
-                        "2.0T": ["Standart", "Design", "S Line"],
-                        "3.0": ["Standart", "Design", "S Line"],
-                        "3.0D": ["Standart", "Design", "S Line"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Standart", "Design", "S Line"] }
                     },
                     "Q8": {
-                        "3.0": ["Standart", "Design", "S Line"],
-                        "3.0D": ["Standart", "Design", "S Line"]
+                        "Benzin-Otomatik-3.0": { packages: ["Standart", "Design", "S Line"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Standart", "Design", "S Line"] }
                     }
                 },
                 "Volkswagen": {
                     "T-Cross": {
-                        "1.0": ["Trend", "Comfort", "Highline"],
-                        "1.2": ["Trend", "Comfort", "Highline"],
-                        "1.5": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Trend", "Comfort", "Highline"] }
                     },
                     "T-Roc": {
-                        "1.0": ["Trend", "Comfort", "Highline"],
-                        "1.2": ["Trend", "Comfort", "Highline"],
-                        "1.4T": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] }
                     },
                     "Tiguan": {
-                        "1.4T": ["Trend", "Comfort", "Highline"],
-                        "2.0": ["Trend", "Comfort", "Highline"],
-                        "2.0D": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] }
                     },
                     "Touareg": {
-                        "3.0": ["Trend", "Comfort", "Highline"],
-                        "3.0D": ["Trend", "Comfort", "Highline"],
-                        "3.6": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Otomatik-3.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Trend", "Comfort", "Highline"] }
                     }
                 },
                 "Ford": {
                     "EcoSport": {
-                        "1.5": ["Style", "Trend", "Titanium"],
-                        "1.6": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Style", "Trend", "Titanium"]
+                        "Benzin-Manuel-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] }
                     },
                     "Kuga": {
-                        "1.5T": ["Style", "Trend", "Titanium"],
-                        "1.6": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Style", "Trend", "Titanium"],
-                        "2.0D": ["Style", "Trend", "Titanium"]
+                        "Benzin-Otomatik-1.5": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] }
                     },
                     "Explorer": {
-                        "2.3T": ["Base", "Platinum", "Limited"],
-                        "3.0": ["Base", "Platinum", "Limited"]
+                        "Benzin-Otomatik-2.3": { packages: ["Base", "Platinum", "Limited"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Base", "Platinum", "Limited"] }
                     }
                 },
                 "Renault": {
                     "Kadjar": {
-                        "1.3": ["Life", "Trend", "Iconic"],
-                        "1.6": ["Life", "Trend", "Iconic"],
-                        "1.5D": ["Life", "Trend", "Iconic"],
-                        "1.6D": ["Life", "Trend", "Iconic"]
+                        "Benzin-Manuel-1.3": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Manuel-1.6": { packages: ["Life", "Trend", "Iconic"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Iconic"] },
+                        "Dizel-Manuel-1.5": { packages: ["Life", "Trend", "Iconic"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Life", "Trend", "Iconic"] },
+                        "Dizel-Manuel-1.6": { packages: ["Life", "Trend", "Iconic"] },
+                        "Dizel-Otomatik-1.6": { packages: ["Life", "Trend", "Iconic"] }
                     },
                     "Koleos": {
-                        "1.6": ["Life", "Trend", "Privilege"],
-                        "2.0": ["Life", "Trend", "Privilege"],
-                        "2.0D": ["Life", "Trend", "Privilege"],
-                        "2.5": ["Life", "Trend", "Privilege"]
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Privilege"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Life", "Trend", "Privilege"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Life", "Trend", "Privilege"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Life", "Trend", "Privilege"] }
                     }
                 },
                 "Peugeot": {
                     "2008": {
-                        "1.2": ["Active", "Allure", "GT Line"],
-                        "1.5": ["Active", "Allure", "GT Line"],
-                        "1.5D": ["Active", "Allure", "GT Line"],
-                        "1.6T": ["Active", "Allure", "GT Line"]
+                        "Benzin-Manuel-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Active", "Allure", "GT Line"] }
                     },
                     "3008": {
-                        "1.2": ["Active", "Allure", "GT Line"],
-                        "1.5": ["Active", "Allure", "GT Line"],
-                        "1.5D": ["Active", "Allure", "GT Line"],
-                        "1.6": ["Active", "Allure", "GT Line"],
-                        "2.0": ["Active", "Allure", "GT Line"]
+                        "Benzin-Manuel-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Manuel-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Manuel-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Active", "Allure", "GT Line"] }
                     },
                     "5008": {
-                        "1.6": ["Active", "Allure", "GT Line"],
-                        "1.6T": ["Active", "Allure", "GT Line"],
-                        "1.8": ["Active", "Allure", "GT Line"],
-                        "2.0": ["Active", "Allure", "GT Line"]
+                        "Benzin-Manuel-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Active", "Allure", "GT Line"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Active", "Allure", "GT Line"] }
                     },
                     "4007": {
-                        "2.2": ["Active", "Allure", "Privilege"],
-                        "2.2D": ["Active", "Allure", "Privilege"],
-                        "2.4": ["Active", "Allure", "Privilege"]
+                        "Benzin-Otomatik-2.2": { packages: ["Active", "Allure", "Privilege"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Active", "Allure", "Privilege"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Active", "Allure", "Privilege"] }
                     }
                 },
                 "Citroen": {
                     "C3-Aircross": {
-                        "1.2": ["Shine", "Feel", "Exclusive"],
-                        "1.5": ["Shine", "Feel", "Exclusive"],
-                        "1.5D": ["Shine", "Feel", "Exclusive"],
-                        "1.6T": ["Shine", "Feel", "Exclusive"]
+                        "Benzin-Manuel-1.2": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Benzin-Manuel-1.5": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Dizel-Manuel-1.5": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Shine", "Feel", "Exclusive"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Shine", "Feel", "Exclusive"] }
                     }
                 },
                 "Hyundai": {
                     "Tucson": {
-                        "1.6": ["GL", "GLS", "GLX"],
-                        "2.0": ["GL", "GLS", "GLX"],
-                        "2.0D": ["GL", "GLS", "GLX"],
-                        "2.7": ["GL", "GLS", "GLX"]
+                        "Benzin-Manuel-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] },
+                        "Dizel-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.7": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Santa Fe": {
-                        "2.0": ["GL", "GLS", "GLX"],
-                        "2.2D": ["GL", "GLS", "GLX"],
-                        "2.4": ["GL", "GLS", "GLX"],
-                        "2.7": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] },
+                        "Dizel-Otomatik-2.2": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.7": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "ix25": {
-                        "1.6": ["GL", "GLS", "GLX"],
-                        "2.0": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "ix35": {
-                        "2.0": ["GL", "GLS", "GLX"],
-                        "2.4": ["GL", "GLS", "GLX"],
-                        "2.7": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.7": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Kona": {
-                        "1.6": ["GL", "GLS", "GLX"],
-                        "2.0": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Venue": {
-                        "1.2": ["GL", "GLS", "GLX"],
-                        "1.5": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-1.2": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.5": { packages: ["GL", "GLS", "GLX"] }
                     },
                     "Creta": {
-                        "1.6": ["GL", "GLS", "GLX"],
-                        "1.8": ["GL", "GLS", "GLX"],
-                        "2.0": ["GL", "GLS", "GLX"]
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-1.8": { packages: ["GL", "GLS", "GLX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLS", "GLX"] }
                     }
                 },
                 "Kia": {
                     "Sorento": {
-                        "2.0": ["L", "EX", "SX"],
-                        "2.2D": ["L", "EX", "SX"],
-                        "2.4": ["L", "EX", "SX"],
-                        "3.3": ["L", "EX", "SX"]
+                        "Benzin-Otomatik-2.0": { packages: ["L", "EX", "SX"] },
+                        "Dizel-Otomatik-2.2": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.3": { packages: ["L", "EX", "SX"] }
                     },
                     "Niro": {
-                        "1.5": ["L", "EX", "SX"],
-                        "1.6T": ["L", "EX", "SX"],
-                        "2.0": ["L", "EX", "SX"]
+                        "Benzin-Otomatik-1.5": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "EX", "SX"] }
                     },
                     "Sportage": {
-                        "1.6": ["L", "EX", "SX"],
-                        "2.0": ["L", "EX", "SX"],
-                        "2.0D": ["L", "EX", "SX"],
-                        "2.4": ["L", "EX", "SX"]
+                        "Benzin-Manuel-1.6": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "EX", "SX"] },
+                        "Dizel-Otomatik-2.0": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.4": { packages: ["L", "EX", "SX"] }
                     },
                     "Seltos": {
-                        "1.4": ["L", "EX", "SX"],
-                        "1.6": ["L", "EX", "SX"],
-                        "2.0": ["L", "EX", "SX"]
+                        "Benzin-Otomatik-1.4": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "EX", "SX"] }
                     }
                 },
                 "Nissan": {
                     "X-Trail": {
-                        "2.0": ["S", "SV", "SL"],
-                        "2.5": ["S", "SV", "SL"],
-                        "3.5": ["S", "SV", "SL"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-3.5": { packages: ["S", "SV", "SL"] }
                     },
                     "Qashqai": {
-                        "1.6": ["S", "SV", "SL"],
-                        "2.0": ["S", "SV", "SL"],
-                        "2.5": ["S", "SV", "SL"]
+                        "Benzin-Manuel-1.6": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-1.6": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL"] }
                     },
                     "Murano": {
-                        "2.5": ["S", "SV", "SL"],
-                        "3.5": ["S", "SV", "SL"]
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-3.5": { packages: ["S", "SV", "SL"] }
                     },
                     "Pathfinder": {
-                        "3.5": ["S", "SV", "SL"],
-                        "4.0": ["S", "SV", "SL"]
+                        "Benzin-Otomatik-3.5": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-4.0": { packages: ["S", "SV", "SL"] }
                     },
                     "Rogue": {
-                        "2.0": ["S", "SV", "SL"],
-                        "2.5": ["S", "SV", "SL"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SL"] },
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SV", "SL"] }
                     }
                 },
                 "Mazda": {
                     "CX-3": {
-                        "1.5": ["i", "i Touring", "s Touring"],
-                        "2.0": ["i", "i Touring", "s Touring"]
+                        "Benzin-Manuel-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.0": { packages: ["i", "i Touring", "s Touring"] }
                     },
                     "CX-5": {
-                        "2.0": ["i", "i Touring", "s Touring"],
-                        "2.5": ["i", "i Touring", "s Touring"],
-                        "3.0": ["i", "i Touring", "s Touring"]
+                        "Benzin-Manuel-2.0": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.0": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-3.0": { packages: ["i", "i Touring", "s Touring"] }
                     },
                     "CX-7": {
-                        "2.2D": ["i", "i Touring", "s Touring"],
-                        "2.3": ["i", "i Touring", "s Touring"],
-                        "2.5": ["i", "i Touring", "s Touring"]
+                        "Dizel-Manuel-2.2": { packages: ["i", "i Touring", "s Touring"] },
+                        "Dizel-Otomatik-2.2": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Manuel-2.3": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.3": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.5": { packages: ["i", "i Touring", "s Touring"] }
                     },
                     "CX-9": {
-                        "2.5": ["i", "i Touring", "s Touring"],
-                        "3.0": ["i", "i Touring", "s Touring"],
-                        "3.7": ["i", "i Touring", "s Touring"]
+                        "Benzin-Otomatik-2.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-3.0": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-3.7": { packages: ["i", "i Touring", "s Touring"] }
                     },
                     "CX-30": {
-                        "1.5": ["i", "i Touring", "s Touring"],
-                        "2.0": ["i", "i Touring", "s Touring"]
+                        "Benzin-Manuel-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-1.5": { packages: ["i", "i Touring", "s Touring"] },
+                        "Benzin-Otomatik-2.0": { packages: ["i", "i Touring", "s Touring"] }
                     }
                 },
                 "Subaru": {
                     "Forester": {
-                        "2.0": ["2.5i", "2.5i Premium", "2.5i Sport"],
-                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                        "Benzin-Manuel-2.0": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] }
                     },
                     "Crosstrek": {
-                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
-                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                        "Benzin-Manuel-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] }
                     },
                     "Outback": {
-                        "2.5": ["2.5i", "2.5i Premium", "2.5i Limited"],
-                        "3.0": ["3.0R", "3.0R Limited"]
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i", "2.5i Premium", "2.5i Limited"] },
+                        "Benzin-Otomatik-3.0": { packages: ["3.0R", "3.0R Limited"] }
                     },
                     "XV": {
-                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
-                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                        "Benzin-Manuel-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.0": { packages: ["2.0i", "2.0i Premium", "2.0i Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["2.5i", "2.5i Premium", "2.5i Sport"] }
                     }
                 },
                 "Suzuki": {
                     "Vitara": {
-                        "1.6": ["GL", "GLX", "GLS"],
-                        "1.8": ["GL", "GLX", "GLS"],
-                        "2.0": ["GL", "GLX", "GLS"]
+                        "Benzin-Manuel-1.6": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Manuel-1.8": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Otomatik-1.8": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Otomatik-2.0": { packages: ["GL", "GLX", "GLS"] }
                     },
                     "S-Cross": {
-                        "1.3": ["GL", "GLX", "GLS"],
-                        "1.6": ["GL", "GLX", "GLS"]
+                        "Benzin-Manuel-1.3": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Otomatik-1.3": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Manuel-1.6": { packages: ["GL", "GLX", "GLS"] },
+                        "Benzin-Otomatik-1.6": { packages: ["GL", "GLX", "GLS"] }
                     }
                 },
                 "Jeep": {
                     "Wrangler": {
-                        "2.0": ["Sport", "Sahara", "Rubicon"],
-                        "3.6": ["Sport", "Sahara", "Rubicon"],
-                        "3.8": ["Sport", "Sahara", "Rubicon"]
+                        "Benzin-Manuel-2.0": { packages: ["Sport", "Sahara", "Rubicon"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Sport", "Sahara", "Rubicon"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Sport", "Sahara", "Rubicon"] },
+                        "Benzin-Otomatik-3.8": { packages: ["Sport", "Sahara", "Rubicon"] }
                     },
                     "Cherokee": {
-                        "2.0": ["Sport", "Latitude", "Limited"],
-                        "2.4": ["Sport", "Latitude", "Limited"],
-                        "3.2": ["Sport", "Latitude", "Limited"]
+                        "Benzin-Manuel-2.0": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Sport", "Latitude", "Limited"] }
                     },
                     "Compass": {
-                        "2.0": ["Sport", "Latitude", "Limited"],
-                        "2.4": ["Sport", "Latitude", "Limited"]
+                        "Benzin-Manuel-2.0": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Sport", "Latitude", "Limited"] }
                     },
                     "Grand Cherokee": {
-                        "2.7D": ["Sport", "Latitude", "Limited"],
-                        "3.0": ["Sport", "Latitude", "Limited"],
-                        "3.6": ["Sport", "Latitude", "Limited"],
-                        "4.0": ["Sport", "Latitude", "Limited"]
+                        "Dizel-Otomatik-2.7": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-4.0": { packages: ["Sport", "Latitude", "Limited"] }
                     },
                     "Renegade": {
-                        "1.4": ["Sport", "Latitude", "Limited"],
-                        "2.4": ["Sport", "Latitude", "Limited"]
+                        "Benzin-Manuel-1.4": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Sport", "Latitude", "Limited"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Sport", "Latitude", "Limited"] }
                     }
                 },
                 "Land Rover": {
                     "Discovery": {
-                        "3.0": ["S", "SE", "HSE"],
-                        "4.0": ["S", "SE", "HSE"],
-                        "4.4D": ["S", "SE", "HSE"]
+                        "Benzin-Otomatik-3.0": { packages: ["S", "SE", "HSE"] },
+                        "Benzin-Otomatik-4.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-4.4": { packages: ["S", "SE", "HSE"] }
                     },
                     "Discovery Sport": {
-                        "2.0": ["S", "SE", "HSE"],
-                        "2.0D": ["S", "SE", "HSE"]
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-2.0": { packages: ["S", "SE", "HSE"] }
                     },
                     "Freelander": {
-                        "2.0": ["S", "SE", "HSE"],
-                        "2.0D": ["S", "SE", "HSE"],
-                        "3.2": ["S", "SE", "HSE"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Manuel-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Benzin-Otomatik-3.2": { packages: ["S", "SE", "HSE"] }
                     },
                     "Range Rover": {
-                        "3.0": ["Vogue", "Supercharged", "Sport"],
-                        "4.4D": ["Vogue", "Supercharged", "Sport"],
-                        "4.4": ["Vogue", "Supercharged", "Sport"]
+                        "Benzin-Otomatik-3.0": { packages: ["Vogue", "Supercharged", "Sport"] },
+                        "Dizel-Otomatik-4.4": { packages: ["Vogue", "Supercharged", "Sport"] },
+                        "Benzin-Otomatik-4.4": { packages: ["Vogue", "Supercharged", "Sport"] }
                     },
                     "Range Rover Evoque": {
-                        "2.0": ["Pure", "Prestige", "Dynamic"],
-                        "2.0D": ["Pure", "Prestige", "Dynamic"],
-                        "2.2D": ["Pure", "Prestige", "Dynamic"]
+                        "Benzin-Otomatik-2.0": { packages: ["Pure", "Prestige", "Dynamic"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Pure", "Prestige", "Dynamic"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Pure", "Prestige", "Dynamic"] }
                     },
                     "Range Rover Sport": {
-                        "3.0": ["S", "SE", "HSE"],
-                        "4.2": ["S", "SE", "HSE"],
-                        "4.4D": ["S", "SE", "HSE"]
+                        "Benzin-Otomatik-3.0": { packages: ["S", "SE", "HSE"] },
+                        "Benzin-Otomatik-4.2": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-4.4": { packages: ["S", "SE", "HSE"] }
                     },
                     "Range Rover Velar": {
-                        "2.0": ["S", "SE", "HSE"],
-                        "2.0D": ["S", "SE", "HSE"],
-                        "3.0": ["S", "SE", "HSE"]
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                                                "Benzin-Otomatik-3.0": { packages: ["S", "SE", "HSE"] }
                     },
                     "Defender": {
-                        "2.0": ["City", "Country", "Professional"],
-                        "2.2D": ["City", "Country", "Professional"]
+                        "Benzin-Manuel-2.0": { packages: ["City", "Country", "Professional"] },
+                        "Benzin-Otomatik-2.0": { packages: ["City", "Country", "Professional"] },
+                        "Dizel-Manuel-2.2": { packages: ["City", "Country", "Professional"] },
+                        "Dizel-Otomatik-2.2": { packages: ["City", "Country", "Professional"] }
                     }
                 },
                 "GMC": {
                     "Terrain": {
-                        "1.5T": ["SLE", "SLT", "Denali"],
-                        "2.0": ["SLE", "SLT", "Denali"],
-                        "3.6": ["SLE", "SLT", "Denali"]
+                        "Benzin-Otomatik-1.5": { packages: ["SLE", "SLT", "Denali"] },
+                        "Benzin-Otomatik-2.0": { packages: ["SLE", "SLT", "Denali"] },
+                        "Benzin-Otomatik-3.6": { packages: ["SLE", "SLT", "Denali"] }
                     },
                     "Acadia": {
-                        "2.0T": ["SLE", "SLT", "Denali"],
-                        "3.6": ["SLE", "SLT", "Denali"]
+                        "Benzin-Otomatik-2.0": { packages: ["SLE", "SLT", "Denali"] },
+                        "Benzin-Otomatik-3.6": { packages: ["SLE", "SLT", "Denali"] }
                     },
                     "Yukon": {
-                        "4.3": ["WT", "SLE", "Denali"],
-                        "5.3": ["WT", "SLE", "Denali"],
-                        "6.2": ["WT", "SLE", "Denali"]
+                        "Benzin-Otomatik-4.3": { packages: ["WT", "SLE", "Denali"] },
+                        "Benzin-Otomatik-5.3": { packages: ["WT", "SLE", "Denali"] },
+                        "Benzin-Otomatik-6.2": { packages: ["WT", "SLE", "Denali"] }
                     },
                     "Canyon": {
-                        "2.5": ["Regular Cab", "Crew Cab", "Double Cab"],
-                        "3.6": ["Regular Cab", "Crew Cab", "Double Cab"]
+                        "Benzin-Manuel-2.5": { packages: ["Regular Cab", "Crew Cab", "Double Cab"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Regular Cab", "Crew Cab", "Double Cab"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Regular Cab", "Crew Cab", "Double Cab"] }
                     }
                 },
                 "Cadillac": {
                     "SRX": {
-                        "2.8": ["Base", "Luxury", "Performance"],
-                        "3.0": ["Base", "Luxury", "Performance"],
-                        "3.6": ["Base", "Luxury", "Performance"]
+                        "Benzin-Otomatik-2.8": { packages: ["Base", "Luxury", "Performance"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Base", "Luxury", "Performance"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Base", "Luxury", "Performance"] }
                     },
                     "Escalade": {
-                        "5.3": ["Base", "Luxury", "Premium"],
-                        "6.2": ["Base", "Luxury", "Premium"]
+                        "Benzin-Otomatik-5.3": { packages: ["Base", "Luxury", "Premium"] },
+                        "Benzin-Otomatik-6.2": { packages: ["Base", "Luxury", "Premium"] }
                     }
                 },
                 "Dodge": {
                     "Durango": {
-                        "3.6": ["SXT", "R/T", "Limited"],
-                        "5.7": ["SXT", "R/T", "Limited"]
+                        "Benzin-Otomatik-3.6": { packages: ["SXT", "R/T", "Limited"] },
+                        "Benzin-Otomatik-5.7": { packages: ["SXT", "R/T", "Limited"] }
                     }
                 },
                 "Buick": {
                     "Enclave": {
-                        "3.6": ["Convenience", "Preferred", "Premium"],
-                        "5.3": ["Convenience", "Preferred", "Premium"]
+                        "Benzin-Otomatik-3.6": { packages: ["Convenience", "Preferred", "Premium"] },
+                        "Benzin-Otomatik-5.3": { packages: ["Convenience", "Preferred", "Premium"] }
                     },
                     "Envision": {
-                        "1.5T": ["Convenience", "Preferred", "Premium"],
-                        "2.0": ["Convenience", "Preferred", "Premium"]
+                        "Benzin-Otomatik-1.5": { packages: ["Convenience", "Preferred", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Convenience", "Preferred", "Premium"] }
                     }
                 },
                 "Brilliance": {
                     "H230": {
-                        "1.3": ["Standart", "Comfort", "Luxury"],
-                        "1.5": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Manuel-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "H320": {
-                        "1.6": ["Standart", "Comfort", "Luxury"],
-                        "2.0": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "V5": {
-                        "1.5": ["Standart", "Comfort", "Luxury"],
-                        "1.6": ["Standart", "Comfort", "Luxury"],
-                        "1.8": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "V7": {
-                        "1.8": ["Standart", "Comfort", "Luxury"],
-                        "2.0": ["Standart", "Comfort", "Luxury"],
-                        "2.4": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.8": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Standart", "Comfort", "Luxury"] }
                     }
                 },
                 "Haval": {
                     "H1": {
-                        "1.3": ["Elite", "Premium", "Luxury"],
-                        "1.5": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Manuel-1.3": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H2": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "1.6": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H3": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.4": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Manuel-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H4": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H5": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H6": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H7": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H8": {
-                        "2.0T": ["Elite", "Premium", "Luxury"],
-                        "3.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "H9": {
-                        "2.0T": ["Elite", "Premium", "Luxury"],
-                        "3.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "F5": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "1.6": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "F7": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     }
                 },
                 "Geely": {
                     "GX2": {
-                        "1.3": ["Standart", "Comfort", "Luxury"],
-                        "1.5": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Manuel-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "GX3": {
-                        "1.3": ["Standart", "Comfort", "Luxury"],
-                        "1.5": ["Standart", "Comfort", "Luxury"],
-                        "1.6": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Manuel-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "GX7": {
-                        "1.8": ["Standart", "Comfort", "Luxury"],
-                        "2.0": ["Standart", "Comfort", "Luxury"],
-                        "2.4": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.8": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Standart", "Comfort", "Luxury"] }
                     }
                 },
                 "Chery": {
                     "Tiggo": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "1.6": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.4": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Elite", "Premium", "Luxury"] }
                     }
                 },
                 "Changan": {
                     "CS35": {
-                        "1.6": ["Elite", "Premium", "Luxury"],
-                        "1.8": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Manuel-1.6": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "CS55": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "1.6": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "CS75": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "CS95": {
-                        "1.5T": ["Elite", "Premium", "Luxury"],
-                        "2.0T": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     }
                 },
                 "Dongfeng": {
                     "AX3": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "1.6": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "AX5": {
-                        "1.5": ["Elite", "Premium", "Luxury"],
-                        "1.8": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] }
                     },
                     "AX7": {
-                        "1.8": ["Elite", "Premium", "Luxury"],
-                        "2.0": ["Elite", "Premium", "Luxury"],
-                        "2.3": ["Elite", "Premium", "Luxury"]
+                        "Benzin-Otomatik-1.8": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Elite", "Premium", "Luxury"] },
+                        "Benzin-Otomatik-2.3": { packages: ["Elite", "Premium", "Luxury"] }
                     }
                 },
                 "GAC": {
                     "GS3": {
-                        "1.5": ["Standart", "Comfort", "Luxury"],
-                        "1.6": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "GS4": {
-                        "1.5": ["Standart", "Comfort", "Luxury"],
-                        "1.6": ["Standart", "Comfort", "Luxury"],
-                        "1.8": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "GS5": {
-                        "1.6": ["Standart", "Comfort", "Luxury"],
-                        "1.8": ["Standart", "Comfort", "Luxury"],
-                        "2.0": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Luxury"] }
                     },
                     "GS8": {
-                        "2.0": ["Standart", "Comfort", "Luxury"],
-                        "2.3": ["Standart", "Comfort", "Luxury"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-2.3": { packages: ["Standart", "Comfort", "Luxury"] }
                     }
                 },
                 "Lexus": {
                     "NX": {
-                        "2.0": ["Standard", "Luxury", "F Sport"],
-                        "2.5": ["Standard", "Luxury", "F Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Luxury", "F Sport"] }
                     },
                     "RX": {
-                        "2.7": ["Standard", "Luxury", "F Sport"],
-                        "3.5": ["Standard", "Luxury", "F Sport"],
-                        "4.6": ["Standard", "Luxury", "F Sport"]
+                        "Benzin-Otomatik-2.7": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-4.6": { packages: ["Standard", "Luxury", "F Sport"] }
                     },
                     "UX": {
-                        "2.0": ["Standard", "Luxury", "F Sport"],
-                        "2.5": ["Standard", "Luxury", "F Sport"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Luxury", "F Sport"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Luxury", "F Sport"] }
                     },
                     "GX": {
-                        "4.0": ["Standard", "Luxury", "Premium"],
-                        "4.7": ["Standard", "Luxury", "Premium"]
+                        "Benzin-Otomatik-4.0": { packages: ["Standard", "Luxury", "Premium"] },
+                        "Benzin-Otomatik-4.7": { packages: ["Standard", "Luxury", "Premium"] }
                     },
                     "LX": {
-                        "5.7": ["Standard", "Premium", "Ultra"],
-                        "5.8": ["Standard", "Premium", "Ultra"]
+                        "Benzin-Otomatik-5.7": { packages: ["Standard", "Premium", "Ultra"] },
+                        "Benzin-Otomatik-5.8": { packages: ["Standard", "Premium", "Ultra"] }
                     }
                 },
                 "Tesla": {
                     "Model X": {
-                        "Long Range": ["Standard", "Plaid"],
-                        "Plaid": ["Plaid", "Plaid+"]
+                        "Elektrik-Otomatik-Long Range": { packages: ["Standard", "Plaid"] },
+                        "Elektrik-Otomatik-Plaid": { packages: ["Plaid", "Plaid+"] }
                     },
                     "Model Y": {
-                        "Standard Range": ["Standard", "Plus"],
-                        "Long Range": ["Standard", "Plus", "Performance"]
+                        "Elektrik-Otomatik-Standard Range": { packages: ["Standard", "Plus"] },
+                        "Elektrik-Otomatik-Long Range": { packages: ["Standard", "Plus", "Performance"] }
                     }
                 },
                 "Porsche": {
                     "Cayenne": {
-                        "2.7": ["Base", "S", "Turbo S"],
-                        "3.0": ["Base", "S", "Turbo S"],
-                        "3.6": ["Base", "S", "Turbo S"],
-                        "4.8": ["Base", "S", "Turbo S"]
+                        "Benzin-Otomatik-2.7": { packages: ["Base", "S", "Turbo S"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Base", "S", "Turbo S"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Base", "S", "Turbo S"] },
+                        "Benzin-Otomatik-4.8": { packages: ["Base", "S", "Turbo S"] }
                     },
                     "Macan": {
-                        "2.0": ["Base", "S", "Turbo"],
-                        "2.9": ["Base", "S", "Turbo"],
-                        "3.0": ["Base", "S", "Turbo"]
+                        "Benzin-Otomatik-2.0": { packages: ["Base", "S", "Turbo"] },
+                        "Benzin-Otomatik-2.9": { packages: ["Base", "S", "Turbo"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Base", "S", "Turbo"] }
                     }
                 },
                 "Mitsubishi": {
                     "Outlander": {
-                        "2.0": ["S", "SV", "SE"],
-                        "2.4": ["S", "SV", "SE"],
-                        "3.0": ["S", "SV", "SE"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-2.4": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-3.0": { packages: ["S", "SV", "SE"] }
                     },
                     "Pajero": {
-                        "2.5D": ["GLS", "GLX", "Premium"],
-                        "3.0": ["GLS", "GLX", "Premium"],
-                        "3.2D": ["GLS", "GLX", "Premium"],
-                        "3.5": ["GLS", "GLX", "Premium"],
-                        "3.8": ["GLS", "GLX", "Premium"]
+                        "Dizel-Otomatik-2.5": { packages: ["GLS", "GLX", "Premium"] },
+                        "Benzin-Otomatik-3.0": { packages: ["GLS", "GLX", "Premium"] },
+                        "Dizel-Otomatik-3.2": { packages: ["GLS", "GLX", "Premium"] },
+                        "Benzin-Otomatik-3.5": { packages: ["GLS", "GLX", "Premium"] },
+                        "Benzin-Otomatik-3.8": { packages: ["GLS", "GLX", "Premium"] }
                     },
                     "ASX": {
-                        "1.6": ["S", "SV", "SE"],
-                        "2.0": ["S", "SV", "SE"],
-                        "2.4": ["S", "SV", "SE"]
+                        "Benzin-Manuel-1.6": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-1.6": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SV", "SE"] },
+                        "Benzin-Otomatik-2.4": { packages: ["S", "SV", "SE"] }
                     }
                 },
                 "Volvo": {
                     "XC40": {
-                        "2.0": ["Momentum", "R-Design", "Inscription"],
-                        "2.0D": ["Momentum", "R-Design", "Inscription"]
+                        "Benzin-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] }
                     },
                     "XC60": {
-                        "2.0": ["Momentum", "R-Design", "Inscription"],
-                        "2.0D": ["Momentum", "R-Design", "Inscription"],
-                        "2.5": ["Momentum", "R-Design", "Inscription"]
+                        "Benzin-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Momentum", "R-Design", "Inscription"] }
                     },
                     "XC70": {
-                        "2.0": ["Momentum", "R-Design", "Inscription"],
-                        "2.5": ["Momentum", "R-Design", "Inscription"],
-                        "3.0": ["Momentum", "R-Design", "Inscription"],
-                        "3.2": ["Momentum", "R-Design", "Inscription"]
+                        "Benzin-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Momentum", "R-Design", "Inscription"] }
                     },
                     "XC90": {
-                        "2.0": ["Momentum", "R-Design", "Inscription"],
-                        "2.0D": ["Momentum", "R-Design", "Inscription"],
-                        "3.0": ["Momentum", "R-Design", "Inscription"],
-                        "3.2": ["Momentum", "R-Design", "Inscription"]
+                        "Benzin-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Momentum", "R-Design", "Inscription"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Momentum", "R-Design", "Inscription"] }
                     }
                 },
                 "Fiat": {
                     "500X": {
-                        "1.3": ["Pop", "Easy", "Lounge"],
-                        "1.4": ["Pop", "Easy", "Lounge"],
-                        "1.6": ["Pop", "Easy", "Lounge"]
+                        "Benzin-Manuel-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Manuel-1.6": { packages: ["Pop", "Easy", "Lounge"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Pop", "Easy", "Lounge"] }
                     }
                 },
                 "Alfa Romeo": {
                     "Stelvio": {
-                        "2.0T": ["Base", "Sport", "Quadrifoglio"],
-                        "2.2D": ["Base", "Sport", "Quadrifoglio"]
+                        "Benzin-Otomatik-2.0": { packages: ["Base", "Sport", "Quadrifoglio"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Base", "Sport", "Quadrifoglio"] }
                     }
                 },
                 "Jaguar": {
                     "F-Pace": {
-                        "2.0": ["S", "SE", "HSE"],
-                        "2.0D": ["S", "SE", "HSE"],
-                        "3.0": ["S", "SE", "HSE"]
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Dizel-Otomatik-2.0": { packages: ["S", "SE", "HSE"] },
+                        "Benzin-Otomatik-3.0": { packages: ["S", "SE", "HSE"] }
                     }
                 },
                 "Acura": {
                     "RDX": {
-                        "2.0": ["Standard", "Technology", "A-Spec"],
-                        "3.5": ["Standard", "Technology", "A-Spec"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Technology", "A-Spec"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Technology", "A-Spec"] }
                     },
                     "MDX": {
-                        "2.0": ["Base", "Advance", "Type-S"],
-                        "3.0": ["Base", "Advance", "Type-S"],
-                        "3.5": ["Base", "Advance", "Type-S"],
-                        "3.7": ["Base", "Advance", "Type-S"]
+                        "Benzin-Otomatik-2.0": { packages: ["Base", "Advance", "Type-S"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Base", "Advance", "Type-S"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Base", "Advance", "Type-S"] },
+                        "Benzin-Otomatik-3.7": { packages: ["Base", "Advance", "Type-S"] }
                     }
                 },
                 "Infiniti": {
                     "EX": {
-                        "3.5": ["Standard", "Luxury", "Premium Plus"],
-                        "3.7": ["Standard", "Luxury", "Premium Plus"]
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-3.7": { packages: ["Standard", "Luxury", "Premium Plus"] }
                     },
                     "QX50": {
-                        "2.0": ["Pure", "Essential", "Luxe"],
-                        "3.0": ["Pure", "Essential", "Luxe"]
+                        "Benzin-Otomatik-2.0": { packages: ["Pure", "Essential", "Luxe"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Pure", "Essential", "Luxe"] }
                     },
                     "QX60": {
-                        "2.5": ["Standard", "Luxury", "Premium Plus"],
-                        "3.0": ["Standard", "Luxury", "Premium Plus"],
-                        "3.5": ["Standard", "Luxury", "Premium Plus"]
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Luxury", "Premium Plus"] }
                     },
                     "QX80": {
-                        "3.5": ["Standard", "Luxury", "Premium Plus"],
-                        "4.0": ["Standard", "Luxury", "Premium Plus"],
-                        "5.6": ["Standard", "Luxury", "Premium Plus"]
+                        "Benzin-Otomatik-3.5": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-4.0": { packages: ["Standard", "Luxury", "Premium Plus"] },
+                        "Benzin-Otomatik-5.6": { packages: ["Standard", "Luxury", "Premium Plus"] }
                     }
                 }
             },
             "Ticari": {
                 "Toyota": {
                     "Avanza": {
-                        "1.3": ["Manual", "Auto", "Premium"],
-                        "1.5": ["Manual", "Auto", "Premium"]
+                        "Benzin-Manuel-1.3": { packages: ["Manual", "Auto", "Premium"] },
+                        "Benzin-Otomatik-1.3": { packages: ["Manual", "Auto", "Premium"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Manual", "Auto", "Premium"] }
                     },
                     "Alphard": {
-                        "2.4": ["L", "S", "X"],
-                        "3.0": ["L", "S", "X"],
-                        "3.5": ["L", "S", "X"]
+                        "Benzin-Otomatik-2.4": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.0": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "S", "X"] }
                     },
                     "Vellfire": {
-                        "2.4": ["L", "S", "X"],
-                        "3.0": ["L", "S", "X"],
-                        "3.5": ["L", "S", "X"]
+                        "Benzin-Otomatik-2.4": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.0": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "S", "X"] }
                     },
                     "Sienna": {
-                        "2.5": ["LE", "XLE", "Limited"],
-                        "3.5": ["LE", "XLE", "Limited"]
+                        "Benzin-Otomatik-2.5": { packages: ["LE", "XLE", "Limited"] },
+                        "Benzin-Otomatik-3.5": { packages: ["LE", "XLE", "Limited"] }
                     },
                     "Noah": {
-                        "1.8": ["X", "S", "G"],
-                        "2.0": ["X", "S", "G"]
+                        "Benzin-Manuel-1.8": { packages: ["X", "S", "G"] },
+                        "Benzin-Otomatik-1.8": { packages: ["X", "S", "G"] },
+                        "Benzin-Otomatik-2.0": { packages: ["X", "S", "G"] }
                     },
                     "Voxy": {
-                        "1.8": ["X", "S", "V"],
-                        "2.0": ["X", "S", "V"]
+                        "Benzin-Manuel-1.8": { packages: ["X", "S", "V"] },
+                        "Benzin-Otomatik-1.8": { packages: ["X", "S", "V"] },
+                        "Benzin-Otomatik-2.0": { packages: ["X", "S", "V"] }
                     },
                     "Estima": {
-                        "2.0": ["L", "S", "X"],
-                        "2.4": ["L", "S", "X"],
-                        "3.5": ["L", "S", "X"]
+                        "Benzin-Otomatik-2.0": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-2.4": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "S", "X"] }
                     },
                     "Previa": {
-                        "2.0": ["LE", "XLE", "CE"],
-                        "2.4": ["LE", "XLE", "CE"]
+                        "Benzin-Otomatik-2.0": { packages: ["LE", "XLE", "CE"] },
+                        "Benzin-Otomatik-2.4": { packages: ["LE", "XLE", "CE"] }
                     },
                     "Ipsum": {
-                        "2.0": ["S", "Q", "X"],
-                        "2.4": ["S", "Q", "X"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "Q", "X"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "Q", "X"] },
+                        "Benzin-Otomatik-2.4": { packages: ["S", "Q", "X"] }
                     },
                     "Gaia": {
-                        "1.5": ["X", "S"],
-                        "1.8": ["X", "S"]
+                        "Benzin-Manuel-1.5": { packages: ["X", "S"] },
+                        "Benzin-Otomatik-1.5": { packages: ["X", "S"] },
+                        "Benzin-Otomatik-1.8": { packages: ["X", "S"] }
                     },
                     "Hiace": {
-                        "2.0": ["Standard", "Mid", "Premium"],
-                        "2.4": ["Standard", "Mid", "Premium"],
-                        "2.5D": ["Standard", "Mid", "Premium"]
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.5": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "Proace": {
-                        "1.5": ["Base", "Professional", "Premium"],
-                        "1.6D": ["Base", "Professional", "Premium"],
-                        "2.0": ["Base", "Professional", "Premium"]
+                        "Benzin-Otomatik-1.5": { packages: ["Base", "Professional", "Premium"] },
+                        "Dizel-Otomatik-1.6": { packages: ["Base", "Professional", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Base", "Professional", "Premium"] }
                     }
                 },
                 "Honda": {
                     "Odyssey": {
-                        "2.4": ["LX", "EX", "EX-L"],
-                        "3.5": ["LX", "EX", "EX-L"]
+                        "Benzin-Otomatik-2.4": { packages: ["LX", "EX", "EX-L"] },
+                        "Benzin-Otomatik-3.5": { packages: ["LX", "EX", "EX-L"] }
                     },
                     "Elysion": {
-                        "2.4": ["L", "S", "X"],
-                        "3.0": ["L", "S", "X"]
+                        "Benzin-Otomatik-2.4": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-3.0": { packages: ["L", "S", "X"] }
                     },
                     "Stream": {
-                        "1.7": ["L", "S", "X"],
-                        "2.0": ["L", "S", "X"]
+                        "Benzin-Manuel-1.7": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-1.7": { packages: ["L", "S", "X"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L", "S", "X"] }
                     }
                 },
                 "Nissan": {
                     "Serena": {
-                        "2.0": ["S", "SC", "SR"],
-                        "2.3D": ["S", "SC", "SR"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SC", "SR"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SC", "SR"] },
+                        "Dizel-Otomatik-2.3": { packages: ["S", "SC", "SR"] }
                     },
                     "Caravan": {
-                        "2.0": ["S", "SC", "SR"],
-                        "2.5": ["S", "SC", "SR"]
+                        "Benzin-Manuel-2.0": { packages: ["S", "SC", "SR"] },
+                        "Benzin-Otomatik-2.0": { packages: ["S", "SC", "SR"] },
+                        "Benzin-Otomatik-2.5": { packages: ["S", "SC", "SR"] }
                     },
                     "NV": {
-                        "2.5": ["Standard", "Mid", "Premium"],
-                        "3.0": ["Standard", "Mid", "Premium"]
+                        "Benzin-Otomatik-2.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-3.0": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "NV200": {
-                        "1.5": ["Standard", "Mid", "Premium"],
-                        "1.6": ["Standard", "Mid", "Premium"],
-                        "2.0": ["Standard", "Mid", "Premium"]
+                        "Benzin-Otomatik-1.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] }
                     }
                 },
                 "Renault": {
                     "Espace": {
-                        "1.6": ["Life", "Trend", "Initiale"],
-                        "1.8": ["Life", "Trend", "Initiale"],
-                        "2.0": ["Life", "Trend", "Initiale"],
-                        "2.0D": ["Life", "Trend", "Initiale"],
-                        "2.2D": ["Life", "Trend", "Initiale"]
+                        "Benzin-Manuel-1.6": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Manuel-1.8": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Life", "Trend", "Initiale"] },
+                        "Dizel-Manuel-2.0": { packages: ["Life", "Trend", "Initiale"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Life", "Trend", "Initiale"] },
+                        "Dizel-Manuel-2.2": { packages: ["Life", "Trend", "Initiale"] }
                     },
                     "Scenic": {
-                        "1.4": ["Life", "Trend", "Initiale"],
-                        "1.5D": ["Life", "Trend", "Initiale"],
-                        "1.6": ["Life", "Trend", "Initiale"],
-                        "1.6T": ["Life", "Trend", "Initiale"],
-                        "1.9D": ["Life", "Trend", "Initiale"]
+                        "Benzin-Manuel-1.4": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Life", "Trend", "Initiale"] },
+                        "Dizel-Manuel-1.5": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Manuel-1.6": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Initiale"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Life", "Trend", "Initiale"] },
+                        "Dizel-Manuel-1.9": { packages: ["Life", "Trend", "Initiale"] }
                     },
                     "Master": {
-                        "1.6": ["L1", "L2", "H1"],
-                        "1.9D": ["L1", "L2", "H1"],
-                        "2.2D": ["L1", "L2", "H1"],
-                        "2.5D": ["L1", "L2", "H1"],
-                        "2.8D": ["L1", "L2", "H1"]
+                        "Benzin-Manuel-1.6": { packages: ["L1", "L2", "H1"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Manuel-1.9": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Otomatik-1.9": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Manuel-2.2": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Otomatik-2.2": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Manuel-2.5": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Otomatik-2.5": { packages: ["L1", "L2", "H1"] },
+                        "Dizel-Manuel-2.8": { packages: ["L1", "L2", "H1"] }
                     }
                 },
                 "Ford": {
                     "Galaxy": {
-                        "1.6": ["Style", "Trend", "Titanium"],
-                        "1.6T": ["Style", "Trend", "Titanium"],
-                        "1.8": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Style", "Trend", "Titanium"],
-                        "2.0D": ["Style", "Trend", "Titanium"]
+                        "Benzin-Manuel-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.8": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Manuel-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] }
                     },
                     "S-Max": {
-                        "1.6": ["Style", "Trend", "Titanium"],
-                        "1.6T": ["Style", "Trend", "Titanium"],
-                        "1.8": ["Style", "Trend", "Titanium"],
-                        "2.0": ["Style", "Trend", "Titanium"],
-                        "2.0D": ["Style", "Trend", "Titanium"]
+                        "Benzin-Manuel-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Manuel-1.8": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Style", "Trend", "Titanium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Manuel-2.0": { packages: ["Style", "Trend", "Titanium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Style", "Trend", "Titanium"] }
                     },
                     "Transit": {
-                        "1.6": ["Standard", "Mid", "Premium"],
-                        "2.0": ["Standard", "Mid", "Premium"],
-                        "2.0D": ["Standard", "Mid", "Premium"],
-                        "2.2": ["Standard", "Mid", "Premium"],
-                        "2.3": ["Standard", "Mid", "Premium"],
-                        "3.2": ["Standard", "Mid", "Premium"]
+                        "Benzin-Manuel-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.2": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Standard", "Mid", "Premium"] }
                     }
                 },
                 "Volkswagen": {
                     "Caravelle": {
-                        "2.0": ["L1", "L2", "L3"],
-                        "2.0T": ["L1", "L2", "L3"],
-                        "2.5": ["L1", "L2", "L3"],
-                        "2.5D": ["L1", "L2", "L3"],
-                        "3.2": ["L1", "L2", "L3"]
+                        "Benzin-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.5": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.5": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.5": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-3.2": { packages: ["L1", "L2", "L3"] }
                     },
                     "Multivan": {
-                        "1.9D": ["Edition 25", "Edition 30", "Edition 35"],
-                        "2.0": ["Edition 25", "Edition 30", "Edition 35"],
-                        "2.0T": ["Edition 25", "Edition 30", "Edition 35"],
-                        "3.2": ["Edition 25", "Edition 30", "Edition 35"]
+                        "Dizel-Manuel-1.9": { packages: ["Edition 25", "Edition 30", "Edition 35"] },
+                        "Benzin-Manuel-2.0": { packages: ["Edition 25", "Edition 30", "Edition 35"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Edition 25", "Edition 30", "Edition 35"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Edition 25", "Edition 30", "Edition 35"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Edition 25", "Edition 30", "Edition 35"] }
                     },
                     "Touran": {
-                        "1.2": ["Trend", "Comfort", "Highline"],
-                        "1.4": ["Trend", "Comfort", "Highline"],
-                        "1.4T": ["Trend", "Comfort", "Highline"],
-                        "1.6": ["Trend", "Comfort", "Highline"],
-                        "1.8": ["Trend", "Comfort", "Highline"],
-                        "1.9D": ["Trend", "Comfort", "Highline"],
-                        "2.0D": ["Trend", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.6": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Manuel-1.8": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Manuel-1.9": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-1.9": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Manuel-2.0": { packages: ["Trend", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Trend", "Comfort", "Highline"] }
                     },
                     "Transporter": {
-                        "1.6": ["Standart", "Comfort", "Highline"],
-                        "2.0": ["Standart", "Comfort", "Highline"],
-                        "2.0D": ["Standart", "Comfort", "Highline"],
-                        "2.5": ["Standart", "Comfort", "Highline"],
-                        "2.5D": ["Standart", "Comfort", "Highline"]
+                        "Benzin-Manuel-1.6": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Benzin-Manuel-2.0": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Dizel-Manuel-2.0": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Benzin-Manuel-2.5": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Benzin-Otomatik-2.5": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Dizel-Manuel-2.5": { packages: ["Standart", "Comfort", "Highline"] },
+                        "Dizel-Otomatik-2.5": { packages: ["Standart", "Comfort", "Highline"] }
                     }
                 },
                 "Peugeot": {
                     "Expert": {
-                        "1.6": ["L1", "L2", "L3"],
-                        "1.6D": ["L1", "L2", "L3"],
-                        "1.9": ["L1", "L2", "L3"],
-                        "1.9D": ["L1", "L2", "L3"],
-                        "2.0": ["L1", "L2", "L3"],
-                        "2.0D": ["L1", "L2", "L3"]
+                        "Benzin-Manuel-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.0": { packages: ["L1", "L2", "L3"] }
                     },
                     "Boxer": {
-                        "1.4": ["Standard", "Mid", "Premium"],
-                        "1.6": ["Standard", "Mid", "Premium"],
-                        "2.0": ["Standard", "Mid", "Premium"],
-                        "2.2": ["Standard", "Mid", "Premium"],
-                        "2.3D": ["Standard", "Mid", "Premium"],
-                        "2.8D": ["Standard", "Mid", "Premium"]
+                        "Benzin-Manuel-1.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.2": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.2": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.8": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.8": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "Rifter": {
-                        "1.2": ["Comfortline", "Trendline", "Highline"],
-                        "1.5": ["Comfortline", "Trendline", "Highline"],
-                        "1.5D": ["Comfortline", "Trendline", "Highline"],
-                        "1.6": ["Comfortline", "Trendline", "Highline"]
+                        "Benzin-Manuel-1.2": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Benzin-Manuel-1.5": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Dizel-Manuel-1.5": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Benzin-Manuel-1.6": { packages: ["Comfortline", "Trendline", "Highline"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Comfortline", "Trendline", "Highline"] }
                     }
                 },
                 "Citroen": {
                     "Berlingo": {
-                        "1.4": ["S", "Cool", "CoolStyle"],
-                        "1.5": ["S", "Cool", "CoolStyle"],
-                        "1.5D": ["S", "Cool", "CoolStyle"],
-                        "1.6": ["S", "Cool", "CoolStyle"],
-                        "1.6D": ["S", "Cool", "CoolStyle"]
+                        "Benzin-Manuel-1.4": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Benzin-Otomatik-1.4": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Benzin-Manuel-1.5": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Benzin-Otomatik-1.5": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Dizel-Manuel-1.5": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Dizel-Otomatik-1.5": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Benzin-Manuel-1.6": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Benzin-Otomatik-1.6": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Dizel-Manuel-1.6": { packages: ["S", "Cool", "CoolStyle"] },
+                        "Dizel-Otomatik-1.6": { packages: ["S", "Cool", "CoolStyle"] }
                     },
                     "Jumper": {
-                        "1.6": ["L1", "L2", "L3"],
-                        "1.9": ["L1", "L2", "L3"],
-                        "1.9D": ["L1", "L2", "L3"],
-                        "2.0": ["L1", "L2", "L3"],
-                        "2.0D": ["L1", "L2", "L3"],
-                        "2.8D": ["L1", "L2", "L3"]
+                        "Benzin-Manuel-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-1.6": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-1.9": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.8": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.8": { packages: ["L1", "L2", "L3"] }
                     }
                 },
                 "Mercedes-Benz": {
                     "Vito": {
-                        "1.6": ["Standart", "Comfort", "Premium"],
-                        "2.0": ["Standart", "Comfort", "Premium"],
-                        "2.1D": ["Standart", "Comfort", "Premium"],
-                        "2.2D": ["Standart", "Comfort", "Premium"],
-                        "3.0D": ["Standart", "Comfort", "Premium"],
-                        "3.2": ["Standart", "Comfort", "Premium"]
+                        "Benzin-Manuel-1.6": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Benzin-Manuel-2.0": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Manuel-2.1": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Otomatik-2.1": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Manuel-2.2": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Manuel-3.0": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Benzin-Manuel-3.2": { packages: ["Standart", "Comfort", "Premium"] },
+                        "Benzin-Otomatik-3.2": { packages: ["Standart", "Comfort", "Premium"] }
                     },
                     "Sprinter": {
-                        "1.8": ["L1", "L2", "L3"],
-                        "2.0": ["L1", "L2", "L3"],
-                        "2.1D": ["L1", "L2", "L3"],
-                        "2.2D": ["L1", "L2", "L3"],
-                        "2.7D": ["L1", "L2", "L3"],
-                        "3.0D": ["L1", "L2", "L3"],
-                        "3.2": ["L1", "L2", "L3"],
-                        "3.7D": ["L1", "L2", "L3"]
+                        "Benzin-Manuel-1.8": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-1.8": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.1": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.1": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.2": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.2": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.7": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.7": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-3.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-3.0": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-3.2": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-3.2": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-3.7": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-3.7": { packages: ["L1", "L2", "L3"] }
                     }
                 },
                 "Dacia": {
                     "Dokker": {
-                        "1.0": ["Essential", "Comfort", "Luxury"],
-                        "1.2": ["Essential", "Comfort", "Luxury"],
-                        "1.5": ["Essential", "Comfort", "Luxury"],
-                        "1.5D": ["Essential", "Comfort", "Luxury"]
+                        "Benzin-Manuel-1.0": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.0": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Manuel-1.2": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Manuel-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Dizel-Manuel-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Essential", "Comfort", "Luxury"] }
                     },
                     "Lodgy": {
-                        "1.2": ["Essential", "Comfort", "Luxury"],
-                        "1.5": ["Essential", "Comfort", "Luxury"],
-                        "1.5D": ["Essential", "Comfort", "Luxury"],
-                        "1.6": ["Essential", "Comfort", "Luxury"]
+                        "Benzin-Manuel-1.2": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.2": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Manuel-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Dizel-Manuel-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Dizel-Otomatik-1.5": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Manuel-1.6": { packages: ["Essential", "Comfort", "Luxury"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Essential", "Comfort", "Luxury"] }
                     }
                 },
                 "Opel": {
                     "Zafira": {
-                        "1.4": ["Sport", "Edition", "OPC"],
-                        "1.6": ["Sport", "Edition", "OPC"],
-                        "1.7D": ["Sport", "Edition", "OPC"],
-                        "1.8": ["Sport", "Edition", "OPC"],
-                        "1.9D": ["Sport", "Edition", "OPC"]
+                        "Benzin-Manuel-1.4": { packages: ["Sport", "Edition", "OPC"] },
+                        "Benzin-Otomatik-1.4": { packages: ["Sport", "Edition", "OPC"] },
+                        "Benzin-Manuel-1.6": { packages: ["Sport", "Edition", "OPC"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Sport", "Edition", "OPC"] },
+                        "Dizel-Manuel-1.7": { packages: ["Sport", "Edition", "OPC"] },
+                        "Dizel-Otomatik-1.7": { packages: ["Sport", "Edition", "OPC"] },
+                        "Benzin-Manuel-1.8": { packages: ["Sport", "Edition", "OPC"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Sport", "Edition", "OPC"] },
+                        "Dizel-Manuel-1.9": { packages: ["Sport", "Edition", "OPC"] },
+                        "Dizel-Otomatik-1.9": { packages: ["Sport", "Edition", "OPC"] }
                     }
                 },
                 "Iveco": {
                     "Daily": {
-                        "2.3": ["L1", "L2", "L3"],
-                        "2.3D": ["L1", "L2", "L3"],
-                        "2.8": ["L1", "L2", "L3"],
-                        "2.8D": ["L1", "L2", "L3"],
-                        "3.0D": ["L1", "L2", "L3"],
-                        "3.2": ["L1", "L2", "L3"]
+                        "Benzin-Manuel-2.3": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.3": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.3": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.3": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Manuel-2.8": { packages: ["L1", "L2", "L3"] },
+                        "Benzin-Otomatik-2.8": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-2.8": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-2.8": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Manuel-3.0": { packages: ["L1", "L2", "L3"] },
+                        "Dizel-Otomatik-3.0": { packages: ["L1", "L2", "L3"] }
                     }
                 },
                 "Hyundai": {
                     "H-1": {
-                        "2.4": ["Standard", "Mid", "Premium"],
-                        "2.5D": ["Standard", "Mid", "Premium"]
+                        "Benzin-Otomatik-2.4": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.5": { packages: ["Standard", "Mid", "Premium"] }
                     },
                     "H350": {
-                        "2.5D": ["Standard", "Mid", "Premium"],
-                        "2.8D": ["Standard", "Mid", "Premium"],
-                        "3.0D": ["Standard", "Mid", "Premium"]
+                        "Dizel-Manuel-2.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.5": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.8": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.8": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-3.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Standard", "Mid", "Premium"] }
                     }
                 },
                 "Kia": {
                     "Carnival": {
-                        "2.2": ["L", "EX", "SX"],
-                        "2.7": ["L", "EX", "SX"],
-                        "3.5": ["L", "EX", "SX"],
-                        "3.8": ["L", "EX", "SX"]
+                        "Benzin-Otomatik-2.2": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-2.7": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.8": { packages: ["L", "EX", "SX"] }
                     },
                     "Sedona": {
-                        "2.0": ["L", "EX", "SX"],
-                        "2.2D": ["L", "EX", "SX"],
-                        "2.7": ["L", "EX", "SX"],
-                        "3.3": ["L", "EX", "SX"],
-                        "3.5": ["L", "EX", "SX"],
-                        "3.8": ["L", "EX", "SX"]
+                        "Benzin-Otomatik-2.0": { packages: ["L", "EX", "SX"] },
+                        "Dizel-Otomatik-2.2": { packages: ["L", "EX", "SX"] },
+                                                "Benzin-Otomatik-2.7": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.3": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.5": { packages: ["L", "EX", "SX"] },
+                        "Benzin-Otomatik-3.8": { packages: ["L", "EX", "SX"] }
                     }
                 },
                 "Chrysler": {
                     "Pacifica": {
-                        "2.5": ["Base", "Touring", "Limited"],
-                        "3.6": ["Base", "Touring", "Limited"]
+                        "Benzin-Otomatik-2.5": { packages: ["Base", "Touring", "Limited"] },
+                        "Benzin-Otomatik-3.6": { packages: ["Base", "Touring", "Limited"] }
                     }
                 },
                 "Fiat": {
                     "Ulysse": {
-                        "1.6": ["Base", "Mid", "Premium"],
-                        "1.8": ["Base", "Mid", "Premium"],
-                        "2.0": ["Base", "Mid", "Premium"],
-                        "2.0D": ["Base", "Mid", "Premium"],
-                        "2.2D": ["Base", "Mid", "Premium"]
+                        "Benzin-Manuel-1.6": { packages: ["Base", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.6": { packages: ["Base", "Mid", "Premium"] },
+                        "Benzin-Manuel-1.8": { packages: ["Base", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.8": { packages: ["Base", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.0": { packages: ["Base", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Base", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.0": { packages: ["Base", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Base", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.2": { packages: ["Base", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.2": { packages: ["Base", "Mid", "Premium"] }
                     },
                     "Ducato": {
-                        "1.9": ["Standard", "Mid", "Premium"],
-                        "1.9D": ["Standard", "Mid", "Premium"],
-                        "2.0": ["Standard", "Mid", "Premium"],
-                        "2.0D": ["Standard", "Mid", "Premium"],
-                        "2.3D": ["Standard", "Mid", "Premium"],
-                        "2.8D": ["Standard", "Mid", "Premium"],
-                        "3.0D": ["Standard", "Mid", "Premium"]
+                        "Benzin-Manuel-1.9": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-1.9": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-1.9": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-1.9": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Manuel-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Benzin-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.3": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-2.8": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-2.8": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Manuel-3.0": { packages: ["Standard", "Mid", "Premium"] },
+                        "Dizel-Otomatik-3.0": { packages: ["Standard", "Mid", "Premium"] }
                     }
                 }
             }
@@ -2628,15 +2856,15 @@
 
         let currentStep = 1;
 
-                function loadBrands() {
+        function loadBrands() {
             const vehicleType = document.getElementById('vehicleType').value;
             const brandSelect = document.getElementById('brand');
             brandSelect.innerHTML = '<option value="">Seçiniz</option>';
             
-            if (vehicleType && vehicleData[vehicleType]) {
-                const brands = Object.keys(vehicleData[vehicleType]).sort();
+            if (vehicleType && vehicleDataFull[vehicleType]) {
+                const brands = Object.keys(vehicleDataFull[vehicleType]).sort();
                 brands.forEach(brand => {
-                    if (Object.keys(vehicleData[vehicleType][brand]).length > 0) {
+                    if (Object.keys(vehicleDataFull[vehicleType][brand]).length > 0) {
                         const opt = document.createElement('option');
                         opt.value = brand;
                         opt.textContent = brand;
@@ -2645,8 +2873,10 @@
                 });
             }
             
-            document.getElementById('model').innerHTML = '<option value="">Önce marka seçiniz</option>';
-            document.getElementById('engine').innerHTML = '<option value="">Önce model seçiniz</option>';
+            document.getElementById('model').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('fuel').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('transmission').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('engine').innerHTML = '<option value="">Seçiniz</option>';
             document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
         }
 
@@ -2656,8 +2886,8 @@
             const modelSelect = document.getElementById('model');
             modelSelect.innerHTML = '<option value="">Seçiniz</option>';
             
-            if (vehicleType && brand && vehicleData[vehicleType][brand]) {
-                const models = Object.keys(vehicleData[vehicleType][brand]).sort();
+            if (vehicleType && brand && vehicleDataFull[vehicleType][brand]) {
+                const models = Object.keys(vehicleDataFull[vehicleType][brand]).sort();
                 models.forEach(model => {
                     const opt = document.createElement('option');
                     opt.value = model;
@@ -2666,50 +2896,14 @@
                 });
             }
             
+            loadYearRange();
+            document.getElementById('fuel').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('transmission').innerHTML = '<option value="">Seçiniz</option>';
             document.getElementById('engine').innerHTML = '<option value="">Seçiniz</option>';
             document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
         }
 
-        function loadEngines() {
-            const vehicleType = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const engineSelect = document.getElementById('engine');
-            engineSelect.innerHTML = '<option value="">Seçiniz</option>';
-            
-            if (vehicleType && brand && model && vehicleData[vehicleType][brand] && vehicleData[vehicleType][brand][model]) {
-                const engines = Object.keys(vehicleData[vehicleType][brand][model]).sort();
-                engines.forEach(engine => {
-                    const opt = document.createElement('option');
-                    opt.value = engine;
-                    opt.textContent = engine;
-                    engineSelect.appendChild(opt);
-                });
-            }
-            
-            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
-        }
-
-        function loadPackages() {
-            const vehicleType = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const engine = document.getElementById('engine').value;
-            const packageSelect = document.getElementById('package');
-            packageSelect.innerHTML = '<option value="">Seçiniz</option>';
-            
-            if (vehicleType && brand && model && engine && vehicleData[vehicleType][brand] && vehicleData[vehicleType][brand][model] && vehicleData[vehicleType][brand][model][engine]) {
-                const packages = vehicleData[vehicleType][brand][model][engine];
-                packages.forEach(pkg => {
-                    const opt = document.createElement('option');
-                    opt.value = pkg;
-                    opt.textContent = pkg;
-                    packageSelect.appendChild(opt);
-                });
-            }
-        }
-
-        function loadYears() {
+        function loadYearRange() {
             const yearSelect = document.getElementById('year');
             yearSelect.innerHTML = '<option value="">Seçiniz</option>';
             const currentYear = new Date().getFullYear();
@@ -2719,6 +2913,124 @@
                 opt.value = i;
                 opt.textContent = i;
                 yearSelect.appendChild(opt);
+            }
+        }
+
+        function loadFuel() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const fuelSelect = document.getElementById('fuel');
+            const transmissionSelect = document.getElementById('transmission');
+            
+            fuelSelect.innerHTML = '<option value="">Seçiniz</option>';
+            transmissionSelect.innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('engine').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && vehicleDataFull[vehicleType][brand][model]) {
+                const modelData = vehicleDataFull[vehicleType][brand][model];
+                const fuels = new Set();
+                
+                Object.keys(modelData).forEach(key => {
+                    const fuel = key.split('-')[0];
+                    fuels.add(fuel);
+                });
+                
+                Array.from(fuels).sort().forEach(fuel => {
+                    const opt = document.createElement('option');
+                    opt.value = fuel;
+                    opt.textContent = fuel;
+                    fuelSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function loadTransmissions() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const fuel = document.getElementById('fuel').value;
+            const transmissionSelect = document.getElementById('transmission');
+            
+            transmissionSelect.innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('engine').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && fuel && vehicleDataFull[vehicleType][brand][model]) {
+                const modelData = vehicleDataFull[vehicleType][brand][model];
+                const transmissions = new Set();
+                
+                Object.keys(modelData).forEach(key => {
+                    const parts = key.split('-');
+                    if (parts[0] === fuel) {
+                        transmissions.add(parts[1]);
+                    }
+                });
+                
+                Array.from(transmissions).sort().forEach(transmission => {
+                    const opt = document.createElement('option');
+                    opt.value = transmission;
+                    opt.textContent = transmission;
+                    transmissionSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function loadEngines() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const fuel = document.getElementById('fuel').value;
+            const transmission = document.getElementById('transmission').value;
+            const engineSelect = document.getElementById('engine');
+            
+            engineSelect.innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && fuel && transmission && vehicleDataFull[vehicleType][brand][model]) {
+                const modelData = vehicleDataFull[vehicleType][brand][model];
+                const engines = new Set();
+                
+                Object.keys(modelData).forEach(key => {
+                    const parts = key.split('-');
+                    if (parts[0] === fuel && parts[1] === transmission) {
+                        engines.add(parts[2]);
+                    }
+                });
+                
+                Array.from(engines).sort().forEach(engine => {
+                    const opt = document.createElement('option');
+                    opt.value = engine;
+                    opt.textContent = engine;
+                    engineSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function loadPackages() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const fuel = document.getElementById('fuel').value;
+            const transmission = document.getElementById('transmission').value;
+            const engine = document.getElementById('engine').value;
+            const packageSelect = document.getElementById('package');
+            
+            packageSelect.innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && fuel && transmission && engine && vehicleDataFull[vehicleType][brand][model]) {
+                const modelData = vehicleDataFull[vehicleType][brand][model];
+                const key = `${fuel}-${transmission}-${engine}`;
+                
+                if (modelData[key] && modelData[key].packages) {
+                    modelData[key].packages.forEach(pkg => {
+                        const opt = document.createElement('option');
+                        opt.value = pkg;
+                        opt.textContent = pkg;
+                        packageSelect.appendChild(opt);
+                    });
+                }
             }
         }
 
@@ -2822,17 +3134,21 @@
                 <strong>📍 Araç Türü:</strong> ${vehicleTypeDisplay}<br>
                 <strong>🏢 Marka:</strong> ${document.getElementById('brand').value}<br>
                 <strong>📋 Model:</strong> ${document.getElementById('model').value}<br>
-                <strong>🔧 Motor:</strong> ${document.getElementById('engine').value}<br>
-                <strong>📦 Paket:</strong> ${document.getElementById('package').value}<br>
                 <strong>📅 Yıl:</strong> ${document.getElementById('year').value}<br>
                 <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
                 <strong>🎨 Renk:</strong> ${document.getElementById('color').value}<br>
-                <strong>🚗 Şanzıman:</strong> ${document.getElementById('transmission').value}<br>
                 <strong>💨 Yakıt:</strong> ${document.getElementById('fuel').value}<br>
+                <strong>🔧 Şanzıman:</strong> ${document.getElementById('transmission').value}<br>
+                <strong>🚗 Motor:</strong> ${document.getElementById('engine').value}<br>
+                <strong>📦 Paket:</strong> ${document.getElementById('package').value}<br>
+                <strong>🔄 Çekiş:</strong> ${document.getElementById('wheelDrive').value}<br>
                 ${paintInfo}
                 ${tramerInfo}<br>
-                <strong>👤 Ad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
-                <strong>📱 Tel:</strong> ${document.getElementById('phone').value}
+                <strong>👤 Ad Soyad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+                <strong>📱 Telefon:</strong> ${document.getElementById('phone').value}<br>
+                <strong>📧 Email:</strong> ${document.getElementById('email').value || 'Belirtilmemiş'}<br>
+                <strong>🏙️ Şehir:</strong> ${document.getElementById('city').value}<br>
+                <strong>📍 İlçe:</strong> ${document.getElementById('district').value}
             `;
         }
 
@@ -2878,13 +3194,13 @@
                 vehicleType: vehicleTypeForSave,
                 brand: document.getElementById('brand').value,
                 model: document.getElementById('model').value,
-                engine: document.getElementById('engine').value,
-                package: document.getElementById('package').value,
                 year: document.getElementById('year').value,
                 mileage: document.getElementById('mileage').value,
                 color: document.getElementById('color').value,
                 fuel: document.getElementById('fuel').value,
                 transmission: document.getElementById('transmission').value,
+                engine: document.getElementById('engine').value,
+                package: document.getElementById('package').value,
                 wheelDrive: document.getElementById('wheelDrive').value,
                 paintData: JSON.stringify(paintData),
                 tramerStatus: document.querySelector('input[name="tramerStatus"]:checked').value,
@@ -2920,9 +3236,10 @@
 
         // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
-            loadYears();
-            document.getElementById('model').addEventListener('change', loadEngines);
+            document.getElementById('fuel').addEventListener('change', loadTransmissions);
+            document.getElementById('transmission').addEventListener('change', loadEngines);
             document.getElementById('engine').addEventListener('change', loadPackages);
+            document.getElementById('model').addEventListener('change', loadFuel);
         });
     </script>
 </body>
