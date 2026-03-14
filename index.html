@@ -4968,20 +4968,22 @@
 
         window.addEventListener('load', loadYears);
     </script>
-        <script>
-        function goToAdmin() {
-            window.location.href = 'hikaz.html';  // ← BU SATIRI DEĞIŞTIR
-        }
-
+            <script>
         window.addEventListener('load', () => {
-            const nav = document.querySelector('nav ul');
-            if (nav) {
-                const adminLink = document.createElement('li');
-                adminLink.innerHTML = '<a onclick="goToAdmin()" style="cursor: pointer;">🔐 Admin</a>';
-                nav.appendChild(adminLink);
+            // Eğer admin giriş yapmışsa, Admin butonu göster
+            if (localStorage.getItem('adminLogged') === 'true') {
+                const nav = document.querySelector('nav ul');
+                if (nav) {
+                    const adminLink = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.textContent = '🔐 Admin Panel';
+                    link.href = './hikaz.html';
+                    link.style.cursor = 'pointer';
+                    adminLink.appendChild(link);
+                    nav.appendChild(adminLink);
+                }
             }
         });
     </script>
-</body>
 </body>
 </html>
