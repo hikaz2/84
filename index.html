@@ -776,19 +776,20 @@
 
                         <!-- STEP 2 -->
                         <div class="form-step" data-step="2">
-                            <h3>Motor & Özellikleri</h3>
+                            <h3>Motor & Paket</h3>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="fuel">Yakıt *</label>
-                                    <select id="fuel" required>
+                                    <label for="engine">Motor *</label>
+                                    <select id="engine" required onchange="loadPackages()">
                                         <option value="">Seçiniz</option>
-                                        <option value="Benzin">Benzin</option>
-                                        <option value="Dizel">Dizel</option>
-                                        <option value="LPG">LPG</option>
-                                        <option value="Elektrik">Elektrik</option>
-                                        <option value="Hibrit">Hibrit</option>
-                                        <option value="Doğalgaz">Doğalgaz</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="package">Paket *</label>
+                                    <select id="package" required>
+                                        <option value="">Seçiniz</option>
                                     </select>
                                 </div>
 
@@ -802,58 +803,19 @@
                                         <option value="Yarı-Otomatik">Yarı-Otomatik</option>
                                     </select>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="engineSize">Motor Hacmi *</label>
-                                    <select id="engineSize" required>
-                                        <option value="">Seçiniz</option>
-                                        <option value="0.8">0.8 L</option>
-                                        <option value="1.0">1.0 L</option>
-                                        <option value="1.2">1.2 L</option>
-                                        <option value="1.3">1.3 L</option>
-                                        <option value="1.4">1.4 L</option>
-                                        <option value="1.5">1.5 L</option>
-                                        <option value="1.6">1.6 L</option>
-                                        <option value="1.8">1.8 L</option>
-                                        <option value="1.9">1.9 L</option>
-                                        <option value="2.0">2.0 L</option>
-                                        <option value="2.2">2.2 L</option>
-                                        <option value="2.5">2.5 L</option>
-                                        <option value="2.8">2.8 L</option>
-                                        <option value="3.0">3.0 L</option>
-                                        <option value="3.5">3.5 L</option>
-                                        <option value="4.0">4.0 L</option>
-                                        <option value="5.0">5.0 L</option>
-                                        <option value="6.0">6.0 L</option>
-                                    </select>
-                                </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="horsepower">Beygir Gücü *</label>
-                                    <select id="horsepower" required>
+                                    <label for="fuel">Yakıt *</label>
+                                    <select id="fuel" required>
                                         <option value="">Seçiniz</option>
-                                        <option value="50">50 BG</option>
-                                        <option value="60">60 BG</option>
-                                        <option value="75">75 BG</option>
-                                        <option value="90">90 BG</option>
-                                        <option value="110">110 BG</option>
-                                        <option value="130">130 BG</option>
-                                        <option value="150">150 BG</option>
-                                        <option value="170">170 BG</option>
-                                        <option value="190">190 BG</option>
-                                        <option value="210">210 BG</option>
-                                        <option value="230">230 BG</option>
-                                        <option value="250">250 BG</option>
-                                        <option value="280">280 BG</option>
-                                        <option value="300">300 BG</option>
-                                        <option value="350">350 BG</option>
-                                        <option value="400">400 BG</option>
-                                        <option value="450">450 BG</option>
-                                        <option value="500">500 BG</option>
-                                        <option value="600">600 BG</option>
-                                        <option value="700">700 BG</option>
+                                        <option value="Benzin">Benzin</option>
+                                        <option value="Dizel">Dizel</option>
+                                        <option value="LPG">LPG</option>
+                                        <option value="Elektrik">Elektrik</option>
+                                        <option value="Hibrit">Hibrit</option>
+                                        <option value="Doğalgaz">Doğalgaz</option>
                                     </select>
                                 </div>
 
@@ -1162,163 +1124,1511 @@
     <script>
         const vehicleData = {
             "Otomobil": {
-                "Abarth": ["500", "595", "695"],
-                "Acura": ["ILX", "RDX", "TLX", "MDX", "NSX"],
-                "Alfa Romeo": ["Giulia", "Stelvio", "4C", "Giulietta", "MiTo", "159", "Brera"],
-                "Alpina": ["B3", "B5", "B7"],
-                "Aston Martin": ["DB11", "Vantage", "DBS", "Rapide"],
-                "Audi": ["A1", "A3", "A4", "A5", "A6", "A7", "A8"],
-                "Bentley": ["Continental", "Flying Spur", "Mulsanne"],
-                "BMW": ["316", "318", "320", "323", "325", "328", "330", "335", "340", "420", "425", "428", "430", "435", "440", "520", "523", "525", "528", "530", "535", "540", "545", "550", "555", "560", "565", "570", "575", "580", "585", "590", "595", "600", "620", "630", "640", "650", "660", "670", "680", "690", "700", "720", "730", "740", "745", "750", "760", "770", "780", "790", "840", "850", "860", "M3", "M4", "M5", "M6", "M8", "Z4"],
-                "Bugatti": ["Veyron", "Chiron"],
-                "Cadillac": ["ATS", "CTS", "DeVille"],
-                "Chevrolet": ["Cruze"],
-                "Chrysler": ["300"],
-                "Citroen": ["C1", "C2", "C3", "C4", "C5", "C-Elysee", "DS3", "DS4", "DS5"],
-                "Dacia": ["Logan"],
-                "Daihatsu": [],
-                "Datsun": [],
-                "Dodge": ["Charger", "Challenger"],
-                "Ferrari": ["F430", "F458", "F488", "California", "FF"],
-                "Fiat": ["500", "Panda", "Punto", "Tipo"],
-                "Ford": ["Focus", "Fiesta", "Fusion", "Mondeo"],
-                "GAC": [],
-                "Geely": ["Emgrand"],
-                "Genesis": ["G70", "G80", "G90"],
-                "GMC": [],
-                "Great Wall": [],
-                "Haval": [],
-                "Honda": ["Accord", "Civic"],
-                "Hyundai": ["Accent", "Elantra", "Sonata", "i20", "i30"],
-                "Infiniti": ["G", "Q50", "Q60"],
-                "Isuzu": [],
-                "Iveco": [],
-                "Jaguar": ["XE", "XF"],
-                "Jeep": [],
-                "Kia": ["Cerato", "Forte", "K5", "Optima", "Rio"],
-                "Lamborghini": [],
-                "Lancia": ["Ypsilon"],
-                "Land Rover": [],
-                "Lexus": ["ES", "GS", "LS", "IS"],
-                "Lifan": [],
-                "Maserati": ["Ghibli", "Quattroporte"],
-                "Mazda": ["2", "3", "6"],
-                "McLaren": [],
-                "Mercedes-Benz": ["A", "C", "E", "S", "CLA"],
-                "MG": ["3", "5", "6"],
-                "Mini": ["Cooper"],
-                "Mitsubishi": ["Colt", "Lancer"],
-                "Nissan": ["Almera", "Altima", "Maxima", "Sentra", "Sunny", "Teana"],
-                "Opel": ["Astra", "Corsa", "Insignia"],
-                "Peugeot": ["206", "207", "208", "306", "307", "308", "309", "405", "406", "407", "408", "509"],
-                "Porsche": ["911", "Taycan"],
-                "Renault": ["Clio", "Fluence", "Laguna", "Megane", "Talisman"],
-                "Rolls-Royce": ["Ghost", "Phantom", "Wraith"],
-                "Rover": ["25", "45", "75"],
-                "Skoda": ["Fabia", "Octavia", "Superb"],
-                "Subaru": ["Legacy", "Impreza"],
-                "Suzuki": ["Swift", "Ciaz"],
-                "Tata": [],
-                "Tesla": ["Model 3", "Model S"],
-                "Toyota": ["Camry", "Corolla", "Altis", "Yaris", "Prius", "Mark X", "Crown", "Reiz"],
-                "Volkswagen": ["Golf", "Jetta", "Passat", "Polo", "Phaeton", "Bora"],
-                "Volvo": ["S40", "S60", "S80", "S90"],
-                "Wuling": [],
-                "Xpeng": [],
-                "Zotye": [],
-                "Chery": [],
-                "Changan": [],
-                "FAW": ["Besturn"],
-                "Dongfeng": []
+                "Toyota": {
+                    "Camry": {
+                        "2.0": ["Le", "S", "SE", "XLE", "XSE"],
+                        "2.5": ["L", "LE", "SE", "XLE", "XSE"],
+                        "3.5": ["L", "LE", "SE", "XLE", "XSE"]
+                    },
+                    "Corolla": {
+                        "1.6": ["L", "LE", "S", "XLE", "XSE"],
+                        "1.8": ["ECO", "LE", "S", "XLE", "XSE"],
+                        "2.0": ["L", "LE", "S", "XLE", "XSE"]
+                    },
+                    "Yaris": {
+                        "1.3": ["L", "LE", "XLE"],
+                        "1.5": ["L", "LE", "S", "XLE"]
+                    },
+                    "Prius": {
+                        "1.8 Hibrit": ["L", "LE", "XLE", "Four"],
+                        "1.8 Hibrit AWD": ["XLE"]
+                    },
+                    "Altis": {
+                        "1.6": ["GL", "GLX", "SE"],
+                        "1.8": ["GL", "GLX", "SE", "XLE"],
+                        "2.0": ["GL", "GLX", "SE"]
+                    },
+                    "Mark X": {
+                        "2.5": ["Standard", "G", "250G"],
+                        "3.0": ["Standard", "G", "300G", "Premium"]
+                    },
+                    "Crown": {
+                        "2.0": ["Standard"],
+                        "2.5": ["G", "G Executive", "Royal"],
+                        "3.0": ["Premium", "Royal Premium"]
+                    }
+                },
+                "Honda": {
+                    "Accord": {
+                        "1.5T": ["LX", "Sport", "EX", "EX-L"],
+                        "2.0T": ["Sport", "EX", "EX-L"],
+                        "3.5": ["LX", "EX", "EX-L"]
+                    },
+                    "Civic": {
+                        "1.5": ["DX", "LX", "EX", "EX-T"],
+                        "1.6": ["S", "EX", "LX"],
+                        "2.0": ["Si", "Type R"]
+                    },
+                    "Insight": {
+                        "1.5 Hibrit": ["LX", "EX", "EX-L"]
+                    }
+                },
+                "BMW": {
+                    "320i": {
+                        "2.0": ["Standart", "Sport", "Luxury", "M Sport"]
+                    },
+                    "320d": {
+                        "2.0D": ["Standart", "Sport", "Luxury", "M Sport"]
+                    },
+                    "330i": {
+                        "2.0T": ["Standart", "Sport", "Luxury", "M Sport"]
+                    },
+                    "330d": {
+                        "2.0D": ["Standart", "Sport", "Luxury", "M Sport"]
+                    },
+                    "520d": {
+                        "2.0D": ["Standart", "Luxury", "M Sport"],
+                        "2.5D": ["Standart", "Luxury", "M Sport"]
+                    },
+                    "530i": {
+                        "2.0T": ["Standart", "Luxury", "M Sport"]
+                    }
+                },
+                "Mercedes-Benz": {
+                    "C200": {
+                        "1.5": ["Urban", "AMG Line"],
+                        "1.6": ["Urban", "AMG Line"]
+                    },
+                    "C300": {
+                        "2.0": ["Urban", "Classic", "AMG Line"]
+                    },
+                    "E200": {
+                        "1.5": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "E300": {
+                        "2.0": ["Urban", "Avantgarde", "AMG Line"],
+                        "2.0D": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "S500": {
+                        "3.0": ["Standart", "AMG Line", "Premium"],
+                        "3.5": ["Standart", "AMG Line", "Premium"]
+                    }
+                },
+                "Audi": {
+                    "A4": {
+                        "1.4T": ["Urban", "Design", "S Line"],
+                        "1.5T": ["Urban", "Design", "S Line"],
+                        "2.0": ["Urban", "Design", "S Line"],
+                        "2.0D": ["Urban", "Design", "S Line"]
+                    },
+                    "A6": {
+                        "2.0": ["Urban", "Design", "S Line"],
+                        "2.0D": ["Urban", "Design", "S Line"],
+                        "2.5": ["Urban", "Design", "S Line"]
+                    },
+                    "A8": {
+                        "3.0": ["Standart", "S Line", "Premium"],
+                        "4.0": ["Standart", "S Line", "Premium"]
+                    }
+                },
+                "Volkswagen": {
+                    "Golf": {
+                        "1.0": ["Trend", "Comfort", "Highline"],
+                        "1.4": ["Trend", "Comfort", "Highline"],
+                        "1.5": ["Trend", "Comfort", "Highline", "R Line"],
+                        "2.0": ["Trend", "Comfort", "Highline", "GTI"]
+                    },
+                    "Passat": {
+                        "1.4T": ["Trend", "Comfort", "Highline"],
+                        "1.5T": ["Trend", "Comfort", "Highline"],
+                        "2.0": ["Trend", "Comfort", "Highline"],
+                        "2.0D": ["Trend", "Comfort", "Highline"]
+                    },
+                    "Jetta": {
+                        "1.4": ["Trend", "Comfort", "Highline"],
+                        "1.6": ["Trend", "Comfort", "Highline"],
+                        "2.0": ["Trend", "Comfort", "Highline"]
+                    }
+                },
+                "Ford": {
+                    "Focus": {
+                        "1.0": ["Style", "Trend", "Titanium"],
+                        "1.5": ["Style", "Trend", "Titanium"],
+                        "1.6": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Titanium", "ST"]
+                    },
+                    "Fiesta": {
+                        "1.0": ["Style", "Trend", "Titanium"],
+                        "1.1": ["Style", "Trend", "Titanium"],
+                        "1.25": ["Style", "Trend", "Titanium"],
+                        "1.6": ["Titanium", "ST"]
+                    },
+                    "Mondeo": {
+                        "1.5T": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Style", "Trend", "Titanium"],
+                        "2.0D": ["Style", "Trend", "Titanium"]
+                    }
+                },
+                "Renault": {
+                    "Clio": {
+                        "0.9": ["Life", "Joy", "Iconic"],
+                        "1.0": ["Life", "Joy", "Iconic"],
+                        "1.2": ["Life", "Joy", "Iconic"],
+                        "1.5D": ["Life", "Joy", "Iconic"]
+                    },
+                    "Megane": {
+                        "1.2": ["Life", "Trend", "Iconic"],
+                        "1.3": ["Life", "Trend", "Iconic"],
+                        "1.5D": ["Life", "Trend", "Iconic"],
+                        "1.6": ["Life", "Trend", "Iconic"]
+                    },
+                    "Laguna": {
+                        "1.6": ["Life", "Trend", "Privilege"],
+                        "2.0": ["Life", "Trend", "Privilege"],
+                        "2.0D": ["Life", "Trend", "Privilege"]
+                    }
+                },
+                "Peugeot": {
+                    "208": {
+                        "1.2": ["Active", "Allure", "GT Line"],
+                        "1.4": ["Active", "Allure", "GT Line"],
+                        "1.5D": ["Active", "Allure", "GT Line"]
+                    },
+                    "308": {
+                        "1.2": ["Active", "Allure", "GT Line"],
+                        "1.5": ["Active", "Allure", "GT Line"],
+                        "1.5D": ["Active", "Allure", "GT Line"],
+                        "1.6": ["Active", "Allure", "GT Line"]
+                    },
+                    "408": {
+                        "1.6": ["Active", "Allure", "GT Line"],
+                        "1.6T": ["Active", "Allure", "GT Line"],
+                        "1.8": ["Active", "Allure", "GT Line"],
+                        "2.0": ["Active", "Allure", "GT Line"]
+                    }
+                },
+                "Hyundai": {
+                    "Accent": {
+                        "1.4": ["GL", "GLS", "GLX"],
+                        "1.5": ["GL", "GLS", "GLX"]
+                    },
+                    "Elantra": {
+                        "1.6": ["GL", "GLS", "GLX"],
+                        "1.8": ["GL", "GLS", "GLX"],
+                        "2.0": ["GL", "GLS", "GLX"]
+                    },
+                    "Sonata": {
+                        "2.0": ["GL", "GLS", "GLX"],
+                        "2.4": ["GL", "GLS", "GLX"],
+                        "2.7": ["GL", "GLS", "GLX"]
+                    }
+                },
+                "Kia": {
+                    "Cerato": {
+                        "1.6": ["L", "S", "EX"],
+                        "1.8": ["L", "S", "EX"],
+                        "2.0": ["L", "S", "EX"]
+                    },
+                    "Forte": {
+                        "1.6": ["L", "S", "EX"],
+                        "1.8": ["L", "S", "EX"],
+                        "2.0": ["L", "S", "EX"]
+                    },
+                    "Optima": {
+                        "2.0": ["L", "S", "EX", "SX"],
+                        "2.4": ["L", "S", "EX", "SX"]
+                    }
+                },
+                "Nissan": {
+                    "Sunny": {
+                        "1.5": ["S", "SV", "SL"],
+                        "1.6": ["S", "SV", "SL"]
+                    },
+                    "Altima": {
+                        "2.5": ["S", "SV", "SL", "SR"],
+                        "3.5": ["S", "SV", "SL", "SR"]
+                    },
+                    "Teana": {
+                        "2.0": ["S", "SV", "SL"],
+                        "2.3": ["S", "SV", "SL"],
+                        "2.5": ["S", "SV", "SL"]
+                    }
+                },
+                "Mazda": {
+                    "2": {
+                        "1.3": ["i", "i Sport", "s Touring"],
+                        "1.5": ["i", "i Sport", "s Touring"],
+                        "1.6": ["i", "i Sport", "s Touring"]
+                    },
+                    "3": {
+                        "1.5": ["i", "i Touring", "s Touring"],
+                        "1.6": ["i", "i Touring", "s Touring"],
+                        "2.0": ["i", "i Touring", "s Touring", "Speed3"]
+                    },
+                    "6": {
+                        "2.0": ["i", "i Touring", "s Touring"],
+                        "2.5": ["i", "i Touring", "s Touring"],
+                        "3.0": ["i", "i Touring", "s Touring"]
+                    }
+                },
+                "Subaru": {
+                    "Impreza": {
+                        "1.5": ["2.5i", "2.5i Premium", "2.5i Sport"],
+                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
+                        "2.5": ["2.5i Limited", "2.5i RS"]
+                    },
+                    "Legacy": {
+                        "2.5": ["2.5i", "2.5i Premium", "2.5i Limited"]
+                    }
+                },
+                "Fiat": {
+                    "Punto": {
+                        "1.2": ["Pop", "Easy", "Lounge"],
+                        "1.3": ["Pop", "Easy", "Lounge"],
+                        "1.4": ["Pop", "Easy", "Lounge"]
+                    },
+                    "Tipo": {
+                        "1.3": ["Pop", "Easy", "Lounge"],
+                        "1.4": ["Pop", "Easy", "Lounge"],
+                        "1.6": ["Pop", "Easy", "Lounge"]
+                    },
+                    "500": {
+                        "0.9": ["Pop", "Easy", "Lounge"],
+                        "1.2": ["Pop", "Easy", "Lounge"],
+                        "1.4": ["Pop", "Easy", "Lounge"]
+                    }
+                },
+                "Dacia": {
+                    "Logan": {
+                        "1.0": ["Express", "Essential", "Comfort", "Laureate"],
+                        "1.2": ["Express", "Essential", "Comfort", "Laureate"],
+                        "1.4": ["Express", "Essential", "Comfort", "Laureate"],
+                        "1.5D": ["Express", "Essential", "Comfort", "Laureate"]
+                    }
+                },
+                "Chevrolet": {
+                    "Cruze": {
+                        "1.4T": ["LS", "LT", "LTZ"],
+                        "1.5": ["LS", "LT", "LTZ"],
+                        "1.6": ["LS", "LT", "LTZ"],
+                        "1.8": ["LS", "LT", "LTZ"]
+                    }
+                },
+                "Chrysler": {
+                    "300": {
+                        "2.7": ["LX", "Limited", "300C"],
+                                                "3.5": ["LX", "Limited", "300C"],
+                        "5.7": ["LX", "Limited", "300C"]
+                    }
+                },
+                "Alfa Romeo": {
+                    "Giulia": {
+                        "2.0": ["Super", "Veloce", "Quadrifoglio"],
+                        "2.2D": ["Super", "Veloce", "Quadrifoglio"]
+                    },
+                    "Giulietta": {
+                        "1.2": ["Progression", "Distinctive", "Distinctive Plus"],
+                        "1.4": ["Progression", "Distinctive", "Distinctive Plus"],
+                        "1.6D": ["Progression", "Distinctive", "Distinctive Plus"]
+                    },
+                    "MiTo": {
+                        "1.3": ["Junior", "Junior Plus", "Business"],
+                        "1.4": ["Junior", "Junior Plus", "Business"]
+                    }
+                },
+                "Lancia": {
+                    "Ypsilon": {
+                        "0.9": ["Life", "Gold", "Platinum"],
+                        "1.0": ["Life", "Gold", "Platinum"],
+                        "1.2": ["Life", "Gold", "Platinum"]
+                    }
+                },
+                "Geely": {
+                    "Emgrand": {
+                        "1.3": ["Standard", "Elite", "Luxury"],
+                        "1.5": ["Standard", "Elite", "Luxury"],
+                        "1.8": ["Standard", "Elite", "Luxury"]
+                    }
+                },
+                "MG": {
+                    "3": {
+                        "1.2": ["Standard", "Active", "Comfort"],
+                        "1.5": ["Standard", "Active", "Comfort"]
+                    },
+                    "5": {
+                        "1.5": ["Standard", "Active", "Comfort"],
+                        "1.6": ["Standard", "Active", "Comfort"]
+                    },
+                    "6": {
+                        "1.5": ["Standard", "Active", "Comfort", "Luxury"],
+                        "1.8": ["Standard", "Active", "Comfort", "Luxury"]
+                    }
+                },
+                "Chery": {
+                    "Arrizo": {
+                        "1.5": ["Standard", "Active", "Comfort"],
+                        "1.6": ["Standard", "Active", "Comfort"]
+                    }
+                },
+                "FAW": {
+                    "Besturn": {
+                        "1.6": ["Standard", "Comfort", "Luxury"],
+                        "2.0": ["Standard", "Comfort", "Luxury"]
+                    }
+                },
+                "Lexus": {
+                    "IS": {
+                        "2.0": ["Standard", "Luxury", "F Sport"],
+                        "2.5": ["Standard", "Luxury", "F Sport"]
+                    },
+                    "ES": {
+                        "2.5": ["Standard", "Luxury", "Premium Plus"],
+                        "3.5": ["Standard", "Luxury", "Premium Plus"]
+                    },
+                    "GS": {
+                        "2.0": ["Standard", "Luxury", "F Sport"],
+                        "3.0": ["Standard", "Luxury", "F Sport"],
+                        "4.6": ["Standard", "Luxury", "F Sport"]
+                    }
+                },
+                "Tesla": {
+                    "Model 3": {
+                        "Standard Range": ["Standard", "Plus", "Performance"],
+                        "Long Range": ["Standard", "Plus", "Performance"]
+                    },
+                    "Model S": {
+                        "Long Range": ["Standard", "Plaid"],
+                        "Plaid": ["Plaid", "Plaid+"]
+                    }
+                },
+                "Porsche": {
+                    "Taycan": {
+                        "2.0 Elektrik": ["Base", "4S", "Turbo S"],
+                        "2.2 Elektrik": ["Base", "4S", "Turbo S"]
+                    }
+                },
+                "Rolls-Royce": {
+                    "Ghost": {
+                        "6.6": ["Standard", "Silver", "Diamond"],
+                        "6.75": ["Standard", "Silver", "Diamond"]
+                    },
+                    "Phantom": {
+                        "6.75": ["Standard", "Extended", "Drophead"]
+                    },
+                    "Wraith": {
+                        "6.6": ["Standard", "Black Badge"]
+                    }
+                },
+                "Maserati": {
+                    "Ghibli": {
+                        "2.8": ["Modena", "Levante", "Trofeo"],
+                        "3.0": ["Modena", "Levante", "Trofeo"]
+                    },
+                    "Quattroporte": {
+                        "3.0": ["Modena", "Levante", "Trofeo"],
+                        "3.8": ["Modena", "Levante", "Trofeo"]
+                    }
+                },
+                "Bugatti": {},
+                "Lamborghini": {},
+                "Ferrari": {},
+                "Mini": {
+                    "Cooper": {
+                        "1.2": ["One", "Cooper", "Cooper S"],
+                        "1.5": ["One", "Cooper", "Cooper S"],
+                        "1.6": ["One", "Cooper", "Cooper S", "JCW"]
+                    }
+                },
+                "Mitsubishi": {
+                    "Lancer": {
+                        "1.5": ["GS", "GT", "SE"],
+                        "1.6": ["GS", "GT", "SE"],
+                        "2.0": ["GS", "GT", "SE", "Evolution"]
+                    },
+                    "Colt": {
+                        "1.3": ["CJ", "GL", "GLX"],
+                        "1.5": ["CJ", "GL", "GLX"]
+                    }
+                },
+                "Skoda": {
+                    "Fabia": {
+                        "1.0": ["Active", "Ambition", "Elegance"],
+                        "1.2": ["Active", "Ambition", "Elegance"],
+                        "1.5": ["Active", "Ambition", "Elegance"]
+                    },
+                    "Octavia": {
+                        "1.0": ["Active", "Ambition", "Elegance"],
+                        "1.4": ["Active", "Ambition", "Elegance"],
+                        "1.5": ["Active", "Ambition", "Elegance"],
+                        "1.8T": ["Active", "Ambition", "Elegance"]
+                    }
+                }
             },
             "SUV": {
-                "Audi": ["Q2", "Q3", "Q4", "Q5", "Q7", "Q8"],
-                "BMW": ["X1", "X2", "X3", "X4", "X5", "X6", "X7"],
-                "Brilliance": ["H230", "H320", "V5", "V7"],
-                "Cadillac": ["Escalade", "SRX"],
-                "Chevrolet": ["Equinox", "Captiva", "Traverse", "Tahoe"],
-                "Dacia": ["Duster"],
-                "Dodge": ["Durango"],
-                "Ford": ["EcoSport", "Kuga", "Explorer"],
-                "GAC": ["GS3", "GS4", "GS5", "GS8"],
-                "Geely": ["GX2", "GX3", "GX7"],
-                "Great Wall": ["Haval"],
-                "Haval": ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "F5", "F7"],
-                "Honda": ["CR-V", "Pilot", "HR-V"],
-                "Hyundai": ["Santa Fe", "Tucson", "ix25", "ix35", "Kona", "Venue", "Creta"],
-                "Infiniti": ["EX", "QX50", "QX60", "QX80"],
-                "Isuzu": ["D-Max", "Mu-X"],
-                "Jeep": ["Wrangler", "Cherokee", "Compass", "Grand Cherokee", "Renegade"],
-                "Kia": ["Sorento", "Niro", "Sportage", "Seltos"],
-                "Land Rover": ["Discovery", "Discovery Sport", "Freelander", "Range Rover", "Range Rover Evoque", "Range Rover Sport", "Range Rover Velar", "Defender"],
-                "Lexus": ["NX", "RX", "UX", "GX", "LX"],
-                "Lifan": ["X50", "X60"],
-                "Mazda": ["CX-3", "CX-5", "CX-7", "CX-9", "CX-30"],
-                "Mercedes-Benz": ["GLA", "GLB", "GLC", "GLE", "GLS", "GLK"],
-                "MG": ["GS", "HS"],
-                "Mitsubishi": ["Outlander", "Pajero", "ASX"],
-                "Nissan": ["Qashqai", "X-Trail", "Murano", "Pathfinder", "Rogue"],
-                "Opel": ["Mokka", "Grandland", "Antara"],
-                "Peugeot": ["2008", "3008", "4007", "5008"],
-                "Porsche": ["Cayenne", "Macan"],
-                "Renault": ["Kadjar", "Koleos"],
-                "Subaru": ["Forester", "Crosstrek", "Outback", "XV"],
-                "Suzuki": ["Vitara", "S-Cross"],
-                "Tesla": ["Model X", "Model Y"],
-                "Toyota": ["RAV4", "Fortuner", "Highlander", "Vanguard", "Prado", "Land Cruiser", "Rush", "Urban Cruiser", "Raize"],
-                "Volkswagen": ["T-Cross", "T-Roc", "Tiguan", "Touareg"],
-                "Volvo": ["XC40", "XC60", "XC70", "XC90"],
-                "Wuling": [],
-                "Xpeng": ["G3"],
-                "Zotye": [],
-                "Chery": ["Tiggo"],
-                "Changan": ["CS35", "CS55", "CS75", "CS95"],
-                "Citroen": ["C3-Aircross"],
-                "Dongfeng": ["AX3", "AX5", "AX7"],
-                "Fiat": ["500X"],
-                "Alfa Romeo": ["Stelvio"],
-                "Jaguar": ["F-Pace"],
-                "GMC": ["Terrain", "Acadia", "Yukon", "Canyon"],
-                "Acura": ["RDX", "MDX"],
-                "Hyundai": [],
-                "Buick": ["Enclave", "Envision"]
+                "Toyota": {
+                    "RAV4": {
+                        "2.0": ["L", "LE", "XLE", "Limited"],
+                        "2.5": ["L", "LE", "XLE", "Limited"],
+                        "3.5": ["L", "LE", "XLE", "Limited"]
+                    },
+                    "Prado": {
+                        "2.7": ["TX", "TX Limited", "VX"],
+                        "3.0D": ["TX", "TX Limited", "VX"],
+                        "4.0": ["TX", "TX Limited", "VX"]
+                    },
+                    "Land Cruiser": {
+                        "4.0": ["Standard", "VX", "ZX"],
+                        "4.5D": ["Standard", "VX", "ZX"]
+                    },
+                    "Fortuner": {
+                        "2.4D": ["Standard", "Mid", "Premium"],
+                        "2.7": ["Standard", "Mid", "Premium"],
+                        "2.8": ["Standard", "Mid", "Premium"]
+                    },
+                    "Highlander": {
+                        "2.7": ["L", "LE", "Limited"],
+                        "3.5": ["L", "LE", "Limited"]
+                    },
+                    "Rush": {
+                        "1.5": ["Standard", "Mid", "Premium"],
+                        "1.6": ["Standard", "Mid", "Premium"]
+                    },
+                    "Raize": {
+                        "1.0T": ["Standard", "Mid", "Premium"],
+                        "1.2": ["Standard", "Mid", "Premium"]
+                    }
+                },
+                "Honda": {
+                    "CR-V": {
+                        "1.5": ["LX", "EX", "EX-L"],
+                        "2.0": ["LX", "EX", "EX-L"],
+                        "2.4": ["LX", "EX", "EX-L"]
+                    },
+                    "Pilot": {
+                        "3.0": ["LX", "EX", "EX-L"],
+                        "3.5": ["LX", "EX", "EX-L"]
+                    },
+                    "HR-V": {
+                        "1.5": ["LX", "EX", "EX-L"],
+                        "1.8": ["LX", "EX", "EX-L"]
+                    }
+                },
+                "BMW": {
+                    "X1": {
+                        "2.0": ["sDrive18i", "sDrive20i", "xDrive20i", "M Sport"],
+                        "2.0D": ["sDrive18d", "xDrive20d", "M Sport"]
+                    },
+                    "X3": {
+                        "2.0T": ["xDrive20i", "xDrive30i", "M40i", "M Sport"],
+                        "2.0D": ["xDrive20d", "xDrive30d", "M Sport"]
+                    },
+                    "X5": {
+                        "3.0": ["xDrive30i", "xDrive40i", "M50i", "M Sport"],
+                        "3.0D": ["xDrive30d", "xDrive40d", "M Sport"]
+                    },
+                    "X7": {
+                        "3.0": ["xDrive40i", "xDrive50i", "M50i"],
+                        "3.0D": ["xDrive40d"]
+                    }
+                },
+                "Mercedes-Benz": {
+                    "GLA": {
+                        "1.3": ["Urban", "Avantgarde", "AMG Line"],
+                        "1.4T": ["Urban", "Avantgarde", "AMG Line"],
+                        "2.0": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "GLB": {
+                        "1.3": ["Urban", "Avantgarde", "AMG Line"],
+                        "2.0": ["Urban", "Avantgarde", "AMG Line"],
+                        "2.0D": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "GLC": {
+                        "2.0T": ["Urban", "Avantgarde", "AMG Line"],
+                        "2.0D": ["Urban", "Avantgarde", "AMG Line"],
+                        "3.0": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "GLE": {
+                        "2.0T": ["Urban", "Avantgarde", "AMG Line"],
+                        "3.0": ["Urban", "Avantgarde", "AMG Line"],
+                        "3.0D": ["Urban", "Avantgarde", "AMG Line"]
+                    },
+                    "GLS": {
+                        "3.0": ["Urban", "Avantgarde", "AMG Line"],
+                        "3.0D": ["Urban", "Avantgarde", "AMG Line"]
+                    }
+                },
+                "Audi": {
+                    "Q2": {
+                        "1.0": ["Standart", "Design", "S Line"],
+                        "1.4T": ["Standart", "Design", "S Line"],
+                        "2.0D": ["Standart", "Design", "S Line"]
+                    },
+                    "Q3": {
+                        "1.4": ["Standart", "Design", "S Line"],
+                        "2.0": ["Standart", "Design", "S Line"],
+                        "2.0D": ["Standart", "Design", "S Line"]
+                    },
+                    "Q5": {
+                        "2.0T": ["Standart", "Design", "S Line"],
+                        "2.0D": ["Standart", "Design", "S Line"],
+                        "3.0": ["Standart", "Design", "S Line"]
+                    },
+                    "Q7": {
+                        "2.0T": ["Standart", "Design", "S Line"],
+                        "3.0": ["Standart", "Design", "S Line"],
+                        "3.0D": ["Standart", "Design", "S Line"]
+                    },
+                    "Q8": {
+                        "3.0": ["Standart", "Design", "S Line"],
+                        "3.0D": ["Standart", "Design", "S Line"]
+                    }
+                },
+                "Volkswagen": {
+                    "T-Cross": {
+                        "1.0": ["Trend", "Comfort", "Highline"],
+                        "1.2": ["Trend", "Comfort", "Highline"],
+                        "1.5": ["Trend", "Comfort", "Highline"]
+                    },
+                    "T-Roc": {
+                        "1.0": ["Trend", "Comfort", "Highline"],
+                        "1.2": ["Trend", "Comfort", "Highline"],
+                        "1.4T": ["Trend", "Comfort", "Highline"]
+                    },
+                    "Tiguan": {
+                        "1.4T": ["Trend", "Comfort", "Highline"],
+                        "2.0": ["Trend", "Comfort", "Highline"],
+                        "2.0D": ["Trend", "Comfort", "Highline"]
+                    },
+                    "Touareg": {
+                        "3.0": ["Trend", "Comfort", "Highline"],
+                        "3.0D": ["Trend", "Comfort", "Highline"],
+                        "3.6": ["Trend", "Comfort", "Highline"]
+                    }
+                },
+                "Ford": {
+                    "EcoSport": {
+                        "1.5": ["Style", "Trend", "Titanium"],
+                        "1.6": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Style", "Trend", "Titanium"]
+                    },
+                    "Kuga": {
+                        "1.5T": ["Style", "Trend", "Titanium"],
+                        "1.6": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Style", "Trend", "Titanium"],
+                        "2.0D": ["Style", "Trend", "Titanium"]
+                    },
+                    "Explorer": {
+                        "2.3T": ["Base", "Platinum", "Limited"],
+                        "3.0": ["Base", "Platinum", "Limited"]
+                    }
+                },
+                "Renault": {
+                    "Kadjar": {
+                        "1.3": ["Life", "Trend", "Iconic"],
+                        "1.6": ["Life", "Trend", "Iconic"],
+                        "1.5D": ["Life", "Trend", "Iconic"],
+                        "1.6D": ["Life", "Trend", "Iconic"]
+                    },
+                    "Koleos": {
+                        "1.6": ["Life", "Trend", "Privilege"],
+                        "2.0": ["Life", "Trend", "Privilege"],
+                        "2.0D": ["Life", "Trend", "Privilege"],
+                        "2.5": ["Life", "Trend", "Privilege"]
+                    }
+                },
+                "Peugeot": {
+                    "2008": {
+                        "1.2": ["Active", "Allure", "GT Line"],
+                        "1.5": ["Active", "Allure", "GT Line"],
+                        "1.5D": ["Active", "Allure", "GT Line"],
+                        "1.6T": ["Active", "Allure", "GT Line"]
+                    },
+                    "3008": {
+                        "1.2": ["Active", "Allure", "GT Line"],
+                        "1.5": ["Active", "Allure", "GT Line"],
+                        "1.5D": ["Active", "Allure", "GT Line"],
+                        "1.6": ["Active", "Allure", "GT Line"],
+                        "2.0": ["Active", "Allure", "GT Line"]
+                    },
+                    "5008": {
+                        "1.6": ["Active", "Allure", "GT Line"],
+                        "1.6T": ["Active", "Allure", "GT Line"],
+                        "1.8": ["Active", "Allure", "GT Line"],
+                        "2.0": ["Active", "Allure", "GT Line"]
+                    },
+                    "4007": {
+                        "2.2": ["Active", "Allure", "Privilege"],
+                        "2.2D": ["Active", "Allure", "Privilege"],
+                        "2.4": ["Active", "Allure", "Privilege"]
+                    }
+                },
+                "Citroen": {
+                    "C3-Aircross": {
+                        "1.2": ["Shine", "Feel", "Exclusive"],
+                        "1.5": ["Shine", "Feel", "Exclusive"],
+                        "1.5D": ["Shine", "Feel", "Exclusive"],
+                        "1.6T": ["Shine", "Feel", "Exclusive"]
+                    }
+                },
+                "Hyundai": {
+                    "Tucson": {
+                        "1.6": ["GL", "GLS", "GLX"],
+                        "2.0": ["GL", "GLS", "GLX"],
+                        "2.0D": ["GL", "GLS", "GLX"],
+                        "2.7": ["GL", "GLS", "GLX"]
+                    },
+                    "Santa Fe": {
+                        "2.0": ["GL", "GLS", "GLX"],
+                        "2.2D": ["GL", "GLS", "GLX"],
+                        "2.4": ["GL", "GLS", "GLX"],
+                        "2.7": ["GL", "GLS", "GLX"]
+                    },
+                    "ix25": {
+                        "1.6": ["GL", "GLS", "GLX"],
+                        "2.0": ["GL", "GLS", "GLX"]
+                    },
+                    "ix35": {
+                        "2.0": ["GL", "GLS", "GLX"],
+                        "2.4": ["GL", "GLS", "GLX"],
+                        "2.7": ["GL", "GLS", "GLX"]
+                    },
+                    "Kona": {
+                        "1.6": ["GL", "GLS", "GLX"],
+                        "2.0": ["GL", "GLS", "GLX"]
+                    },
+                    "Venue": {
+                        "1.2": ["GL", "GLS", "GLX"],
+                        "1.5": ["GL", "GLS", "GLX"]
+                    },
+                    "Creta": {
+                        "1.6": ["GL", "GLS", "GLX"],
+                        "1.8": ["GL", "GLS", "GLX"],
+                        "2.0": ["GL", "GLS", "GLX"]
+                    }
+                },
+                "Kia": {
+                    "Sorento": {
+                        "2.0": ["L", "EX", "SX"],
+                        "2.2D": ["L", "EX", "SX"],
+                        "2.4": ["L", "EX", "SX"],
+                        "3.3": ["L", "EX", "SX"]
+                    },
+                    "Niro": {
+                        "1.5": ["L", "EX", "SX"],
+                        "1.6T": ["L", "EX", "SX"],
+                        "2.0": ["L", "EX", "SX"]
+                    },
+                    "Sportage": {
+                        "1.6": ["L", "EX", "SX"],
+                        "2.0": ["L", "EX", "SX"],
+                        "2.0D": ["L", "EX", "SX"],
+                        "2.4": ["L", "EX", "SX"]
+                    },
+                    "Seltos": {
+                        "1.4": ["L", "EX", "SX"],
+                        "1.6": ["L", "EX", "SX"],
+                        "2.0": ["L", "EX", "SX"]
+                    }
+                },
+                "Nissan": {
+                    "X-Trail": {
+                        "2.0": ["S", "SV", "SL"],
+                        "2.5": ["S", "SV", "SL"],
+                        "3.5": ["S", "SV", "SL"]
+                    },
+                    "Qashqai": {
+                        "1.6": ["S", "SV", "SL"],
+                        "2.0": ["S", "SV", "SL"],
+                        "2.5": ["S", "SV", "SL"]
+                    },
+                    "Murano": {
+                        "2.5": ["S", "SV", "SL"],
+                        "3.5": ["S", "SV", "SL"]
+                    },
+                    "Pathfinder": {
+                        "3.5": ["S", "SV", "SL"],
+                        "4.0": ["S", "SV", "SL"]
+                    },
+                    "Rogue": {
+                        "2.0": ["S", "SV", "SL"],
+                        "2.5": ["S", "SV", "SL"]
+                    }
+                },
+                "Mazda": {
+                    "CX-3": {
+                        "1.5": ["i", "i Touring", "s Touring"],
+                        "2.0": ["i", "i Touring", "s Touring"]
+                    },
+                    "CX-5": {
+                        "2.0": ["i", "i Touring", "s Touring"],
+                        "2.5": ["i", "i Touring", "s Touring"],
+                        "3.0": ["i", "i Touring", "s Touring"]
+                    },
+                    "CX-7": {
+                        "2.2D": ["i", "i Touring", "s Touring"],
+                        "2.3": ["i", "i Touring", "s Touring"],
+                        "2.5": ["i", "i Touring", "s Touring"]
+                    },
+                    "CX-9": {
+                        "2.5": ["i", "i Touring", "s Touring"],
+                        "3.0": ["i", "i Touring", "s Touring"],
+                        "3.7": ["i", "i Touring", "s Touring"]
+                    },
+                    "CX-30": {
+                        "1.5": ["i", "i Touring", "s Touring"],
+                        "2.0": ["i", "i Touring", "s Touring"]
+                    }
+                },
+                "Subaru": {
+                    "Forester": {
+                        "2.0": ["2.5i", "2.5i Premium", "2.5i Sport"],
+                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                    },
+                    "Crosstrek": {
+                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
+                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                    },
+                    "Outback": {
+                        "2.5": ["2.5i", "2.5i Premium", "2.5i Limited"],
+                        "3.0": ["3.0R", "3.0R Limited"]
+                    },
+                    "XV": {
+                        "2.0": ["2.0i", "2.0i Premium", "2.0i Sport"],
+                        "2.5": ["2.5i", "2.5i Premium", "2.5i Sport"]
+                    }
+                },
+                "Suzuki": {
+                    "Vitara": {
+                        "1.6": ["GL", "GLX", "GLS"],
+                        "1.8": ["GL", "GLX", "GLS"],
+                        "2.0": ["GL", "GLX", "GLS"]
+                    },
+                    "S-Cross": {
+                        "1.3": ["GL", "GLX", "GLS"],
+                        "1.6": ["GL", "GLX", "GLS"]
+                    }
+                },
+                "Jeep": {
+                    "Wrangler": {
+                        "2.0": ["Sport", "Sahara", "Rubicon"],
+                        "3.6": ["Sport", "Sahara", "Rubicon"],
+                        "3.8": ["Sport", "Sahara", "Rubicon"]
+                    },
+                    "Cherokee": {
+                        "2.0": ["Sport", "Latitude", "Limited"],
+                        "2.4": ["Sport", "Latitude", "Limited"],
+                        "3.2": ["Sport", "Latitude", "Limited"]
+                    },
+                    "Compass": {
+                        "2.0": ["Sport", "Latitude", "Limited"],
+                        "2.4": ["Sport", "Latitude", "Limited"]
+                    },
+                    "Grand Cherokee": {
+                        "2.7D": ["Sport", "Latitude", "Limited"],
+                        "3.0": ["Sport", "Latitude", "Limited"],
+                        "3.6": ["Sport", "Latitude", "Limited"],
+                        "4.0": ["Sport", "Latitude", "Limited"]
+                    },
+                    "Renegade": {
+                        "1.4": ["Sport", "Latitude", "Limited"],
+                        "2.4": ["Sport", "Latitude", "Limited"]
+                    }
+                },
+                "Land Rover": {
+                    "Discovery": {
+                        "3.0": ["S", "SE", "HSE"],
+                        "4.0": ["S", "SE", "HSE"],
+                        "4.4D": ["S", "SE", "HSE"]
+                    },
+                    "Discovery Sport": {
+                        "2.0": ["S", "SE", "HSE"],
+                        "2.0D": ["S", "SE", "HSE"]
+                    },
+                    "Freelander": {
+                        "2.0": ["S", "SE", "HSE"],
+                        "2.0D": ["S", "SE", "HSE"],
+                        "3.2": ["S", "SE", "HSE"]
+                    },
+                    "Range Rover": {
+                        "3.0": ["Vogue", "Supercharged", "Sport"],
+                        "4.4D": ["Vogue", "Supercharged", "Sport"],
+                        "4.4": ["Vogue", "Supercharged", "Sport"]
+                    },
+                    "Range Rover Evoque": {
+                        "2.0": ["Pure", "Prestige", "Dynamic"],
+                        "2.0D": ["Pure", "Prestige", "Dynamic"],
+                        "2.2D": ["Pure", "Prestige", "Dynamic"]
+                    },
+                    "Range Rover Sport": {
+                        "3.0": ["S", "SE", "HSE"],
+                        "4.2": ["S", "SE", "HSE"],
+                        "4.4D": ["S", "SE", "HSE"]
+                    },
+                    "Range Rover Velar": {
+                        "2.0": ["S", "SE", "HSE"],
+                        "2.0D": ["S", "SE", "HSE"],
+                        "3.0": ["S", "SE", "HSE"]
+                    },
+                    "Defender": {
+                        "2.0": ["City", "Country", "Professional"],
+                        "2.2D": ["City", "Country", "Professional"]
+                    }
+                },
+                "GMC": {
+                    "Terrain": {
+                        "1.5T": ["SLE", "SLT", "Denali"],
+                        "2.0": ["SLE", "SLT", "Denali"],
+                        "3.6": ["SLE", "SLT", "Denali"]
+                    },
+                    "Acadia": {
+                        "2.0T": ["SLE", "SLT", "Denali"],
+                        "3.6": ["SLE", "SLT", "Denali"]
+                    },
+                    "Yukon": {
+                        "4.3": ["WT", "SLE", "Denali"],
+                        "5.3": ["WT", "SLE", "Denali"],
+                        "6.2": ["WT", "SLE", "Denali"]
+                    },
+                    "Canyon": {
+                        "2.5": ["Regular Cab", "Crew Cab", "Double Cab"],
+                        "3.6": ["Regular Cab", "Crew Cab", "Double Cab"]
+                    }
+                },
+                "Cadillac": {
+                    "SRX": {
+                        "2.8": ["Base", "Luxury", "Performance"],
+                        "3.0": ["Base", "Luxury", "Performance"],
+                        "3.6": ["Base", "Luxury", "Performance"]
+                    },
+                    "Escalade": {
+                        "5.3": ["Base", "Luxury", "Premium"],
+                        "6.2": ["Base", "Luxury", "Premium"]
+                    }
+                },
+                "Dodge": {
+                    "Durango": {
+                        "3.6": ["SXT", "R/T", "Limited"],
+                        "5.7": ["SXT", "R/T", "Limited"]
+                    }
+                },
+                "Buick": {
+                    "Enclave": {
+                        "3.6": ["Convenience", "Preferred", "Premium"],
+                        "5.3": ["Convenience", "Preferred", "Premium"]
+                    },
+                    "Envision": {
+                        "1.5T": ["Convenience", "Preferred", "Premium"],
+                        "2.0": ["Convenience", "Preferred", "Premium"]
+                    }
+                },
+                "Brilliance": {
+                    "H230": {
+                        "1.3": ["Standart", "Comfort", "Luxury"],
+                        "1.5": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "H320": {
+                        "1.6": ["Standart", "Comfort", "Luxury"],
+                        "2.0": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "V5": {
+                        "1.5": ["Standart", "Comfort", "Luxury"],
+                        "1.6": ["Standart", "Comfort", "Luxury"],
+                        "1.8": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "V7": {
+                        "1.8": ["Standart", "Comfort", "Luxury"],
+                        "2.0": ["Standart", "Comfort", "Luxury"],
+                        "2.4": ["Standart", "Comfort", "Luxury"]
+                    }
+                },
+                "Haval": {
+                    "H1": {
+                        "1.3": ["Elite", "Premium", "Luxury"],
+                        "1.5": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H2": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "1.6": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H3": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.4": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H4": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H5": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H6": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H7": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H8": {
+                        "2.0T": ["Elite", "Premium", "Luxury"],
+                        "3.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "H9": {
+                        "2.0T": ["Elite", "Premium", "Luxury"],
+                        "3.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "F5": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "1.6": ["Elite", "Premium", "Luxury"]
+                    },
+                    "F7": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    }
+                },
+                "Geely": {
+                    "GX2": {
+                        "1.3": ["Standart", "Comfort", "Luxury"],
+                        "1.5": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "GX3": {
+                        "1.3": ["Standart", "Comfort", "Luxury"],
+                        "1.5": ["Standart", "Comfort", "Luxury"],
+                        "1.6": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "GX7": {
+                        "1.8": ["Standart", "Comfort", "Luxury"],
+                        "2.0": ["Standart", "Comfort", "Luxury"],
+                        "2.4": ["Standart", "Comfort", "Luxury"]
+                    }
+                },
+                "Chery": {
+                    "Tiggo": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "1.6": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.4": ["Elite", "Premium", "Luxury"]
+                    }
+                },
+                "Changan": {
+                    "CS35": {
+                        "1.6": ["Elite", "Premium", "Luxury"],
+                        "1.8": ["Elite", "Premium", "Luxury"]
+                    },
+                    "CS55": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "1.6": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"]
+                    },
+                    "CS75": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    },
+                    "CS95": {
+                        "1.5T": ["Elite", "Premium", "Luxury"],
+                        "2.0T": ["Elite", "Premium", "Luxury"]
+                    }
+                },
+                "Dongfeng": {
+                    "AX3": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "1.6": ["Elite", "Premium", "Luxury"]
+                    },
+                    "AX5": {
+                        "1.5": ["Elite", "Premium", "Luxury"],
+                        "1.8": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"]
+                    },
+                    "AX7": {
+                        "1.8": ["Elite", "Premium", "Luxury"],
+                        "2.0": ["Elite", "Premium", "Luxury"],
+                        "2.3": ["Elite", "Premium", "Luxury"]
+                    }
+                },
+                "GAC": {
+                    "GS3": {
+                        "1.5": ["Standart", "Comfort", "Luxury"],
+                        "1.6": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "GS4": {
+                        "1.5": ["Standart", "Comfort", "Luxury"],
+                        "1.6": ["Standart", "Comfort", "Luxury"],
+                        "1.8": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "GS5": {
+                        "1.6": ["Standart", "Comfort", "Luxury"],
+                        "1.8": ["Standart", "Comfort", "Luxury"],
+                        "2.0": ["Standart", "Comfort", "Luxury"]
+                    },
+                    "GS8": {
+                        "2.0": ["Standart", "Comfort", "Luxury"],
+                        "2.3": ["Standart", "Comfort", "Luxury"]
+                    }
+                },
+                "Lexus": {
+                    "NX": {
+                        "2.0": ["Standard", "Luxury", "F Sport"],
+                        "2.5": ["Standard", "Luxury", "F Sport"]
+                    },
+                    "RX": {
+                        "2.7": ["Standard", "Luxury", "F Sport"],
+                        "3.5": ["Standard", "Luxury", "F Sport"],
+                        "4.6": ["Standard", "Luxury", "F Sport"]
+                    },
+                    "UX": {
+                        "2.0": ["Standard", "Luxury", "F Sport"],
+                        "2.5": ["Standard", "Luxury", "F Sport"]
+                    },
+                    "GX": {
+                        "4.0": ["Standard", "Luxury", "Premium"],
+                        "4.7": ["Standard", "Luxury", "Premium"]
+                    },
+                    "LX": {
+                        "5.7": ["Standard", "Premium", "Ultra"],
+                        "5.8": ["Standard", "Premium", "Ultra"]
+                    }
+                },
+                "Tesla": {
+                    "Model X": {
+                        "Long Range": ["Standard", "Plaid"],
+                        "Plaid": ["Plaid", "Plaid+"]
+                    },
+                    "Model Y": {
+                        "Standard Range": ["Standard", "Plus"],
+                        "Long Range": ["Standard", "Plus", "Performance"]
+                    }
+                },
+                "Porsche": {
+                    "Cayenne": {
+                        "2.7": ["Base", "S", "Turbo S"],
+                        "3.0": ["Base", "S", "Turbo S"],
+                        "3.6": ["Base", "S", "Turbo S"],
+                        "4.8": ["Base", "S", "Turbo S"]
+                    },
+                    "Macan": {
+                        "2.0": ["Base", "S", "Turbo"],
+                        "2.9": ["Base", "S", "Turbo"],
+                        "3.0": ["Base", "S", "Turbo"]
+                    }
+                },
+                "Mitsubishi": {
+                    "Outlander": {
+                        "2.0": ["S", "SV", "SE"],
+                        "2.4": ["S", "SV", "SE"],
+                        "3.0": ["S", "SV", "SE"]
+                    },
+                    "Pajero": {
+                        "2.5D": ["GLS", "GLX", "Premium"],
+                        "3.0": ["GLS", "GLX", "Premium"],
+                        "3.2D": ["GLS", "GLX", "Premium"],
+                        "3.5": ["GLS", "GLX", "Premium"],
+                        "3.8": ["GLS", "GLX", "Premium"]
+                    },
+                    "ASX": {
+                        "1.6": ["S", "SV", "SE"],
+                        "2.0": ["S", "SV", "SE"],
+                        "2.4": ["S", "SV", "SE"]
+                    }
+                },
+                "Volvo": {
+                    "XC40": {
+                        "2.0": ["Momentum", "R-Design", "Inscription"],
+                        "2.0D": ["Momentum", "R-Design", "Inscription"]
+                    },
+                    "XC60": {
+                        "2.0": ["Momentum", "R-Design", "Inscription"],
+                        "2.0D": ["Momentum", "R-Design", "Inscription"],
+                        "2.5": ["Momentum", "R-Design", "Inscription"]
+                    },
+                    "XC70": {
+                        "2.0": ["Momentum", "R-Design", "Inscription"],
+                        "2.5": ["Momentum", "R-Design", "Inscription"],
+                        "3.0": ["Momentum", "R-Design", "Inscription"],
+                        "3.2": ["Momentum", "R-Design", "Inscription"]
+                    },
+                    "XC90": {
+                        "2.0": ["Momentum", "R-Design", "Inscription"],
+                        "2.0D": ["Momentum", "R-Design", "Inscription"],
+                        "3.0": ["Momentum", "R-Design", "Inscription"],
+                        "3.2": ["Momentum", "R-Design", "Inscription"]
+                    }
+                },
+                "Fiat": {
+                    "500X": {
+                        "1.3": ["Pop", "Easy", "Lounge"],
+                        "1.4": ["Pop", "Easy", "Lounge"],
+                        "1.6": ["Pop", "Easy", "Lounge"]
+                    }
+                },
+                "Alfa Romeo": {
+                    "Stelvio": {
+                        "2.0T": ["Base", "Sport", "Quadrifoglio"],
+                        "2.2D": ["Base", "Sport", "Quadrifoglio"]
+                    }
+                },
+                "Jaguar": {
+                    "F-Pace": {
+                        "2.0": ["S", "SE", "HSE"],
+                        "2.0D": ["S", "SE", "HSE"],
+                        "3.0": ["S", "SE", "HSE"]
+                    }
+                },
+                "Acura": {
+                    "RDX": {
+                        "2.0": ["Standard", "Technology", "A-Spec"],
+                        "3.5": ["Standard", "Technology", "A-Spec"]
+                    },
+                    "MDX": {
+                        "2.0": ["Base", "Advance", "Type-S"],
+                        "3.0": ["Base", "Advance", "Type-S"],
+                        "3.5": ["Base", "Advance", "Type-S"],
+                        "3.7": ["Base", "Advance", "Type-S"]
+                    }
+                },
+                "Infiniti": {
+                    "EX": {
+                        "3.5": ["Standard", "Luxury", "Premium Plus"],
+                        "3.7": ["Standard", "Luxury", "Premium Plus"]
+                    },
+                    "QX50": {
+                        "2.0": ["Pure", "Essential", "Luxe"],
+                        "3.0": ["Pure", "Essential", "Luxe"]
+                    },
+                    "QX60": {
+                        "2.5": ["Standard", "Luxury", "Premium Plus"],
+                        "3.0": ["Standard", "Luxury", "Premium Plus"],
+                        "3.5": ["Standard", "Luxury", "Premium Plus"]
+                    },
+                    "QX80": {
+                        "3.5": ["Standard", "Luxury", "Premium Plus"],
+                        "4.0": ["Standard", "Luxury", "Premium Plus"],
+                        "5.6": ["Standard", "Luxury", "Premium Plus"]
+                    }
+                }
             },
             "Ticari": {
-                "Toyota": ["Avanza", "Alphard", "Vellfire", "Sienna", "Noah", "Voxy", "Estima", "Previa", "Ipsum", "Gaia", "Hiace", "Proace"],
-                "Honda": ["Odyssey", "Elysion", "Stream"],
-                "Nissan": ["Serena", "Caravan", "NV", "NV200"],
-                "Renault": ["Espace", "Scenic", "Master"],
-                "Ford": ["Galaxy", "S-Max", "Transit"],
-                "Volkswagen": ["Caravelle", "Multivan", "Touran", "Transporter"],
-                "Peugeot": ["Expert", "Boxer"],
-                "Citroen": ["Berlingo", "Jumper"],
-                "Mercedes-Benz": ["Vito", "Sprinter"],
-                "Dacia": ["Dokker", "Lodgy"],
-                "Chevrolet": [],
-                "Fiat": ["Ulysse", "Ducato"],
-                "Opel": ["Zafira"],
-                "Iveco": ["Daily"],
-                "Hyundai": ["H-1", "H350"],
-                "Kia": ["Carnival", "Sedona"],
-                "Chrysler": ["Pacifica"],
-                "GAC": [],
-                "Changan": [],
-                "Chery": [],
-                "FAW": [],
-                "Dongfeng": [],
-                "Geely": [],
-                "Haval": [],
-                "Lifan": [],
-                "MG": [],
-                "Wuling": [],
-                "Xpeng": [],
-                "Zotye": []
+                "Toyota": {
+                    "Avanza": {
+                        "1.3": ["Manual", "Auto", "Premium"],
+                        "1.5": ["Manual", "Auto", "Premium"]
+                    },
+                    "Alphard": {
+                        "2.4": ["L", "S", "X"],
+                        "3.0": ["L", "S", "X"],
+                        "3.5": ["L", "S", "X"]
+                    },
+                    "Vellfire": {
+                        "2.4": ["L", "S", "X"],
+                        "3.0": ["L", "S", "X"],
+                        "3.5": ["L", "S", "X"]
+                    },
+                    "Sienna": {
+                        "2.5": ["LE", "XLE", "Limited"],
+                        "3.5": ["LE", "XLE", "Limited"]
+                    },
+                    "Noah": {
+                        "1.8": ["X", "S", "G"],
+                        "2.0": ["X", "S", "G"]
+                    },
+                    "Voxy": {
+                        "1.8": ["X", "S", "V"],
+                        "2.0": ["X", "S", "V"]
+                    },
+                    "Estima": {
+                        "2.0": ["L", "S", "X"],
+                        "2.4": ["L", "S", "X"],
+                        "3.5": ["L", "S", "X"]
+                    },
+                    "Previa": {
+                        "2.0": ["LE", "XLE", "CE"],
+                        "2.4": ["LE", "XLE", "CE"]
+                    },
+                    "Ipsum": {
+                        "2.0": ["S", "Q", "X"],
+                        "2.4": ["S", "Q", "X"]
+                    },
+                    "Gaia": {
+                        "1.5": ["X", "S"],
+                        "1.8": ["X", "S"]
+                    },
+                    "Hiace": {
+                        "2.0": ["Standard", "Mid", "Premium"],
+                        "2.4": ["Standard", "Mid", "Premium"],
+                        "2.5D": ["Standard", "Mid", "Premium"]
+                    },
+                    "Proace": {
+                        "1.5": ["Base", "Professional", "Premium"],
+                        "1.6D": ["Base", "Professional", "Premium"],
+                        "2.0": ["Base", "Professional", "Premium"]
+                    }
+                },
+                "Honda": {
+                    "Odyssey": {
+                        "2.4": ["LX", "EX", "EX-L"],
+                        "3.5": ["LX", "EX", "EX-L"]
+                    },
+                    "Elysion": {
+                        "2.4": ["L", "S", "X"],
+                        "3.0": ["L", "S", "X"]
+                    },
+                    "Stream": {
+                        "1.7": ["L", "S", "X"],
+                        "2.0": ["L", "S", "X"]
+                    }
+                },
+                "Nissan": {
+                    "Serena": {
+                        "2.0": ["S", "SC", "SR"],
+                        "2.3D": ["S", "SC", "SR"]
+                    },
+                    "Caravan": {
+                        "2.0": ["S", "SC", "SR"],
+                        "2.5": ["S", "SC", "SR"]
+                    },
+                    "NV": {
+                        "2.5": ["Standard", "Mid", "Premium"],
+                        "3.0": ["Standard", "Mid", "Premium"]
+                    },
+                    "NV200": {
+                        "1.5": ["Standard", "Mid", "Premium"],
+                        "1.6": ["Standard", "Mid", "Premium"],
+                        "2.0": ["Standard", "Mid", "Premium"]
+                    }
+                },
+                "Renault": {
+                    "Espace": {
+                        "1.6": ["Life", "Trend", "Initiale"],
+                        "1.8": ["Life", "Trend", "Initiale"],
+                        "2.0": ["Life", "Trend", "Initiale"],
+                        "2.0D": ["Life", "Trend", "Initiale"],
+                        "2.2D": ["Life", "Trend", "Initiale"]
+                    },
+                    "Scenic": {
+                        "1.4": ["Life", "Trend", "Initiale"],
+                        "1.5D": ["Life", "Trend", "Initiale"],
+                        "1.6": ["Life", "Trend", "Initiale"],
+                        "1.6T": ["Life", "Trend", "Initiale"],
+                        "1.9D": ["Life", "Trend", "Initiale"]
+                    },
+                    "Master": {
+                        "1.6": ["L1", "L2", "H1"],
+                        "1.9D": ["L1", "L2", "H1"],
+                        "2.2D": ["L1", "L2", "H1"],
+                        "2.5D": ["L1", "L2", "H1"],
+                        "2.8D": ["L1", "L2", "H1"]
+                    }
+                },
+                "Ford": {
+                    "Galaxy": {
+                        "1.6": ["Style", "Trend", "Titanium"],
+                        "1.6T": ["Style", "Trend", "Titanium"],
+                        "1.8": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Style", "Trend", "Titanium"],
+                        "2.0D": ["Style", "Trend", "Titanium"]
+                    },
+                    "S-Max": {
+                        "1.6": ["Style", "Trend", "Titanium"],
+                        "1.6T": ["Style", "Trend", "Titanium"],
+                        "1.8": ["Style", "Trend", "Titanium"],
+                        "2.0": ["Style", "Trend", "Titanium"],
+                        "2.0D": ["Style", "Trend", "Titanium"]
+                    },
+                    "Transit": {
+                        "1.6": ["Standard", "Mid", "Premium"],
+                        "2.0": ["Standard", "Mid", "Premium"],
+                        "2.0D": ["Standard", "Mid", "Premium"],
+                        "2.2": ["Standard", "Mid", "Premium"],
+                        "2.3": ["Standard", "Mid", "Premium"],
+                        "3.2": ["Standard", "Mid", "Premium"]
+                    }
+                },
+                "Volkswagen": {
+                    "Caravelle": {
+                        "2.0": ["L1", "L2", "L3"],
+                        "2.0T": ["L1", "L2", "L3"],
+                        "2.5": ["L1", "L2", "L3"],
+                        "2.5D": ["L1", "L2", "L3"],
+                        "3.2": ["L1", "L2", "L3"]
+                    },
+                    "Multivan": {
+                        "1.9D": ["Edition 25", "Edition 30", "Edition 35"],
+                        "2.0": ["Edition 25", "Edition 30", "Edition 35"],
+                        "2.0T": ["Edition 25", "Edition 30", "Edition 35"],
+                        "3.2": ["Edition 25", "Edition 30", "Edition 35"]
+                    },
+                    "Touran": {
+                        "1.2": ["Trend", "Comfort", "Highline"],
+                        "1.4": ["Trend", "Comfort", "Highline"],
+                        "1.4T": ["Trend", "Comfort", "Highline"],
+                        "1.6": ["Trend", "Comfort", "Highline"],
+                        "1.8": ["Trend", "Comfort", "Highline"],
+                        "1.9D": ["Trend", "Comfort", "Highline"],
+                        "2.0D": ["Trend", "Comfort", "Highline"]
+                    },
+                    "Transporter": {
+                        "1.6": ["Standart", "Comfort", "Highline"],
+                        "2.0": ["Standart", "Comfort", "Highline"],
+                        "2.0D": ["Standart", "Comfort", "Highline"],
+                        "2.5": ["Standart", "Comfort", "Highline"],
+                        "2.5D": ["Standart", "Comfort", "Highline"]
+                    }
+                },
+                "Peugeot": {
+                    "Expert": {
+                        "1.6": ["L1", "L2", "L3"],
+                        "1.6D": ["L1", "L2", "L3"],
+                        "1.9": ["L1", "L2", "L3"],
+                        "1.9D": ["L1", "L2", "L3"],
+                        "2.0": ["L1", "L2", "L3"],
+                        "2.0D": ["L1", "L2", "L3"]
+                    },
+                    "Boxer": {
+                        "1.4": ["Standard", "Mid", "Premium"],
+                        "1.6": ["Standard", "Mid", "Premium"],
+                        "2.0": ["Standard", "Mid", "Premium"],
+                        "2.2": ["Standard", "Mid", "Premium"],
+                        "2.3D": ["Standard", "Mid", "Premium"],
+                        "2.8D": ["Standard", "Mid", "Premium"]
+                    },
+                    "Rifter": {
+                        "1.2": ["Comfortline", "Trendline", "Highline"],
+                        "1.5": ["Comfortline", "Trendline", "Highline"],
+                        "1.5D": ["Comfortline", "Trendline", "Highline"],
+                        "1.6": ["Comfortline", "Trendline", "Highline"]
+                    }
+                },
+                "Citroen": {
+                    "Berlingo": {
+                        "1.4": ["S", "Cool", "CoolStyle"],
+                        "1.5": ["S", "Cool", "CoolStyle"],
+                        "1.5D": ["S", "Cool", "CoolStyle"],
+                        "1.6": ["S", "Cool", "CoolStyle"],
+                        "1.6D": ["S", "Cool", "CoolStyle"]
+                    },
+                    "Jumper": {
+                        "1.6": ["L1", "L2", "L3"],
+                        "1.9": ["L1", "L2", "L3"],
+                        "1.9D": ["L1", "L2", "L3"],
+                        "2.0": ["L1", "L2", "L3"],
+                        "2.0D": ["L1", "L2", "L3"],
+                        "2.8D": ["L1", "L2", "L3"]
+                    }
+                },
+                "Mercedes-Benz": {
+                    "Vito": {
+                        "1.6": ["Standart", "Comfort", "Premium"],
+                        "2.0": ["Standart", "Comfort", "Premium"],
+                        "2.1D": ["Standart", "Comfort", "Premium"],
+                        "2.2D": ["Standart", "Comfort", "Premium"],
+                        "3.0D": ["Standart", "Comfort", "Premium"],
+                        "3.2": ["Standart", "Comfort", "Premium"]
+                    },
+                    "Sprinter": {
+                        "1.8": ["L1", "L2", "L3"],
+                        "2.0": ["L1", "L2", "L3"],
+                        "2.1D": ["L1", "L2", "L3"],
+                        "2.2D": ["L1", "L2", "L3"],
+                        "2.7D": ["L1", "L2", "L3"],
+                        "3.0D": ["L1", "L2", "L3"],
+                        "3.2": ["L1", "L2", "L3"],
+                        "3.7D": ["L1", "L2", "L3"]
+                    }
+                },
+                "Dacia": {
+                    "Dokker": {
+                        "1.0": ["Essential", "Comfort", "Luxury"],
+                        "1.2": ["Essential", "Comfort", "Luxury"],
+                        "1.5": ["Essential", "Comfort", "Luxury"],
+                        "1.5D": ["Essential", "Comfort", "Luxury"]
+                    },
+                    "Lodgy": {
+                        "1.2": ["Essential", "Comfort", "Luxury"],
+                        "1.5": ["Essential", "Comfort", "Luxury"],
+                        "1.5D": ["Essential", "Comfort", "Luxury"],
+                        "1.6": ["Essential", "Comfort", "Luxury"]
+                    }
+                },
+                "Opel": {
+                    "Zafira": {
+                        "1.4": ["Sport", "Edition", "OPC"],
+                        "1.6": ["Sport", "Edition", "OPC"],
+                        "1.7D": ["Sport", "Edition", "OPC"],
+                        "1.8": ["Sport", "Edition", "OPC"],
+                        "1.9D": ["Sport", "Edition", "OPC"]
+                    }
+                },
+                "Iveco": {
+                    "Daily": {
+                        "2.3": ["L1", "L2", "L3"],
+                        "2.3D": ["L1", "L2", "L3"],
+                        "2.8": ["L1", "L2", "L3"],
+                        "2.8D": ["L1", "L2", "L3"],
+                        "3.0D": ["L1", "L2", "L3"],
+                        "3.2": ["L1", "L2", "L3"]
+                    }
+                },
+                "Hyundai": {
+                    "H-1": {
+                        "2.4": ["Standard", "Mid", "Premium"],
+                        "2.5D": ["Standard", "Mid", "Premium"]
+                    },
+                    "H350": {
+                        "2.5D": ["Standard", "Mid", "Premium"],
+                        "2.8D": ["Standard", "Mid", "Premium"],
+                        "3.0D": ["Standard", "Mid", "Premium"]
+                    }
+                },
+                "Kia": {
+                    "Carnival": {
+                        "2.2": ["L", "EX", "SX"],
+                        "2.7": ["L", "EX", "SX"],
+                        "3.5": ["L", "EX", "SX"],
+                        "3.8": ["L", "EX", "SX"]
+                    },
+                    "Sedona": {
+                        "2.0": ["L", "EX", "SX"],
+                        "2.2D": ["L", "EX", "SX"],
+                        "2.7": ["L", "EX", "SX"],
+                        "3.3": ["L", "EX", "SX"],
+                        "3.5": ["L", "EX", "SX"],
+                        "3.8": ["L", "EX", "SX"]
+                    }
+                },
+                "Chrysler": {
+                    "Pacifica": {
+                        "2.5": ["Base", "Touring", "Limited"],
+                        "3.6": ["Base", "Touring", "Limited"]
+                    }
+                },
+                "Fiat": {
+                    "Ulysse": {
+                        "1.6": ["Base", "Mid", "Premium"],
+                        "1.8": ["Base", "Mid", "Premium"],
+                        "2.0": ["Base", "Mid", "Premium"],
+                        "2.0D": ["Base", "Mid", "Premium"],
+                        "2.2D": ["Base", "Mid", "Premium"]
+                    },
+                    "Ducato": {
+                        "1.9": ["Standard", "Mid", "Premium"],
+                        "1.9D": ["Standard", "Mid", "Premium"],
+                        "2.0": ["Standard", "Mid", "Premium"],
+                        "2.0D": ["Standard", "Mid", "Premium"],
+                        "2.3D": ["Standard", "Mid", "Premium"],
+                        "2.8D": ["Standard", "Mid", "Premium"],
+                        "3.0D": ["Standard", "Mid", "Premium"]
+                    }
+                }
             }
         };
 
         let currentStep = 1;
 
-        function loadBrands() {
+                function loadBrands() {
             const vehicleType = document.getElementById('vehicleType').value;
             const brandSelect = document.getElementById('brand');
             brandSelect.innerHTML = '<option value="">Seçiniz</option>';
@@ -1326,8 +2636,7 @@
             if (vehicleType && vehicleData[vehicleType]) {
                 const brands = Object.keys(vehicleData[vehicleType]).sort();
                 brands.forEach(brand => {
-                    // Sadece modeli olan markaları göster
-                    if (vehicleData[vehicleType][brand].length > 0) {
+                    if (Object.keys(vehicleData[vehicleType][brand]).length > 0) {
                         const opt = document.createElement('option');
                         opt.value = brand;
                         opt.textContent = brand;
@@ -1337,21 +2646,65 @@
             }
             
             document.getElementById('model').innerHTML = '<option value="">Önce marka seçiniz</option>';
+            document.getElementById('engine').innerHTML = '<option value="">Önce model seçiniz</option>';
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
         }
 
         function loadModels() {
             const vehicleType = document.getElementById('vehicleType').value;
             const brand = document.getElementById('brand').value;
-                        const modelSelect = document.getElementById('model');
+            const modelSelect = document.getElementById('model');
             modelSelect.innerHTML = '<option value="">Seçiniz</option>';
             
-            if (vehicleType && brand && vehicleData[vehicleType] && vehicleData[vehicleType][brand]) {
-                const models = vehicleData[vehicleType][brand];
+            if (vehicleType && brand && vehicleData[vehicleType][brand]) {
+                const models = Object.keys(vehicleData[vehicleType][brand]).sort();
                 models.forEach(model => {
                     const opt = document.createElement('option');
                     opt.value = model;
                     opt.textContent = model;
                     modelSelect.appendChild(opt);
+                });
+            }
+            
+            document.getElementById('engine').innerHTML = '<option value="">Seçiniz</option>';
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
+        }
+
+        function loadEngines() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const engineSelect = document.getElementById('engine');
+            engineSelect.innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && vehicleData[vehicleType][brand] && vehicleData[vehicleType][brand][model]) {
+                const engines = Object.keys(vehicleData[vehicleType][brand][model]).sort();
+                engines.forEach(engine => {
+                    const opt = document.createElement('option');
+                    opt.value = engine;
+                    opt.textContent = engine;
+                    engineSelect.appendChild(opt);
+                });
+            }
+            
+            document.getElementById('package').innerHTML = '<option value="">Seçiniz</option>';
+        }
+
+        function loadPackages() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const engine = document.getElementById('engine').value;
+            const packageSelect = document.getElementById('package');
+            packageSelect.innerHTML = '<option value="">Seçiniz</option>';
+            
+            if (vehicleType && brand && model && engine && vehicleData[vehicleType][brand] && vehicleData[vehicleType][brand][model] && vehicleData[vehicleType][brand][model][engine]) {
+                const packages = vehicleData[vehicleType][brand][model][engine];
+                packages.forEach(pkg => {
+                    const opt = document.createElement('option');
+                    opt.value = pkg;
+                    opt.textContent = pkg;
+                    packageSelect.appendChild(opt);
                 });
             }
         }
@@ -1469,13 +2822,13 @@
                 <strong>📍 Araç Türü:</strong> ${vehicleTypeDisplay}<br>
                 <strong>🏢 Marka:</strong> ${document.getElementById('brand').value}<br>
                 <strong>📋 Model:</strong> ${document.getElementById('model').value}<br>
+                <strong>🔧 Motor:</strong> ${document.getElementById('engine').value}<br>
+                <strong>📦 Paket:</strong> ${document.getElementById('package').value}<br>
                 <strong>📅 Yıl:</strong> ${document.getElementById('year').value}<br>
                 <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
                 <strong>🎨 Renk:</strong> ${document.getElementById('color').value}<br>
-                <strong>💨 Yakıt:</strong> ${document.getElementById('fuel').value}<br>
                 <strong>🚗 Şanzıman:</strong> ${document.getElementById('transmission').value}<br>
-                <strong>🔧 Motor:</strong> ${document.getElementById('engineSize').value}<br>
-                <strong>⚡ Beygir:</strong> ${document.getElementById('horsepower').value}<br>
+                <strong>💨 Yakıt:</strong> ${document.getElementById('fuel').value}<br>
                 ${paintInfo}
                 ${tramerInfo}<br>
                 <strong>👤 Ad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
@@ -1525,13 +2878,13 @@
                 vehicleType: vehicleTypeForSave,
                 brand: document.getElementById('brand').value,
                 model: document.getElementById('model').value,
+                engine: document.getElementById('engine').value,
+                package: document.getElementById('package').value,
                 year: document.getElementById('year').value,
                 mileage: document.getElementById('mileage').value,
                 color: document.getElementById('color').value,
                 fuel: document.getElementById('fuel').value,
                 transmission: document.getElementById('transmission').value,
-                engineSize: document.getElementById('engineSize').value,
-                horsepower: document.getElementById('horsepower').value,
                 wheelDrive: document.getElementById('wheelDrive').value,
                 paintData: JSON.stringify(paintData),
                 tramerStatus: document.querySelector('input[name="tramerStatus"]:checked').value,
@@ -1568,6 +2921,8 @@
         // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
             loadYears();
+            document.getElementById('model').addEventListener('change', loadEngines);
+            document.getElementById('engine').addEventListener('change', loadPackages);
         });
     </script>
 </body>
