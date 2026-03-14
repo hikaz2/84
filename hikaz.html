@@ -198,18 +198,20 @@
             box-shadow: 0 0 10px rgba(255,215,0,0.15);
         }
 
-        .search-clear {
+        .search-btn {
             padding: 0.8rem 1.5rem;
-            background: var(--red);
-            color: white;
+            background: var(--primary);
+            color: var(--dark);
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
         }
 
-        .search-clear:hover {
-            background: #b71c1c;
+        .search-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
         }
 
         /* TABS */
@@ -611,8 +613,20 @@
 
             <!-- SEARCH BOX -->
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Referans Kodu veya Ad Soyad Ara..." onkeyup="searchOffers()">
-                <button class="search-clear" onclick="clearSearch()">Temizle</button>
+                <input type="text" id="searchInput" placeholder="🔍 Referans Kodu Ara (Örn: OSL-ABC123XYZ)..." onkeypress="if(event.key==='Enter') searchByReference()">
+                <button class="search-btn" onclick="searchByReference()">🔍 Ara</button>
+            </div>
+
+            <!-- SEARCH RESULTS -->
+            <div id="searchResults" style="display: none; margin-bottom: 2rem;">
+                <div class="section">
+                    <h2>🔍 Arama Sonuçları</h2>
+                    <div id="searchResultsContainer" class="offers-grid"></div>
+                    <div id="noResults" class="empty" style="display: none;">
+                        <p>❌ Sonuç bulunamadı</p>
+                    </div>
+                    <button onclick="closeSearch()" style="margin-top: 1rem; padding: 0.8rem 1.5rem; background: var(--red); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; width: 100%;">Kapat</button>
+                </div>
             </div>
 
             <!-- TABS -->
@@ -1095,99 +1109,85 @@
             }
         }
 
-        // SEARCH OFFERS
-        function searchOffers() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        // SEARCH BY REFERENCE
+        function searchByReference() {
+            const searchTerm = document.getElementById('searchInput').value.trim().toUpperCase();
             const offers = JSON.parse(localStorage.getItem('offers') || '[]');
             const statuses = JSON.parse(localStorage.getItem('offerStatuses') || '{}');
 
             if (!searchTerm) {
-                refreshAll();
+                alert('⚠️ Lütfen referans numarası girin!');
                 return;
             }
 
-            // Arama sonuçlarını filtrele
-            const results = offers.filter((offer, index) => {
-                const fullName = (offer.firstName + ' ' + offer.lastName).toLowerCase();
-                const referenceCode = offer.referenceCode.toLowerCase();
-                const brand = offer.brand.toLowerCase();
-                const model = offer.model.toLowerCase();
-                
-                return fullName.includes(searchTerm) || 
-                       referenceCode.includes(searchTerm) ||
-                       brand.includes(searchTerm) ||
-                       model.includes(searchTerm);
-            });
+            // Referans koduna göre ara
+            const resultIndex = offers.findIndex(offer => offer.referenceCode.toUpperCase() === searchTerm);
 
-            // Sonuçları göster
-            const allContainers = [
-                { id: 'pendingContainer', empty: 'emptyPending' },
-                { id: 'approvedContainer', empty: 'emptyApproved' },
-                { id: 'rejectedContainer', empty: 'emptyRejected' }
-            ];
+            const searchResultsDiv = document.getElementById('searchResults');
+            const resultsContainer = document.getElementById('searchResultsContainer');
+            const noResults = document.getElementById('noResults');
 
-            allContainers.forEach(container => {
-                const elem = document.getElementById(container.id);
-                const emptyElem = document.getElementById(container.empty);
-                if (elem) elem.innerHTML = '';
-                if (emptyElem) emptyElem.style.display = 'none';
-            });
+            resultsContainer.innerHTML = '';
+            noResults.style.display = 'none';
 
-            if (results.length === 0) {
-                document.getElementById('pendingContainer').innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #999;"><p>🔍 Sonuç bulunamadı</p></div>';
+            if (resultIndex === -1) {
+                // Sonuç bulunamadı
+                noResults.style.display = 'block';
+                searchResultsDiv.style.display = 'block';
                 return;
             }
 
-            results.forEach((offer) => {
-                const index = offers.findIndex(o => o.referenceCode === offer.referenceCode);
-                const status = statuses[index];
-                const statusText = status ? (status === 'approved' ? 'Onaylandı' : 'Reddedildi') : 'Beklemede';
-                const statusClass = status ? (status === 'approved' ? 'approved' : 'rejected') : 'pending';
-                const icon = status ? (status === 'approved' ? '✅' : '❌') : '⏳';
-                
-                const card = `
-                    <div class="offer-card">
-                        <div class="offer-header">
-                            <div>
-                                <h4>${offer.firstName} ${offer.lastName}</h4>
-                                <div class="offer-info">📱 ${offer.phone}</div>
-                                <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
-                            </div>
-                            <span class="offer-status ${statusClass}">${icon} ${statusText}</span>
-                        </div>
+            // Sonuç bulundu
+            const offer = offers[resultIndex];
+            const status = statuses[resultIndex];
+            const statusText = status ? (status === 'approved' ? 'Onaylandı' : 'Reddedildi') : 'Beklemede';
+            const statusClass = status ? (status === 'approved' ? 'approved' : 'rejected') : 'pending';
+            const icon = status ? (status === 'approved' ? '✅' : '❌') : '⏳';
 
-                        <div class="offer-vehicle">
-                            <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
-                            <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
-                            <p>Kilometre: ${offer.mileage} km</p>
+            const card = `
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div>
+                            <h4>${offer.firstName} ${offer.lastName}</h4>
+                            <div class="offer-info">📱 ${offer.phone}</div>
+                            <div class="offer-info" style="font-weight: 700; color: var(--primary);">🔖 ${offer.referenceCode}</div>
                         </div>
-
-                        <div class="offer-info">
-                            📍 ${offer.city}, ${offer.district}
-                        </div>
-                        <div class="offer-info" style="font-size: 0.8rem; color: #999;">
-                            📅 ${new Date(offer.date).toLocaleDateString('tr-TR')}
-                        </div>
-
-                        <div class="offer-actions">
-                            <button class="btn btn-view" onclick="showDetail(${index})">Detay</button>
-                            ${!status ? `
-                                <button class="btn btn-approve" onclick="approveOffer(${index})">Onayla</button>
-                                <button class="btn btn-reject" onclick="rejectOffer(${index})">Reddet</button>
-                            ` : `
-                                <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
-                            `}
-                        </div>
+                        <span class="offer-status ${statusClass}">${icon} ${statusText}</span>
                     </div>
-                `;
-                document.getElementById('pendingContainer').innerHTML += card;
-            });
+
+                    <div class="offer-vehicle">
+                        <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
+                        <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
+                        <p>Kilometre: ${offer.mileage} km</p>
+                    </div>
+
+                    <div class="offer-info">
+                        📍 ${offer.city}, ${offer.district}
+                    </div>
+                    <div class="offer-info" style="font-size: 0.8rem; color: #999;">
+                        📅 ${new Date(offer.date).toLocaleDateString('tr-TR')}
+                    </div>
+
+                    <div class="offer-actions">
+                        <button class="btn btn-view" onclick="showDetail(${resultIndex})">Detay</button>
+                        ${!status ? `
+                            <button class="btn btn-approve" onclick="approveOffer(${resultIndex})">Onayla</button>
+                            <button class="btn btn-reject" onclick="rejectOffer(${resultIndex})">Reddet</button>
+                        ` : `
+                            <button class="btn btn-delete" onclick="deleteOffer(${resultIndex})">Sil</button>
+                        `}
+                    </div>
+                </div>
+            `;
+
+            resultsContainer.innerHTML = card;
+            searchResultsDiv.style.display = 'block';
         }
 
-        // CLEAR SEARCH
-        function clearSearch() {
+        // CLOSE SEARCH
+        function closeSearch() {
+            document.getElementById('searchResults').style.display = 'none';
             document.getElementById('searchInput').value = '';
-            refreshAll();
         }
 
         // REFRESH ALL
