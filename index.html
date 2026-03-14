@@ -3,527 +3,704 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTOSELL - Araç Değerleme Sistemi</title>
+    <title>Otosell - Araç Veri Tabanı</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary-yellow: #FFD700; --primary-black: #1a1a1a; --text-dark: #2a2a2a; --text-light: #666; --border-color: #e0e0e0; --light-bg: #f5f5f5; --white: #fff; --shadow: 0 8px 32px rgba(0,0,0,0.1); }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); background: #f5f5f5; line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        header { background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%); color: var(--white); padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
-        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.8rem; font-weight: 900; color: var(--primary-yellow); letter-spacing: 2px; }
-        nav ul { list-style: none; display: flex; gap: 1rem; }
-        nav a { color: var(--white); text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 0.8rem; border-radius: 4px; transition: all 0.3s; }
-        nav a:hover { color: var(--primary-yellow); background: rgba(255,215,0,0.1); }
-        .hero { background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%); color: var(--white); padding: 100px 20px 80px; text-align: center; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); border-radius: 50%; animation: float 25s infinite ease-in-out; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(40px); } }
-        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 900; }
-        .hero p { font-size: 1.1rem; margin-bottom: 2rem; color: #ddd; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%); color: var(--primary-black); border: none; padding: 15px 40px; font-size: 1rem; border-radius: 50px; cursor: pointer; font-weight: 700; transition: all 0.3s; text-transform: uppercase; }
-        .form-section { padding: 60px 20px; background: linear-gradient(180deg, #f5f5f5 0%, #fff 50%, #f5f5f5 100%); }
-        .form-section h2 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-black); font-weight: 900; }
-        .form-subtitle { text-align: center; color: var(--text-light); margin-bottom: 2rem; }
-        .form-container { background: var(--white); padding: 3rem; border-radius: 12px; box-shadow: var(--shadow); max-width: 900px; margin: 0 auto; border-top: 5px solid var(--primary-yellow); }
-        .form-step { display: none; }
-        .form-step.active { display: block; animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .progress-bar { height: 4px; background: var(--border-color); border-radius: 2px; margin-bottom: 1.5rem; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-yellow) 0%, #ffed4e 100%); width: 20%; transition: width 0.4s; }
-        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 2rem; gap: 0.5rem; }
-        .step { flex: 1; text-align: center; }
-        .step-number { width: 40px; height: 40px; background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 0.5rem; color: var(--text-light); }
-        .step.active .step-number { background: var(--primary-yellow); color: var(--primary-black); border-color: var(--primary-yellow); }
-        .step.completed .step-number { background: #4CAF50; color: white; }
-        .step-title { font-size: 0.75rem; color: var(--text-light); font-weight: 600; }
-        h3 { color: var(--primary-black); margin-bottom: 1.5rem; font-size: 1.3rem; font-weight: 700; }
-        h4 { color: var(--primary-black); margin-bottom: 1rem; font-size: 1.1rem; font-weight: 700; margin-top: 2rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: var(--primary-black); font-size: 0.9rem; }
-        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea { width: 100%; padding: 12px 14px; border: 2px solid var(--border-color); border-radius: 6px; font-size: 16px; font-family: inherit; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-yellow); box-shadow: 0 0 10px rgba(255,215,0,0.15); }
-        input[type="checkbox"], input[type="radio"] { width: 24px !important; height: 24px !important; cursor: pointer; accent-color: var(--primary-yellow); margin-right: 0.8rem; }
-        .form-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-        .legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 1.5rem 0; padding: 1rem; background: var(--light-bg); border-radius: 8px; }
-        .legend-item { display: flex; align-items: center; gap: 0.8rem; }
-        .legend-color { width: 35px; height: 35px; border-radius: 4px; border: 2px solid #000; }
-        .damage-table-section { overflow-x: auto; margin-top: 2rem; }
-        .damage-table { width: 100%; border-collapse: collapse; }
-        .damage-table thead { background: #DC143C; color: white; }
-        .damage-table th { padding: 12px 8px; font-weight: 700; text-align: center; border: 1px solid var(--border-color); font-size: 0.8rem; }
-        .damage-table td { padding: 10px 8px; border: 1px solid var(--border-color); text-align: center; }
-        .damage-table td:first-child { text-align: left; font-weight: 600; background: var(--light-bg); }
-        .damage-table input[type="radio"] { width: 20px; height: 20px; cursor: pointer; margin: 0; }
-        .tramer-section { background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; }
-        .tramer-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin: 1rem 0; }
-        .tramer-option input[type="radio"] { display: none; }
-        .tramer-option label { display: block; padding: 10px 12px; border: 2px solid var(--border-color); border-radius: 6px; text-align: center; cursor: pointer; margin: 0; background: var(--white); font-weight: 600; }
-        .tramer-option input[type="radio"]:checked + label { background: #4169E1; color: white; border-color: #4169E1; }
-        .tramer-details { display: none; }
-        .tramer-details.show { display: block; }
-        .btn-container { display: flex; gap: 0.8rem; margin-top: 2rem; }
-        .btn-secondary { background: var(--light-bg); color: var(--primary-black); border: 2px solid var(--border-color); padding: 12px 20px; border-radius: 6px; cursor: pointer; font-weight: 700; flex: 1; text-transform: uppercase; }
-        .btn-next { background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%); color: var(--primary-black); border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: 700; flex: 1; text-transform: uppercase; }
-        .btn-submit { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: 700; flex: 1; text-transform: uppercase; }
-        .success-message { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 2rem 1.5rem; border-radius: 12px; text-align: center; display: none; }
-        .success-message.show { display: block; }
-        .error-box { background: #ffebee; color: #c62828; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; display: none; font-weight: 600; }
-        footer { background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%); color: var(--white); padding: 2rem 20px 1rem; margin-top: 3rem; text-align: center; }
-        .checkbox-wrapper { display: flex; align-items: center; gap: 0.8rem; margin: 1.5rem 0; }
-        @media (max-width: 768px) { .form-row { grid-template-columns: repeat(2, 1fr); } .legend { grid-template-columns: repeat(2, 1fr); } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.5em;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        select, input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            background-color: #f9f9f9;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-search {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-reset {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background: #e0e0e0;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .result-item {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .result-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .result-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            color: #666;
+        }
+
+        .detail {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .detail-value {
+            color: #667eea;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .stats p {
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">OTOSELL</div>
-            <nav><ul><li><a href="#home">Ana Sayfa</a></li><li><a href="#form">Değerleme</a></li></ul></nav>
+    <div class="container">
+        <h1>🚗 Otosell - Araç Veri Tabanı</h1>
+
+        <div class="stats">
+            <p id="stats-text">Veritabanı yükleniyor...</p>
         </div>
-    </header>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>ARAÇINIZI<br>DEĞERLENDİRİN</h1>
-            <p>Profesyonel değerleme sistemi ile güvenilir fiyat teklifi alın</p>
-            <button class="btn-primary" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Başla</button>
-        </div>
-    </section>
+        <div class="error" id="error"></div>
 
-    <section class="form-section" id="form">
-        <div class="container">
-            <h2>Araç Değerleme Formu</h2>
-            <p class="form-subtitle">Bilgilerinizi doldurun ve teklif alın</p>
-            <div class="form-container">
-                <div class="error-box" id="errorBox"></div>
-                <div id="formContainer">
-                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-                    <div class="step-indicator">
-                        <div class="step active" data-step="1"><div class="step-number">1</div><div class="step-title">Araç</div></div>
-                        <div class="step" data-step="2"><div class="step-number">2</div><div class="step-title">Özellikleri</div></div>
-                        <div class="step" data-step="3"><div class="step-number">3</div><div class="step-title">Durum</div></div>
-                        <div class="step" data-step="4"><div class="step-number">4</div><div class="step-title">İletişim</div></div>
-                        <div class="step" data-step="5"><div class="step-number">5</div><div class="step-title">Onayla</div></div>
-                    </div>
-                    <form id="offerForm">
-                        <div class="form-step active" data-step="1">
-                            <h3>Araç Bilgileri</h3>
-                            <div class="form-row">
-                                <div class="form-group"><label>Araç Tipi *</label><select id="vehicleType" required onchange="loadBrands()"><option>Seçiniz</option><option value="Otomobil">Otomobil</option><option value="SUV">Arazi, SUV & Pickup</option><option value="Ticari">Minivan & Panelvan</option></select></div>
-                                <div class="form-group"><label>Marka *</label><select id="brand" required onchange="loadModels()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Model *</label><select id="model" required onchange="loadBodyTypes()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Gövde Tipi *</label><select id="bodyType" required onchange="loadYears()"><option>Seçiniz</option></select></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group"><label>Yıl *</label><select id="year" required onchange="loadFuels()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Yakıt *</label><select id="fuel" required onchange="loadTransmissions()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Vites *</label><select id="transmission" required onchange="loadEngines()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Kilometre *</label><input type="number" id="mileage" placeholder="Km" min="0" required></div>
-                            </div>
-                            <div class="btn-container"><button type="button" class="btn-next" onclick="goToStep(2)">İleri</button></div>
-                        </div>
+        <div class="filters">
+            <div class="filter-group">
+                <label for="marka">Marka</label>
+                <select id="marka">
+                    <option value="">-- Marka Seçin --</option>
+                </select>
+            </div>
 
-                        <div class="form-step" data-step="2">
-                            <h3>Araç Özellikleri</h3>
-                            <div class="form-row">
-                                <div class="form-group"><label>Motor *</label><select id="engine" required onchange="loadDriveTypes()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Çekiş Sistemi *</label><select id="driveType" required onchange="loadPackages()"><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Paket *</label><select id="package" required><option>Seçiniz</option></select></div>
-                                <div class="form-group"><label>Renk *</label><select id="color" required><option>Seçiniz</option><option>Siyah</option><option>Beyaz</option><option>Gümüş</option><option>Gri</option><option>Kırmızı</option><option>Mavi</option><option>Yeşil</option><option>Sarı</option><option>Turuncu</option><option>Kahverengi</option></select></div>
-                            </div>
-                            <div class="btn-container"><button type="button" class="btn-secondary" onclick="goToStep(1)">Geri</button><button type="button" class="btn-next" onclick="goToStep(3)">İleri</button></div>
-                        </div>
+            <div class="filter-group">
+                <label for="model">Model</label>
+                <select id="model">
+                    <option value="">-- Model Seçin --</option>
+                </select>
+            </div>
 
-                        <div class="form-step" data-step="3">
-                            <h3>Araç Durumu</h3>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                                <div class="form-group"><label>Kaportanın Rengi *</label><select id="carColor" required><option>Seçiniz</option><option>Siyah</option><option>Beyaz</option><option>Gümüş</option><option>Gri</option><option>Kırmızı</option><option>Mavi</option></select></div>
-                                <div class="tramer-section"><label>Tramer Durumu *</label><div class="tramer-options"><div class="tramer-option"><input type="radio" id="tramer1" name="tramerStatus" value="Hayır" required onchange="toggleTramerDetails()"><label for="tramer1">Hayır</label></div><div class="tramer-option"><input type="radio" id="tramer2" name="tramerStatus" value="Evet" required onchange="toggleTramerDetails()"><label for="tramer2">Evet</label></div></div><div id="tramerDetails" class="tramer-details"><label>Tutarı (₺)</label><input type="number" id="tramerPrice" placeholder="Tutar" min="0"></div></div>
-                            </div>
-                            <h4>Kaportanın Durumu</h4>
-                            <div class="legend"><div class="legend-item"><div class="legend-color" style="background:#fff;"></div><span>Orijinal</span></div><div class="legend-item"><div class="legend-color" style="background:#FFA500;"></div><span>Lokal Boyalı</span></div><div class="legend-item"><div class="legend-color" style="background:#FFFF00;"></div><span>Boyalı</span></div><div class="legend-item"><div class="legend-color" style="background:#4169E1;"></div><span>Onarım</span></div><div class="legend-item"><div class="legend-color" style="background:#DC143C;"></div><span>Değişen</span></div></div>
-                            <div class="damage-table-section"><table class="damage-table"><thead><tr><th>Parça</th><th style="background:#fff;color:#000;">Orijinal</th><th style="background:#FFA500;">Lokal Boyalı</th><th style="background:#FFFF00;color:#000;">Boyalı</th><th style="background:#4169E1;">Onarım</th><th style="background:#DC143C;">Değişen</th></tr></thead><tbody><tr><td>Sol Ön Çamurlu</td><td><input type="radio" name="left-front-fender" value="Orijinal"></td><td><input type="radio" name="left-front-fender" value="Lokal Boyalı"></td><td><input type="radio" name="left-front-fender" value="Boyalı"></td><td><input type="radio" name="left-front-fender" value="Onarım"></td><td><input type="radio" name="left-front-fender" value="Değişen"></td></tr><tr><td>Sol Ön Kapı</td><td><input type="radio" name="left-front-door" value="Orijinal"></td><td><input type="radio" name="left-front-door" value="Lokal Boyalı"></td><td><input type="radio" name="left-front-door" value="Boyalı"></td><td><input type="radio" name="left-front-door" value="Onarım"></td><td><input type="radio" name="left-front-door" value="Değişen"></td></tr><tr><td>Kaput</td><td><input type="radio" name="hood" value="Orijinal"></td><td><input type="radio" name="hood" value="Lokal Boyalı"></td><td><input type="radio" name="hood" value="Boyalı"></td><td><input type="radio" name="hood" value="Onarım"></td><td><input type="radio" name="hood" value="Değişen"></td></tr><tr><td>Tavan</td><td><input type="radio" name="roof" value="Orijinal"></td><td><input type="radio" name="roof" value="Lokal Boyalı"></td><td><input type="radio" name="roof" value="Boyalı"></td><td><input type="radio" name="roof" value="Onarım"></td><td><input type="radio" name="roof" value="Değişen"></td></tr><tr><td>Sağ Ön Kapı</td><td><input type="radio" name="right-front-door" value="Orijinal"></td><td><input type="radio" name="right-front-door" value="Lokal Boyalı"></td><td><input type="radio" name="right-front-door" value="Boyalı"></td><td><input type="radio" name="right-front-door" value="Onarım"></td><td><input type="radio" name="right-front-door" value="Değişen"></td></tr><tr><td>Sağ Ön Çamurlu</td><td><input type="radio" name="right-front-fender" value="Orijinal"></td><td><input type="radio" name="right-front-fender" value="Lokal Boyalı"></td><td><input type="radio" name="right-front-fender" value="Boyalı"></td><td><input type="radio" name="right-front-fender" value="Onarım"></td><td><input type="radio" name="right-front-fender" value="Değişen"></td></tr><tr><td>Sol Arka Çamurlu</td><td><input type="radio" name="left-rear-fender" value="Orijinal"></td><td><input type="radio" name="left-rear-fender" value="Lokal Boyalı"></td><td><input type="radio" name="left-rear-fender" value="Boyalı"></td><td><input type="radio" name="left-rear-fender" value="Onarım"></td><td><input type="radio" name="left-rear-fender" value="Değişen"></td></tr><tr><td>Sol Arka Kapı</td><td><input type="radio" name="left-rear-door" value="Orijinal"></td><td><input type="radio" name="left-rear-door" value="Lokal Boyalı"></td><td><input type="radio" name="left-rear-door" value="Boyalı"></td><td><input type="radio" name="left-rear-door" value="Onarım"></td><td><input type="radio" name="left-rear-door" value="Değişen"></td></tr><tr><td>Bagaj</td><td><input type="radio" name="trunk" value="Orijinal"></td><td><input type="radio" name="trunk" value="Lokal Boyalı"></td><td><input type="radio" name="trunk" value="Boyalı"></td><td><input type="radio" name="trunk" value="Onarım"></td><td><input type="radio" name="trunk" value="Değişen"></td></tr><tr><td>Sağ Arka Kapı</td><td><input type="radio" name="right-rear-door" value="Orijinal"></td><td><input type="radio" name="right-rear-door" value="Lokal Boyalı"></td><td><input type="radio" name="right-rear-door" value="Boyalı"></td><td><input type="radio" name="right-rear-door" value="Onarım"></td><td><input type="radio" name="right-rear-door" value="Değişen"></td></tr><tr><td>Sağ Arka Çamurlu</td><td><input type="radio" name="right-rear-fender" value="Orijinal"></td><td><input type="radio" name="right-rear-fender" value="Lokal Boyalı"></td><td><input type="radio" name="right-rear-fender" value="Boyalı"></td><td><input type="radio" name="right-rear-fender" value="Onarım"></td><td><input type="radio" name="right-rear-fender" value="Değişen"></td></tr></tbody></table></div>
-                            <div class="form-row" style="grid-template-columns:1fr;"><div class="form-group"><label>İç Durumu *</label><select id="interiorCondition" required><option>Seçiniz</option><option>Mükemmel</option><option>İyi</option><option>Orta</option><option>Kötü</option></select></div></div>
-                            <div class="btn-container"><button type="button" class="btn-secondary" onclick="goToStep(2)">Geri</button><button type="button" class="btn-next" onclick="goToStep(4)">İleri</button></div>
-                        </div>
+            <div class="filter-group">
+                <label for="govde">Gövde Tipi</label>
+                <select id="govde">
+                    <option value="">-- Gövde Seçin --</option>
+                </select>
+            </div>
 
-                        <div class="form-step" data-step="4">
-                            <h3>İletişim Bilgileri</h3>
-                            <div class="form-row">
-                                <div class="form-group"><label>Ad *</label><input type="text" id="firstName" placeholder="Adınız" required></div>
-                                <div class="form-group"><label>Soyad *</label><input type="text" id="lastName" placeholder="Soyadınız" required></div>
-                                <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="email@örnek.com"></div>
-                                <div class="form-group"><label>Telefon *</label><input type="tel" id="phone" placeholder="05XX XXX XX XX" required></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group"><label>Şehir *</label><input type="text" id="city" placeholder="Şehir" required></div>
-                                <div class="form-group"><label>İlçe *</label><input type="text" id="district" placeholder="İlçe" required></div>
-                            </div>
-                            <div class="btn-container"><button type="button" class="btn-secondary" onclick="goToStep(3)">Geri</button><button type="button" class="btn-next" onclick="goToStep(5)">İleri</button></div>
-                        </div>
+            <div class="filter-group">
+                <label for="yil">Yıl</label>
+                <select id="yil">
+                    <option value="">-- Yıl Seçin --</option>
+                </select>
+            </div>
 
-                        <div class="form-step" data-step="5">
-                            <h3>Bilgileri Kontrol Edin</h3>
-                            <div id="summaryContent" style="background:var(--light-bg);padding:1.5rem;border-radius:8px;margin-bottom:1.5rem;max-height:400px;overflow-y:auto;font-size:0.95rem;line-height:2;"></div>
-                            <div class="checkbox-wrapper"><input type="checkbox" id="agreement"><label for="agreement">Bilgilerim doğru ve gönderilmesini onaylıyorum</label></div>
-                            <div class="btn-container"><button type="button" class="btn-secondary" onclick="goToStep(4)">Geri</button><button type="button" class="btn-submit" onclick="submitForm()">Gönder</button></div>
-                        </div>
-                    </form>
-                </div>
-                <div id="successMessage" class="success-message">
-                    <div style="font-size:3rem;margin-bottom:1rem;">✓</div>
-                    <h3>Talebiniz Başarıyla Alındı!</h3>
-                    <div style="background:rgba(255,255,255,0.2);padding:1rem;border-radius:6px;margin:1rem 0;"><p><strong>En kısa sürede SMS gönderilecektir.</strong></p><p style="margin-top:0.8rem;">📱 <strong id="displayPhone"></strong></p></div>
-                    <p>Referans: <strong id="referenceCode" style="font-family:monospace;"></strong></p>
-                    <button class="btn-primary" onclick="location.reload()" style="margin-top:1rem;">Yeni Değerleme</button>
-                </div>
+            <div class="filter-group">
+                <label for="yakut">Yakıt</label>
+                <select id="yakut">
+                    <option value="">-- Yakıt Seçin --</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="vites">Vites</label>
+                <select id="vites">
+                    <option value="">-- Vites Seçin --</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="motor">Motor</label>
+                <select id="motor">
+                    <option value="">-- Motor Seçin --</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="cekis">Çekiş</label>
+                <select id="cekis">
+                    <option value="">-- Çekiş Seçin --</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="paket">Paket</label>
+                <select id="paket">
+                    <option value="">-- Paket Seçin --</option>
+                </select>
             </div>
         </div>
-    </section>
-    <footer><p>&copy; 2024 OTOSELL</p></footer>
+
+        <div class="button-group">
+            <button class="btn-search" onclick="searchVehicles()">🔍 Ara</button>
+            <button class="btn-reset" onclick="resetFilters()">🔄 Sıfırla</button>
+        </div>
+
+        <div class="results" id="results"></div>
+    </div>
 
     <script>
-        let currentStep = 1;
-        let DB = {};
+        let vehicleData = {};
+        let allBrands = [];
 
-        // Veriyi yükle
-        fetch('./vehicleData.json')
-            .then(response => response.json())
-            .then(data => {
-                DB = data;
-                console.log('Veriler yüklendi');
-            })
-            .catch(e => console.error('Veri yüklenemedi:', e));
-
-        function loadBrands() {
-            const type = document.getElementById('vehicleType').value;
-            const select = document.getElementById('brand');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && DB[type]) {
-                Object.keys(DB[type]).sort().forEach(brand => {
-                    const opt = document.createElement('option');
-                    opt.value = brand;
-                    opt.textContent = brand;
-                    select.appendChild(opt);
-                });
+        // Verileri yükle
+        async function loadData() {
+            try {
+                const response = await fetch('vehicleData.json');
+                if (!response.ok) throw new Error('Veri yüklenemedi');
+                vehicleData = await response.json();
+                
+                // Markaları al
+                allBrands = Object.keys(vehicleData).sort();
+                
+                // İstatistikleri güncelle
+                updateStats();
+                
+                // Marka dropdown'ını doldur
+                populateMarkaDropdown();
+                
+                console.log('Veriler başarıyla yüklendi:', vehicleData);
+            } catch (error) {
+                showError('Veri yüklenirken hata oluştu: ' + error.message);
+                console.error('Hata:', error);
             }
-            clearSelects(['model', 'bodyType', 'year', 'fuel', 'transmission', 'engine', 'driveType', 'package']);
         }
 
-        function loadModels() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const select = document.getElementById('model');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && DB[type][brand]) {
-                Object.keys(DB[type][brand]).sort().forEach(model => {
-                    const opt = document.createElement('option');
-                    opt.value = model;
-                    opt.textContent = model;
-                    select.appendChild(opt);
-                });
-            }
-            clearSelects(['bodyType', 'year', 'fuel', 'transmission', 'engine', 'driveType', 'package']);
+        function updateStats() {
+            const markaSayisi = Object.keys(vehicleData).length;
+            const toplam = countAllVehicles(vehicleData);
+            document.getElementById('stats-text').innerHTML = 
+                `📊 Toplam ${markaSayisi} marka | ${toplam} araç modeli`;
         }
 
-        function loadBodyTypes() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const select = document.getElementById('bodyType');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && DB[type][brand][model]) {
-                Object.keys(DB[type][brand][model]).sort().forEach(body => {
-                    const opt = document.createElement('option');
-                    opt.value = body;
-                    opt.textContent = body;
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model])[0];
-                    loadYears();
+        function countAllVehicles(obj, count = 0) {
+            for (let key in obj) {
+                if (typeof obj[key] === 'object') {
+                    count = countAllVehicles(obj[key], count);
+                } else if (Array.isArray(obj[key])) {
+                    count += obj[key].length;
                 }
             }
-            clearSelects(['year', 'fuel', 'transmission', 'engine', 'driveType', 'package']);
+            return count;
         }
 
-        function loadYears() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const select = document.getElementById('year');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && DB[type][brand][model][body]) {
-                Object.keys(DB[type][brand][model][body]).sort((a, b) => b - a).forEach(year => {
-                    const opt = document.createElement('option');
-                    opt.value = year;
-                    opt.textContent = year;
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model][body]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model][body])[0];
-                    loadFuels();
-                }
-            }
-            clearSelects(['fuel', 'transmission', 'engine', 'driveType', 'package']);
-        }
-
-        function loadFuels() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const year = document.getElementById('year').value;
-            const select = document.getElementById('fuel');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && year && DB[type][brand][model][body][year]) {
-                Object.keys(DB[type][brand][model][body][year]).sort().forEach(fuel => {
-                    const opt = document.createElement('option');
-                    opt.value = fuel;
-                    opt.textContent = fuel;
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model][body][year]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model][body][year])[0];
-                    loadTransmissions();
-                }
-            }
-            clearSelects(['transmission', 'engine', 'driveType', 'package']);
-        }
-
-        function loadTransmissions() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const year = document.getElementById('year').value;
-            const fuel = document.getElementById('fuel').value;
-            const select = document.getElementById('transmission');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && year && fuel && DB[type][brand][model][body][year][fuel]) {
-                Object.keys(DB[type][brand][model][body][year][fuel]).sort().forEach(trans => {
-                    const opt = document.createElement('option');
-                    opt.value = trans;
-                    opt.textContent = trans.split('-')[0];
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model][body][year][fuel]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model][body][year][fuel])[0];
-                    loadEngines();
-                }
-            }
-            clearSelects(['engine', 'driveType', 'package']);
-        }
-
-        function loadEngines() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const year = document.getElementById('year').value;
-            const fuel = document.getElementById('fuel').value;
-            const trans = document.getElementById('transmission').value;
-            const select = document.getElementById('engine');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && year && fuel && trans && DB[type][brand][model][body][year][fuel][trans]) {
-                Object.keys(DB[type][brand][model][body][year][fuel][trans]).sort().forEach(engine => {
-                    const opt = document.createElement('option');
-                    opt.value = engine;
-                    opt.textContent = engine;
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model][body][year][fuel][trans]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model][body][year][fuel][trans])[0];
-                    loadDriveTypes();
-                }
-            }
-            clearSelects(['driveType', 'package']);
-        }
-
-        function loadDriveTypes() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const year = document.getElementById('year').value;
-            const fuel = document.getElementById('fuel').value;
-            const trans = document.getElementById('transmission').value;
-            const engine = document.getElementById('engine').value;
-            const select = document.getElementById('driveType');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && year && fuel && trans && engine && DB[type][brand][model][body][year][fuel][trans][engine]) {
-                Object.keys(DB[type][brand][model][body][year][fuel][trans][engine]).sort().forEach(drive => {
-                    const opt = document.createElement('option');
-                    opt.value = drive;
-                    opt.textContent = drive;
-                    select.appendChild(opt);
-                });
-                if (Object.keys(DB[type][brand][model][body][year][fuel][trans][engine]).length === 1) {
-                    select.value = Object.keys(DB[type][brand][model][body][year][fuel][trans][engine])[0];
-                    loadPackages();
-                }
-            }
-            clearSelects(['package']);
-        }
-
-        function loadPackages() {
-            const type = document.getElementById('vehicleType').value;
-            const brand = document.getElementById('brand').value;
-            const model = document.getElementById('model').value;
-            const body = document.getElementById('bodyType').value;
-            const year = document.getElementById('year').value;
-            const fuel = document.getElementById('fuel').value;
-            const trans = document.getElementById('transmission').value;
-            const engine = document.getElementById('engine').value;
-            const drive = document.getElementById('driveType').value;
-            const select = document.getElementById('package');
-            select.innerHTML = '<option>Seçiniz</option>';
-            if (type && brand && model && body && year && fuel && trans && engine && drive && DB[type][brand][model][body][year][fuel][trans][engine][drive]) {
-                DB[type][brand][model][body][year][fuel][trans][engine][drive].forEach(pkg => {
-                    const opt = document.createElement('option');
-                    opt.value = pkg;
-                    opt.textContent = pkg;
-                    select.appendChild(opt);
-                });
-            }
-        }
-
-        function clearSelects(ids) {
-            ids.forEach(id => {
-                const select = document.getElementById(id);
-                if (select) select.innerHTML = '<option>Seçiniz</option>';
+        function populateMarkaDropdown() {
+            const markaSelect = document.getElementById('marka');
+            allBrands.forEach(marka => {
+                const option = document.createElement('option');
+                option.value = marka;
+                option.textContent = marka;
+                markaSelect.appendChild(option);
             });
         }
 
-        function toggleTramerDetails() {
-            const selected = document.querySelector('input[name="tramerStatus"]:checked');
-            const div = document.getElementById('tramerDetails');
-            if (selected && selected.value === 'Evet') {
-                div.classList.add('show');
-            } else {
-                div.classList.remove('show');
-                document.getElementById('tramerPrice').value = '';
+        function updateModelDropdown() {
+            const marka = document.getElementById('marka').value;
+            const modelSelect = document.getElementById('model');
+            
+            modelSelect.innerHTML = '<option value="">-- Model Seçin --</option>';
+            
+            if (marka && vehicleData[marka]) {
+                const modeller = Object.keys(vehicleData[marka]).sort();
+                modeller.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
             }
         }
 
-        function goToStep(step) {
-            if (validateStep(currentStep)) {
-                currentStep = step;
-                showStep(step);
+        function updateGovdeDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govdeSelect = document.getElementById('govde');
+            
+            govdeSelect.innerHTML = '<option value="">-- Gövde Seçin --</option>';
+            
+            if (marka && model && vehicleData[marka] && vehicleData[marka][model]) {
+                const govdeler = Object.keys(vehicleData[marka][model]).sort();
+                govdeler.forEach(govde => {
+                    const option = document.createElement('option');
+                    option.value = govde;
+                    option.textContent = govde;
+                    govdeSelect.appendChild(option);
+                });
             }
         }
 
-        function showStep(step) {
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('[data-step]').forEach(el => {
-                const s = parseInt(el.getAttribute('data-step'));
-                el.classList.remove('active', 'completed');
-                if (s < step) el.classList.add('completed');
-                else if (s === step) el.classList.add('active');
-            });
-            document.querySelectorAll('.form-step')[step - 1].classList.add('active');
-            document.getElementById('progressFill').style.width = (step / 5) * 100 + '%';
-            if (step === 5) generateSummary();
+        function updateYilDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yilSelect = document.getElementById('yil');
+            
+            yilSelect.innerHTML = '<option value="">-- Yıl Seçin --</option>';
+            
+            if (marka && model && govde && vehicleData[marka] && vehicleData[marka][model] && vehicleData[marka][model][govde]) {
+                const yillar = Object.keys(vehicleData[marka][model][govde]).sort().reverse();
+                yillar.forEach(yil => {
+                    const option = document.createElement('option');
+                    option.value = yil;
+                    option.textContent = yil;
+                    yilSelect.appendChild(option);
+                });
+            }
         }
 
-        function validateStep(step) {
-            const form = document.querySelectorAll('.form-step')[step - 1];
-            const fields = form.querySelectorAll('[required]');
-            let valid = true;
-            fields.forEach(field => {
-                if (field.type === 'checkbox') return;
-                if (!field.value) {
-                    field.style.borderColor = '#c62828';
-                    valid = false;
-                } else {
-                    field.style.borderColor = '#e0e0e0';
-                }
-            });
-            if (!valid) showError('Tüm zorunlu alanları doldurunuz');
-            return valid;
+        function updateYakutDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakutSelect = document.getElementById('yakut');
+            
+            yakutSelect.innerHTML = '<option value="">-- Yakıt Seçin --</option>';
+            
+            if (marka && model && govde && yil && vehicleData[marka]?.[model]?.[govde]?.[yil]) {
+                const yakutlar = Object.keys(vehicleData[marka][model][govde][yil]).sort();
+                yakutlar.forEach(yakut => {
+                    const option = document.createElement('option');
+                    option.value = yakut;
+                    option.textContent = yakut;
+                    yakutSelect.appendChild(option);
+                });
+            }
         }
 
-        function generateSummary() {
-            const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
-            let paintInfo = '<strong>🎨 Kaportanın Durumu:</strong><br>';
-            let hasSelection = false;
-            parts.forEach(part => {
-                const selected = document.querySelector(`input[name="${part}"]:checked`);
-                if (selected && selected.value !== 'Orijinal') {
-                    paintInfo += `• ${part.replace(/-/g, ' ')}: ${selected.value}<br>`;
-                    hasSelection = true;
-                }
-            });
-            if (!hasSelection) paintInfo = '<strong>🎨 Kaportanın Durumu:</strong> Tümü Orijinal<br>';
-
-            const summary = document.getElementById('summaryContent');
-            summary.innerHTML = `
-                <strong>📍 Araç Tipi:</strong> ${document.getElementById('vehicleType').value}<br>
-                <strong>🏢 Marka:</strong> ${document.getElementById('brand').value}<br>
-                <strong>📋 Model:</strong> ${document.getElementById('model').value}<br>
-                <strong>🏗️ Gövde Tipi:</strong> ${document.getElementById('bodyType').value}<br>
-                <strong>📅 Yıl:</strong> ${document.getElementById('year').value}<br>
-                <strong>⛽ Km:</strong> ${Number(document.getElementById('mileage').value).toLocaleString()}<br>
-                <strong>🎨 Renk:</strong> ${document.getElementById('color').value}<br>
-                <strong>💨 Yakıt:</strong> ${document.getElementById('fuel').value}<br>
-                <strong>⚙️ Vites:</strong> ${document.getElementById('transmission').value}<br>
-                <strong>🔧 Motor:</strong> ${document.getElementById('engine').value}<br>
-                <strong>🔄 Çekiş:</strong> ${document.getElementById('driveType').value}<br>
-                <strong>📦 Paket:</strong> ${document.getElementById('package').value}<br>
-                ${paintInfo}
-                <strong>👤 Ad Soyad:</strong> ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
-                <strong>📱 Telefon:</strong> ${document.getElementById('phone').value}
-            `;
+        function updateVitesDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakut = document.getElementById('yakut').value;
+            const vitesSelect = document.getElementById('vites');
+            
+            vitesSelect.innerHTML = '<option value="">-- Vites Seçin --</option>';
+            
+            if (marka && model && govde && yil && yakut && vehicleData[marka]?.[model]?.[govde]?.[yil]?.[yakut]) {
+                const vitesler = Object.keys(vehicleData[marka][model][govde][yil][yakut]).sort();
+                vitesler.forEach(vites => {
+                    const option = document.createElement('option');
+                    option.value = vites;
+                    option.textContent = vites;
+                    vitesSelect.appendChild(option);
+                });
+            }
         }
 
-        function showError(msg) {
-            const box = document.getElementById('errorBox');
-            box.textContent = '⚠️ ' + msg;
-            box.style.display = 'block';
-            setTimeout(() => box.style.display = 'none', 4000);
+        function updateMotorDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakut = document.getElementById('yakut').value;
+            const vites = document.getElementById('vites').value;
+            const motorSelect = document.getElementById('motor');
+            
+            motorSelect.innerHTML = '<option value="">-- Motor Seçin --</option>';
+            
+            if (marka && model && govde && yil && yakut && vites && vehicleData[marka]?.[model]?.[govde]?.[yil]?.[yakut]?.[vites]) {
+                const motorlar = Object.keys(vehicleData[marka][model][govde][yil][yakut][vites]).sort();
+                motorlar.forEach(motor => {
+                    const option = document.createElement('option');
+                    option.value = motor;
+                    option.textContent = motor;
+                    motorSelect.appendChild(option);
+                });
+            }
         }
 
-        function submitForm() {
-            if (!document.getElementById('agreement').checked) {
-                showError('Lütfen koşulları onaylayınız');
+        function updateCekisDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakut = document.getElementById('yakut').value;
+            const vites = document.getElementById('vites').value;
+            const motor = document.getElementById('motor').value;
+            const cekisSelect = document.getElementById('cekis');
+            
+            cekisSelect.innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            
+            if (marka && model && govde && yil && yakut && vites && motor && vehicleData[marka]?.[model]?.[govde]?.[yil]?.[yakut]?.[vites]?.[motor]) {
+                const cekisler = Object.keys(vehicleData[marka][model][govde][yil][yakut][vites][motor]).sort();
+                cekisler.forEach(cekis => {
+                    const option = document.createElement('option');
+                    option.value = cekis;
+                    option.textContent = cekis;
+                    cekisSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updatePaketDropdown() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakut = document.getElementById('yakut').value;
+            const vites = document.getElementById('vites').value;
+            const motor = document.getElementById('motor').value;
+            const cekis = document.getElementById('cekis').value;
+            const paketSelect = document.getElementById('paket');
+            
+            paketSelect.innerHTML = '<option value="">-- Paket Seçin --</option>';
+            
+            if (marka && model && govde && yil && yakut && vites && motor && cekis && 
+                vehicleData[marka]?.[model]?.[govde]?.[yil]?.[yakut]?.[vites]?.[motor]?.[cekis]) {
+                const paketler = vehicleData[marka][model][govde][yil][yakut][vites][motor][cekis];
+                paketler.forEach(paket => {
+                    const option = document.createElement('option');
+                    option.value = paket;
+                    option.textContent = paket;
+                    paketSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Event listeners
+        document.getElementById('marka').addEventListener('change', function() {
+            updateModelDropdown();
+            document.getElementById('govde').innerHTML = '<option value="">-- Gövde Seçin --</option>';
+            document.getElementById('yil').innerHTML = '<option value="">-- Yıl Seçin --</option>';
+            document.getElementById('yakut').innerHTML = '<option value="">-- Yakıt Seçin --</option>';
+            document.getElementById('vites').innerHTML = '<option value="">-- Vites Seçin --</option>';
+            document.getElementById('motor').innerHTML = '<option value="">-- Motor Seçin --</option>';
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('model').addEventListener('change', function() {
+            updateGovdeDropdown();
+            document.getElementById('yil').innerHTML = '<option value="">-- Yıl Seçin --</option>';
+            document.getElementById('yakut').innerHTML = '<option value="">-- Yakıt Seçin --</option>';
+            document.getElementById('vites').innerHTML = '<option value="">-- Vites Seçin --</option>';
+            document.getElementById('motor').innerHTML = '<option value="">-- Motor Seçin --</option>';
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('govde').addEventListener('change', function() {
+            updateYilDropdown();
+            document.getElementById('yakut').innerHTML = '<option value="">-- Yakıt Seçin --</option>';
+            document.getElementById('vites').innerHTML = '<option value="">-- Vites Seçin --</option>';
+            document.getElementById('motor').innerHTML = '<option value="">-- Motor Seçin --</option>';
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('yil').addEventListener('change', function() {
+            updateYakutDropdown();
+            document.getElementById('vites').innerHTML = '<option value="">-- Vites Seçin --</option>';
+            document.getElementById('motor').innerHTML = '<option value="">-- Motor Seçin --</option>';
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('yakut').addEventListener('change', function() {
+            updateVitesDropdown();
+            document.getElementById('motor').innerHTML = '<option value="">-- Motor Seçin --</option>';
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('vites').addEventListener('change', function() {
+            updateMotorDropdown();
+            document.getElementById('cekis').innerHTML = '<option value="">-- Çekiş Seçin --</option>';
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('motor').addEventListener('change', function() {
+            updateCekisDropdown();
+            document.getElementById('paket').innerHTML = '<option value="">-- Paket Seçin --</option>';
+        });
+
+        document.getElementById('cekis').addEventListener('change', function() {
+            updatePaketDropdown();
+        });
+
+        function searchVehicles() {
+            const marka = document.getElementById('marka').value;
+            const model = document.getElementById('model').value;
+            const govde = document.getElementById('govde').value;
+            const yil = document.getElementById('yil').value;
+            const yakut = document.getElementById('yakut').value;
+            const vites = document.getElementById('vites').value;
+            const motor = document.getElementById('motor').value;
+            const cekis = document.getElementById('cekis').value;
+            const paket = document.getElementById('paket').value;
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (!marka) {
+                showError('Lütfen en az Marka seçiniz!');
                 return;
             }
 
-            const data = {
-                referenceCode: 'OS-' + Date.now(),
-                vehicleType: document.getElementById('vehicleType').value,
-                brand: document.getElementById('brand').value,
-                model: document.getElementById('model').value,
-                bodyType: document.getElementById('bodyType').value,
-                year: document.getElementById('year').value,
-                mileage: document.getElementById('mileage').value,
-                color: document.getElementById('color').value,
-                fuel: document.getElementById('fuel').value,
-                transmission: document.getElementById('transmission').value,
-                engine: document.getElementById('engine').value,
-                driveType: document.getElementById('driveType').value,
-                package: document.getElementById('package').value,
-                tramer: document.querySelector('input[name="tramerStatus"]:checked').value,
-                interior: document.getElementById('interiorCondition').value,
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                city: document.getElementById('city').value,
-                district: document.getElementById('district').value,
-                submittedAt: new Date().toLocaleString('tr-TR')
-            };
+            const results = [];
 
-            let submissions = JSON.parse(localStorage.getItem('otosellSubmissions')) || [];
-            submissions.push(data);
-            localStorage.setItem('otosellSubmissions', JSON.stringify(submissions));
+            if (marka && vehicleData[marka]) {
+                const modelData = model ? vehicleData[marka][model] : vehicleData[marka];
+                
+                for (let m in modelData) {
+                    if (model && m !== model) continue;
+                    
+                    const govdeData = govde ? modelData[m][govde] : modelData[m];
+                    
+                    for (let g in govdeData) {
+                        if (govde && g !== govde) continue;
+                        
+                        const yilData = yil ? govdeData[g][yil] : govdeData[g];
+                        
+                        for (let y in yilData) {
+                            if (yil && y !== yil) continue;
+                            
+                            const yakutData = yakut ? yilData[y][yakut] : yilData[y];
+                            
+                            for (let ya in yakutData) {
+                                if (yakut && ya !== yakut) continue;
+                                
+                                const vitesData = vites ? yakutData[ya][vites] : yakutData[ya];
+                                
+                                for (let v in vitesData) {
+                                    if (vites && v !== vites) continue;
+                                    
+                                    const motorData = motor ? vitesData[v][motor] : vitesData[v];
+                                    
+                                    for (let mo in motorData) {
+                                        if (motor && mo !== motor) continue;
+                                        
+                                        const cekisData = cekis ? motorData[mo][cekis] : motorData[mo];
+                                        
+                                        for (let c in cekisData) {
+                                            if (cekis && c !== cekis) continue;
+                                            
+                                            const paketler = cekisData[c];
+                                            
+                                            paketler.forEach(p => {
+                                                if (!paket || p === paket) {
+                                                    results.push({
+                                                        marka,
+                                                        model: m,
+                                                        govde: g,
+                                                        yil: y,
+                                                        yakut: ya,
+                                                        vites: v,
+                                                        motor: mo,
+                                                        cekis: c,
+                                                        paket: p
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-            document.getElementById('formContainer').style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('displayPhone').textContent = data.phone;
-            document.getElementById('referenceCode').textContent = data.referenceCode;
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="no-results">❌ Sonuç bulunamadı!</div>';
+                return;
+            }
+
+            results.forEach(result => {
+                const resultHTML = `
+                    <div class="result-item">
+                        <h3>${result.marka} ${result.model}</h3>
+                        <div class="result-details">
+                            <div class="detail">
+                                <div class="detail-label">Gövde Tipi</div>
+                                <div class="detail-value">${result.govde}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Yıl</div>
+                                <div class="detail-value">${result.yil}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Yakıt</div>
+                                <div class="detail-value">${result.yakut}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Vites</div>
+                                <div class="detail-value">${result.vites}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Motor</div>
+                                <div class="detail-value">${result.motor}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Çekiş</div>
+                                <div class="detail-value">${result.cekis}</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Paket</div>
+                                <div class="detail-value">${result.paket}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsDiv.innerHTML += resultHTML;
+            });
         }
+
+        function resetFilters() {
+            document.getElementById('marka').value = '';
+            document.getElementById('model').value = '';
+            document.getElementById('govde').value = '';
+            document.getElementById('yil').value = '';
+            document.getElementById('yakut').value = '';
+            document.getElementById('vites').value = '';
+            document.getElementById('motor').value = '';
+            document.getElementById('cekis').value = '';
+            document.getElementById('paket').value = '';
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('error').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Sayfa yüklendiğinde verileri yükle
+        window.addEventListener('load', loadData);
     </script>
 </body>
 </html>
