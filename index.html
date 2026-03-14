@@ -1052,7 +1052,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 OTOSELL - Tüm Hakları Saklıdır.</p>
+        <p>&copy; 2026 © OtoSell | Tüm Hakları Saklıdır.</p>
     </footer>
 
     <script>
@@ -5040,7 +5040,78 @@ tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') &&
             }, 5000);
         }
 
-        window.addEventListener('load', loadYears);
+
+        // STEP PROGRESS FOOTER
+        function initStepProgress() {
+            const stepProgressHTML = `
+                <div style="margin-top: 4rem; padding-top: 3rem; border-top: 2px solid #f0f0f0;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                        
+                        <!-- Step 1 -->
+                        <div style="display: flex; gap: 1.5rem;">
+                            <div style="flex-shrink: 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700 0%, #ffed4e 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <span style="font-size: 1.8rem;">📋</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: #1a1a1a; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 700;">Araç Bilgileri</h4>
+                                <p style="color: #666; margin: 0; font-size: 0.9rem; line-height: 1.5;">Araç türü, marka, model, yıl, yakıt ve motor bilgilerini girin.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div style="display: flex; gap: 1.5rem;">
+                            <div style="flex-shrink: 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700 0%, #ffed4e 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <span style="font-size: 1.8rem;">🔧</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: #1a1a1a; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 700;">Araç Durumu</h4>
+                                <p style="color: #666; margin: 0; font-size: 0.9rem; line-height: 1.5;">Kilometre, iç durumu, renk ve araç parçalarının durumunu belirtin.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div style="display: flex; gap: 1.5rem;">
+                            <div style="flex-shrink: 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700 0%, #ffed4e 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <span style="font-size: 1.8rem;">👤</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: #1a1a1a; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 700;">İletişim Bilgileri</h4>
+                                <p style="color: #666; margin: 0; font-size: 0.9rem; line-height: 1.5;">Ad, soyad, telefon, email, şehir ve ilçe bilgilerinizi girin.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div style="display: flex; gap: 1.5rem;">
+                            <div style="flex-shrink: 0;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FFD700 0%, #ffed4e 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <span style="font-size: 1.8rem;">✅</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: #1a1a1a; margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 700;">Özet ve Gönder</h4>
+                                <p style="color: #666; margin: 0; font-size: 0.9rem; line-height: 1.5;">Tüm bilgilerinizi kontrol edin ve teklif talebini gönderin.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+            
+            const footer = document.createElement('div');
+            footer.innerHTML = stepProgressHTML;
+            document.body.appendChild(footer);
+        }
+
+        window.addEventListener('load', () => {
+            loadYears();
+            initStepProgress();
+        });
     </script>
 </body>
 </html>
