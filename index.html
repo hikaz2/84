@@ -375,32 +375,47 @@
             border: 2px solid #000;
         }
 
+        /* ARAÇ HARITA */
+        svg {
+            width: 100%;
+            height: auto;
+        }
+
+        svg path, svg rect {
+            transition: all 0.3s ease;
+        }
+
+        svg path:hover, svg rect:hover {
+            opacity: 0.8;
+            filter: brightness(1.1);
+        }
+
+        svg path[style*="fill: #FFA500"],
+        svg rect[style*="fill: #FFA500"] {
+            stroke: #FFA500 !important;
+        }
+
+        svg path[style*="fill: #FFFF00"],
+        svg rect[style*="fill: #FFFF00"] {
+            stroke: #FFFF00 !important;
+        }
+
+        svg path[style*="fill: #4169E1"],
+        svg rect[style*="fill: #4169E1"] {
+            stroke: #4169E1 !important;
+        }
+
+        svg path[style*="fill: #DC143C"],
+        svg rect[style*="fill: #DC143C"] {
+            stroke: #DC143C !important;
+        }
+
         .car-diagram {
-            background: var(--white);
-            padding: 2rem 1rem;
-            border-radius: 8px;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
             margin: 2rem 0;
             border: 2px solid var(--border-color);
-            text-align: center;
-        }
-
-        .car-view {
-            margin-bottom: 2rem;
-        }
-
-        .car-view h5 {
-            margin-bottom: 1.5rem;
-            color: var(--primary-black);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .car-svg {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            margin: 0 auto;
-            display: block;
         }
 
         .damage-table-section {
@@ -501,14 +516,6 @@
 
         .tramer-details.show {
             display: block;
-        }
-
-        .tramer-details .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .tramer-details input[type="number"] {
-            width: 100%;
         }
 
         .btn-container {
@@ -637,14 +644,6 @@
             align-items: center;
             gap: 0.8rem;
             margin: 1.5rem 0;
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            width: 24px !important;
-            height: 24px !important;
-            cursor: pointer;
-            flex-shrink: 0;
-            accent-color: var(--primary-yellow);
         }
 
         .checkbox-wrapper label {
@@ -921,11 +920,11 @@
                         <div class="form-step" data-step="3">
                             <h3>Araç Durumu</h3>
 
-                                                        <div class="damage-section">
+                            <div class="damage-section">
                                 <h4>Ekspertiz Tanımları</h4>
                                 <div class="legend">
                                     <div class="legend-item">
-                                        <div class="legend-color" style="background-color: #ffffff;"></div>
+                                        <div class="legend-color" style="background-color: #ffffff; border: 2px solid #000;"></div>
                                         <span>Orijinal</span>
                                     </div>
                                     <div class="legend-item">
@@ -946,242 +945,168 @@
                                     </div>
                                 </div>
 
-                                <!-- ARAÇ GÖRSELİ -->
+                                <!-- ARAÇ HARITA SİSTEMİ -->
                                 <div class="car-diagram">
-                                    <div class="car-view">
-                                        <h5>ARKA GÖRÜNÜŞ</h5>
-                                        <svg viewBox="0 0 400 600" class="car-svg">
-                                            <!-- Tekerler -->
-                                            <g id="rear-left-wheel">
-                                                <circle cx="100" cy="120" r="50" fill="#333" stroke="#000" stroke-width="2"/>
-                                                <circle cx="100" cy="120" r="40" fill="#666"/>
-                                                <circle cx="100" cy="120" r="30" fill="#999"/>
-                                                <circle cx="100" cy="120" r="15" fill="#333"/>
-                                            </g>
-                                            <g id="rear-right-wheel">
-                                                <circle cx="300" cy="120" r="50" fill="#333" stroke="#000" stroke-width="2"/>
-                                                <circle cx="300" cy="120" r="40" fill="#666"/>
-                                                <circle cx="300" cy="120" r="30" fill="#999"/>
-                                                <circle cx="300" cy="120" r="15" fill="#333"/>
-                                            </g>
+                                    <svg viewBox="0 0 500 700">
+                                        <!-- ARKA GÖRÜNÜŞ -->
+                                        <text x="250" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#000">ARKA GÖRÜNÜŞ</text>
 
-                                            <!-- Ana gövde -->
-                                            <path d="M 60 150 L 60 250 Q 50 300 70 400 L 70 520 L 330 520 L 330 400 Q 350 300 340 250 L 340 150 Z" 
-                                                  fill="#ddd" stroke="#000" stroke-width="3"/>
+                                        <!-- Tekerler -->
+                                        <circle cx="120" cy="150" r="45" fill="#333" stroke="#000" stroke-width="2"/>
+                                        <circle cx="120" cy="150" r="35" fill="#666"/>
+                                        <circle cx="120" cy="150" r="20" fill="#999"/>
+                                        <circle cx="120" cy="150" r="10" fill="#333"/>
 
-                                            <!-- Cam -->
-                                            <rect x="100" y="160" width="200" height="80" fill="#87CEEB" stroke="#000" stroke-width="2" rx="5"/>
+                                        <circle cx="380" cy="150" r="45" fill="#333" stroke="#000" stroke-width="2"/>
+                                        <circle cx="380" cy="150" r="35" fill="#666"/>
+                                        <circle cx="380" cy="150" r="20" fill="#999"/>
+                                        <circle cx="380" cy="150" r="10" fill="#333"/>
 
-                                            <!-- Kapı seçim alanları -->
-                                            <rect id="door-rear-left" x="70" y="260" width="100" height="130" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                            <rect id="door-rear-right" x="230" y="260" width="100" height="130" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <!-- Ana Gövde -->
+                                        <path d="M 80 200 L 80 300 L 60 400 L 60 600 L 440 600 L 440 400 L 420 300 L 420 200 Z" 
+                                              fill="#e8e8e8" stroke="#000" stroke-width="2"/>
 
-                                            <!-- Bagaj -->
-                                            <rect id="trunk-part" x="100" y="400" width="200" height="100" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <!-- Cam -->
+                                        <rect x="120" y="220" width="260" height="100" fill="#add8e6" stroke="#000" stroke-width="2" rx="5"/>
 
-                                            <!-- Çamurluklar -->
-                                            <path id="fender-rear-left" d="M 50 200 L 40 350 L 60 400" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                            <path id="fender-rear-right" d="M 350 200 L 360 350 L 340 400" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <!-- Kapılar ve Parçalar -->
+                                        <path id="left-rear-fender-car" d="M 60 300 L 40 450 L 60 500" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                            <!-- Vücut -->
-                                            <rect id="body-rear" x="70" y="150" width="260" height="100" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <rect id="left-rear-door-car" x="80" y="330" width="110" height="150" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                            <!-- Tavan -->
-                                            <path id="roof-part" d="M 100 160 L 100 140 L 300 140 L 300 160" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                        </svg>
-                                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 1rem;">👆 Üzerine tıklayarak hasar seçiniz</p>
-                                    </div>
+                                        <path id="roof-car" d="M 140 220 L 140 190 L 360 190 L 360 220" 
+                                              fill="#bbb" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                    <div class="car-view">
-                                        <h5>ÖN GÖRÜNÜŞ</h5>
-                                        <svg viewBox="0 0 400 600" class="car-svg">
-                                            <!-- Tekerler -->
-                                            <g id="front-left-wheel">
-                                                <circle cx="100" cy="120" r="50" fill="#333" stroke="#000" stroke-width="2"/>
-                                                <circle cx="100" cy="120" r="40" fill="#666"/>
-                                                <circle cx="100" cy="120" r="30" fill="#999"/>
-                                                <circle cx="100" cy="120" r="15" fill="#333"/>
-                                            </g>
-                                            <g id="front-right-wheel">
-                                                <circle cx="300" cy="120" r="50" fill="#333" stroke="#000" stroke-width="2"/>
-                                                <circle cx="300" cy="120" r="40" fill="#666"/>
-                                                <circle cx="300" cy="120" r="30" fill="#999"/>
-                                                <circle cx="300" cy="120" r="15" fill="#333"/>
-                                            </g>
+                                        <rect id="right-rear-door-car" x="310" y="330" width="110" height="150" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                            <!-- Ana gövde -->
-                                            <path d="M 60 200 L 60 250 Q 50 300 70 400 L 70 520 L 330 520 L 330 400 Q 350 300 340 250 L 340 200 Z" 
-                                                  fill="#ddd" stroke="#000" stroke-width="3"/>
+                                        <path id="right-rear-fender-car" d="M 440 300 L 460 450 L 440 500" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                            <!-- Kaput -->
-                                            <rect id="hood-part" x="80" y="150" width="240" height="50" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <rect id="trunk-car" x="140" y="490" width="220" height="100" 
+                                              fill="#ddd" stroke="#000" stroke-width="2" style="cursor: pointer;"/>
 
-                                            <!-- Cam -->
-                                            <rect x="100" y="200" width="200" height="80" fill="#87CEEB" stroke="#000" stroke-width="2" rx="5"/>
+                                        <!-- ARKA ÇIZGI -->
+                                        <line x1="50" y1="610" x2="450" y2="610" stroke="#000" stroke-width="2"/>
 
-                                            <!-- Kapı seçim alanları -->
-                                            <rect id="door-front-left" x="70" y="300" width="100" height="130" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                            <rect id="door-front-right" x="230" y="300" width="100" height="130" 
-                                                  fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
+                                        <!-- ÖN GÖRÜNÜŞ -->
+                                        <text x="250" y="680" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">ÖN GÖRÜNÜŞ</text>
+                                    </svg>
 
-                                            <!-- Çamurluklar -->
-                                            <path id="fender-front-left" d="M 50 240 L 40 350 L 60 400" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                            <path id="fender-front-right" d="M 350 240 L 360 350 L 340 400" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-
-                                            <!-- Tavan -->
-                                            <path id="roof-front-part" d="M 100 200 L 100 180 L 300 180 L 300 200" 
-                                                  fill="none" stroke="#00ff00" stroke-width="3" stroke-dasharray="5,5"
-                                                  style="cursor: pointer;" class="door-part"/>
-                                        </svg>
-                                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 1rem;">👆 Üzerine tıklayarak hasar seçiniz</p>
-                                    </div>
+                                    <p style="text-align: center; color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                                        👆 Araç parçalarına tıklayarak hasar türünü seçiniz
+                                    </p>
                                 </div>
 
-                                <!-- HASAR SEÇİM MODAL -->
-                                <div id="damageModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;">
-                                    <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
-                                        <h4 style="margin-bottom: 1.5rem;">Hasar Türünü Seçiniz</h4>
-                                        <p id="damagePartName" style="margin-bottom: 1rem; color: var(--text-light); font-weight: 600;"></p>
-                                        
-                                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-                                            <button onclick="setDamage('Orijinal')" style="padding: 10px; background: #fff; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; font-weight: 600;">Orijinal</button>
-                                            <button onclick="setDamage('Lokal Boyalı')" style="padding: 10px; background: #FFA500; border: 2px solid #FFA500; border-radius: 6px; cursor: pointer; font-weight: 600; color: white;">Lokal Boyalı</button>
-                                            <button onclick="setDamage('Boyalı')" style="padding: 10px; background: #FFFF00; border: 2px solid #FFFF00; border-radius: 6px; cursor: pointer; font-weight: 600;">Boyalı</button>
-                                            <button onclick="setDamage('Onarım')" style="padding: 10px; background: #4169E1; border: 2px solid #4169E1; border-radius: 6px; cursor: pointer; font-weight: 600; color: white;">Onarım</button>
-                                            <button onclick="setDamage('Değişen')" style="padding: 10px; background: #DC143C; border: 2px solid #DC143C; border-radius: 6px; cursor: pointer; font-weight: 600; color: white;">Değişen</button>
-                                        </div>
-                                        
-                                        <button onclick="closeDamageModal()" style="width: 100%; margin-top: 1.5rem; padding: 10px; background: #f0f0f0; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Kapat</button>
+                                <!-- HASAR TABLOSU -->
+                                <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 2px solid var(--border-color);">
+                                    <h4 style="margin-bottom: 1rem;">Hasar Detayları</h4>
+                                    <div class="damage-table-section">
+                                        <table class="damage-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Parça Adı</th>
+                                                    <th style="background-color: #ffffff; color: #000;">Orijinal</th>
+                                                    <th style="background-color: #FFA500;">Lokal Boyalı</th>
+                                                    <th style="background-color: #FFFF00; color: #000;">Boyalı</th>
+                                                    <th style="background-color: #4169E1;">Onarım</th>
+                                                    <th style="background-color: #DC143C;">Değişen</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Sol Ön Çamurlu</td>
+                                                    <td><input type="radio" name="left-front-fender" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-fender" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-fender" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-fender" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-fender" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sol Ön Kapı</td>
+                                                    <td><input type="radio" name="left-front-door" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-door" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-door" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-door" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-front-door" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kaput</td>
+                                                    <td><input type="radio" name="hood" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="hood" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="hood" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="hood" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="hood" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tavan</td>
+                                                    <td><input type="radio" name="roof" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="roof" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="roof" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="roof" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="roof" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sağ Ön Kapı</td>
+                                                    <td><input type="radio" name="right-front-door" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-door" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-door" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-door" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-door" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sağ Ön Çamurlu</td>
+                                                    <td><input type="radio" name="right-front-fender" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-fender" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-fender" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-fender" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-front-fender" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sol Arka Çamurlu</td>
+                                                    <td><input type="radio" name="left-rear-fender" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-fender" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-fender" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-fender" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-fender" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sol Arka Kapı</td>
+                                                    <td><input type="radio" name="left-rear-door" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-door" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-door" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-door" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="left-rear-door" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bagaj</td>
+                                                    <td><input type="radio" name="trunk" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="trunk" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="trunk" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="trunk" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="trunk" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sağ Arka Kapı</td>
+                                                    <td><input type="radio" name="right-rear-door" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-door" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-door" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-door" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-door" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sağ Arka Çamurlu</td>
+                                                    <td><input type="radio" name="right-rear-fender" value="Orijinal" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-fender" value="Lokal Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-fender" value="Boyalı" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-fender" value="Onarım" onchange="updateCarColor()"></td>
+                                                    <td><input type="radio" name="right-rear-fender" value="Değişen" onchange="updateCarColor()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
-
-                                <!-- TABLO -->
-                                <div class="damage-table-section">
-                                    <table class="damage-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Parça Adı</th>
-                                                <th>Orijinal</th>
-                                                <th>Lokal Boyalı</th>
-                                                <th>Boyalı</th>
-                                                <th>Onarım</th>
-                                                <th>Değişen</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Sol Ön Çamurlu</td>
-                                                <td><input type="radio" name="fender-front-left" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-left" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-left" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-left" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-left" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sol Ön Kapı</td>
-                                                <td><input type="radio" name="door-front-left" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-left" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-left" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-left" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-left" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Kaput</td>
-                                                <td><input type="radio" name="hood-part" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="hood-part" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="hood-part" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="hood-part" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="hood-part" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tavan</td>
-                                                <td><input type="radio" name="roof-part" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="roof-part" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="roof-part" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="roof-part" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="roof-part" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sağ Ön Kapı</td>
-                                                <td><input type="radio" name="door-front-right" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-right" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-right" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-right" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-front-right" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sağ Ön Çamurlu</td>
-                                                <td><input type="radio" name="fender-front-right" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-right" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-right" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-right" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-front-right" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sol Arka Çamurlu</td>
-                                                <td><input type="radio" name="fender-rear-left" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-left" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-left" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-left" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-left" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sol Arka Kapı</td>
-                                                <td><input type="radio" name="door-rear-left" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-left" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-left" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-left" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-left" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bagaj</td>
-                                                <td><input type="radio" name="trunk-part" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="trunk-part" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="trunk-part" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="trunk-part" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="trunk-part" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sağ Arka Kapı</td>
-                                                <td><input type="radio" name="door-rear-right" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-right" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-right" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-right" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="door-rear-right" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sağ Arka Çamurlu</td>
-                                                <td><input type="radio" name="fender-rear-right" value="Orijinal" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-right" value="Lokal Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-right" value="Boyalı" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-right" value="Onarım" onchange="updateCarColor()"></td>
-                                                <td><input type="radio" name="fender-rear-right" value="Değişen" onchange="updateCarColor()"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
 
@@ -1365,7 +1290,7 @@
                     const opt = document.createElement('option');
                     opt.value = m;
                     opt.textContent = m;
-                                        modelSelect.appendChild(opt);
+                    modelSelect.appendChild(opt);
                 });
             }
         }
@@ -1384,10 +1309,14 @@
         }
 
         function updateCarColor() {
-            const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
+            const parts = [
+                'left-front-fender', 'left-front-door', 'hood', 'roof', 
+                'right-front-door', 'right-front-fender', 'left-rear-fender', 
+                'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'
+            ];
             
             const colorMap = {
-                'Orijinal': '#ffffff',
+                'Orijinal': '#ddd',
                 'Lokal Boyalı': '#FFA500',
                 'Boyalı': '#FFFF00',
                 'Onarım': '#4169E1',
@@ -1396,7 +1325,8 @@
 
             parts.forEach(part => {
                 const selected = document.querySelector(`input[name="${part}"]:checked`);
-                const element = document.getElementById(part);
+                const element = document.getElementById(part + '-car');
+                
                 if (element && selected) {
                     element.style.fill = colorMap[selected.value];
                     element.style.stroke = '#000';
@@ -1430,7 +1360,7 @@
                 const stepNum = parseInt(el.getAttribute('data-step'));
                 el.classList.remove('active', 'completed');
                 if (stepNum < step) el.classList.add('completed');
-                else if (stepNum === step) el.classList.add('active');
+                                else if (stepNum === step) el.classList.add('active');
             });
 
             document.querySelectorAll('.form-step')[step - 1].classList.add('active');
@@ -1466,7 +1396,11 @@
             const summary = document.getElementById('summaryContent');
             const tramerPrice = document.getElementById('tramerPrice').value;
             
-            const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
+            const parts = [
+                'left-front-fender', 'left-front-door', 'hood', 'roof', 
+                'right-front-door', 'right-front-fender', 'left-rear-fender', 
+                'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'
+            ];
             
             let paintInfo = '<strong>🎨 Boya Durumu:</strong><br>';
             let hasSelection = false;
@@ -1516,7 +1450,11 @@
                 return;
             }
 
-            const parts = ['left-front-fender', 'left-front-door', 'hood', 'roof', 'right-front-door', 'right-front-fender', 'left-rear-fender', 'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'];
+            const parts = [
+                'left-front-fender', 'left-front-door', 'hood', 'roof', 
+                'right-front-door', 'right-front-fender', 'left-rear-fender', 
+                'left-rear-door', 'trunk', 'right-rear-door', 'right-rear-fender'
+            ];
             
             let paintData = {};
             parts.forEach(part => {
@@ -1579,6 +1517,31 @@
             if (brandSelect) {
                 brandSelect.addEventListener('change', loadModels);
             }
+
+            // SVG parçalarını tıklanabilir yap
+            const carParts = [
+                'left-rear-fender-car', 'left-rear-door-car', 'roof-car',
+                'right-rear-door-car', 'right-rear-fender-car', 'trunk-car'
+            ];
+
+            carParts.forEach(partId => {
+                const element = document.getElementById(partId);
+                if (element) {
+                    element.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const baseId = partId.replace('-car', '');
+                        
+                        const radioButtons = document.querySelectorAll(`input[name="${baseId}"]`);
+                        if (radioButtons.length > 0) {
+                            const partLabel = document.querySelector(`td:contains("${baseId}")`);
+                            const message = baseId.replace(/-/g, ' ').toUpperCase();
+                            alert(message + ' seçildi. Aşağıdaki tabloda durumunu seçiniz.');
+                        }
+                    });
+
+                    element.style.cursor = 'pointer';
+                }
+            });
         });
     </script>
 </body>
