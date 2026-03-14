@@ -5000,22 +5000,5 @@
 
         window.addEventListener('load', loadYears);
     </script>
-            <script>
-        window.addEventListener('load', () => {
-            // Eğer admin giriş yapmışsa, Admin butonu göster
-            if (localStorage.getItem('adminLogged') === 'true') {
-                const nav = document.querySelector('nav ul');
-                if (nav) {
-                    const adminLink = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.textContent = '🔐 Admin Panel';
-                    link.href = './hikaz.html';
-                    link.style.cursor = 'pointer';
-                    adminLink.appendChild(link);
-                    nav.appendChild(adminLink);
-                }
-            }
-        });
-    </script>
 </body>
 </html>
