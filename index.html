@@ -1349,7 +1349,6 @@
     
     const referenceCode = 'OSL-' + Math.random().toString(36).substr(2, 9).toUpperCase();
     
-    // ✅ VERİLERİ TOPLA
     const offerData = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -1375,14 +1374,10 @@
         date: new Date().toISOString()
     };
 
-    // ✅ LOCALSTORAGE'A KAYDET
     let offers = JSON.parse(localStorage.getItem('offers') || '[]');
     offers.push(offerData);
     localStorage.setItem('offers', JSON.stringify(offers));
     
-    console.log('Teklif kaydedildi:', offerData); // Debug
-    
-    // ✅ BAŞARI MESAJI
     document.getElementById('formContainer').style.display = 'none';
     document.getElementById('successMessage').classList.add('show');
     document.getElementById('displayPhone').textContent = document.getElementById('phone').value;
@@ -1394,7 +1389,6 @@
     
     document.getElementById('referenceCode').textContent = referenceCode;
 }
-
         function showError(message) {
             const errorBox = document.getElementById('errorBox');
             errorBox.textContent = message;
@@ -4972,24 +4966,53 @@
         }
 
         function submitForm() {
-            if (!document.getElementById('agreement').checked) {
-                showError('Lütfen bilgileriniz doğru olduğunu onaylayınız!');
-                return;
-            }
-            
-            const referenceCode = 'OSL-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-            
-            document.getElementById('formContainer').style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('displayPhone').textContent = document.getElementById('phone').value;
-            
-            if (document.getElementById('email').value) {
-                document.getElementById('emailDisplay').style.display = 'block';
-                document.getElementById('displayEmail').textContent = document.getElementById('email').value;
-            }
-            
-            document.getElementById('referenceCode').textContent = referenceCode;
-        }
+    if (!document.getElementById('agreement').checked) {
+        showError('Lütfen bilgileriniz doğru olduğunu onaylayınız!');
+        return;
+    }
+    
+    const referenceCode = 'OSL-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    
+    const offerData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value || '',
+        city: document.getElementById('city').value,
+        district: document.getElementById('district').value,
+        vehicleType: document.getElementById('vehicleType').value,
+        brand: document.getElementById('brand').value,
+        model: document.getElementById('model').value,
+        bodyType: document.getElementById('bodyType').value,
+        year: document.getElementById('year').value,
+        fuel: document.getElementById('fuel').value,
+        engine: document.getElementById('engine').value,
+        package: document.getElementById('package').value,
+        color: document.getElementById('color').value,
+        mileage: document.getElementById('mileage').value,
+        carColor: document.getElementById('carColor').value,
+        interiorCondition: document.getElementById('interiorCondition').value,
+        tramer: document.querySelector('input[name="tramerStatus"]:checked').value,
+        tramerPrice: document.getElementById('tramerPrice').value || '0',
+        referenceCode: referenceCode,
+        date: new Date().toISOString()
+    };
+
+    let offers = JSON.parse(localStorage.getItem('offers') || '[]');
+    offers.push(offerData);
+    localStorage.setItem('offers', JSON.stringify(offers));
+    
+    document.getElementById('formContainer').style.display = 'none';
+    document.getElementById('successMessage').classList.add('show');
+    document.getElementById('displayPhone').textContent = document.getElementById('phone').value;
+    
+    if (document.getElementById('email').value) {
+        document.getElementById('emailDisplay').style.display = 'block';
+        document.getElementById('displayEmail').textContent = document.getElementById('email').value;
+    }
+    
+    document.getElementById('referenceCode').textContent = referenceCode;
+}
 
         function showError(message) {
             const errorBox = document.getElementById('errorBox');
