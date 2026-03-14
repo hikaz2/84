@@ -4924,63 +4924,60 @@ tramerPrice: document.querySelector('input[name="tramerStatus"]:checked') &&
         }
 
         function generateSummary() {
-            const carParts = [
-                { name: 'hood', label: 'Kaput' },
-                { name: 'right-front-fender', label: 'Sağ Ön Çamurluk' },
-                { name: 'left-front-fender', label: 'Sol Ön Çamurluk' },
-                { name: 'right-front-door', label: 'Sağ Ön Kapı' },
-                { name: 'left-front-door', label: 'Sol Ön Kapı' },
-                { name: 'right-rear-door', label: 'Sağ Arka Kapı' },
-                { name: 'left-rear-door', label: 'Sol Arka Kapı' },
-                { name: 'right-rear-fender', label: 'Sağ Arka Çamurluk' },
-                { name: 'left-rear-fender', label: 'Sol Arka Çamurluk' },
-                { name: 'trunk', label: 'Bagaj' }
-            ];
+    const carParts = [
+        { name: 'hood', label: 'Kaput' },
+        { name: 'right-front-fender', label: 'Sağ Ön Çamurluk' },
+        { name: 'left-front-fender', label: 'Sol Ön Çamurluk' },
+        { name: 'right-front-door', label: 'Sağ Ön Kapı' },
+        { name: 'left-front-door', label: 'Sol Ön Kapı' },
+        { name: 'right-rear-door', label: 'Sağ Arka Kapı' },
+        { name: 'left-rear-door', label: 'Sol Arka Kapı' },
+        { name: 'right-rear-fender', label: 'Sağ Arka Çamurluk' },
+        { name: 'left-rear-fender', label: 'Sol Arka Çamurluk' },
+        { name: 'trunk', label: 'Bagaj' }
+    ];
 
-            let carPartsInfo = '<strong>🔧 ARAÇ PARÇALARI DURUMU:</strong><br>';
-            carParts.forEach(part => {
-                const selected = document.querySelector(`input[name="${part.name}"]:checked`);
-                const status = selected ? selected.value : 'Seçilmedi';
-                carPartsInfo += `${part.label}: ${status}<br>`;
-            });
+    let carPartsInfo = '<strong>🔧 ARAÇ PARÇALARI DURUMU:</strong><br>';
+    carParts.forEach(part => {
+        const selected = document.querySelector(`input[name="${part.name}"]:checked`);
+        const status = selected ? selected.value : 'Seçilmedi';
+        carPartsInfo += `${part.label}: ${status}<br>`;
+    });
 
-            const tramerStatus = document.querySelector('input[name="tramerStatus"]:checked');
-const tramerPrice = tramerStatus && tramerStatus.value === 'Evet' 
-    ? document.getElementById('tramerPrice').value 
-    : '';
-const tramerInfo = tramerStatus && tramerStatus.value === 'Evet' 
-    ? ` (₺${tramerPrice})` 
-    : ''; 
-            const summary = `
-                <strong>📋 ARAÇ BİLGİLERİ:</strong><br>
-                Araç Tipi: ${document.getElementById('vehicleType').value}<br>
-                Marka: ${document.getElementById('brand').value}<br>
-                Model: ${document.getElementById('model').value}<br>
-                Gövde Tipi: ${document.getElementById('bodyType').value}<br>
-                Yıl: ${document.getElementById('year').value}<br>
-                Yakıt: ${document.getElementById('fuel').value}<br>
-                Motor: ${document.getElementById('engine').value}<br>
-                Paket: ${document.getElementById('package').value}<br>
-                Dış Renk: ${document.getElementById('color').value}<br>
-                <br>
-                <strong>🚗 ARAÇ DURUMU:</strong><br>
-                Kilometre: ${document.getElementById('mileage').value} km<br>
-                Kaportanın Rengi: ${document.getElementById('carColor').value}<br>
-                İç Durumu: ${document.getElementById('interiorCondition').value}<br>
-                Tramer: ${document.querySelector('input[name="tramerStatus"]:checked').value}${tramerInfo}<br>
-                <br>
-                ${carPartsInfo}
-                <br>
-                <strong>📞 İLETİŞİM BİLGİLERİ:</strong><br>
-                Ad Soyad: ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
-                Telefon: ${document.getElementById('phone').value}<br>
-                Email: ${document.getElementById('email').value || 'Belirtilmedi'}<br>
-                Şehir: ${document.getElementById('city').value}<br>
-                İlçe: ${document.getElementById('district').value}
-            `;
-            
-            document.getElementById('summaryContent').innerHTML = summary;
-        }
+    const tramerStatusEl = document.querySelector('input[name="tramerStatus"]:checked');
+    const tramerStatusValue = tramerStatusEl ? tramerStatusEl.value : 'Seçilmedi';
+    const tramerPrice = document.getElementById('tramerPrice').value || '0';
+    const tramerInfo = tramerStatusValue === 'Evet' ? ` (���${tramerPrice})` : '';
+
+    const summary = `
+        <strong>📋 ARAÇ BİLGİLERİ:</strong><br>
+        Araç Tipi: ${document.getElementById('vehicleType').value}<br>
+        Marka: ${document.getElementById('brand').value}<br>
+        Model: ${document.getElementById('model').value}<br>
+        Gövde Tipi: ${document.getElementById('bodyType').value}<br>
+        Yıl: ${document.getElementById('year').value}<br>
+        Yakıt: ${document.getElementById('fuel').value}<br>
+        Motor: ${document.getElementById('engine').value}<br>
+        Paket: ${document.getElementById('package').value}<br>
+        <br>
+        <strong>🚗 ARAÇ DURUMU:</strong><br>
+        Kilometre: ${document.getElementById('mileage').value} km<br>
+        Kaportanın Rengi: ${document.getElementById('carColor').value}<br>
+        İç Durumu: ${document.getElementById('interiorCondition').value}<br>
+        Tramer: ${tramerStatusValue}${tramerInfo}<br>
+        <br>
+        ${carPartsInfo}
+        <br>
+        <strong>📞 İLETİŞİM BİLGİLERİ:</strong><br>
+        Ad Soyad: ${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>
+        Telefon: ${document.getElementById('phone').value}<br>
+        Email: ${document.getElementById('email').value || 'Belirtilmedi'}<br>
+        Şehir: ${document.getElementById('city').value}<br>
+        İlçe: ${document.getElementById('district').value}
+    `;
+    
+    document.getElementById('summaryContent').innerHTML = summary;
+}
 
         function submitForm() {
     if (!document.getElementById('agreement').checked) {
@@ -4989,6 +4986,10 @@ const tramerInfo = tramerStatus && tramerStatus.value === 'Evet'
     }
     
     const referenceCode = 'OSL-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    
+    const tramerStatusEl = document.querySelector('input[name="tramerStatus"]:checked');
+    const tramerStatusValue = tramerStatusEl ? tramerStatusEl.value : 'Hayır';
+    const tramerPriceValue = document.getElementById('tramerPrice').value || '0';
     
     const offerData = {
         firstName: document.getElementById('firstName').value,
@@ -5005,12 +5006,11 @@ const tramerInfo = tramerStatus && tramerStatus.value === 'Evet'
         fuel: document.getElementById('fuel').value,
         engine: document.getElementById('engine').value,
         package: document.getElementById('package').value,
-        color: document.getElementById('color').value,
         mileage: document.getElementById('mileage').value,
         carColor: document.getElementById('carColor').value,
         interiorCondition: document.getElementById('interiorCondition').value,
-        tramer: document.querySelector('input[name="tramerStatus"]:checked').value,
-        tramerPrice: document.getElementById('tramerPrice').value || '0',
+        tramer: tramerStatusValue,
+        tramerPrice: tramerPriceValue,
         referenceCode: referenceCode,
         date: new Date().toISOString()
     };
