@@ -1638,7 +1638,41 @@
 
         // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
-            loadYears();
+            let currentPartId = null;
+
+        function openDamageModal(partId, partName) {
+            currentPartId = partId;
+            document.getElementById('partNameModal').textContent = partName;
+            document.getElementById('damageModal').style.display = 'flex';
+        }
+
+        function closeDamageModal() {
+            document.getElementById('damageModal').style.display = 'none';
+            currentPartId = null;
+        }
+
+        function selectDamage(damageType) {
+            if (!currentPartId) return;
+            
+            const radioName = currentPartId;
+            const radio = document.querySelector(`input[name="${radioName}"][value="${damageType}"]`);
+            
+            if (radio) {
+                radio.checked = true;
+                updateCarColor();
+            }
+            
+            closeDamageModal();
+        }
+
+        // Modal dışına basınca kapansın
+        document.getElementById('damageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDamageModal();
+            }
+        });
+
+        loadYears();
             
             const brandSelect = document.getElementById('brand');
             if (brandSelect) {
