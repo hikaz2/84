@@ -9,7 +9,7 @@
         // Admin paneli erişim kontrolü
         window.addEventListener('load', () => {
             if (localStorage.getItem('adminLogged') !== 'true') {
-                window.location.href = 'hikaz.html';
+                window.location.href = 'index.html';
             }
         });
     </script>
@@ -28,6 +28,12 @@
             --border: #ddd;
             --text: #333;
             --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --green: #4CAF50;
+            --red: #c62828;
+            --blue: #2196F3;
+            --orange: #FFA500;
+            --yellow: #FFFF00;
+            --purple: #4169E1;
         }
 
         body {
@@ -45,15 +51,18 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
         }
 
         .logout-btn {
-            background: #c62828;
+            background: var(--red);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
@@ -66,11 +75,49 @@
             background: #b71c1c;
         }
 
-        /* MAIN CONTAINER */
+        /* CONTAINER */
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 2rem;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        /* CONTENT */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         /* STATS */
@@ -78,35 +125,36 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: white;
+            background: linear-gradient(135deg, var(--primary) 0%, #ffed4e 100%);
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: var(--shadow);
             text-align: center;
-            border-top: 5px solid var(--primary);
+            color: var(--dark);
+            box-shadow: var(--shadow);
         }
 
         .stat-card h3 {
             font-size: 2.5rem;
-            color: var(--primary);
+            font-weight: 900;
             margin-bottom: 0.5rem;
         }
 
         .stat-card p {
-            color: #666;
             font-size: 0.95rem;
+            opacity: 0.8;
         }
 
-        /* TEKLIFLER TABLOSU */
+        /* SECTION */
         .section {
             background: white;
             padding: 2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
+            margin-bottom: 2rem;
         }
 
         .section h2 {
@@ -117,38 +165,95 @@
             padding-bottom: 1rem;
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        .section h3 {
+            color: var(--dark);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        /* OFFERS LIST */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .offer-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .offer-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .offer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .offer-header h4 {
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .offer-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .offer-status.pending {
+            background: #FF9800;
+        }
+
+        .offer-status.approved {
+            background: var(--green);
+        }
+
+        .offer-status.rejected {
+            background: var(--red);
+        }
+
+        .offer-info {
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .offer-info strong {
+            color: var(--primary);
+        }
+
+        .offer-vehicle {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 3px solid var(--blue);
+        }
+
+        .offer-vehicle p {
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .offer-actions {
+            display: flex;
+            gap: 0.5rem;
             margin-top: 1rem;
         }
 
-        table thead {
-            background: var(--light);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        table th {
-            padding: 1rem;
-            text-align: left;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        table tbody tr:hover {
-            background: var(--light);
-        }
-
-        /* BUTTONS */
         .btn {
             padding: 0.6rem 1.2rem;
             border: none;
@@ -157,10 +262,12 @@
             font-weight: 600;
             font-size: 0.85rem;
             transition: all 0.3s;
+            flex: 1;
+            text-align: center;
         }
 
         .btn-view {
-            background: #2196F3;
+            background: var(--blue);
             color: white;
         }
 
@@ -168,13 +275,31 @@
             background: #1976D2;
         }
 
+        .btn-approve {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #45a049;
+        }
+
+        .btn-reject {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: #b71c1c;
+        }
+
         .btn-delete {
-            background: #c62828;
+            background: #999;
             color: white;
         }
 
         .btn-delete:hover {
-            background: #b71c1c;
+            background: #666;
         }
 
         /* MODAL */
@@ -199,9 +324,9 @@
             background: white;
             padding: 2rem;
             border-radius: 12px;
-            max-width: 600px;
+            max-width: 700px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 90vh;
             overflow-y: auto;
             box-shadow: var(--shadow);
         }
@@ -213,21 +338,29 @@
             padding-bottom: 1rem;
         }
 
-        .info-row {
+        .modal-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-bottom: 1rem;
         }
 
-        .info-item {
+        .modal-item {
             background: var(--light);
-            padding: 1rem;
+            padding: 0.8rem;
             border-radius: 6px;
         }
 
-        .info-item strong {
+        .modal-item strong {
             color: var(--primary);
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-item p {
+            color: var(--text);
+            font-size: 0.9rem;
         }
 
         .modal-close {
@@ -238,6 +371,7 @@
             border-radius: 6px;
             cursor: pointer;
             margin-top: 1.5rem;
+            width: 100%;
             font-weight: 600;
         }
 
@@ -245,16 +379,117 @@
             background: #555;
         }
 
-        /* EMPTY STATE */
-        .empty {
-            text-align: center;
-            padding: 3rem;
-            color: #999;
+        /* INSPECTION FORM */
+        .inspection-form {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
         }
 
-        .empty p {
-            font-size: 1.1rem;
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
             margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* DAMAGE TABLE */
+        .damage-section {
+            margin-top: 1.5rem;
+        }
+
+        .damage-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .damage-table thead {
+            background: var(--dark);
+            color: white;
+        }
+
+        .damage-table th {
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .damage-table td {
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .damage-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            background: var(--light);
+        }
+
+        .damage-table input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .color-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            border: 1px solid #000;
         }
 
         /* MESSAGE */
@@ -267,16 +502,43 @@
 
         .message.show {
             display: block;
+            animation: slideIn 0.3s ease-out;
         }
 
         .success {
-            background: #4CAF50;
+            background: var(--green);
             color: white;
         }
 
         .error {
-            background: #c62828;
+            background: var(--red);
             color: white;
+        }
+
+        .warning {
+            background: #FF9800;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .empty {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .empty p {
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
@@ -284,16 +546,21 @@
                 grid-template-columns: 1fr;
             }
 
-            table {
-                font-size: 0.85rem;
-            }
-
-            table th, table td {
-                padding: 0.7rem;
-            }
-
-            .info-row {
+            .offers-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .modal-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-btn {
+                border-bottom: 2px solid var(--border) !important;
             }
         }
     </style>
@@ -301,7 +568,7 @@
 <body>
     <!-- HEADER -->
     <header>
-        <h1>🔐 OTOSELL Admin Panel</h1>
+        <h1>🔐 OTOSELL - Admin Panel</h1>
         <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
     </header>
 
@@ -310,153 +577,386 @@
         <!-- MESSAGE -->
         <div id="message" class="message"></div>
 
-        <!-- STATS -->
-        <div class="stats">
-            <div class="stat-card">
-                <h3 id="totalOffers">0</h3>
-                <p>📋 Toplam Teklif</p>
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" onclick="switchTab('offers')">📋 Teklifler</button>
+            <button class="tab-btn" onclick="switchTab('inspection')">🔍 Araç İncelemesi</button>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalOffers">0</h3>
+                    <p>📋 Toplam Teklif</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pendingOffers">0</h3>
+                    <p>⏳ Bekleyen Teklifler</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="approvedOffers">0</h3>
+                    <p>✅ Onaylanan Teklifler</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="rejectedOffers">0</h3>
+                    <p>❌ Reddedilen Teklifler</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3 id="todayOffers">0</h3>
-                <p>📅 Bugünkü Teklif</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="totalBrands">0</h3>
-                <p>🏢 Farklı Marka</p>
+
+            <div class="section">
+                <h2>📊 İstatistikler</h2>
+                <p>Toplam <strong id="dashTotalOffers">0</strong> teklife karşı:</p>
+                <ul style="margin-top: 1rem; margin-left: 1.5rem;">
+                    <li><strong id="dashPending">0</strong> teklif incelenmeyi bekliyor</li>
+                    <li><strong id="dashApproved">0</strong> teklif onaylanmış</li>
+                    <li><strong id="dashRejected">0</strong> teklif reddedilmiş</li>
+                </ul>
             </div>
         </div>
 
-        <!-- TEKLIFLER SEKSİYONU -->
-        <div class="section">
-            <h2>📋 Gelen Teklifler</h2>
-            <div class="table-responsive">
-                <table id="offersTable">
-                    <thead>
-                        <tr>
-                            <th>Ad Soyad</th>
-                            <th>Telefon</th>
-                            <th>Araç</th>
-                            <th>Km</th>
-                            <th>Tarih</th>
-                            <th>İşlem</th>
-                        </tr>
-                    </thead>
-                    <tbody id="offersBody">
-                    </tbody>
-                </table>
+        <!-- OFFERS -->
+        <div id="offers" class="tab-content">
+            <div class="section">
+                <h2>📋 Gelen Teklifler</h2>
+                <div id="offersContainer" class="offers-grid"></div>
                 <div id="emptyOffers" class="empty" style="display: none;">
                     <p>😴 Henüz teklif yok</p>
                 </div>
             </div>
         </div>
+
+        <!-- INSPECTION -->
+        <div id="inspection" class="tab-content">
+            <div class="section">
+                <h2>🔍 Araç İncelemesi</h2>
+                <p style="color: var(--text); margin-bottom: 1rem;">Bir teklifi seçerek araç incelemesi yapınız.</p>
+                <div id="inspectionOffers" class="offers-grid"></div>
+                <div id="emptyInspection" class="empty" style="display: none;">
+                    <p>😴 İncelenecek teklif yok</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- DETAIL MODAL -->
     <div id="detailModal" class="modal">
         <div class="modal-content">
             <h3>📋 Teklif Detayları</h3>
             
-            <h4 style="color: var(--primary); margin: 1.5rem 0 1rem;">👤 Kişi Bilgileri</h4>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Ad:</strong> <span id="detailFirstName"></span>
+            <h3 style="font-size: 1rem; color: var(--primary); margin-top: 1.5rem; border: none; padding: 0;">👤 Kişi Bilgileri</h3>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Ad:</strong>
+                    <p id="detailFirstName"></p>
                 </div>
-                <div class="info-item">
-                    <strong>Soyad:</strong> <span id="detailLastName"></span>
-                </div>
-            </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Telefon:</strong> <span id="detailPhone"></span>
-                </div>
-                <div class="info-item">
-                    <strong>Email:</strong> <span id="detailEmail"></span>
+                <div class="modal-item">
+                    <strong>Soyad:</strong>
+                    <p id="detailLastName"></p>
                 </div>
             </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Şehir:</strong> <span id="detailCity"></span>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Telefon:</strong>
+                    <p id="detailPhone"></p>
                 </div>
-                <div class="info-item">
-                    <strong>İlçe:</strong> <span id="detailDistrict"></span>
-                </div>
-            </div>
-
-            <h4 style="color: var(--primary); margin: 1.5rem 0 1rem;">🚗 Araç Bilgileri</h4>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Marka:</strong> <span id="detailBrand"></span>
-                </div>
-                <div class="info-item">
-                    <strong>Model:</strong> <span id="detailModel"></span>
+                <div class="modal-item">
+                    <strong>Email:</strong>
+                    <p id="detailEmail"></p>
                 </div>
             </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Yıl:</strong> <span id="detailYear"></span>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Şehir:</strong>
+                    <p id="detailCity"></p>
                 </div>
-                <div class="info-item">
-                    <strong>Yakıt:</strong> <span id="detailFuel"></span>
-                </div>
-            </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Motor:</strong> <span id="detailEngine"></span>
-                </div>
-                <div class="info-item">
-                    <strong>Paket:</strong> <span id="detailPackage"></span>
-                </div>
-            </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Gövde:</strong> <span id="detailBodyType"></span>
-                </div>
-                <div class="info-item">
-                    <strong>Renk:</strong> <span id="detailColor"></span>
+                <div class="modal-item">
+                    <strong>İlçe:</strong>
+                    <p id="detailDistrict"></p>
                 </div>
             </div>
 
-            <h4 style="color: var(--primary); margin: 1.5rem 0 1rem;">📊 Durum Bilgileri</h4>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Kilometre:</strong> <span id="detailMileage"></span> km
+            <h3 style="font-size: 1rem; color: var(--primary); margin-top: 1.5rem; border: none; padding: 0;">🚗 Araç Bilgileri</h3>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Marka:</strong>
+                    <p id="detailBrand"></p>
                 </div>
-                <div class="info-item">
-                    <strong>İç Durumu:</strong> <span id="detailInterior"></span>
+                <div class="modal-item">
+                    <strong>Model:</strong>
+                    <p id="detailModel"></p>
                 </div>
             </div>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Kaportanın Rengi:</strong> <span id="detailCarColor"></span>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Yıl:</strong>
+                    <p id="detailYear"></p>
                 </div>
-                <div class="info-item">
-                    <strong>Tramer:</strong> <span id="detailTramer"></span>
+                <div class="modal-item">
+                    <strong>Yakıt:</strong>
+                    <p id="detailFuel"></p>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Motor:</strong>
+                    <p id="detailEngine"></p>
+                </div>
+                <div class="modal-item">
+                    <strong>Paket:</strong>
+                    <p id="detailPackage"></p>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Gövde Tipi:</strong>
+                    <p id="detailBodyType"></p>
+                </div>
+                <div class="modal-item">
+                    <strong>Dış Renk:</strong>
+                    <p id="detailColor"></p>
                 </div>
             </div>
 
-            <h4 style="color: var(--primary); margin: 1.5rem 0 1rem;">🔖 Referans</h4>
-            <div class="info-item">
-                <strong>Kod:</strong> <span id="detailReference" style="font-family: monospace;"></span>
+            <h3 style="font-size: 1rem; color: var(--primary); margin-top: 1.5rem; border: none; padding: 0;">📊 Durum Bilgileri</h3>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Kilometre:</strong>
+                    <p id="detailMileage"></p>
+                </div>
+                <div class="modal-item">
+                    <strong>İç Durumu:</strong>
+                    <p id="detailInterior"></p>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-item">
+                    <strong>Kaportanın Rengi:</strong>
+                    <p id="detailCarColor"></p>
+                </div>
+                <div class="modal-item">
+                    <strong>Tramer:</strong>
+                    <p id="detailTramer"></p>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1rem; color: var(--primary); margin-top: 1.5rem; border: none; padding: 0;">🔖 Referans</h3>
+            <div class="modal-item" style="grid-column: 1/-1;">
+                <strong>Kod:</strong>
+                <p id="detailReference" style="font-family: monospace;"></p>
             </div>
 
             <button class="modal-close" onclick="closeModal()">Kapat</button>
         </div>
     </div>
 
+    <!-- INSPECTION MODAL -->
+    <div id="inspectionModal" class="modal">
+        <div class="modal-content">
+            <h3>🔍 Araç İncelemesi - <span id="inspectionOfferName"></span></h3>
+            
+            <div class="inspection-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Araç Durumu Notu</label>
+                        <textarea id="inspectionNotes" placeholder="Araç durumu hakkında notlar yazınız..."></textarea>
+                    </div>
+                </div>
+
+                <div class="damage-section">
+                    <h3 style="font-size: 1rem;">🎨 Araç Parçalarının Durumu</h3>
+                    <div class="color-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: white; border: 2px solid #000;"></div>
+                            <span>Orijinal</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--orange);"></div>
+                            <span>Lokal Boya</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--yellow); border: 1px solid #999;"></div>
+                            <span>Boyalı</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--purple);"></div>
+                            <span>Onarım</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: var(--red);"></div>
+                            <span>Değişen</span>
+                        </div>
+                    </div>
+
+                    <table class="damage-table">
+                        <thead>
+                            <tr>
+                                <th>Parça Adı</th>
+                                <th style="background: white; color: black;">Orijinal</th>
+                                <th style="background: var(--orange);">Lokal Boya</th>
+                                <th style="background: var(--yellow); color: black;">Boyalı</th>
+                                <th style="background: var(--purple);">Onarım</th>
+                                <th style="background: var(--red);">Değişen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kaput</td>
+                                <td><input type="radio" name="hood" value="Orijinal"></td>
+                                <td><input type="radio" name="hood" value="Lokal Boya"></td>
+                                <td><input type="radio" name="hood" value="Boyalı"></td>
+                                <td><input type="radio" name="hood" value="Onarım"></td>
+                                <td><input type="radio" name="hood" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sağ Ön Çamurluk</td>
+                                <td><input type="radio" name="right-front-fender" value="Orijinal"></td>
+                                <td><input type="radio" name="right-front-fender" value="Lokal Boya"></td>
+                                <td><input type="radio" name="right-front-fender" value="Boyalı"></td>
+                                <td><input type="radio" name="right-front-fender" value="Onarım"></td>
+                                <td><input type="radio" name="right-front-fender" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sol Ön Çamurluk</td>
+                                <td><input type="radio" name="left-front-fender" value="Orijinal"></td>
+                                <td><input type="radio" name="left-front-fender" value="Lokal Boya"></td>
+                                <td><input type="radio" name="left-front-fender" value="Boyalı"></td>
+                                <td><input type="radio" name="left-front-fender" value="Onarım"></td>
+                                <td><input type="radio" name="left-front-fender" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sağ Ön Kapı</td>
+                                <td><input type="radio" name="right-front-door" value="Orijinal"></td>
+                                <td><input type="radio" name="right-front-door" value="Lokal Boya"></td>
+                                <td><input type="radio" name="right-front-door" value="Boyalı"></td>
+                                <td><input type="radio" name="right-front-door" value="Onarım"></td>
+                                <td><input type="radio" name="right-front-door" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sol Ön Kapı</td>
+                                <td><input type="radio" name="left-front-door" value="Orijinal"></td>
+                                <td><input type="radio" name="left-front-door" value="Lokal Boya"></td>
+                                <td><input type="radio" name="left-front-door" value="Boyalı"></td>
+                                <td><input type="radio" name="left-front-door" value="Onarım"></td>
+                                <td><input type="radio" name="left-front-door" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sağ Arka Kapı</td>
+                                <td><input type="radio" name="right-rear-door" value="Orijinal"></td>
+                                <td><input type="radio" name="right-rear-door" value="Lokal Boya"></td>
+                                <td><input type="radio" name="right-rear-door" value="Boyalı"></td>
+                                <td><input type="radio" name="right-rear-door" value="Onarım"></td>
+                                <td><input type="radio" name="right-rear-door" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sol Arka Kapı</td>
+                                <td><input type="radio" name="left-rear-door" value="Orijinal"></td>
+                                <td><input type="radio" name="left-rear-door" value="Lokal Boya"></td>
+                                <td><input type="radio" name="left-rear-door" value="Boyalı"></td>
+                                <td><input type="radio" name="left-rear-door" value="Onarım"></td>
+                                <td><input type="radio" name="left-rear-door" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sağ Arka Çamurluk</td>
+                                <td><input type="radio" name="right-rear-fender" value="Orijinal"></td>
+                                <td><input type="radio" name="right-rear-fender" value="Lokal Boya"></td>
+                                <td><input type="radio" name="right-rear-fender" value="Boyalı"></td>
+                                <td><input type="radio" name="right-rear-fender" value="Onarım"></td>
+                                <td><input type="radio" name="right-rear-fender" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Sol Arka Çamurluk</td>
+                                <td><input type="radio" name="left-rear-fender" value="Orijinal"></td>
+                                <td><input type="radio" name="left-rear-fender" value="Lokal Boya"></td>
+                                <td><input type="radio" name="left-rear-fender" value="Boyalı"></td>
+                                <td><input type="radio" name="left-rear-fender" value="Onarım"></td>
+                                <td><input type="radio" name="left-rear-fender" value="Değişen"></td>
+                            </tr>
+                            <tr>
+                                <td>Bagaj</td>
+                                <td><input type="radio" name="trunk" value="Orijinal"></td>
+                                <td><input type="radio" name="trunk" value="Lokal Boya"></td>
+                                <td><input type="radio" name="trunk" value="Boyalı"></td>
+                                <td><input type="radio" name="trunk" value="Onarım"></td>
+                                <td><input type="radio" name="trunk" value="Değişen"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-row" style="margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label>Tahmini Fiyat (₺)</label>
+                        <input type="number" id="estimatedPrice" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Durum</label>
+                        <select id="inspectionStatus">
+                            <option value="">Seçiniz</option>
+                            <option value="Onaylandı">✅ Onaylandı</option>
+                            <option value="Reddedildi">❌ Reddedildi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button style="background: var(--green); color: white; padding: 1rem; width: 100%; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 0.5rem;" onclick="saveInspection()">💾 İncelemesi Kaydet</button>
+            <button class="modal-close" style="background: #666; margin: 0;" onclick="closeInspectionModal()">Kapat</button>
+        </div>
+    </div>
+
     <script>
+        let currentOfferIndex = -1;
+
         // AUTH
         function logout() {
             localStorage.removeItem('adminLogged');
             window.location.href = 'index.html';
         }
 
-        // LOAD DATA
+        // TAB SWITCH
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'dashboard') loadDashboard();
+            if (tabName === 'offers') loadOffers();
+            if (tabName === 'inspection') loadInspectionTab();
+        }
+
+        // LOAD DASHBOARD
+        function loadDashboard() {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const inspections = JSON.parse(localStorage.getItem('inspections') || '[]');
+
+            const total = offers.length;
+            const pending = offers.length - inspections.length;
+            const approved = inspections.filter(i => i.status === 'Onaylandı').length;
+            const rejected = inspections.filter(i => i.status === 'Reddedildi').length;
+
+            document.getElementById('totalOffers').textContent = total;
+            document.getElementById('pendingOffers').textContent = pending;
+            document.getElementById('approvedOffers').textContent = approved;
+            document.getElementById('rejectedOffers').textContent = rejected;
+
+            document.getElementById('dashTotalOffers').textContent = total;
+            document.getElementById('dashPending').textContent = pending;
+            document.getElementById('dashApproved').textContent = approved;
+            document.getElementById('dashRejected').textContent = rejected;
+        }
+
+        // LOAD OFFERS
         function loadOffers() {
             const offers = JSON.parse(localStorage.getItem('offers') || '[]');
-            const tbody = document.getElementById('offersBody');
+            const inspections = JSON.parse(localStorage.getItem('inspections') || '[]');
+            const container = document.getElementById('offersContainer');
             const emptyMsg = document.getElementById('emptyOffers');
 
-            tbody.innerHTML = '';
+            container.innerHTML = '';
 
             if (offers.length === 0) {
                 emptyMsg.style.display = 'block';
@@ -466,26 +966,96 @@
             emptyMsg.style.display = 'none';
 
             offers.forEach((offer, index) => {
-                const row = `
-                    <tr>
-                        <td>${offer.firstName} ${offer.lastName}</td>
-                        <td>${offer.phone}</td>
-                        <td>${offer.brand} ${offer.model}</td>
-                        <td>${offer.mileage}</td>
-                        <td>${new Date(offer.date).toLocaleDateString('tr-TR')}</td>
-                        <td>
-                            <button class="btn btn-view" onclick="showDetail(${index})">Görüntüle</button>
-                            <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
+                const inspection = inspections.find(i => i.offerIndex === index);
+                const status = inspection ? inspection.status : 'Beklemede';
+                const statusClass = status === 'Onaylandı' ? 'approved' : status === 'Reddedildi' ? 'rejected' : 'pending';
 
-            updateStats(offers);
+                const card = `
+                    <div class="offer-card">
+                        <div class="offer-header">
+                            <div>
+                                <h4>${offer.firstName} ${offer.lastName}</h4>
+                                <div class="offer-info">📱 ${offer.phone}</div>
+                            </div>
+                            <span class="offer-status ${statusClass}">${status}</span>
+                        </div>
+
+                        <div class="offer-vehicle">
+                            <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
+                            <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
+                            <p>Kilometre: ${offer.mileage} km</p>
+                        </div>
+
+                        <div class="offer-info">
+                            📍 ${offer.city}, ${offer.district}
+                        </div>
+                        <div class="offer-info" style="font-size: 0.8rem; color: #999;">
+                            📅 ${new Date(offer.date).toLocaleDateString('tr-TR')}
+                        </div>
+
+                        <div class="offer-actions">
+                            <button class="btn btn-view" onclick="showDetail(${index})">Detay</button>
+                            <button class="btn btn-approve" onclick="startInspection(${index})">İncele</button>
+                            <button class="btn btn-delete" onclick="deleteOffer(${index})">Sil</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
         }
 
-        // SHOW DETAILS
+        // LOAD INSPECTION TAB
+        function loadInspectionTab() {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const inspections = JSON.parse(localStorage.getItem('inspections') || '[]');
+            const container = document.getElementById('inspectionOffers');
+            const emptyMsg = document.getElementById('emptyInspection');
+
+            const pendingOffers = offers.filter((_, index) => !inspections.find(i => i.offerIndex === index));
+
+            container.innerHTML = '';
+
+            if (pendingOffers.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+
+            offers.forEach((offer, index) => {
+                const inspection = inspections.find(i => i.offerIndex === index);
+                if (inspection) return; // Zaten incelenmiş olanı atla
+
+                const card = `
+                    <div class="offer-card">
+                        <div class="offer-header">
+                            <div>
+                                <h4>${offer.firstName} ${offer.lastName}</h4>
+                                <div class="offer-info">📱 ${offer.phone}</div>
+                            </div>
+                            <span class="offer-status pending">Beklemede</span>
+                        </div>
+
+                        <div class="offer-vehicle">
+                            <p><strong style="color: var(--primary);">${offer.brand} ${offer.model}</strong></p>
+                            <p>Yıl: ${offer.year} | Yakıt: ${offer.fuel}</p>
+                            <p>Kilometre: ${offer.mileage} km</p>
+                        </div>
+
+                        <div class="offer-info">
+                            📍 ${offer.city}, ${offer.district}
+                        </div>
+
+                        <div class="offer-actions">
+                            <button class="btn btn-approve" onclick="startInspection(${index})" style="flex: 1;">🔍 İncele</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // SHOW DETAIL
         function showDetail(index) {
             const offers = JSON.parse(localStorage.getItem('offers') || '[]');
             const offer = offers[index];
@@ -504,7 +1074,7 @@
             document.getElementById('detailPackage').textContent = offer.package;
             document.getElementById('detailBodyType').textContent = offer.bodyType;
             document.getElementById('detailColor').textContent = offer.color;
-            document.getElementById('detailMileage').textContent = offer.mileage;
+            document.getElementById('detailMileage').textContent = offer.mileage + ' km';
             document.getElementById('detailInterior').textContent = offer.interiorCondition;
             document.getElementById('detailCarColor').textContent = offer.carColor;
             document.getElementById('detailTramer').textContent = offer.tramer + (offer.tramerPrice && offer.tramer === 'Evet' ? ` (₺${offer.tramerPrice})` : '');
@@ -517,6 +1087,69 @@
             document.getElementById('detailModal').classList.remove('show');
         }
 
+        // START INSPECTION
+        function startInspection(index) {
+            currentOfferIndex = index;
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const offer = offers[index];
+
+            document.getElementById('inspectionOfferName').textContent = offer.firstName + ' ' + offer.lastName;
+            document.getElementById('inspectionNotes').value = '';
+            document.getElementById('estimatedPrice').value = '';
+            document.getElementById('inspectionStatus').value = '';
+
+            // Damage inputs temizle
+            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+
+            document.getElementById('inspectionModal').classList.add('show');
+        }
+
+        function closeInspectionModal() {
+            document.getElementById('inspectionModal').classList.remove('show');
+            currentOfferIndex = -1;
+        }
+
+        // SAVE INSPECTION
+        function saveInspection() {
+            if (currentOfferIndex === -1) {
+                showMessage('Hata oluştu!', 'error');
+                return;
+            }
+
+            const status = document.getElementById('inspectionStatus').value;
+            const notes = document.getElementById('inspectionNotes').value;
+            const price = document.getElementById('estimatedPrice').value;
+
+            if (!status) {
+                showMessage('Lütfen durumu seçiniz!', 'warning');
+                return;
+            }
+
+            // Damage bilgilerini topla
+            const damages = {};
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                damages[radio.name] = radio.value;
+            });
+
+            const inspection = {
+                offerIndex: currentOfferIndex,
+                status: status,
+                notes: notes,
+                estimatedPrice: price,
+                damages: damages,
+                date: new Date().toISOString()
+            };
+
+            let inspections = JSON.parse(localStorage.getItem('inspections') || '[]');
+            inspections.push(inspection);
+            localStorage.setItem('inspections', JSON.stringify(inspections));
+
+            showMessage('✅ İnceleme başarıyla kaydedildi!', 'success');
+            closeInspectionModal();
+            loadDashboard();
+            loadInspectionTab();
+        }
+
         // DELETE OFFER
         function deleteOffer(index) {
             if (confirm('Bu teklifi silmek istediğinize emin misiniz?')) {
@@ -524,20 +1157,9 @@
                 offers.splice(index, 1);
                 localStorage.setItem('offers', JSON.stringify(offers));
                 loadOffers();
-                showMessage('✅ Teklif silindi', 'success');
+                loadDashboard();
+                showMessage('✅ Teklif silindi!', 'success');
             }
-        }
-
-        // STATS
-        function updateStats(offers) {
-            document.getElementById('totalOffers').textContent = offers.length;
-
-            const today = new Date().toDateString();
-            const todayCount = offers.filter(o => new Date(o.date).toDateString() === today).length;
-            document.getElementById('todayOffers').textContent = todayCount;
-
-            const brands = new Set(offers.map(o => o.brand)).size;
-            document.getElementById('totalBrands').textContent = brands;
         }
 
         // MESSAGE
@@ -550,13 +1172,19 @@
 
         // LOAD ON STARTUP
         window.addEventListener('load', () => {
-            loadOffers();
+            loadDashboard();
         });
 
         // MODAL CLOSE ON OUTSIDE CLICK
         document.getElementById('detailModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('detailModal')) {
                 closeModal();
+            }
+        });
+
+        document.getElementById('inspectionModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('inspectionModal')) {
+                closeInspectionModal();
             }
         });
     </script>
