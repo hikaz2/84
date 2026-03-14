@@ -4968,5 +4968,15 @@
 
         window.addEventListener('load', loadYears);
     </script>
+    <script>
+        window.addEventListener('load', () => {
+            const nav = document.querySelector('nav ul');
+            if (nav) {
+                const adminLink = document.createElement('li');
+                adminLink.innerHTML = '<a onclick="goToAdmin()" style="cursor: pointer;">🔐 Admin</a>';
+                nav.appendChild(adminLink);
+            }
+        });
+    </script>
 </body>
 </html>
