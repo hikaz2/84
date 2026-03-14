@@ -36,7 +36,7 @@
             padding: 0 20px;
         }
 
-        /* LOGIN SECTION */
+        /* LOGIN BÖLÜMÜ */
         #loginSection {
             display: flex;
             justify-content: center;
@@ -140,7 +140,7 @@
             font-weight: 600;
         }
 
-        /* ADMIN SECTION */
+        /* ADMIN BÖLÜMÜ */
         #adminSection {
             display: none;
         }
@@ -444,21 +444,31 @@
             padding-bottom: 0.5rem;
         }
 
-        .damage-list {
+        .paint-list {
             background: var(--light-bg);
             padding: 1rem;
             border-radius: 5px;
             margin-top: 0.5rem;
         }
 
-        .damage-item {
+        .paint-item {
             padding: 0.5rem 0;
             border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
 
-        .damage-item:last-child {
+        .paint-item:last-child {
             border-bottom: none;
+        }
+
+        .paint-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
         }
 
         @media (max-width: 768px) {
@@ -661,18 +671,29 @@
 
             if (!item) return;
 
-            let damageInfo = '';
+            const colorMap = {
+                'Orijinal': '#ddd',
+                'Lokal Boyalı': '#FFA500',
+                'Boyalı': '#FFFF00',
+                'Onarım': '#4169E1',
+                'Değişen': '#DC143C'
+            };
+
+            let paintInfo = '';
             try {
-                const damages = JSON.parse(item.damages || '{}');
-                if (Object.keys(damages).length > 0) {
-                    damageInfo = '<div class="damage-list">';
-                    for (const [id, damage] of Object.entries(damages)) {
-                        damageInfo += `<div class="damage-item"><strong>${id}:</strong> ${damage}</div>`;
+                const paintData = JSON.parse(item.paintData || '{}');
+                if (Object.keys(paintData).length > 0) {
+                    paintInfo = '<div class="paint-list">';
+                    for (const [part, status] of Object.entries(paintData)) {
+                        if (status !== 'Orijinal') {
+                            const color = colorMap[status] || '#ddd';
+                            paintInfo += `<div class="paint-item"><span class="paint-color" style="background-color: ${color};"></span><strong>${part}:</strong> ${status}</div>`;
+                        }
                     }
-                    damageInfo += '</div>';
+                    paintInfo += '</div>';
                 }
             } catch (e) {
-                damageInfo = '';
+                paintInfo = '';
             }
 
             const detailContent = document.getElementById('detailContent');
@@ -766,16 +787,22 @@
                     </div>
                 </div>
 
-                <div class="section-title">🔍 Araç Durumu</div>
+                <div class="section-title">🎨 Araç Durumu</div>
                 <div class="detail-item">
-                    <label>Boya Hasarları:</label>
-                    ${damageInfo || '<p>Hasar yok</p>'}
+                    <label>Boya Durumu:</label>
+                    ${paintInfo || '<p>Tümü Orijinal</p>'}
                 </div>
                 <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>Tramer:</label>
+                        <p>${item.tramerStatus}${item.tramerPrice && item.tramerPrice !== '0' ? ' (₺' + item.tramerPrice + ')' : ''}</p>
+                    </div>
                     <div class="detail-item">
                         <label>Kaza Geçmişi:</label>
                         <p>${item.hasAccident}</p>
                     </div>
+                </div>
+                <div class="detail-grid">
                     <div class="detail-item">
                         <label>İç Durumu:</label>
                         <p>${item.interiorCondition}</p>
