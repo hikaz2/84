@@ -1,0 +1,3226 @@
+{
+  "Otomobil": {
+    "Toyota": {
+      "Camry": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Le", "S", "SE", "XLE"],
+                "Arka Çekişli": ["Limited"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Le", "S", "SE"],
+                "Arka Çekişli": ["XLE", "XSE"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["L", "LE", "SE"],
+                "Arka Çekişli": ["XLE", "XSE"]
+              },
+              "Otomatik-3.5": {
+                "Arka Çekişli": ["L", "LE", "SE", "XLE"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Le", "S", "SE", "XLE"],
+                "Arka Çekişli": ["Limited"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Le", "S", "SE"],
+                "Arka Çekişli": ["XLE", "XSE"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["L", "LE", "SE"],
+                "Arka Çekişli": ["XLE", "XSE"]
+              }
+            }
+          },
+          "2022": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Le", "S", "SE"],
+                "Arka Çekişli": ["XLE"]
+              },
+              "Otomatik-2.5": {
+                "Arka Çekişli": ["XLE", "XSE"]
+              }
+            }
+          }
+        }
+      },
+      "Corolla": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "LE", "S", "XLE"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L", "LE", "S", "XLE"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["ECO", "LE", "S", "XLE"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["LE", "S", "XLE"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "LE", "S"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["LE", "S", "XLE"]
+              }
+            }
+          },
+          "2022": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "LE"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["LE", "S"]
+              }
+            }
+          }
+        }
+      },
+      "Yaris": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["L", "LE", "XLE"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["L", "LE", "XLE"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["L", "LE", "S", "XLE"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["L", "LE"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LE", "S", "XLE"]
+              }
+            }
+          },
+          "2022": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["L", "LE"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LE", "S"]
+              }
+            }
+          }
+        }
+      },
+      "Prius": {
+        "Sedan": {
+          "2024": {
+            "Hibrit": {
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["L", "LE", "XLE", "Four"]
+              }
+            }
+          },
+          "2023": {
+            "Hibrit": {
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["L", "LE", "XLE"]
+              }
+            }
+          },
+          "2022": {
+            "Hibrit": {
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["L", "LE"]
+              }
+            }
+          }
+        }
+      },
+      "Altis": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLX", "SE"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL", "GLX", "SE"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["GL", "GLX", "SE", "XLE"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLX", "SE"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLX"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["GLX", "SE"]
+              }
+            }
+          },
+          "2022": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL", "GLX"]
+              }
+            }
+          }
+        }
+      },
+      "Mark X": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Arka Çekişli": ["Standard", "G", "250G"]
+              },
+              "Otomatik-3.0": {
+                "Arka Çekişli": ["Standard", "G", "300G", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Arka Çekişli": ["Standard", "G"]
+              },
+              "Otomatik-3.0": {
+                "Arka Çekişli": ["G", "Premium"]
+              }
+            }
+          }
+        }
+      },
+      "Crown": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Arka Çekişli": ["G", "G Executive", "Royal"]
+              },
+              "Otomatik-3.0": {
+                "Arka Çekişli": ["Premium", "Royal Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Arka Çekişli": ["G", "Royal"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Honda": {
+      "Accord": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "Sport", "EX", "EX-L"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Sport", "EX", "EX-L"]
+              },
+              "Otomatik-3.5": {
+                "Arka Çekişli": ["LX", "EX", "EX-L"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              },
+              "Otomatik-3.5": {
+                "Arka Çekişli": ["EX", "EX-L"]
+              }
+            }
+          }
+        }
+      },
+      "Civic": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["DX", "LX", "EX", "EX-T"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["DX", "LX", "EX", "EX-T"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["S", "EX", "LX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Si", "Type R"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["DX", "LX"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              }
+            }
+          }
+        }
+      },
+      "Insight": {
+        "Sedan": {
+          "2024": {
+            "Hibrit": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX", "EX-L"]
+              }
+            }
+          },
+          "2023": {
+            "Hibrit": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "BMW": {
+      "320i": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Standart", "Sport", "Luxury", "M Sport"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Standart", "Sport", "Luxury", "M Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Sport", "Luxury"]
+              }
+            }
+          }
+        }
+      },
+      "320d": {
+        "Sedan": {
+          "2024": {
+            "Dizel": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Standart", "Sport", "Luxury"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Standart", "Sport", "Luxury", "M Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Sport", "Luxury"]
+              }
+            }
+          }
+        }
+      },
+      "330i": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Standart", "Sport", "Luxury", "M Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Sport", "Luxury"]
+              }
+            }
+          }
+        }
+      },
+      "530i": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Standart", "Luxury", "M Sport"]
+              },
+              "Otomatik-3.0": {
+                "Arka Çekişli": ["M Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Luxury"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Mercedes-Benz": {
+      "C200": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çeki��li": ["Urban", "AMG Line"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Urban", "AMG Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Urban", "AMG"]
+              }
+            }
+          }
+        }
+      },
+      "C300": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Classic", "AMG Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Classic"]
+              }
+            }
+          }
+        }
+      },
+      "E300": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "Avantgarde", "AMG Line"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "Avantgarde"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "AMG"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Audi": {
+      "A4": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Urban", "Design", "S Line"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Urban", "Design", "S Line"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Urban", "Design"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Design", "S Line"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Design", "S Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Urban", "Design"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Design", "S Line"]
+              }
+            }
+          }
+        }
+      },
+      "A6": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "Design", "S Line"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "Design"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Arka Çekişli": ["Urban", "Design"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Volkswagen": {
+      "Golf": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline", "R Line"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline", "GTI"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Highline"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Highline"]
+              }
+            }
+          }
+        }
+      },
+      "Passat": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Highline"]
+              }
+            }
+          }
+        }
+      },
+      "Jetta": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Comfort", "Highline"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Ford": {
+      "Focus": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Titanium", "ST"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend", "Titanium"]
+              }
+            }
+          }
+        }
+      },
+      "Fiesta": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.1": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.25": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.25": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Titanium", "ST"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Titanium"]
+              }
+            }
+          }
+        }
+      },
+      "Mondeo": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Titanium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Renault": {
+      "Clio": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-0.9": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              },
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              },
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              },
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Life", "Joy", "Iconic"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-0.9": {
+                "Ön Çekişli": ["Life", "Joy"]
+              },
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life", "Iconic"]
+              }
+            }
+          }
+        }
+      },
+      "Megane": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              },
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              },
+              "Manuel-1.9": {
+                "Ön Çekişli": ["Life", "Trend", "Iconic"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Trend", "Iconic"]
+              }
+            }
+          }
+        }
+      },
+      "Laguna": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Privilege"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Privilege"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Privilege"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Privilege"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Privilege"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Privilege"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Peugeot": {
+      "208": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Allure", "GT Line"]
+              }
+            }
+          }
+        }
+      },
+      "308": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Allure", "GT Line"]
+              }
+            }
+          }
+        }
+      },
+      "408": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Manuel-1.8": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GT Line"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Hyundai": {
+      "Accent": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["GLS", "GLX"]
+              }
+            }
+          }
+        }
+      },
+      "Elantra": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["GLS", "GLX"]
+              }
+            }
+          }
+        }
+      },
+      "Sonata": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              },
+              "Otomatik-2.7": {
+                "Ön Çekişli": ["GL", "GLS", "GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["GLX"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Kia": {
+      "Cerato": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["S", "EX"]
+              }
+            }
+          }
+        }
+      },
+      "Forte": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["S", "EX"]
+              }
+            }
+          }
+        }
+      },
+      "Optima": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S", "EX", "SX"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["L", "S", "EX", "SX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Nissan": {
+      "Sunny": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["S", "SV"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["SV", "SL"]
+              }
+            }
+          }
+        }
+      },
+      "Altima": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["S", "SV", "SL", "SR"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["S", "SV", "SL", "SR"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["S", "SV"]
+              }
+            }
+          }
+        }
+      },
+      "Teana": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              },
+              "Otomatik-2.3": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["S", "SV", "SL"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S", "SV"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Mazda": {
+      "2": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["i", "i Sport", "s Touring"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["i", "i Sport"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["i Sport", "s Touring"]
+              }
+            }
+          }
+        }
+      },
+      "3": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring", "Speed3"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["i", "i Touring"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i Touring", "s Touring"]
+              }
+            }
+          }
+        }
+      },
+      "6": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              },
+              "Otomatik-3.0": {
+                "Ön Çekişli": ["i", "i Touring", "s Touring"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i", "i Touring"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Subaru": {
+      "Impreza": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium", "2.5i Sport"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium", "2.5i Sport"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["2.0i", "2.0i Premium", "2.0i Sport"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["2.0i", "2.0i Premium", "2.0i Sport"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["2.5i Limited", "2.5i RS"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["2.0i Sport"]
+              }
+            }
+          }
+        }
+      },
+      "Legacy": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium", "2.5i Limited"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Fiat": {
+      "Punto": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Easy", "Lounge"]
+              }
+            }
+          }
+        }
+      },
+      "Tipo": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Easy", "Lounge"]
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "Hatchback": {
+          "2024": {
+            "Benzin": {
+              "Manuel-0.9": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-0.9": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Pop", "Easy", "Lounge"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-0.9": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Easy", "Lounge"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Dacia": {
+      "Logan": {
+        "Sedan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              },
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              },
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Express", "Essential", "Comfort", "Laureate"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Express", "Essential"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Comfort", "Laureate"]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "SUV": {
+    "Toyota": {
+      "RAV4": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "LE", "XLE"],
+                "Dört Çekişli": ["Limited"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["L", "LE", "XLE"],
+                "Dört Çekişli": ["Limited"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "LE"],
+                "Dört Çekişli": ["XLE", "Limited"]
+              }
+            }
+          }
+        }
+      },
+      "Prado": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.7": {
+                "Dört Çekişli": ["TX", "TX Limited", "VX"]
+              },
+              "Otomatik-4.0": {
+                "Dört Çekişli": ["TX", "TX Limited", "VX"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["TX", "TX Limited", "VX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.7": {
+                "Dört Çekişli": ["TX", "VX"]
+              }
+            }
+          }
+        }
+      },
+      "Land Cruiser": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-4.0": {
+                "Dört Çekişli": ["Standard", "VX", "ZX"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-4.5": {
+                "Dört Çekişli": ["Standard", "VX", "ZX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-4.0": {
+                "Dört Çekişli": ["VX", "ZX"]
+              }
+            }
+          }
+        }
+      },
+      "Fortuner": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.7": {
+                "Dört Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-2.8": {
+                "Dört Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.4": {
+                "Dört Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-2.4": {
+                "Dört Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.7": {
+                "Dört Çekişli": ["Mid", "Premium"]
+              }
+            }
+          }
+        }
+      },
+      "Highlander": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.7": {
+                "Ön Çekişli": ["L", "LE"],
+                "Dört Çekişli": ["Limited"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["L", "LE"],
+                "Dört Çekişli": ["Limited"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["L", "LE"],
+                "Dört Çekişli": ["Limited"]
+              }
+            }
+          }
+        }
+      },
+      "Rush": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Mid", "Premium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Standard", "Premium"]
+              }
+            }
+          }
+        }
+      },
+      "Raize": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Mid", "Premium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Honda": {
+      "CR-V": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX", "EX-L"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L"]
+              }
+            }
+          },
+                    "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L"]
+              }
+            }
+          }
+        }
+      },
+      "Pilot": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L", "Max"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L", "Max"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L"]
+              }
+            }
+          }
+        }
+      },
+      "HR-V": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX", "EX-L"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["LX", "EX"],
+                "Dört Çekişli": ["EX-L"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["LX", "EX"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "BMW": {
+      "X1": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["sDrive18i", "sDrive20i"],
+                "Dört Çekişli": ["xDrive20i", "xDrive20i M Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["sDrive18i"],
+                "Dört Çekişli": ["xDrive20i"]
+              }
+            }
+          }
+        }
+      },
+      "X3": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["xDrive20i", "xDrive30i"]
+              },
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["M40i", "M40i xDrive"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["xDrive20i", "xDrive30i"]
+              }
+            }
+          }
+        }
+      },
+      "X5": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["xDrive40i", "xDrive50i"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["xDrive40i"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Mercedes-Benz": {
+      "GLA": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Urban", "Avantgarde"],
+                "Dört Çekişli": ["AMG Line"]
+              },
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["AMG Line", "AMG 35"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Urban"],
+                "Dört Çekişli": ["Avantgarde"]
+              }
+            }
+          }
+        }
+      },
+      "GLC": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Avantgarde"],
+                "Dört Çekişli": ["AMG Line"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Urban", "Avantgarde"],
+                "Dört Çekişli": ["AMG Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Urban", "Avantgarde"]
+              }
+            }
+          }
+        }
+      },
+      "GLE": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Urban", "Avantgarde"]
+              },
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["Urban", "Avantgarde", "AMG Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["Avantgarde", "AMG Line"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Audi": {
+      "Q3": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Standart", "Design"],
+                "Dört Çekişli": ["S Line"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Standart", "Design"],
+                "Dört Çekişli": ["S Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Standart"],
+                "Dört Çekişli": ["Design"]
+              }
+            }
+          }
+        }
+      },
+      "Q5": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Standart", "Design", "S Line"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Standart", "Design", "S Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Design", "S Line"]
+              }
+            }
+          }
+        }
+      },
+      "Q7": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Standart", "Design", "S Line"]
+              },
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["Standart", "Design", "S Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["Design", "S Line"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Volkswagen": {
+      "Tiguan": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort"],
+                "Dört Çekişli": ["Highline"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort"],
+                "Dört Çekişli": ["Highline"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort"],
+                "Dört Çekişli": ["Highline"]
+              },
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Highline", "R Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Comfort", "Highline"]
+              }
+            }
+          }
+        }
+      },
+      "T-Cross": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.0": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.5": {
+                "Dört Çekişli": ["Highline"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.0": {
+                "Ön Çekişli": ["Trend"]
+              },
+              "Otomatik-1.5": {
+                "Dört Çekişli": ["Highline"]
+              }
+            }
+          }
+        }
+      },
+      "T-Roc": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend", "Comfort"],
+                "Dört Çekişli": ["Highline"]
+              },
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Highline", "R Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Comfort"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Ford": {
+      "EcoSport": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Style", "Trend"],
+                "Dört Çekişli": ["Titanium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Titanium"]
+              }
+            }
+          }
+        }
+      },
+      "Escape": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend"],
+                "Dört Çekişli": ["Titanium"]
+              },
+              "Manuel-2.3": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-2.3": {
+                "Ön Çekişli": ["Style", "Trend"],
+                "Dört Çekişli": ["Titanium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Titanium"]
+              }
+            }
+          }
+        }
+      },
+      "Edge": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend"],
+                "Dört Çekişli": ["Titanium"]
+              },
+              "Otomatik-3.0": {
+                "Dört Çekişli": ["Titanium", "Sport"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Titanium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Renault": {
+      "Kadjar": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Life"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          }
+        }
+      },
+      "Duster": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Life"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          }
+        }
+      },
+      "Koleos": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              },
+              "Manuel-2.5": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["Life", "Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend"],
+                "Dört Çekişli": ["Iconic"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Peugeot": {
+      "2008": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Active"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Allure"],
+                "Dört Çekişli": ["GT Line"]
+              }
+            }
+          }
+        }
+      },
+      "3008": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              },
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Allure"],
+                "D��rt Çekişli": ["GT Line"]
+              }
+            }
+          }
+        }
+      },
+      "5008": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Active", "Allure"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Active", "Allure"],
+                "Dört Çekişli": ["GT Line"]
+              },
+              "Otomatik-2.0": {
+                "Dört Çekişli": ["Active", "Allure", "GT Line"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Allure"],
+                "Dört Çekişli": ["GT Line"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Hyundai": {
+      "Tucson": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL"],
+                "Dört Çekişli": ["GLS", "GLX"]
+              }
+            }
+          }
+        }
+      },
+      "Santa Fe": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              },
+              "Otomatik-2.7": {
+                "Dört Çekişli": ["GL", "GLS", "GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL"],
+                "Dört Çekişli": ["GLS"]
+              }
+            }
+          }
+        }
+      },
+      "Creta": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["GL", "GLS"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["GL", "GLS"],
+                "Dört Çekişli": ["GLX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["GL"],
+                "Dört Çekişli": ["GLS"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Kia": {
+      "Sportage": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L", "S", "EX"],
+                "Dört Çekişli": ["SX"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["L", "S", "EX"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S", "EX"],
+                "Dört Çekişli": ["SX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L"],
+                "Dört Çekişli": ["EX", "SX"]
+              }
+            }
+          }
+        }
+      },
+      "Sorento": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S"],
+                "Dört Çekişli": ["EX", "SX"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["L", "S"],
+                "Dört Çekişli": ["EX", "SX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L"],
+                "Dört Çekişli": ["S", "EX"]
+              }
+            }
+          }
+        }
+      },
+      "Niro": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["L", "S"],
+                "Dört Çekişli": ["EX"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L", "S"],
+                "Dört Çekişli": ["EX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["S"],
+                "Dört Çekişli": ["EX"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Nissan": {
+      "X-Trail": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["S", "SV"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S", "SV"],
+                "Dört Çekişli": ["SL", "SR"]
+              },
+              "Manuel-2.5": {
+                "Ön Çekişli": ["S", "SV"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["S", "SV"],
+                "Dört Çekişli": ["SL", "SR"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S"],
+                "Dört Çekişli": ["SV", "SL"]
+              }
+            }
+          }
+        }
+      },
+      "Qashqai": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["S", "SV"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["S", "SV"],
+                "Dört Çekişli": ["SL"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["S", "SV"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S", "SV"],
+                "Dört Çekişli": ["SL"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["S"],
+                "Dört Çekişli": ["SV", "SL"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Mazda": {
+      "CX-5": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["i", "i Touring"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i", "i Touring"],
+                "Dört Çekişli": ["s Touring", "Signature"]
+              },
+              "Manuel-2.5": {
+                "Ön Çekişli": ["i", "i Touring"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["i", "i Touring"],
+                "Dört Çekişli": ["s Touring", "Signature"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["i"],
+                "Dört Çekişli": ["i Touring", "s Touring"]
+              }
+            }
+          }
+        }
+      },
+      "CX-9": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["i", "i Touring"],
+                "Dört Çekişli": ["s Touring", "Signature"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["i"],
+                "Dört Çekişli": ["i Touring", "s Touring"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Subaru": {
+      "Forester": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"],
+                "Dört Çekişli": ["2.5i Sport", "2.5i Limited"]
+              },
+              "Manuel-2.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["2.5i", "2.5i Premium"],
+                "Dört Çekişli": ["2.5i Sport", "2.5i Limited"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Dört Çekişli": ["2.5i Premium", "2.5i Sport"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Fiat": {
+      "500X": {
+        "SUV": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Pop", "Easy"],
+                "Dört Çekişli": ["Lounge"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Pop", "Easy"],
+                "Dört Çekişli": ["Lounge"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Pop", "Easy"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Pop", "Easy"],
+                "Dört Çekişli": ["Lounge"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Pop"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Easy"],
+                "Dört Çekişli": ["Lounge"]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Ticari": {
+    "Toyota": {
+      "Avanza": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Manual", "Auto", "Premium"]
+              },
+              "Otomatik-1.3": {
+                "Ön Çekişli": ["Manual", "Auto", "Premium"]
+              },
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Manual", "Auto", "Premium"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Manual", "Auto", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.3": {
+                "Ön Çekişli": ["Manual", "Premium"]
+              },
+              "Otomatik-1.5": {
+                "Ön Çekişli": ["Auto", "Premium"]
+              }
+            }
+          }
+        }
+      },
+      "Alphard": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-3.0": {
+                "Ön Çekişli": ["L", "S", "X"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["L", "S", "X"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["L", "S"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["X"]
+              }
+            }
+          }
+        }
+      },
+      "Hiace": {
+        "Panelvan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Manuel-2.4": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.5": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Standard", "Mid"]
+              },
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["Mid", "Premium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Honda": {
+      "Odyssey": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["LX", "EX", "EX-L"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["LX", "EX", "EX-L"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["EX", "EX-L"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Nissan": {
+      "Serena": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["S", "SC", "SR"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["S", "SC", "SR"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.3": {
+                "Ön Çekişli": ["S", "SC", "SR"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["S", "SC"]
+              },
+              "Otomatik-2.3": {
+                "Ön Çekişli": ["SR"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Renault": {
+      "Espace": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Manuel-1.8": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Trend", "Initiale"]
+              }
+            }
+          }
+        }
+      },
+      "Scenic": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.5": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              },
+              "Otomatik-1.9": {
+                "Ön Çekişli": ["Life", "Trend", "Initiale"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Life", "Trend"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend", "Initiale"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Ford": {
+      "Galaxy": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.8": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Titanium"]
+              }
+            }
+          }
+        }
+      },
+      "S-Max": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Manuel-1.8": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Style", "Trend", "Titanium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Style", "Trend"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Titanium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Volkswagen": {
+      "Caravelle": {
+        "Panelvan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-2.0": {
+                "Ön Çekişli": ["L1", "L2", "L3"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L1", "L2", "L3"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["L1", "L2", "L3"]
+              }
+            },
+            "Dizel": {
+              "Manuel-2.5": {
+                "Ön Çekişli": ["L1", "L2", "L3"]
+              },
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["L1", "L2", "L3"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["L2", "L3"]
+              }
+            }
+          }
+        }
+      },
+      "Touran": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.4": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-1.8": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.8": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              }
+            },
+            "Dizel": {
+              "Manuel-1.9": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-1.9": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Manuel-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              },
+              "Otomatik-2.0": {
+                "Ön Çekişli": ["Trend", "Comfort", "Highline"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Manuel-1.2": {
+                "Ön Çekişli": ["Trend", "Comfort"]
+              },
+              "Otomatik-1.6": {
+                "Ön Çekişli": ["Comfort", "Highline"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Hyundai": {
+      "H-1": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            },
+            "Dizel": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["Standard", "Mid", "Premium"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-2.4": {
+                "Ön Çekişli": ["Mid", "Premium"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Kia": {
+      "Carnival": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.2": {
+                "Ön Çekişli": ["L", "EX", "SX"]
+              },
+              "Otomatik-2.7": {
+                "Ön Çekişli": ["L", "EX", "SX"]
+              },
+              "Otomatik-3.5": {
+                "Ön Çekişli": ["L", "EX", "SX"]
+              },
+              "Otomatik-3.8": {
+                "Ön Çekişli": ["L", "EX", "SX"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.8": {
+                "Ön Çekişli": ["EX", "SX"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Chrysler": {
+      "Pacifica": {
+        "Minivan": {
+          "2024": {
+            "Benzin": {
+              "Otomatik-2.5": {
+                "Ön Çekişli": ["Base", "Touring", "Limited"]
+              },
+              "Otomatik-3.6": {
+                "Ön Çekişli": ["Base", "Touring", "Limited"]
+              }
+            }
+          },
+          "2023": {
+            "Benzin": {
+              "Otomatik-3.6": {
+                "Ön Çekişli": ["Touring", "Limited"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
