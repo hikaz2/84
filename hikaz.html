@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTOSELL - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-black: #1a1a1a;
+            --text-dark: #2a2a2a;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+            --light-bg: #f5f5f5;
+            --white: #fff;
+            --shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* LOGIN PAGE */
+        #loginPage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #loginPage.hidden {
+            display: none !important;
+        }
+
+        .login-box {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            color: var(--primary-black);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .login-box .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .login-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--primary-black);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .login-box button:hover {
+            transform: translateY(-2px);
+        }
+
+        .login-error {
+            color: #c62828;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-info {
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: #c62828;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+
+        /* SIDEBAR */
+        .wrapper {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+
+        .sidebar button.active {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--primary-black);
+            border-color: var(--primary-yellow);
+        }
+
+        .sidebar button:hover {
+            border-color: var(--primary-yellow);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h2 {
+            color: var(--primary-black);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        /* STATISTICS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--primary-black);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* TABLES */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        table thead {
+            background: var(--light-bg);
+        }
+
+        table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tr:hover {
+            background: var(--light-bg);
+        }
+
+        /* FORMS */
+        .form-section {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-black);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 10px rgba(255,215,0,0.15);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--primary-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-danger {
+            background: #c62828;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-danger:hover {
+            background: #b71c1c;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .btn-edit {
+            background: #2196F3;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-edit:hover {
+            background: #0b7dda;
+        }
+
+        /* VEHICLE CARDS */
+        .vehicles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .vehicle-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-yellow);
+        }
+
+        .vehicle-card h4 {
+            color: var(--primary-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .vehicle-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .vehicle-card .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .vehicle-card .btn {
+            flex: 1;
+            margin: 0;
+        }
+
+        /* MESSAGES */
+        .success-msg {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-msg.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .error-msg {
+            background: #c62828;
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-msg.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 2rem 20px 1rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vehicles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN PAGE -->
+    <div id="loginPage">
+        <div class="login-box">
+            <h2>🔐 Admin Giriş</h2>
+            <div class="form-group">
+                <label for="username">Kullanıcı Adı</label>
+                <input type="text" id="username" placeholder="admin">
+            </div>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            <button onclick="login()">Giriş Yap</button>
+            <div id="loginError" class="login-error"></div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="hidden">
+        <!-- HEADER -->
+        <header>
+            <div class="container">
+                <div class="logo">OTOSELL Admin</div>
+                <div class="header-right">
+                    <div class="user-info">👤 Admin</div>
+                    <button class="logout-btn" onclick="logout()">Çıkış</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="container">
+            <div class="wrapper">
+                <!-- SIDEBAR -->
+                <div class="sidebar">
+                    <button class="tab-btn active" onclick="showTab('dashboard')">📊 Dashboard</button>
+                    <button class="tab-btn" onclick="showTab('offers')">📋 Teklifler</button>
+                    <button class="tab-btn" onclick="showTab('vehicles')">🚗 Araçlar</button>
+                    <button class="tab-btn" onclick="showTab('addvehicle')">➕ Araç Ekle</button>
+                </div>
+
+                <!-- MAIN CONTENT -->
+                <div class="main-content">
+                    <!-- DASHBOARD -->
+                    <div id="dashboard" class="tab-content active">
+                        <h2>📊 Dashboard</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3 id="totalOffers">0</h3>
+                                <p>Toplam Teklif</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="totalVehicles">0</h3>
+                                <p>Toplam Araç</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="todayOffers">0</h3>
+                                <p>Bugünkü Teklif</p>
+                            </div>
+                        </div>
+
+                        <div id="successMsg" class="success-msg"></div>
+                        <div id="errorMsg" class="error-msg"></div>
+                    </div>
+
+                    <!-- OFFERS -->
+                    <div id="offers" class="tab-content">
+                        <h2>📋 Gelen Teklifler</h2>
+                        <div class="table-responsive">
+                            <table id="offersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Ad Soyad</th>
+                                        <th>Telefon</th>
+                                        <th>Email</th>
+                                        <th>Araç</th>
+                                        <th>Kilometre</th>
+                                        <th>Tarih</th>
+                                        <th>İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- VEHICLES -->
+                    <div id="vehicles" class="tab-content">
+                        <h2>🚗 Araçlar</h2>
+                        <div id="vehiclesContainer" class="vehicles-grid"></div>
+                    </div>
+
+                    <!-- ADD VEHICLE -->
+                    <div id="addvehicle" class="tab-content">
+                        <h2>➕ Araç Ekle</h2>
+                        <div class="form-section">
+                            <h3>Yeni Araç Ekle</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Araç Tipi *</label>
+                                    <select id="addType">
+                                        <option value="">Seçiniz</option>
+                                        <option value="Otomobil">Otomobil</option>
+                                        <option value="SUV">SUV & Arazi</option>
+                                        <option value="Minivan">Minivan & Panelvan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Marka *</label>
+                                    <input type="text" id="addBrand" placeholder="Toyota">
+                                </div>
+                                <div class="form-group">
+                                    <label>Model *</label>
+                                    <input type="text" id="addModel" placeholder="Corolla">
+                                </div>
+                                <div class="form-group">
+                                    <label>Yıl *</label>
+                                    <input type="number" id="addYear" placeholder="2024" min="2005" max="2026">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Yakıt *</label>
+                                    <select id="addFuel">
+                                        <option value="">Seçiniz</option>
+                                        <option value="Benzin">Benzin</option>
+                                        <option value="Dizel">Dizel</option>
+                                        <option value="Hibrit">Hibrit</option>
+                                        <option value="Elektrik">Elektrik</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Motor *</label>
+                                    <input type="text" id="addEngine" placeholder="1.6L">
+                                </div>
+                                <div class="form-group">
+                                    <label>Paket *</label>
+                                    <input type="text" id="addPackage" placeholder="Standart">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gövde Tipi *</label>
+                                    <select id="addBodyType">
+                                        <option value="">Seçiniz</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Cabrio">Cabrio</option>
+                                        <option value="Minivan">Minivan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" onclick="addVehicle()">Araç Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 OTOSELL - Admin Panel</p>
+        </footer>
+    </div>
+
+    <script>
+        // Auth
+        const ADMIN_USER = 'admin';
+        const ADMIN_PASS = 'hikazcsk010';
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('loginError');
+
+            if (username === ADMIN_USER && password === ADMIN_PASS) {
+                localStorage.setItem('adminLogged', 'true');
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                loadDashboard();
+            } else {
+                errorBox.textContent = '❌ Kullanıcı adı veya şifre yanlış!';
+                errorBox.classList.add('show');
+                setTimeout(() => errorBox.classList.remove('show'), 3000);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminLogged');
+            location.reload();
+        }
+
+        // Tab Management
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'dashboard') loadDashboard();
+            if (tabName === 'offers') loadOffers();
+            if (tabName === 'vehicles') loadVehicles();
+        }
+
+        // Dashboard
+        function loadDashboard() {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const vehicles = JSON.parse(localStorage.getItem('vehicles') || '[]');
+            
+            document.getElementById('totalOffers').textContent = offers.length;
+            document.getElementById('totalVehicles').textContent = vehicles.length;
+            
+            const today = new Date().toDateString();
+            const todayOffers = offers.filter(o => new Date(o.date).toDateString() === today).length;
+            document.getElementById('todayOffers').textContent = todayOffers;
+        }
+
+        // Offers
+        function loadOffers() {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            const tbody = document.querySelector('#offersTable tbody');
+            tbody.innerHTML = '';
+
+            offers.forEach((offer, index) => {
+                const row = `
+                    <tr>
+                        <td>${offer.firstName} ${offer.lastName}</td>
+                        <td>${offer.phone}</td>
+                        <td>${offer.email || '-'}</td>
+                        <td>${offer.brand} ${offer.model}</td>
+                        <td>${offer.mileage} km</td>
+                        <td>${new Date(offer.date).toLocaleDateString('tr-TR')}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteOffer(${index})">Sil</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function deleteOffer(index) {
+            const offers = JSON.parse(localStorage.getItem('offers') || '[]');
+            offers.splice(index, 1);
+            localStorage.setItem('offers', JSON.stringify(offers));
+            loadOffers();
+            showMessage('Teklif silindi', 'success');
+        }
+
+        // Vehicles
+        function loadVehicles() {
+            const vehicles = JSON.parse(localStorage.getItem('vehicles') || '[]');
+            const container = document.getElementById('vehiclesContainer');
+            container.innerHTML = '';
+
+            if (vehicles.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Henüz araç eklenmemiş</p>';
+                return;
+            }
+
+            vehicles.forEach((vehicle, index) => {
+                const card = `
+                    <div class="vehicle-card">
+                        <h4>${vehicle.brand} ${vehicle.model}</h4>
+                        <p><strong>Yıl:</strong> ${vehicle.year}</p>
+                        <p><strong>Yakıt:</strong> ${vehicle.fuel}</p>
+                        <p><strong>Motor:</strong> ${vehicle.engine}</p>
+                        <p><strong>Paket:</strong> ${vehicle.package}</p>
+                        <p><strong>Gövde:</strong> ${vehicle.bodyType}</p>
+                        <p><strong>Tür:</strong> ${vehicle.type}</p>
+                        <div class="btn-group">
+                            <button class="btn btn-danger" onclick="deleteVehicle(${index})">Sil</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function deleteVehicle(index) {
+            const vehicles = JSON.parse(localStorage.getItem('vehicles') || '[]');
+            vehicles.splice(index, 1);
+            localStorage.setItem('vehicles', JSON.stringify(vehicles));
+            loadVehicles();
+            showMessage('Araç silindi', 'success');
+        }
+
+        // Add Vehicle
+        function addVehicle() {
+            const type = document.getElementById('addType').value;
+            const brand = document.getElementById('addBrand').value;
+            const model = document.getElementById('addModel').value;
+            const year = document.getElementById('addYear').value;
+            const fuel = document.getElementById('addFuel').value;
+            const engine = document.getElementById('addEngine').value;
+            const pkg = document.getElementById('addPackage').value;
+            const bodyType = document.getElementById('addBodyType').value;
+
+            if (!type || !brand || !model || !year || !fuel || !engine || !pkg || !bodyType) {
+                showMessage('Tüm alanları doldurunuz!', 'error');
+                return;
+            }
+
+            const vehicles = JSON.parse(localStorage.getItem('vehicles') || '[]');
+            vehicles.push({ type, brand, model, year, fuel, engine, package: pkg, bodyType });
+            localStorage.setItem('vehicles', JSON.stringify(vehicles));
+
+            document.getElementById('addType').value = '';
+            document.getElementById('addBrand').value = '';
+            document.getElementById('addModel').value = '';
+            document.getElementById('addYear').value = '';
+            document.getElementById('addFuel').value = '';
+            document.getElementById('addEngine').value = '';
+            document.getElementById('addPackage').value = '';
+            document.getElementById('addBodyType').value = '';
+
+            showMessage('✅ Araç başarıyla eklendi!', 'success');
+            loadDashboard();
+        }
+
+        // Messages
+        function showMessage(msg, type) {
+            const box = type === 'success' ? document.getElementById('successMsg') : document.getElementById('errorMsg');
+            box.textContent = msg;
+            box.classList.add('show');
+            setTimeout(() => box.classList.remove('show'), 3000);
+        }
+
+        // Check Auth on Load
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('adminLogged') === 'true') {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                loadDashboard();
+            } else {
+                document.getElementById('loginPage').classList.remove('hidden');
+                document.getElementById('adminPanel').classList.add('hidden');
+            }
+        });
+
+        // Enter Key
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !document.getElementById('loginPage').classList.contains('hidden')) {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
