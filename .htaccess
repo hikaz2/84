@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # .html uzantısını gizle
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+    
+    # Direkt .html çağrılarını yönlendir
+    RewriteCond %{REQUEST_URI} \.html$ 
+    RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+</IfModule>
