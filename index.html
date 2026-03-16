@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTOSell - Aracınızı Güvenle Satın!</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --dark: #1a1a1a;
+            --light-bg: #f8f8f8;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --white: #fff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* HEADER & NAV */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 80px 15px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--dark);
+            border: none;
+            padding: 16px 50px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,215,0,0.4);
+        }
+
+        /* FEATURES SECTION */
+        .features-section {
+            padding: 80px 15px;
+            background: var(--white);
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            border-color: var(--primary-yellow);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* BLOG SECTION */
+        .blog-section {
+            padding: 80px 15px;
+            background: var(--light-bg);
+        }
+
+        .blog-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary-yellow);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .blog-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .blog-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-read-more {
+            color: var(--primary-yellow);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .blog-read-more:hover {
+            color: var(--dark);
+            text-decoration: underline;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 80px 15px;
+            background: var(--white);
+        }
+
+        .about-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .about-text {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-light);
+            line-height: 2;
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-highlight {
+            background: linear-gradient(120deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-yellow);
+            margin: 2rem auto;
+            max-width: 700px;
+        }
+
+        .about-highlight p {
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 80px 15px;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-yellow);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .contact-card h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            opacity: 0.9;
+        }
+
+        .contact-card a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--white);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            color: #999;
+            padding: 2rem 15px;
+            text-align: center;
+            border-top: 1px solid rgba(255,215,0,0.1);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--white);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features-section h2,
+            .blog-section h2,
+            .about-section h2,
+            .contact-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .hero {
+                padding: 50px 15px 40px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .btn-primary {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">OTOSell</a>
+            <nav>
+                <a href="#hakkimizda">Hakkımızda</a>
+                <a href="#iletisim">İletişim</a>
+                <a href="admin_panel.html" target="_blank">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Aracını Değerlendir & <span style="color: var(--primary-yellow);">Hemen Sat!</span></h1>
+            <p>OTOSell ile aracınızın gerçek değerini öğrenin, güvenle ve hızlıca satın!</p>
+            <button class="btn-primary" onclick="window.location.href='aracini-degerlendir.html'">🚗 Aracını Değerlendir</button>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Neden OTOSell?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>100% Güvenilir</h3>
+                    <p>Sektörün en güvenilir araç değerlendirme platformu. Tüm işlemler şeffaf ve müşteri odaklıdır.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Kurumsal & Profesyonel</h3>
+                    <p>Yılların tecrübesi ve uzman ekibi ile aracınızın değerini en doğru şekilde belirleriz.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Hızlı & Kolay</h3>
+                    <p>Dakikalar içinde değerlendirme formu, saatler içinde teklif. Satış süreci hiç bu kadar kolay olmamıştı!</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>En İyi Fiyat</h3>
+                    <p>Pazar fiyatlarından haberdar uzmanlarımız aracınıza adil değer vermesini sağlar.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>7/24 Destek</h3>
+                    <p>Her aşamada yanınızdayız. Sorularınız için her zaman hazırız.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Garantili Satış</h3>
+                    <p>Teklif alındıktan sonra satış süreci tam destek ve garantili şekilde ilerlenir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="blog-section">
+        <div class="container">
+            <h2>Bilgi Köşesi</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <h3>💡 Aracınızın Değerini Artırmak İçin İpuçları</h3>
+                    <p>Aracınızı satmadan önce temizliğini yapın, bakım belgelerini hazırlayın ve önemli açıklıkları kapatın. Bu basit adımlar fiyatınızı 10-15% artırabilir!</p>
+                    <a href="#" class="blog-read-more">Devamını Oku →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>📊 Araç Değerlemesi Nasıl Yapılır?</h3>
+                    <p>Kullanım süresi, kilometre, bakım durumu ve özellikleri göz önüne alınarak bilimsel yöntemlerle değerleme yapılır. OTOSell'de bu süreç tamamen şeffaftır.</p>
+                    <a href="#" class="blog-read-more">Devamını Oku →</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>🎯 Satış Sürecinde Dikkat Edilecekler</h3>
+                    <p>Alıcı seçiminden resmi işlemlere kadar her aşamada güvenli ve hızlı işlemler için kontrol listesi. OTOSell ekibi her adımda size rehberlik eder.</p>
+                    <a href="#" class="blog-read-more">Devamını Oku →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="hakkimizda">
+        <div class="container">
+            <h2>Hakkımızda</h2>
+            <div class="about-text">
+                <p>OTOSell, 2020 yılından beri otomotiv sektöründe hizmet vermektedir. Binlerce müşterimiz aracını güvenle ve kazançlı bir şekilde satmış, memnuniyetle ayrılmıştır.</p>
+            </div>
+
+            <div class="about-highlight">
+                <p><strong>🎯 Misyon:</strong> Her araç sahibinin aracını adil fiyatla, hızlı ve güvenle satabilmesini sağlamak.</p>
+                <p style="margin-top: 1rem;"><strong>👁️ Vizyon:</strong> Türkiye'nin en güvenilir, en kolay kullanılan araç değerlendirme platformu olmak.</p>
+                <p style="margin-top: 1rem;"><strong>💚 Değerlerimiz:</strong> Şeffaflık, müşteri memnuniyeti, profesyonellik ve dayanıklılık.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="iletisim">
+        <div class="container">
+            <h2>İletişim & Destek</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Sorularınız mı var? Bize her zaman ulaşabilirsiniz!</p>
+
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>📞 Telefon</h3>
+                    <p>+90 (212) 555-0123</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">Pazartesi-Cuma 09:00-18:00</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <p><a href="mailto:destek@otocars.com">destek@otocars.com</a></p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">24 saat içinde cevap</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3>📍 Adres</h3>
+                    <p>OTOSell Merkez Ofisi<br>Kozyatağı Mah., İstanbul</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">Ziyaret için randevu alınız</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <button class="btn-primary" onclick="window.location.href='aracini-degerlendir.html'">Şimdi Başla 🚀</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 OTOSell | otocars.com - Aracınızı güvenle satın!</p>
+        <p>Tüm Hakları Saklıdır. <a href="#">Gizlilik Politikası</a> | <a href="#">Kullanım Şartları</a></p>
+    </footer>
+</body>
+</html>
