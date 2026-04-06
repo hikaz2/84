@@ -1,574 +1,369 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aracını Değerinde, Hemen Sat!</title>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-yellow: #FFD700;
-            --dark: #1a1a1a;
-            --light-bg: #f8f8f8;
-            --text: #333;
-            --text-light: #666;
-            --border: #e0e0e0;
-            --white: #fff;
-            --shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text);
-            background: var(--light-bg);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* HEADER & NAV */
-        header {
-            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary-yellow);
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
-            margin-left: 2rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary-yellow);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
-            color: var(--white);
-            padding: 80px 15px 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 25s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(30px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
-            color: var(--dark);
-            border: none;
-            padding: 16px 50px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,215,0,0.4);
-        }
-
-        /* FEATURES SECTION */
-        .features-section {
-            padding: 80px 15px;
-            background: var(--white);
-        }
-
-        .features-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--dark);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 40px;
-        }
-
-        .feature-card {
-            background: var(--light-bg);
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .feature-card:hover {
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
-            border-color: var(--primary-yellow);
-        }
-
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        /* BLOG SECTION */
-        .blog-section {
-            padding: 80px 15px;
-            background: var(--light-bg);
-        }
-
-        .blog-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--dark);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-            border-top: 4px solid var(--primary-yellow);
-        }
-
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-        }
-
-        .blog-card h3 {
-            color: var(--dark);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .blog-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .blog-read-more {
-            color: var(--primary-yellow);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .blog-read-more:hover {
-            color: var(--dark);
-            text-decoration: underline;
-        }
-
-        /* ABOUT SECTION */
-        .about-section {
-            padding: 80px 15px;
-            background: var(--white);
-        }
-
-        .about-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--dark);
-        }
-
-        .about-text {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-            color: var(--text-light);
-            line-height: 2;
-            font-size: 1.05rem;
-            margin-bottom: 3rem;
-        }
-
-        .about-highlight {
-            background: linear-gradient(120deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-yellow);
-            margin: 2rem auto;
-            max-width: 700px;
-        }
-
-        .about-highlight p {
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* CONTACT SECTION */
-        .contact-section {
-            padding: 80px 15px;
-            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
-            color: var(--white);
-            text-align: center;
-        }
-
-        .contact-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-yellow);
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .contact-card {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-
-        .contact-card h3 {
-            color: var(--primary-yellow);
-            margin-bottom: 1rem;
-        }
-
-        .contact-card p {
-            opacity: 0.9;
-        }
-
-        .contact-card a {
-            color: var(--primary-yellow);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .contact-card a:hover {
-            color: var(--white);
-        }
-
-        /* FOOTER */
-        footer {
-            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
-            color: #999;
-            padding: 2rem 15px;
-            text-align: center;
-            border-top: 1px solid rgba(255,215,0,0.1);
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--primary-yellow);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: var(--white);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            nav a {
-                margin-left: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .features-section h2,
-            .blog-section h2,
-            .about-section h2,
-            .contact-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .feature-icon {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header .container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav {
-                text-align: center;
-            }
-
-            nav a {
-                display: block;
-                margin: 0.5rem 0;
-            }
-
-            .hero {
-                padding: 50px 15px 40px;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-            }
-
-            .btn-primary {
-                padding: 12px 30px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HesapHub – Güvenli Hesap Alım & Satım Platformu</title>
+  <meta name="description" content="HesapHub ile sosyal medya hesapları, oyun hesapları ve web sitelerini güvenle alın veya satın.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="container">
-            <a href="/" class="logo">OTOSELL</a>
-            <nav>
-                <a href="#hakkimizda">Hakkımızda</a>
-                <a href="#iletisim">İletişim</a>
-            </nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="announcement-bar">
+    🎉 HesapHub'a hoş geldiniz! Güvenli hesap alım satımı için doğru adrestesiniz.
+    <a href="hakkimizda.html">Daha fazla →</a>
+  </div>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand">
+          <span class="brand-icon">💼</span> HesapHub
+        </a>
+        <div class="navbar-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Hesap veya ilan ara..." id="searchInput">
+            <button class="btn" onclick="doSearch()">🔍</button>
+          </div>
         </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Aracını Değerlendir & <span style="color: var(--primary-yellow);">Hemen Sat!</span></h1>
-            <p>OTOSELL ile aracınızın gerçek değerini öğrenin, güvenle ve hızlıca satın!</p>
-            <button class="btn-primary" onclick="window.location.href='aracini-degerlendir'">Aracını Değerlendir</button>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
         </div>
-    </section>
+      </div>
+    </div>
+  </nav>
+  <div class="category-bar">
+    <div class="container">
+      <div class="category-bar-inner">
+        <a href="ilanlar.html" class="cat-link">🌟 Tümü</a>
+        <a href="ilanlar.html?kategori=instagram" class="cat-link">📸 Instagram</a>
+        <a href="ilanlar.html?kategori=tiktok" class="cat-link">🎵 TikTok</a>
+        <a href="ilanlar.html?kategori=youtube" class="cat-link">🎬 YouTube</a>
+        <a href="ilanlar.html?kategori=twitter" class="cat-link">🐦 Twitter/X</a>
+        <a href="ilanlar.html?kategori=facebook" class="cat-link">📘 Facebook</a>
+        <a href="ilanlar.html?kategori=oyun" class="cat-link">🎮 Oyun Hesapları</a>
+        <a href="ilanlar.html?kategori=web" class="cat-link">💻 Web Siteleri</a>
+        <a href="ilanlar.html?kategori=diger" class="cat-link">📱 Diğer</a>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="ilan-ver.html">İlan Ver</a></li>
+      <li><a href="hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="iletisim.html">İletişim</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+      <li><a href="kayit.html">Kayıt Ol</a></li>
+    </ul>
+  </div>
+</header>
 
-    <!-- FEATURES SECTION -->
-    <section class="features-section">
-        <div class="container">
-            <h2>Neden OTOSELL?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>100% Güvenilir</h3>
-                    <p>Sektörün en güvenilir araç değerlendirme platformu. Tüm işlemler şeffaf ve müşteri odaklıdır.</p>
-                </div>
+<main>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🏢</div>
-                    <h3>Kurumsal & Profesyonel</h3>
-                    <p>Yılların tecrübesi ve uzman ekibi ile aracınızın değerini en doğru şekilde belirleriz.</p>
-                </div>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Sosyal Medya Hesabını<br><span>Güvenle Al veya Sat!</span></h1>
+    <p>Türkiye'nin en büyük hesap alım satım platformu. Instagram, TikTok, YouTube ve daha fazlası.</p>
+    <div class="hero-search">
+      <input type="text" placeholder="Ne aramak istiyorsunuz? (Instagram, TikTok, Oyun...)" id="heroSearch">
+      <button onclick="doHeroSearch()">🔍 Ara</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num" id="statListings">15+</span><span class="hero-stat-label">Aktif İlan</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">500+</span><span class="hero-stat-label">Mutlu Kullanıcı</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">%100</span><span class="hero-stat-label">Güvenli İşlem</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">7/24</span><span class="hero-stat-label">Destek</span></div>
+    </div>
+  </div>
+</section>
 
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Hızlı & Kolay</h3>
-                    <p>Dakikalar içinde değerlendirme formu, saatler içinde teklif. Satış süreci hiç bu kadar kolay olmamıştı!</p>
-                </div>
+<!-- ===== TRUST BADGES ===== -->
+<section style="background:#fff;padding:1.5rem 0;border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="trust-badges">
+      <div class="trust-badge"><span class="tb-icon">🔒</span> Güvenli Ödeme Sistemi</div>
+      <div class="trust-badge"><span class="tb-icon">✅</span> Onaylı Satıcılar</div>
+      <div class="trust-badge"><span class="tb-icon">🛡️</span> Alıcı Koruması</div>
+      <div class="trust-badge"><span class="tb-icon">⚡</span> Hızlı Teslimat</div>
+      <div class="trust-badge"><span class="tb-icon">💬</span> 7/24 Destek</div>
+    </div>
+  </div>
+</section>
 
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>En İyi Fiyat</h3>
-                    <p>Pazar fiyatlarından haberdar uzmanlarımız aracınıza adil değer vermesini sağlar.</p>
-                </div>
+<!-- ===== CATEGORIES ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Kategoriler</span>
+      <h2>Ne Satın Almak İstiyorsunuz?</h2>
+      <p>Binlerce ilan arasından ihtiyacınıza göre seçin</p>
+    </div>
+    <div class="categories-grid" id="categoriesGrid"></div>
+  </div>
+</section>
 
-                <div class="feature-card">
-                    <div class="feature-icon">📞</div>
-                    <h3>7/24 Destek</h3>
-                    <p>Her aşamada yanınızdayız. Sorularınız için her zaman hazırız.</p>
-                </div>
+<!-- ===== FEATURED LISTINGS ===== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Öne Çıkan İlanlar</span>
+      <h2>⭐ Öne Çıkan İlanlar</h2>
+      <p>Editörlerimizin seçtiği en iyi fırsatlar</p>
+    </div>
+    <div class="listings-grid" id="featuredGrid"></div>
+    <div class="text-center mt-4">
+      <a href="ilanlar.html" class="btn btn-outline btn-lg">Tüm İlanları Gör →</a>
+    </div>
+  </div>
+</section>
 
-                <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>Garantili Satış</h3>
-                    <p>Teklif alındıktan sonra satış süreci tam destek ve garantili şekilde ilerlenir.</p>
-                </div>
-            </div>
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nasıl Çalışır?</span>
+      <h2>Kolayca Al veya Sat</h2>
+      <p>Sadece birkaç adımda işleminizi tamamlayın</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div style="font-size:2.5rem;margin-bottom:1rem">📝</div>
+        <h3>Kayıt Ol</h3>
+        <p>Ücretsiz hesap oluşturun. E-posta adresinizle dakikalar içinde kayıt olun.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
+        <h3>İlan Bul veya Ver</h3>
+        <p>İstediğiniz hesabı arayın ya da kendi hesabınız için ilan verin.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div style="font-size:2.5rem;margin-bottom:1rem">💬</div>
+        <h3>Satıcıyla İletişime Geç</h3>
+        <p>Satıcıyla güvenli mesajlaşma sistemi üzerinden iletişim kurun.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+        <h3>Güvenle Tamamla</h3>
+        <p>Alıcı koruması kapsamında ödemenizi yapın ve hesabı teslim alın.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECENT LISTINGS ===== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Son İlanlar</span>
+      <h2>🆕 En Son Eklenen İlanlar</h2>
+      <p>Platformumuza yeni eklenen ilanları kaçırmayın</p>
+    </div>
+    <div class="listings-grid" id="recentGrid"></div>
+    <div class="text-center mt-4">
+      <a href="ilanlar.html" class="btn btn-primary btn-lg">Tüm İlanları Görüntüle</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Neden HesapHub?</span>
+      <h2>Güvenli & Kolay Alım Satım</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Alıcı Koruması</h3>
+        <p>Her işlemde alıcı koruması aktiftir. Hesap teslim edilmeden ödeme satıcıya aktarılmaz.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Onaylı Satıcılar</h3>
+        <p>Tüm satıcılar kimlik doğrulama sürecinden geçer. Sahte ilanlar anında kaldırılır.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Hızlı İşlem</h3>
+        <p>Basit arayüz ile ilan verme ve satın alma işlemlerinizi dakikalar içinde tamamlayın.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Adil Fiyatlar</h3>
+        <p>Pazar koşullarına uygun fiyatlarla alın veya satın. Komisyon oranlarımız sektörün en düşüğü.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>7/24 Destek</h3>
+        <p>Her konuda yardıma ihtiyaç duyduğunuzda destek ekibimiz her zaman yanınızda.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Güvenli Ödeme</h3>
+        <p>Tüm ödemeler SSL ile şifrelenir. Kredi kartı ve banka transferi seçenekleri mevcuttur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);padding:4rem 1rem;text-align:center;color:#fff">
+  <div class="container">
+    <h2 style="color:#fff;font-size:2rem;margin-bottom:1rem">Hesabını Sat, Para Kazan!</h2>
+    <p style="color:rgba(255,255,255,.85);font-size:1.1rem;margin-bottom:2rem;max-width:600px;margin-left:auto;margin-right:auto">Kullanmadığın sosyal medya hesabını veya oyun hesabını HesapHub üzerinden güvenle sat. Binlerce alıcı seni bekliyor!</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="ilan-ver.html" class="btn btn-secondary btn-lg">➕ İlan Ver</a>
+      <a href="kayit.html" class="btn btn-outline-white btn-lg">Ücretsiz Kayıt Ol</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">💼 HesapHub</a>
+        <p class="footer-desc">Türkiye'nin en güvenilir sosyal medya hesabı alım satım platformu. Güvenli, hızlı ve kolay.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" title="Instagram">📸</a>
+          <a href="#" class="social-link" title="Twitter">🐦</a>
+          <a href="#" class="social-link" title="YouTube">🎬</a>
+          <a href="#" class="social-link" title="TikTok">🎵</a>
         </div>
-    </section>
+      </div>
+      <div class="footer-col">
+        <h4>Kategoriler</h4>
+        <ul class="footer-links">
+          <li><a href="ilanlar.html?kategori=instagram">📸 Instagram</a></li>
+          <li><a href="ilanlar.html?kategori=tiktok">🎵 TikTok</a></li>
+          <li><a href="ilanlar.html?kategori=youtube">🎬 YouTube</a></li>
+          <li><a href="ilanlar.html?kategori=twitter">🐦 Twitter/X</a></li>
+          <li><a href="ilanlar.html?kategori=oyun">🎮 Oyun Hesapları</a></li>
+          <li><a href="ilanlar.html?kategori=web">💻 Web Siteleri</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hızlı Bağlantılar</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">Tüm İlanlar</a></li>
+          <li><a href="ilan-ver.html">İlan Ver</a></li>
+          <li><a href="giris.html">Giriş Yap</a></li>
+          <li><a href="kayit.html">Kayıt Ol</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Destek</h4>
+        <ul class="footer-links">
+          <li><a href="iletisim.html">İletişim</a></li>
+          <li><a href="#">Sık Sorulan Sorular</a></li>
+          <li><a href="#">Güvenlik Merkezi</a></li>
+          <li><a href="#">Kullanım Koşulları</a></li>
+          <li><a href="#">Gizlilik Politikası</a></li>
+          <li><a href="#">Çerez Politikası</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Kullanım Koşulları</a>
+        <a href="#">Gizlilik Politikası</a>
+        <a href="#">Çerezler</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    <!-- BLOG SECTION -->
-    <section class="blog-section">
-        <div class="container">
-            <h2>Bilgi Köşesi</h2>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <h3>💡 Aracınızın Değerini Artırmak İçin İpuçları</h3>
-                    <p>Aracınızı satmadan önce temizliğini yapın, bakım belgelerini hazırlayın ve önemli açıklıkları kapatın. Bu basit adımlar fiyatınızı 10-15% artırabilir!</p>
-                    <a href="#" class="blog-read-more">Devamını Oku →</a>
-                </div>
+<script src="js/app.js"></script>
+<script>
+const CATS = [
+  { id: 'instagram', name: 'Instagram', emoji: '📸' },
+  { id: 'tiktok', name: 'TikTok', emoji: '🎵' },
+  { id: 'youtube', name: 'YouTube', emoji: '🎬' },
+  { id: 'twitter', name: 'Twitter/X', emoji: '🐦' },
+  { id: 'facebook', name: 'Facebook', emoji: '📘' },
+  { id: 'oyun', name: 'Oyun Hesapları', emoji: '🎮' },
+  { id: 'web', name: 'Web Siteleri', emoji: '💻' },
+  { id: 'diger', name: 'Diğer', emoji: '📱' }
+];
 
-                <div class="blog-card">
-                    <h3>📊 Araç Değerlemesi Nasıl Yapılır?</h3>
-                    <p>Kullanım süresi, kilometre, bakım durumu ve özellikleri göz önüne alınarak bilimsel yöntemlerle değerleme yapılır. OTOSell'de bu süreç tamamen şeffaftır.</p>
-                    <a href="#" class="blog-read-more">Devamını Oku →</a>
-                </div>
+document.addEventListener('DOMContentLoaded', () => {
+  const counts = getCatCounts();
+  const total = getListings().length;
 
-                <div class="blog-card">
-                    <h3>🎯 Satış Sürecinde Dikkat Edilecekler</h3>
-                    <p>Alıcı seçiminden resmi işlemlere kadar her aşamada güvenli ve hızlı işlemler için kontrol listesi. OTOSell ekibi her adımda size rehberlik eder.</p>
-                    <a href="#" class="blog-read-more">Devamını Oku →</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Stat
+  const statEl = document.getElementById('statListings');
+  if (statEl) statEl.textContent = total + '+';
 
-    <!-- ABOUT SECTION -->
-    <section class="about-section" id="hakkimizda">
-        <div class="container">
-            <h2>Hakkımızda</h2>
-            <div class="about-text">
-                <p>OTOSell, 2020 yılından beri otomotiv sektöründe hizmet vermektedir. Binlerce müşterimiz aracını güvenle ve kazançlı bir şekilde satmış, memnuniyetle ayrılmıştır.</p>
-            </div>
+  // Categories
+  const cg = document.getElementById('categoriesGrid');
+  if (cg) {
+    cg.innerHTML = CATS.map(c => `
+      <a href="ilanlar.html?kategori=${c.id}" class="category-card">
+        <span class="cat-icon">${c.emoji}</span>
+        <span class="cat-name">${c.name}</span>
+        <span class="cat-count">${counts[c.id] || 0} ilan</span>
+      </a>`).join('');
+  }
 
-            <div class="about-highlight">
-                <p><strong>🎯 Misyon:</strong> Her araç sahibinin aracını adil fiyatla, hızlı ve güvenle satabilmesini sağlamak.</p>
-                <p style="margin-top: 1rem;"><strong>👁️ Vizyon:</strong> Türkiye'nin en güvenilir, en kolay kullanılan araç değerlendirme platformu olmak.</p>
-                <p style="margin-top: 1rem;"><strong>💚 Değerlerimiz:</strong> Şeffaflık, müşteri memnuniyeti, profesyonellik ve dayanıklılık.</p>
-            </div>
-        </div>
-    </section>
+  // Featured
+  const fg = document.getElementById('featuredGrid');
+  if (fg) {
+    const featured = getFeatured(8);
+    fg.innerHTML = featured.length ? featured.map(renderCard).join('') : '<p class="text-muted text-center">Henüz öne çıkan ilan bulunmamaktadır.</p>';
+  }
 
-    <!-- CONTACT SECTION -->
-    <section class="contact-section" id="iletisim">
-        <div class="container">
-            <h2>İletişim & Destek</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Sorularınız mı var? Bize her zaman ulaşabilirsiniz!</p>
+  // Recent
+  const rg = document.getElementById('recentGrid');
+  if (rg) {
+    const recent = getRecent(8);
+    rg.innerHTML = recent.length ? recent.map(renderCard).join('') : '<p class="text-muted text-center">Henüz ilan bulunmamaktadır.</p>';
+  }
+});
 
-            <div class="contact-info">
-                <div class="contact-card">
-                    <h3>📞 Telefon</h3>
-                    <p>+90 (544) 601-1480</p>
-                    <p style="font-size: 0.9rem; opacity: 0.7;">Pazartesi-Cuma 09:00-18:00</p>
-                </div>
-
-                <div class="contact-card">
-                    <h3>📧 Email</h3>
-                    <p><a href="mailto:destek@otosell.com">destek@otosell.com</a></p>
-                    <p style="font-size: 0.9rem; opacity: 0.7;">24 saat içinde cevap</p>
-                </div>
-
-                <div class="contact-card">
-                    <h3>📍 Adres</h3>
-                    <p>OTOSELL Merkez Ofisi<br>Huzur Mah., Bursa</p>
-                    <p style="font-size: 0.9rem; opacity: 0.7;">Ziyaret için randevu alınız</p>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem;">
-                <button class="btn-primary" onclick="window.location.href='aracini-degerlendir'">Şimdi Başla 🚀</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 OTOSELL | Aracınızı güvenle satın!</p>
-        <p>Tüm Hakları Saklıdır. <a href="#">Gizlilik Politikası</a> | <a href="#">Kullanım Şartları</a></p>
-    </footer>
+function doHeroSearch() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = 'ilanlar.html?q=' + encodeURIComponent(q);
+}
+document.getElementById('heroSearch').addEventListener('keydown', e => { if (e.key === 'Enter') doHeroSearch(); });
+</script>
 </body>
 </html>

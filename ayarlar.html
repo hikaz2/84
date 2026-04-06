@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayarlar – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:2rem;padding-bottom:3rem">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="index.html">Ana Sayfa</a> <span>›</span>
+        <a href="profil.html">Profil</a> <span>›</span>
+        <span>Ayarlar</span>
+      </div>
+      <h1 class="page-title">⚙️ Ayarlar</h1>
+      <p class="page-subtitle">Hesap ve profil ayarlarınızı yönetin</p>
+    </div>
+
+    <div id="notLoggedIn" style="display:none" class="empty-state">
+      <div class="empty-state-icon">🔐</div>
+      <h3>Giriş Yapmanız Gerekiyor</h3>
+      <p>Ayarlara erişmek için giriş yapın.</p>
+      <a href="giris.html" class="btn btn-primary">Giriş Yap</a>
+    </div>
+
+    <div id="settingsContent" class="settings-layout">
+      <!-- Sidebar Nav -->
+      <div class="settings-nav">
+        <button class="settings-nav-item active" onclick="showSection('profile')">👤 Profil Bilgileri</button>
+        <button class="settings-nav-item" onclick="showSection('security')">🔒 Güvenlik</button>
+        <button class="settings-nav-item" onclick="showSection('notifications')">🔔 Bildirimler</button>
+        <button class="settings-nav-item" onclick="showSection('privacy')">🛡️ Gizlilik</button>
+        <div class="dropdown-divider"></div>
+        <button class="settings-nav-item danger" onclick="confirmLogout()" style="color:var(--danger)">🚪 Çıkış Yap</button>
+      </div>
+
+      <!-- Content -->
+      <div>
+
+        <!-- Profile Section -->
+        <div class="settings-section" id="section-profile">
+          <h2 class="settings-section-title">👤 Profil Bilgileri</h2>
+          <p class="settings-section-desc">Kullanıcı adı, e-posta ve diğer profil bilgilerinizi güncelleyin.</p>
+
+          <div id="profileSuccess" class="alert alert-success" style="display:none"></div>
+          <div id="profileError" class="alert alert-danger" style="display:none"></div>
+
+          <form id="profileForm" novalidate>
+            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem">
+              <div class="profile-avatar" id="settingsAvatar" style="width:80px;height:80px;font-size:2rem;border:3px solid var(--border)">?</div>
+              <div>
+                <div style="font-weight:700;margin-bottom:.25rem" id="settingsName">Kullanıcı Adı</div>
+                <div style="font-size:.875rem;color:var(--gray)" id="settingsEmail">email@...</div>
+                <button type="button" class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="showToast('Fotoğraf yükleme özelliği yakında aktif olacak.','info')">📷 Fotoğraf Değiştir</button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="setUsername">Kullanıcı Adı <span>*</span></label>
+                <input type="text" class="form-control" id="setUsername" required minlength="3" maxlength="30">
+                <div class="invalid-feedback">En az 3 karakter olmalıdır.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="setPhone">Telefon</label>
+                <input type="tel" class="form-control" id="setPhone" placeholder="05XX XXX XX XX">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setEmail">E-posta Adresi <span>*</span></label>
+              <input type="email" class="form-control" id="setEmail" required>
+              <div class="invalid-feedback">Geçerli bir e-posta giriniz.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setBio">Hakkımda</label>
+              <textarea class="form-control" id="setBio" rows="3" placeholder="Kendinizi kısaca tanıtın..." maxlength="300"></textarea>
+              <div class="form-text">Max 300 karakter</div>
+            </div>
+            <button type="submit" class="btn btn-primary">💾 Değişiklikleri Kaydet</button>
+          </form>
+        </div>
+
+        <!-- Security Section -->
+        <div class="settings-section" id="section-security" style="display:none">
+          <h2 class="settings-section-title">🔒 Güvenlik Ayarları</h2>
+          <p class="settings-section-desc">Şifrenizi ve güvenlik ayarlarınızı güncelleyin.</p>
+
+          <div id="passSuccess" class="alert alert-success" style="display:none"></div>
+          <div id="passError" class="alert alert-danger" style="display:none"></div>
+
+          <form id="passwordForm" novalidate>
+            <h3 style="font-size:1rem;margin-bottom:1.25rem">🔑 Şifre Değiştir</h3>
+            <div class="form-group">
+              <label class="form-label" for="curPass">Mevcut Şifre <span>*</span></label>
+              <input type="password" class="form-control" id="curPass" required>
+              <div class="invalid-feedback">Mevcut şifrenizi girin.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newPass">Yeni Şifre <span>*</span></label>
+              <input type="password" class="form-control" id="newPass" required minlength="6">
+              <div class="invalid-feedback">En az 6 karakter olmalıdır.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newPassConf">Yeni Şifre Tekrar <span>*</span></label>
+              <input type="password" class="form-control" id="newPassConf" required>
+              <div class="invalid-feedback" id="passConfErr">Şifreler eşleşmiyor.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">🔑 Şifreyi Güncelle</button>
+          </form>
+
+          <div class="divider"></div>
+
+          <h3 style="font-size:1rem;margin-bottom:1rem">🔐 İki Faktörlü Doğrulama</h3>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--light-2);border-radius:var(--radius)">
+            <div>
+              <div style="font-weight:600;margin-bottom:.25rem">SMS ile Doğrulama</div>
+              <div style="font-size:.875rem;color:var(--gray)">Hesabınıza ekstra güvenlik katmanı ekleyin</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="showToast('Bu özellik yakında eklenecek.','info')">Etkinleştir</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--danger)">⚠️ Hesap İşlemleri</h3>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="showToast('Aktif oturumlar listeleniyor...','info')">📋 Aktif Oturumlar</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmDeleteAccount()">🗑️ Hesabı Sil</button>
+          </div>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="settings-section" id="section-notifications" style="display:none">
+          <h2 class="settings-section-title">🔔 Bildirim Ayarları</h2>
+          <p class="settings-section-desc">Hangi bildirimleri almak istediğinizi seçin.</p>
+
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">📩 Mesaj Bildirimleri</div>
+                <div style="font-size:.875rem;color:var(--gray)">Yeni mesaj geldiğinde bildirim al</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" checked style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#22c55e;border-radius:12px;transition:.3s"></span></label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">💳 Satış Bildirimleri</div>
+                <div style="font-size:.875rem;color:var(--gray)">Birileri ilanınızla ilgilendiğinde bildirim al</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" checked style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#22c55e;border-radius:12px;transition:.3s"></span></label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">📧 E-posta Bülteni</div>
+                <div style="font-size:.875rem;color:var(--gray)">HesapHub'dan haftalık haberler ve kampanyalar</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:12px;transition:.3s"></span></label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">🔔 Tarayıcı Bildirimleri</div>
+                <div style="font-size:.875rem;color:var(--gray)">Push bildirimlerini etkinleştir</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:12px;transition:.3s"></span></label>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem">
+            <button class="btn btn-primary" onclick="showToast('Bildirim ayarları kaydedildi!','success')">💾 Kaydet</button>
+          </div>
+        </div>
+
+        <!-- Privacy Section -->
+        <div class="settings-section" id="section-privacy" style="display:none">
+          <h2 class="settings-section-title">🛡️ Gizlilik Ayarları</h2>
+          <p class="settings-section-desc">Hesabınızın görünürlüğünü ve gizlilik tercihlerinizi yönetin.</p>
+
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">👤 Profil Görünürlüğü</div>
+                <div style="font-size:.875rem;color:var(--gray)">Profiliniz diğer kullanıcılara görünsün</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" checked style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#22c55e;border-radius:12px;transition:.3s"></span></label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">📞 Telefon Gizliliği</div>
+                <div style="font-size:.875rem;color:var(--gray)">Telefon numaranızı gizli tut</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" checked style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#22c55e;border-radius:12px;transition:.3s"></span></label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid var(--border);border-radius:var(--radius)">
+              <div>
+                <div style="font-weight:600">📊 İstatistik Paylaşımı</div>
+                <div style="font-size:.875rem;color:var(--gray)">İlan görüntülenme sayılarını herkese göster</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:44px;height:24px"><input type="checkbox" checked style="opacity:0;width:0;height:0"><span style="position:absolute;cursor:pointer;inset:0;background:#22c55e;border-radius:12px;transition:.3s"></span></label>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3 style="font-size:1rem;margin-bottom:1rem">📄 Veri ve Gizlilik</h3>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-outline btn-sm" onclick="showToast('Verileriniz hazırlanıyor...','info')">📥 Verilerimi İndir</button>
+            <a href="#" class="btn btn-ghost btn-sm">Gizlilik Politikası</a>
+            <a href="#" class="btn btn-ghost btn-sm">Çerez Ayarları</a>
+          </div>
+          <div style="margin-top:1.5rem">
+            <button class="btn btn-primary" onclick="showToast('Gizlilik ayarları kaydedildi!','success')">💾 Kaydet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;justify-content:center">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const u = getUser();
+  if (!u) {
+    document.getElementById('notLoggedIn').style.display = 'block';
+    document.getElementById('settingsContent').style.display = 'none';
+    return;
+  }
+  document.getElementById('settingsAvatar').textContent = u.username[0].toUpperCase();
+  document.getElementById('settingsName').textContent = u.username;
+  document.getElementById('settingsEmail').textContent = u.email;
+  document.getElementById('setUsername').value = u.username;
+  document.getElementById('setEmail').value = u.email;
+  if (u.phone) document.getElementById('setPhone').value = u.phone;
+  if (u.bio) document.getElementById('setBio').value = u.bio;
+});
+
+function showSection(name) {
+  document.querySelectorAll('.settings-section').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('.settings-nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).style.display = 'block';
+  const map = { profile:0, security:1, notifications:2, privacy:3 };
+  document.querySelectorAll('.settings-nav-item')[map[name]].classList.add('active');
+}
+
+document.getElementById('profileForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('setUsername').value.trim();
+  const email = document.getElementById('setEmail').value.trim();
+  const phone = document.getElementById('setPhone').value.trim();
+  const bio = document.getElementById('setBio').value.trim();
+  const succ = document.getElementById('profileSuccess');
+  const err = document.getElementById('profileError');
+  succ.style.display = 'none'; err.style.display = 'none';
+
+  if (!username || username.length < 3) { document.getElementById('setUsername').classList.add('is-invalid'); return; }
+  if (!email || !email.includes('@')) { document.getElementById('setEmail').classList.add('is-invalid'); return; }
+
+  const result = updateUser({ username, email, phone, bio });
+  if (result.success) {
+    succ.textContent = '✅ Profil bilgileri güncellendi!';
+    succ.style.display = 'flex';
+    showToast('Profil güncellendi!', 'success');
+    document.getElementById('settingsAvatar').textContent = username[0].toUpperCase();
+    document.getElementById('settingsName').textContent = username;
+    document.getElementById('settingsEmail').textContent = email;
+  } else {
+    err.textContent = result.message;
+    err.style.display = 'flex';
+  }
+});
+
+document.getElementById('passwordForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const cur = document.getElementById('curPass').value;
+  const next = document.getElementById('newPass').value;
+  const conf = document.getElementById('newPassConf').value;
+  const succ = document.getElementById('passSuccess');
+  const err = document.getElementById('passError');
+  succ.style.display = 'none'; err.style.display = 'none';
+
+  if (!cur) { document.getElementById('curPass').classList.add('is-invalid'); return; }
+  if (next.length < 6) { document.getElementById('newPass').classList.add('is-invalid'); return; }
+  if (next !== conf) { document.getElementById('newPassConf').classList.add('is-invalid'); document.getElementById('passConfErr').textContent = 'Şifreler eşleşmiyor.'; return; }
+
+  const result = changePassword(cur, next);
+  if (result.success) {
+    succ.textContent = '✅ Şifreniz başarıyla güncellendi!';
+    succ.style.display = 'flex';
+    document.getElementById('passwordForm').reset();
+    showToast('Şifre güncellendi!', 'success');
+  } else {
+    err.textContent = result.message;
+    err.style.display = 'flex';
+  }
+});
+
+function confirmLogout() {
+  if (confirm('Çıkış yapmak istediğinizden emin misiniz?')) logout();
+}
+
+function confirmDeleteAccount() {
+  if (confirm('Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!')) {
+    showToast('Hesap silme özelliği yakında aktif olacak.', 'info');
+  }
+}
+</script>
+</body>
+</html>

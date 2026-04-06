@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlan Ver – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:2rem;padding-bottom:3rem">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="index.html">Ana Sayfa</a> <span>›</span> <span>İlan Ver</span>
+      </div>
+      <h1 class="page-title">➕ İlan Ver</h1>
+      <p class="page-subtitle">Hesabınızı binlerce alıcıya ulaştırın</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start">
+      <!-- FORM -->
+      <div class="card">
+        <div class="card-header">
+          <h3 style="margin:0;font-size:1.1rem">📝 İlan Bilgileri</h3>
+        </div>
+        <div class="card-body">
+          <div id="loginWarning" class="alert alert-warning" style="display:none">
+            ⚠️ İlan verebilmek için önce <a href="giris.html">giriş yapmanız</a> veya <a href="kayit.html">kayıt olmanız</a> gerekiyor.
+          </div>
+          <div id="successMsg" class="alert alert-success" style="display:none"></div>
+          <div id="errorMsg" class="alert alert-danger" style="display:none"></div>
+
+          <form id="listingForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="lTitle">İlan Başlığı <span>*</span></label>
+              <input type="text" class="form-control" id="lTitle" placeholder="Örn: 50K Takipçili Instagram Hesabı – Moda Nişi" required maxlength="100">
+              <div class="form-text">Hesabınızı en iyi tanımlayan başlığı yazın. (Max 100 karakter)</div>
+              <div class="invalid-feedback">İlan başlığı zorunludur (en az 10 karakter).</div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="lCategory">Kategori <span>*</span></label>
+                <select class="form-control" id="lCategory" required onchange="updateEmoji()">
+                  <option value="">Kategori seçin...</option>
+                  <option value="instagram">📸 Instagram</option>
+                  <option value="tiktok">🎵 TikTok</option>
+                  <option value="youtube">🎬 YouTube</option>
+                  <option value="twitter">🐦 Twitter/X</option>
+                  <option value="facebook">📘 Facebook</option>
+                  <option value="oyun">🎮 Oyun Hesabı</option>
+                  <option value="web">💻 Web Sitesi</option>
+                  <option value="diger">📱 Diğer</option>
+                </select>
+                <div class="invalid-feedback">Lütfen bir kategori seçin.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lPrice">Fiyat (₺) <span>*</span></label>
+                <input type="number" class="form-control" id="lPrice" placeholder="0" min="1" required>
+                <div class="form-text">Türk Lirası cinsinden fiyat girin.</div>
+                <div class="invalid-feedback">Geçerli bir fiyat girin.</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="lStat">İstatistik Değeri</label>
+                <input type="text" class="form-control" id="lStat" placeholder="Örn: 50.000 veya Diamond">
+                <div class="form-text">Takipçi sayısı, rank, vb.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lStatLabel">İstatistik Etiketi</label>
+                <input type="text" class="form-control" id="lStatLabel" placeholder="Örn: Takipçi veya Rank">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lDesc">Açıklama <span>*</span></label>
+              <textarea class="form-control" id="lDesc" rows="6" placeholder="Hesabınızı detaylı şekilde tanıtın. İçerik türü, takipçi kalitesi, engagement oranı, neden satıyorsunuz gibi bilgileri ekleyin." required minlength="30" style="min-height:150px"></textarea>
+              <div class="form-text" id="descCount">0 / 2000 karakter</div>
+              <div class="invalid-feedback">Açıklama en az 30 karakter olmalıdır.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Hesap Özellikleri</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+                <label class="form-check"><input type="checkbox" name="feature" value="Organik takipçi"> <span>Organik takipçi</span></label>
+                <label class="form-check"><input type="checkbox" name="feature" value="Yüksek etkileşim"> <span>Yüksek etkileşim</span></label>
+                <label class="form-check"><input type="checkbox" name="feature" value="Monetizasyon açık"> <span>Monetizasyon açık</span></label>
+                <label class="form-check"><input type="checkbox" name="feature" value="Temiz geçmiş"> <span>Temiz geçmiş</span></label>
+                <label class="form-check"><input type="checkbox" name="feature" value="Türkiye takipçili"> <span>Türkiye takipçili</span></label>
+                <label class="form-check"><input type="checkbox" name="feature" value="Doğrulanmış hesap"> <span>Doğrulanmış hesap</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lContact">İletişim Tercihi</label>
+              <select class="form-control" id="lContact">
+                <option value="platform">Platform üzerinden mesaj</option>
+                <option value="email">E-posta</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+            </div>
+
+            <div style="padding:1rem;background:var(--warning-bg);border-radius:var(--radius);margin-bottom:1.5rem;font-size:.875rem;color:#92400e">
+              ⚠️ <strong>Önemli:</strong> Gerçek olmayan bilgiler içeren ilanlar kaldırılır ve hesabınız askıya alınabilir. Lütfen doğru ve eksiksiz bilgi girin.
+            </div>
+
+            <div class="form-check" style="margin-bottom:1.5rem">
+              <input type="checkbox" id="lTerms" required>
+              <label for="lTerms"><a href="#">Kullanım Koşulları</a>'nı ve <a href="#">İlan Kuralları</a>'nı okudum, kabul ediyorum.</label>
+            </div>
+
+            <div style="display:flex;gap:1rem">
+              <button type="submit" class="btn btn-primary btn-lg" style="flex:1">🚀 İlanı Yayınla</button>
+              <a href="ilanlar.html" class="btn btn-ghost btn-lg">İptal</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div class="card">
+          <div class="card-body">
+            <h4 style="margin-bottom:1rem">💡 İlan İpuçları</h4>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;font-size:.875rem;color:var(--dark-3)">
+              <li>✅ Başlığınızı açık ve net yazın</li>
+              <li>✅ Takipçi sayısı ve engagement oranını belirtin</li>
+              <li>✅ Hesabın nişini ve içerik türünü açıklayın</li>
+              <li>✅ Hesabın yaşını ve geçmişini belirtin</li>
+              <li>✅ Ekran görüntüsü veya kanıt sunun</li>
+              <li>❌ Yanıltıcı bilgi yazmayın</li>
+              <li>❌ Başka platformlara yönlendirmeyin</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="border-color:var(--primary)">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:.75rem">🛡️</div>
+            <h4 style="margin-bottom:.5rem">Güvenli İşlem</h4>
+            <p style="font-size:.85rem;color:var(--gray);line-height:1.7">Tüm işlemler HesapHub güvencesi altında gerçekleşir. Alıcı ödemeyi yapmadan hesabı teslim etmeyin.</p>
+          </div>
+        </div>
+
+        <div class="card" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff">
+          <div class="card-body" style="text-align:center">
+            <div style="font-size:2rem;margin-bottom:.75rem">⭐</div>
+            <h4 style="color:#fff;margin-bottom:.5rem">Öne Çıkan İlan</h4>
+            <p style="font-size:.85rem;color:rgba(255,255,255,.85);margin-bottom:1rem">İlanınızı öne çıkararak 5x daha fazla görüntülenme elde edin!</p>
+            <a href="iletisim.html" class="btn btn-outline-white btn-sm">Bilgi Al</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;justify-content:center">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+const EMOJIS = { instagram:'📸', tiktok:'🎵', youtube:'🎬', twitter:'🐦', facebook:'📘', oyun:'🎮', web:'💻', diger:'📱' };
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!isLoggedIn()) {
+    document.getElementById('loginWarning').style.display = 'flex';
+    document.getElementById('listingForm').style.opacity = '.4';
+    document.getElementById('listingForm').style.pointerEvents = 'none';
+  }
+  const desc = document.getElementById('lDesc');
+  desc.addEventListener('input', () => { document.getElementById('descCount').textContent = desc.value.length + ' / 2000 karakter'; });
+});
+
+function updateEmoji() {
+  // Emoji is looked up from EMOJIS map at submission time; no live update needed
+}
+
+document.getElementById('listingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!requireAuth()) return;
+
+  const title = document.getElementById('lTitle').value.trim();
+  const cat = document.getElementById('lCategory').value;
+  const price = parseFloat(document.getElementById('lPrice').value);
+  const desc = document.getElementById('lDesc').value.trim();
+  const stat = document.getElementById('lStat').value.trim();
+  const statLabel = document.getElementById('lStatLabel').value.trim();
+  const terms = document.getElementById('lTerms').checked;
+  const errEl = document.getElementById('errorMsg');
+  errEl.style.display = 'none';
+
+  let valid = true;
+  if (title.length < 10) { document.getElementById('lTitle').classList.add('is-invalid'); valid = false; } else document.getElementById('lTitle').classList.remove('is-invalid');
+  if (!cat) { document.getElementById('lCategory').classList.add('is-invalid'); valid = false; } else document.getElementById('lCategory').classList.remove('is-invalid');
+  if (!price || price < 1) { document.getElementById('lPrice').classList.add('is-invalid'); valid = false; } else document.getElementById('lPrice').classList.remove('is-invalid');
+  if (desc.length < 30) { document.getElementById('lDesc').classList.add('is-invalid'); valid = false; } else document.getElementById('lDesc').classList.remove('is-invalid');
+  if (!terms) { errEl.textContent = 'Kullanım koşullarını kabul etmeniz gerekiyor.'; errEl.style.display = 'flex'; valid = false; }
+  if (!valid) return;
+
+  const features = [...document.querySelectorAll('input[name="feature"]:checked')].map(c => c.value);
+  const result = addListing({ title, category: cat, price, description: desc, stat: stat || null, statLabel: statLabel || null, emoji: EMOJIS[cat] || '📦', features });
+  if (result.success) {
+    document.getElementById('successMsg').textContent = '🎉 İlanınız başarıyla yayınlandı! Yönlendiriliyorsunuz...';
+    document.getElementById('successMsg').style.display = 'flex';
+    document.getElementById('listingForm').reset();
+    showToast('İlan yayınlandı! 🎉', 'success');
+    setTimeout(() => { window.location.href = 'ilan-detay.html?id=' + result.listing.id; }, 1500);
+  } else {
+    errEl.textContent = result.message;
+    errEl.style.display = 'flex';
+  }
+});
+</script>
+</body>
+</html>
