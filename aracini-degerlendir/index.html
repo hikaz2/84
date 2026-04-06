@@ -1150,7 +1150,7 @@
             'Volvo': ['C30', 'C40', 'S40', 'S60', 'S80', 'S90', 'V40', 'V60', 'V90', 'XC40', 'XC60', 'XC90']
         };
 
-        // Base prices in TL (approximate 2025 market mid-range)
+        // Base prices in TL (approximate current market mid-range for a reference year vehicle)
         const basePrices = {
             'Alfa Romeo': 2100000, 'Audi': 2800000, 'BMW': 3200000,
             'Chevrolet': 900000, 'Citroen': 1100000, 'Dacia': 850000,
@@ -1458,7 +1458,6 @@
         }
 
         function resetForm() {
-            document.querySelector('form') && document.querySelector('form').reset();
             // reset selects
             ['marka', 'model', 'yil', 'yakit', 'vites', 'kasa', 'renk', 'hasar', 'boya', 'tramer', 'muayene', 'sehir'].forEach(id => {
                 const el = document.getElementById(id);
