@@ -1241,7 +1241,7 @@
             });
 
             const tel = document.getElementById('telefon').value.replace(/\D/g, '');
-            if (tel.length < 10) {
+            if (tel.length !== 11) {
                 setFieldError('field-telefon', true);
                 valid = false;
             } else {
@@ -1320,18 +1320,27 @@
 
         // ─── Model auto-suggest hint ─────────────────────────────────
         const brandModels = {
-            Toyota: 'Corolla, Yaris, RAV4, Camry',
-            Volkswagen: 'Golf, Polo, Passat, Tiguan',
-            Renault: 'Clio, Megane, Symbol, Kadjar',
+            Audi: 'A3, A4, A6, Q5, Q7',
+            BMW: '3 Serisi, 5 Serisi, X5, 1 Serisi',
+            Chevrolet: 'Cruze, Spark, Captiva, Aveo',
+            Dacia: 'Sandero, Logan, Duster, Spring',
+            Fiat: 'Egea, Doblo, Tipo, 500',
             Ford: 'Focus, Fiesta, Kuga, Mondeo',
+            Honda: 'Civic, CR-V, Jazz, HR-V',
             Hyundai: 'i20, i30, Tucson, Santa Fe',
             Kia: 'Picanto, Rio, Sportage, Sorento',
-            BMW: '3 Serisi, 5 Serisi, X5, 1 Serisi',
-            Mercedes: 'C Serisi, E Serisi, GLC, A Serisi',
-            Fiat: 'Egea, Doblo, Tipo, 500',
+            'Mercedes-Benz': 'C Serisi, E Serisi, GLC, A Serisi',
+            Mitsubishi: 'ASX, Outlander, Eclipse Cross, L200',
+            Nissan: 'Micra, Qashqai, Juke, X-Trail',
             Opel: 'Astra, Corsa, Insignia, Mokka',
-            Dacia: 'Sandero, Logan, Duster, Spring',
             Peugeot: '208, 308, 3008, 5008',
+            Renault: 'Clio, Megane, Symbol, Kadjar',
+            Seat: 'Ibiza, Leon, Ateca, Arona',
+            Skoda: 'Fabia, Octavia, Superb, Kodiaq',
+            Suzuki: 'Swift, Vitara, S-Cross, Jimny',
+            Toyota: 'Corolla, Yaris, RAV4, Camry',
+            Volkswagen: 'Golf, Polo, Passat, Tiguan',
+            Volvo: 'S60, S90, XC40, XC60',
         };
 
         function updateModels() {
