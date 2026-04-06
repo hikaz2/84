@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aracını Değerinde, Hemen Sat!</title>
+    <meta name="description" content="HesapSat.net – Aracınızın piyasa değerini anında hesaplayın ve güvenle satın. Ücretsiz araç fiyat hesaplama motoru.">
+    <meta name="keywords" content="hesapsat, araç fiyat hesaplama, araç değer hesaplama, araç sat, araç değerlendirme">
+    <meta property="og:title" content="HesapSat.net | Aracınızı Hesaplayın, Hemen Satın!">
+    <meta property="og:description" content="Türkiye'nin en kolay araç fiyat hesaplama ve satış platformu. Aracınızın gerçek değerini saniyeler içinde öğrenin.">
+    <meta property="og:url" content="https://hesapsat.net">
+    <title>HesapSat.net | Aracınızı Hesaplayın, Hemen Satın!</title>
     
     <style>
         * {
@@ -34,6 +39,134 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+
+        /* CALCULATOR SECTION */
+        .calculator-section {
+            padding: 80px 15px;
+            background: var(--white);
+        }
+
+        .calculator-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .calculator-section .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            font-size: 1.05rem;
+        }
+
+        .calculator-card {
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .calc-group label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .calc-group select,
+        .calc-group input {
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--white);
+            transition: border-color 0.3s;
+        }
+
+        .calc-group select:focus,
+        .calc-group input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+
+        .calc-result.visible {
+            display: block;
+        }
+
+        .calc-result .result-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-result .result-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-result .result-range {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .calc-result .result-cta {
+            margin-top: 1.5rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-yellow);
+            border: 2px solid var(--primary-yellow);
+            padding: 12px 36px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-yellow);
+            color: var(--dark);
+        }
+
+        @media (max-width: 600px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* HEADER & NAV */
@@ -430,8 +563,9 @@
     <!-- HEADER -->
     <header>
         <div class="container">
-            <a href="/" class="logo">OTOSELL</a>
+            <a href="https://hesapsat.net" class="logo">hesapsat<span style="color:#fff;">.net</span></a>
             <nav>
+                <a href="#hesapla">Fiyat Hesapla</a>
                 <a href="#hakkimizda">Hakkımızda</a>
                 <a href="#iletisim">İletişim</a>
             </nav>
@@ -441,21 +575,120 @@
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Aracını Değerlendir & <span style="color: var(--primary-yellow);">Hemen Sat!</span></h1>
-            <p>OTOSELL ile aracınızın gerçek değerini öğrenin, güvenle ve hızlıca satın!</p>
-            <button class="btn-primary" onclick="window.location.href='aracini-degerlendir'">Aracını Değerlendir</button>
+            <h1>Aracınızın Fiyatını <span style="color: var(--primary-yellow);">Saniyeler İçinde Hesaplayın!</span></h1>
+            <p>hesapsat.net ile aracınızın gerçek piyasa değerini anında öğrenin ve güvenle satın!</p>
+            <a href="#hesapla" class="btn-primary">Ücretsiz Hesapla 🚗</a>
+        </div>
+    </section>
+
+    <!-- CALCULATOR SECTION -->
+    <section class="calculator-section" id="hesapla">
+        <div class="container">
+            <h2>🧮 Araç Fiyat Hesaplama</h2>
+            <p class="section-subtitle">Aracınızın bilgilerini girin, tahmini piyasa değerini anında hesaplayalım.</p>
+            <div class="calculator-card">
+                <div class="calc-grid">
+                    <div class="calc-group">
+                        <label for="marka">Marka</label>
+                        <select id="marka">
+                            <option value="">Marka Seçin</option>
+                            <option value="toyota">Toyota</option>
+                            <option value="volkswagen">Volkswagen</option>
+                            <option value="ford">Ford</option>
+                            <option value="renault">Renault</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="hyundai">Hyundai</option>
+                            <option value="honda">Honda</option>
+                            <option value="bmw">BMW</option>
+                            <option value="mercedes">Mercedes-Benz</option>
+                            <option value="audi">Audi</option>
+                            <option value="peugeot">Peugeot</option>
+                            <option value="citroen">Citroën</option>
+                            <option value="nissan">Nissan</option>
+                            <option value="kia">Kia</option>
+                            <option value="opel">Opel</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label for="yil">Model Yılı</label>
+                        <select id="yil">
+                            <option value="">Yıl Seçin</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label for="kilometre">Kilometre</label>
+                        <input type="number" id="kilometre" placeholder="örn. 85000" min="0" max="1000000">
+                    </div>
+
+                    <div class="calc-group">
+                        <label for="yakit">Yakıt Tipi</label>
+                        <select id="yakit">
+                            <option value="">Yakıt Seçin</option>
+                            <option value="benzin">Benzin</option>
+                            <option value="dizel">Dizel</option>
+                            <option value="lpg">LPG</option>
+                            <option value="hibrit">Hibrit</option>
+                            <option value="elektrik">Elektrik</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label for="vites">Vites</label>
+                        <select id="vites">
+                            <option value="">Vites Seçin</option>
+                            <option value="manuel">Manuel</option>
+                            <option value="otomatik">Otomatik</option>
+                            <option value="yariotomatik">Yarı Otomatik</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label for="durum">Araç Durumu</label>
+                        <select id="durum">
+                            <option value="">Durum Seçin</option>
+                            <option value="mukemmel">Mükemmel (Hasarsız)</option>
+                            <option value="iyi">İyi (Küçük Çizikler)</option>
+                            <option value="orta">Orta (Boya/Tramer Var)</option>
+                            <option value="kotu">Kötü (Hasar Var)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="hesapla()" style="width:100%;margin-top:0.5rem;">
+                    Fiyatı Hesapla →
+                </button>
+
+                <div class="calc-result" id="calcResult">
+                    <p class="result-label">Tahmini Piyasa Değeri</p>
+                    <p class="result-price" id="resultPrice">—</p>
+                    <p class="result-range" id="resultRange"></p>
+                    <div class="result-cta">
+                        <a href="https://hesapsat.net" target="_blank" class="btn-secondary">
+                            hesapsat.net'te Satışa Çıkar
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- FEATURES SECTION -->
     <section class="features-section">
         <div class="container">
-            <h2>Neden OTOSELL?</h2>
+            <h2>Neden hesapsat.net?</h2>
             <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧮</div>
+                    <h3>Anlık Fiyat Hesaplama</h3>
+                    <p>Marka, yıl, kilometre ve durumu girerek saniyeler içinde aracınızın tahmini piyasa değerini öğrenin.</p>
+                </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">🛡️</div>
                     <h3>100% Güvenilir</h3>
-                    <p>Sektörün en güvenilir araç değerlendirme platformu. Tüm işlemler şeffaf ve müşteri odaklıdır.</p>
+                    <p>hesapsat.net'in en güvenilir araç değerlendirme motoru. Tüm işlemler şeffaf ve müşteri odaklıdır.</p>
                 </div>
 
                 <div class="feature-card">
@@ -467,7 +700,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Hızlı & Kolay</h3>
-                    <p>Dakikalar içinde değerlendirme formu, saatler içinde teklif. Satış süreci hiç bu kadar kolay olmamıştı!</p>
+                    <p>Dakikalar içinde değerlendirme, saatler içinde teklif. Satış süreci hiç bu kadar kolay olmamıştı!</p>
                 </div>
 
                 <div class="feature-card">
@@ -480,12 +713,6 @@
                     <div class="feature-icon">📞</div>
                     <h3>7/24 Destek</h3>
                     <p>Her aşamada yanınızdayız. Sorularınız için her zaman hazırız.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>Garantili Satış</h3>
-                    <p>Teklif alındıktan sonra satış süreci tam destek ve garantili şekilde ilerlenir.</p>
                 </div>
             </div>
         </div>
@@ -504,13 +731,13 @@
 
                 <div class="blog-card">
                     <h3>📊 Araç Değerlemesi Nasıl Yapılır?</h3>
-                    <p>Kullanım süresi, kilometre, bakım durumu ve özellikleri göz önüne alınarak bilimsel yöntemlerle değerleme yapılır. OTOSell'de bu süreç tamamen şeffaftır.</p>
+                    <p>Kullanım süresi, kilometre, bakım durumu ve özellikleri göz önüne alınarak bilimsel yöntemlerle değerleme yapılır. hesapsat.net'te bu süreç tamamen şeffaftır.</p>
                     <a href="#" class="blog-read-more">Devamını Oku →</a>
                 </div>
 
                 <div class="blog-card">
                     <h3>🎯 Satış Sürecinde Dikkat Edilecekler</h3>
-                    <p>Alıcı seçiminden resmi işlemlere kadar her aşamada güvenli ve hızlı işlemler için kontrol listesi. OTOSell ekibi her adımda size rehberlik eder.</p>
+                    <p>Alıcı seçiminden resmi işlemlere kadar her aşamada güvenli ve hızlı işlemler için kontrol listesi. hesapsat.net ekibi her adımda size rehberlik eder.</p>
                     <a href="#" class="blog-read-more">Devamını Oku →</a>
                 </div>
             </div>
@@ -522,12 +749,12 @@
         <div class="container">
             <h2>Hakkımızda</h2>
             <div class="about-text">
-                <p>OTOSell, 2020 yılından beri otomotiv sektöründe hizmet vermektedir. Binlerce müşterimiz aracını güvenle ve kazançlı bir şekilde satmış, memnuniyetle ayrılmıştır.</p>
+                <p>hesapsat.net, 2020 yılından beri otomotiv sektöründe hizmet vermektedir. Binlerce müşterimiz aracını güvenle ve kazançlı bir şekilde satmış, memnuniyetle ayrılmıştır.</p>
             </div>
 
             <div class="about-highlight">
-                <p><strong>🎯 Misyon:</strong> Her araç sahibinin aracını adil fiyatla, hızlı ve güvenle satabilmesini sağlamak.</p>
-                <p style="margin-top: 1rem;"><strong>👁️ Vizyon:</strong> Türkiye'nin en güvenilir, en kolay kullanılan araç değerlendirme platformu olmak.</p>
+                <p><strong>🎯 Misyon:</strong> Her araç sahibinin aracının değerini adil şekilde hesaplayıp, hızlı ve güvenle satabilmesini sağlamak.</p>
+                <p style="margin-top: 1rem;"><strong>👁️ Vizyon:</strong> Türkiye'nin en güvenilir, en kolay kullanılan araç fiyat hesaplama ve satış platformu olmak.</p>
                 <p style="margin-top: 1rem;"><strong>💚 Değerlerimiz:</strong> Şeffaflık, müşteri memnuniyeti, profesyonellik ve dayanıklılık.</p>
             </div>
         </div>
@@ -548,27 +775,95 @@
 
                 <div class="contact-card">
                     <h3>📧 Email</h3>
-                    <p><a href="mailto:destek@otosell.com">destek@otosell.com</a></p>
+                    <p><a href="mailto:destek@hesapsat.net">destek@hesapsat.net</a></p>
                     <p style="font-size: 0.9rem; opacity: 0.7;">24 saat içinde cevap</p>
                 </div>
 
                 <div class="contact-card">
                     <h3>📍 Adres</h3>
-                    <p>OTOSELL Merkez Ofisi<br>Huzur Mah., Bursa</p>
+                    <p>hesapsat.net Merkez Ofisi<br>Huzur Mah., Bursa</p>
                     <p style="font-size: 0.9rem; opacity: 0.7;">Ziyaret için randevu alınız</p>
                 </div>
             </div>
 
             <div style="margin-top: 3rem;">
-                <button class="btn-primary" onclick="window.location.href='aracini-degerlendir'">Şimdi Başla 🚀</button>
+                <a href="#hesapla" class="btn-primary">Ücretsiz Hesapla 🚀</a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 OTOSELL | Aracınızı güvenle satın!</p>
+        <p>&copy; 2026 <a href="https://hesapsat.net">hesapsat.net</a> | Aracınızı hesaplayın, güvenle satın!</p>
         <p>Tüm Hakları Saklıdır. <a href="#">Gizlilik Politikası</a> | <a href="#">Kullanım Şartları</a></p>
     </footer>
+
+    <script>
+        // Populate year dropdown
+        (function () {
+            var yilSelect = document.getElementById('yil');
+            var currentYear = new Date().getFullYear();
+            for (var y = currentYear; y >= 1990; y--) {
+                var opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                yilSelect.appendChild(opt);
+            }
+        })();
+
+        // Base prices (TL) per brand – approximate mid-market values
+        var brandBase = {
+            toyota: 850000, volkswagen: 900000, ford: 780000, renault: 720000,
+            fiat: 680000, hyundai: 760000, honda: 820000, bmw: 1800000,
+            mercedes: 2000000, audi: 1700000, peugeot: 740000, citroen: 700000,
+            nissan: 780000, kia: 760000, opel: 720000
+        };
+
+        // Multipliers
+        var yakitMul = { benzin: 1.0, dizel: 1.05, lpg: 0.9, hibrit: 1.12, elektrik: 1.2 };
+        var vitesMul = { manuel: 0.95, otomatik: 1.05, yariotomatik: 1.0 };
+        var durumMul = { mukemmel: 1.0, iyi: 0.90, orta: 0.75, kotu: 0.55 };
+
+        function hesapla() {
+            var marka = document.getElementById('marka').value;
+            var yil = parseInt(document.getElementById('yil').value, 10);
+            var km = parseInt(document.getElementById('kilometre').value, 10);
+            var yakit = document.getElementById('yakit').value;
+            var vites = document.getElementById('vites').value;
+            var durum = document.getElementById('durum').value;
+
+            if (!marka || !yil || isNaN(km) || !yakit || !vites || !durum) {
+                alert('Lütfen tüm alanları doldurun.');
+                return;
+            }
+
+            var base = brandBase[marka] || 750000;
+            var age = new Date().getFullYear() - yil;
+
+            // Age depreciation: ~8% per year, max 70%
+            var ageFactor = Math.max(0.3, 1 - age * 0.08);
+
+            // Km depreciation: ~5% per 20,000 km, max 50%
+            var kmFactor = Math.max(0.5, 1 - Math.floor(km / 20000) * 0.05);
+
+            var price = base * ageFactor * kmFactor
+                * (yakitMul[yakit] || 1)
+                * (vitesMul[vites] || 1)
+                * (durumMul[durum] || 1);
+
+            price = Math.round(price / 1000) * 1000;
+            var low = Math.round(price * 0.92 / 1000) * 1000;
+            var high = Math.round(price * 1.08 / 1000) * 1000;
+
+            document.getElementById('resultPrice').textContent =
+                price.toLocaleString('tr-TR') + ' ₺';
+            document.getElementById('resultRange').textContent =
+                'Piyasa Aralığı: ' + low.toLocaleString('tr-TR') + ' ₺ – ' + high.toLocaleString('tr-TR') + ' ₺';
+
+            var resultEl = document.getElementById('calcResult');
+            resultEl.classList.add('visible');
+            resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
 </body>
 </html>
