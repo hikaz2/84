@@ -1,0 +1,165 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <div style="padding:16px 20px 8px;font-size:0.75rem;font-weight:700;color:#F5C518;letter-spacing:1px;text-transform:uppercase;">Yönetici</div>
+    <a href="/admin" class="admin-nav-item <%= currentPath === '/admin' ? 'active' : '' %>">
+      <i class="fas fa-tachometer-alt"></i> Dashboard
+    </a>
+    <div class="admin-nav-label">YÖNETİM</div>
+    <a href="/admin/kullanicilar" class="admin-nav-item <%= currentPath.startsWith('/admin/kullanicilar') ? 'active' : '' %>">
+      <i class="fas fa-users"></i> Kullanıcılar
+    </a>
+    <a href="/admin/ilanlar" class="admin-nav-item <%= currentPath.startsWith('/admin/ilanlar') ? 'active' : '' %>">
+      <i class="fas fa-list"></i> İlanlar
+    </a>
+    <a href="/admin/islemler" class="admin-nav-item <%= currentPath.startsWith('/admin/islemler') ? 'active' : '' %>">
+      <i class="fas fa-exchange-alt"></i> İşlemler
+    </a>
+    <div class="admin-nav-label">SİSTEM</div>
+    <a href="/admin/ayarlar" class="admin-nav-item <%= currentPath.startsWith('/admin/ayarlar') ? 'active' : '' %>">
+      <i class="fas fa-cogs"></i> Site Ayarları
+    </a>
+    <div class="admin-nav-label">KISA YOLLAR</div>
+    <a href="/" class="admin-nav-item">
+      <i class="fas fa-home"></i> Siteye Dön
+    </a>
+    <a href="/cikis" class="admin-nav-item" style="color:#ff6b6b;">
+      <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+    </a>
+  </aside>
+
+  <!-- Content -->
+  <div class="admin-content">
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon yellow">👥</div>
+        <div class="stat-info">
+          <div class="value"><%= stats.users %></div>
+          <div class="label">Toplam Üye</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">📋</div>
+        <div class="stat-info">
+          <div class="value"><%= stats.listings %></div>
+          <div class="label">Toplam İlan</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">💸</div>
+        <div class="stat-info">
+          <div class="value"><%= stats.transactions %></div>
+          <div class="label">İşlem Sayısı</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon yellow">💰</div>
+        <div class="stat-info">
+          <div class="value">₺<%= parseFloat(stats.revenue || 0).toLocaleString('tr-TR', {minimumFractionDigits:0}) %></div>
+          <div class="label">Toplam Gelir</div>
+        </div>
+      </div>
+      <% if (stats.pendingListings > 0) { %>
+      <div class="stat-card" style="border-color:var(--warning);">
+        <div class="stat-icon red">⏳</div>
+        <div class="stat-info">
+          <div class="value"><%= stats.pendingListings %></div>
+          <div class="label">Onay Bekleyen</div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <!-- Pending Listings -->
+      <div class="card">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>⏳ Onay Bekleyen İlanlar</span>
+          <a href="/admin/ilanlar?durum=pending" style="font-size:0.8rem;color:var(--primary);">Tümü</a>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <% if (pendingListings.length === 0) { %>
+            <div style="padding:24px;text-align:center;color:#888;font-size:0.9rem;">Onay bekleyen ilan yok ✅</div>
+          <% } else { %>
+            <% pendingListings.forEach(l => { %>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #f0f0f0;gap:12px;">
+              <div style="flex:1;overflow:hidden;">
+                <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><%= l.title %></div>
+                <div style="font-size:0.75rem;color:#888;"><%= l.username %> · ₺<%= parseFloat(l.price).toFixed(2) %></div>
+              </div>
+              <div style="display:flex;gap:6px;flex-shrink:0;">
+                <form action="/admin/ilanlar/<%= l.id %>/onayla" method="POST">
+                  <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                </form>
+                <form action="/admin/ilanlar/<%= l.id %>/reddet" method="POST">
+                  <input type="hidden" name="reason" value="Uygunsuz içerik">
+                  <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                </form>
+              </div>
+            </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Recent Users -->
+      <div class="card">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>👤 Son Üyeler</span>
+          <a href="/admin/kullanicilar" style="font-size:0.8rem;color:var(--primary);">Tümü</a>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <% recentUsers.forEach(u => { %>
+          <div style="display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid #f0f0f0;">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;font-size:0.85rem;flex-shrink:0;">
+              <%= u.username.charAt(0).toUpperCase() %>
+            </div>
+            <div style="flex:1;">
+              <div style="font-weight:600;font-size:0.9rem;"><%= u.username %></div>
+              <div style="font-size:0.75rem;color:#888;"><%= u.email %></div>
+            </div>
+            <span class="badge <%= u.role === 'admin' ? 'badge-red' : 'badge-gray' %>"><%= u.role %></span>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>💸 Son İşlemler</span>
+        <a href="/admin/islemler" style="font-size:0.8rem;color:var(--primary);">Tümü</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>İlan</th>
+              <th>Alıcı</th>
+              <th>Satıcı</th>
+              <th>Tutar</th>
+              <th>Tarih</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% recentTx.forEach(t => { %>
+            <tr>
+              <td style="font-weight:600;font-size:0.85rem;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><%= t.listing_title %></td>
+              <td style="font-size:0.85rem;"><%= t.buyer_name %></td>
+              <td style="font-size:0.85rem;"><%= t.seller_name %></td>
+              <td><strong>₺<%= parseFloat(t.amount).toFixed(2) %></strong></td>
+              <td style="font-size:0.8rem;color:#888;"><%= new Date(t.created_at).toLocaleString('tr-TR') %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

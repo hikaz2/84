@@ -1,0 +1,103 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('./partials/sidebar') %>
+  <div class="admin-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <h1 style="font-size:1.5rem;font-weight:800;">👥 Kullanıcı Yönetimi</h1>
+      <span style="color:#888;font-size:0.9rem;"><%= total %> kullanıcı</span>
+    </div>
+
+    <!-- Search/Filter -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-body" style="padding:16px;">
+        <form method="GET" action="/admin/kullanicilar" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <input type="text" name="arama" class="form-control" placeholder="Kullanıcı adı veya e-posta ara..." value="<%= arama || '' %>" style="flex:1;min-width:200px;">
+          <select name="rol" class="form-control" style="width:auto;">
+            <option value="">Tüm Roller</option>
+            <option value="user" <%= rol === 'user' ? 'selected' : '' %>>Kullanıcı</option>
+            <option value="admin" <%= rol === 'admin' ? 'selected' : '' %>>Admin</option>
+            <option value="moderator" <%= rol === 'moderator' ? 'selected' : '' %>>Moderatör</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Ara</button>
+          <a href="/admin/kullanicilar" class="btn btn-outline">Sıfırla</a>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Kullanıcı</th>
+              <th>Rol</th>
+              <th>Bakiye</th>
+              <th>Satış</th>
+              <th>Durum</th>
+              <th>Kayıt</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(u => { %>
+            <tr style="<%= u.is_banned ? 'background:#fde8ea;' : '' %>">
+              <td style="color:#888;font-size:0.8rem;">#<%= u.id %></td>
+              <td>
+                <div style="font-weight:600;"><%= u.username %></div>
+                <div style="font-size:0.75rem;color:#888;"><%= u.email %></div>
+              </td>
+              <td>
+                <span class="badge <%= u.role === 'admin' ? 'badge-red' : u.role === 'moderator' ? 'badge-blue' : 'badge-gray' %>">
+                  <%= u.role %>
+                </span>
+              </td>
+              <td>₺<%= parseFloat(u.balance || 0).toFixed(2) %></td>
+              <td><%= u.total_sales %></td>
+              <td>
+                <% if (u.is_banned) { %>
+                  <span class="badge badge-red">Yasaklı</span>
+                <% } else { %>
+                  <span class="badge badge-green">Aktif</span>
+                <% } %>
+              </td>
+              <td style="font-size:0.8rem;color:#888;"><%= new Date(u.created_at).toLocaleDateString('tr-TR') %></td>
+              <td>
+                <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                  <a href="/profil/<%= u.username %>" class="btn btn-outline btn-sm" title="Profil"><i class="fas fa-eye"></i></a>
+                  <% if (u.role !== 'admin') { %>
+                    <% if (u.is_banned) { %>
+                      <form action="/admin/kullanicilar/<%= u.id %>/unban" method="POST">
+                        <button class="btn btn-success btn-sm" title="Yasağı Kaldır"><i class="fas fa-unlock"></i></button>
+                      </form>
+                    <% } else { %>
+                      <form action="/admin/kullanicilar/<%= u.id %>/ban" method="POST" onsubmit="var r=prompt('Yasaklama sebebi?');if(!r)return false;this.querySelector('input').value=r;">
+                        <input type="hidden" name="reason" value="Kural ihlali">
+                        <button class="btn btn-danger btn-sm" title="Yasakla"><i class="fas fa-ban"></i></button>
+                      </form>
+                    <% } %>
+                  <% } %>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <% if (totalPages > 1) { %>
+      <div class="card-footer">
+        <div class="pagination" style="margin-top:0;">
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="?sayfa=<%= i %>&arama=<%= arama||'' %>&rol=<%= rol||'' %>" class="page-link <%= i === page ? 'active' : '' %>"><%= i %></a>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

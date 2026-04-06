@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="max-width:600px;padding:60px 20px;text-align:center;">
+  <div style="background:white;border-radius:20px;padding:48px;border:1px solid #e0e0e0;box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+    <div style="width:80px;height:80px;background:#d4edda;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 24px;">✅</div>
+    <h1 style="font-size:1.8rem;font-weight:900;color:#155724;margin-bottom:8px;">Ödeme Başarılı!</h1>
+    <p style="color:#666;margin-bottom:32px;"><%= tx.listing_title %> başarıyla satın alındı.</p>
+
+    <div style="background:#f8f8f8;border-radius:12px;padding:20px;text-align:left;margin-bottom:28px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <span style="color:#888;">İşlem No</span>
+        <span style="font-weight:600;font-size:0.85rem;"><%= tx.uuid.substring(0, 8).toUpperCase() %>...</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <span style="color:#888;">Satıcı</span>
+        <span style="font-weight:600;"><%= tx.seller_username %></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <span style="color:#888;">Ödenen Tutar</span>
+        <span style="font-weight:700;color:var(--dark);">₺<%= parseFloat(tx.amount).toFixed(2) %></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span style="color:#888;">Tarih</span>
+        <span style="font-weight:600;"><%= new Date(tx.created_at).toLocaleString('tr-TR') %></span>
+      </div>
+    </div>
+
+    <p style="color:#888;font-size:0.9rem;margin-bottom:28px;">
+      Satıcıyla iletişime geçerek ürünü teslim alabilirsiniz. Sorun yaşarsanız destek ekibimizle iletişime geçin.
+    </p>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/mesajlar/yeni" class="btn btn-primary">
+        <i class="fas fa-comment"></i> Satıcıyla Konuş
+      </a>
+      <a href="/profil/islemler" class="btn btn-dark">
+        <i class="fas fa-history"></i> İşlem Geçmişi
+      </a>
+      <a href="/ilanlar" class="btn btn-outline">
+        <i class="fas fa-home"></i> Alışverişe Dön
+      </a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

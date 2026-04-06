@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="padding:40px 20px;">
+  <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:24px;">❤️ Favorilerim</h1>
+
+  <% if (listings.length === 0) { %>
+    <div style="text-align:center;padding:80px;background:white;border-radius:16px;border:1px solid #e0e0e0;">
+      <i class="fas fa-heart-broken" style="font-size:3rem;color:#ddd;margin-bottom:16px;display:block;"></i>
+      <h3 style="color:#666;margin-bottom:8px;">Henüz favori yok</h3>
+      <p style="color:#999;">Beğendiğiniz ilanları favorilere ekleyin.</p>
+      <a href="/ilanlar" class="btn btn-primary" style="margin-top:16px;">İlanları Gözat</a>
+    </div>
+  <% } else { %>
+    <div class="listings-grid">
+      <% listings.forEach(listing => { %>
+        <%- include('../partials/listing-card', { listing }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

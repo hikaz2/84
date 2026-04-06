@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h1 class="auth-title">Kayıt Ol</h1>
+    <p class="auth-subtitle">Ücretsiz hesap oluşturun ve alışverişe başlayın.</p>
+
+    <% if (error) { %>
+      <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+    <% } %>
+
+    <form action="/kayit" method="POST">
+      <div class="form-group">
+        <label class="form-label">Kullanıcı Adı <span class="required">*</span></label>
+        <input type="text" name="username" class="form-control" placeholder="kullanici_adi" required pattern="[a-zA-Z0-9_]{3,20}" minlength="3" maxlength="20">
+        <div class="form-hint">3-20 karakter, harf, rakam ve alt çizgi kullanılabilir.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-posta <span class="required">*</span></label>
+        <input type="email" name="email" class="form-control" placeholder="ornek@mail.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Şifre <span class="required">*</span></label>
+        <input type="password" name="password" class="form-control" placeholder="En az 6 karakter" required minlength="6">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Şifre Tekrar <span class="required">*</span></label>
+        <input type="password" name="password2" class="form-control" placeholder="Şifrenizi tekrar girin" required minlength="6">
+      </div>
+      <div style="margin-bottom:20px;font-size:0.85rem;color:#666;background:#f8f8f8;padding:12px;border-radius:8px;">
+        <i class="fas fa-info-circle" style="color:var(--primary);"></i>
+        Kayıt olarak <a href="/kullanim-kosullari" style="color:var(--primary);">Kullanım Koşulları</a>'nı ve
+        <a href="/gizlilik" style="color:var(--primary);">Gizlilik Politikası</a>'nı kabul etmiş olursunuz.
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg">
+        <i class="fas fa-user-plus"></i> Hesap Oluştur
+      </button>
+    </form>
+
+    <div class="auth-divider">veya</div>
+
+    <div style="text-align:center;font-size:0.9rem;">
+      Hesabınız var mı? <a href="/giris" style="color:var(--primary);font-weight:700;">Giriş Yap</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+<div style="background:var(--dark);padding:40px 0;margin-bottom:0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div style="width:90px;height:90px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#111;border:4px solid var(--primary);">
+        <%= profileUser.username.charAt(0).toUpperCase() %>
+      </div>
+      <div>
+        <h1 style="color:white;font-size:1.8rem;font-weight:800;"><%= profileUser.username %></h1>
+        <div style="color:#aaa;margin-top:8px;display:flex;gap:20px;flex-wrap:wrap;font-size:0.9rem;">
+          <span><i class="fas fa-star" style="color:var(--primary);"></i> <%= parseFloat(profileUser.rating || 0).toFixed(1) %> (<%= profileUser.rating_count %> yorum)</span>
+          <span><i class="fas fa-shopping-bag" style="color:var(--primary);"></i> <%= profileUser.total_sales %> satış</span>
+          <span><i class="fas fa-calendar" style="color:var(--primary);"></i> <%= new Date(profileUser.created_at).toLocaleDateString('tr-TR', {month:'long',year:'numeric'}) %></span>
+        </div>
+        <% if (profileUser.bio) { %>
+          <p style="color:#ccc;margin-top:8px;font-size:0.9rem;max-width:500px;"><%= profileUser.bio %></p>
+        <% } %>
+      </div>
+      <% if (!isOwn && user) { %>
+        <form action="/mesajlar/yeni" method="POST" style="margin-left:auto;">
+          <input type="hidden" name="receiver_id" value="<%= profileUser.id %>">
+          <input type="hidden" name="message" value="Merhaba!">
+          <button class="btn btn-primary"><i class="fas fa-comment"></i> Mesaj Gönder</button>
+        </form>
+      <% } else if (isOwn) { %>
+        <a href="/profil" class="btn btn-primary" style="margin-left:auto;"><i class="fas fa-user"></i> Profilim</a>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding:30px 20px;">
+  <!-- Listings -->
+  <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:20px;">İlanları (<%= listings.length %>)</h2>
+  <% if (listings.length > 0) { %>
+    <div class="listings-grid">
+      <% listings.forEach(listing => { %>
+        <%- include('../partials/listing-card', { listing }) %>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div style="color:#888;padding:24px 0;">Bu kullanıcının aktif ilanı bulunmuyor.</div>
+  <% } %>
+
+  <!-- Reviews -->
+  <% if (reviews.length > 0) { %>
+  <div style="margin-top:40px;">
+    <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:20px;">Değerlendirmeler</h2>
+    <div class="card">
+      <% reviews.forEach(review => { %>
+      <div style="display:flex;gap:16px;padding:20px;border-bottom:1px solid #f0f0f0;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;flex-shrink:0;">
+          <%= review.reviewer_username.charAt(0).toUpperCase() %>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
+            <strong><%= review.reviewer_username %></strong>
+            <span style="color:var(--primary);">
+              <% for(let i=0;i<review.rating;i++) { %>⭐<% } %>
+            </span>
+          </div>
+          <p style="color:#555;font-size:0.9rem;"><%= review.comment || 'Yorum yapılmamış.' %></p>
+          <div style="font-size:0.75rem;color:#999;margin-top:4px;"><%= new Date(review.created_at).toLocaleDateString('tr-TR') %></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

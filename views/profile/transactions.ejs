@@ -1,0 +1,64 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="padding:40px 20px;">
+  <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:24px;">💸 İşlemlerim</h1>
+
+  <% if (transactions.length === 0) { %>
+    <div style="text-align:center;padding:80px;background:white;border-radius:16px;border:1px solid #e0e0e0;">
+      <i class="fas fa-exchange-alt" style="font-size:3rem;color:#ddd;margin-bottom:16px;display:block;"></i>
+      <h3 style="color:#666;margin-bottom:8px;">Henüz işlem yok</h3>
+      <a href="/ilanlar" class="btn btn-primary" style="margin-top:16px;">Alışverişe Başla</a>
+    </div>
+  <% } else { %>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>İlan</th>
+              <th>Tür</th>
+              <th>Karşı Taraf</th>
+              <th>Tutar</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% transactions.forEach(t => { %>
+            <tr>
+              <td>
+                <a href="/ilanlar/<%= t.listing_uuid %>" style="font-weight:600;display:block;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  <%= t.listing_title %>
+                </a>
+              </td>
+              <td>
+                <% if (t.buyer_id === userId) { %>
+                  <span class="badge badge-red">🛒 Satın Aldım</span>
+                <% } else { %>
+                  <span class="badge badge-green">💸 Sattım</span>
+                <% } %>
+              </td>
+              <td style="color:#888;">
+                <%= t.buyer_id === userId ? t.seller_username : t.buyer_username %>
+              </td>
+              <td>
+                <strong style="color:<%= t.buyer_id === userId ? 'var(--danger)' : 'var(--success)' %>;">
+                  <%= t.buyer_id === userId ? '-' : '+' %>₺<%= parseFloat(t.amount).toFixed(2) %>
+                </strong>
+              </td>
+              <td>
+                <span class="badge <%= t.status === 'completed' ? 'badge-green' : t.status === 'pending' ? 'badge-yellow' : 'badge-red' %>">
+                  <%= t.status === 'completed' ? 'Tamamlandı' : t.status === 'pending' ? 'Bekliyor' : 'İptal' %>
+                </span>
+              </td>
+              <td style="font-size:0.85rem;color:#888;"><%= new Date(t.created_at).toLocaleDateString('tr-TR') %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

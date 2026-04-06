@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="max-width:600px;padding:40px 20px;">
+  <div class="card">
+    <div class="card-header" style="font-size:1.3rem;">
+      <i class="fas fa-wallet" style="color:var(--primary);"></i> Bakiye Yükle
+    </div>
+    <div class="card-body">
+      <% if (success) { %>
+        <div class="alert alert-success alert-auto-dismiss">
+          <i class="fas fa-check-circle"></i> Bakiyeniz başarıyla yüklendi!
+        </div>
+      <% } %>
+      <% if (error) { %>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+      <% } %>
+
+      <div style="background:#f8f8f8;border-radius:12px;padding:16px;margin-bottom:24px;">
+        <div style="font-size:0.8rem;color:#888;">Mevcut Bakiyeniz</div>
+        <div style="font-size:2rem;font-weight:900;">₺<%= parseFloat(user.balance || 0).toFixed(2) %></div>
+      </div>
+
+      <form action="/bakiye/yukle" method="POST">
+        <div class="form-group">
+          <label class="form-label">Yüklenecek Tutar (₺) <span class="required">*</span></label>
+          <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+            <% [50, 100, 250, 500, 1000].forEach(amount => { %>
+              <button type="button" onclick="document.getElementById('amountInput').value='<%= amount %>'" class="btn btn-outline btn-sm">₺<%= amount %></button>
+            <% }) %>
+          </div>
+          <input type="number" name="amount" id="amountInput" class="form-control" placeholder="Tutar girin..." min="10" max="10000" step="0.01" required value="<%= typeof amount !== 'undefined' ? amount : '' %>">
+          <div class="form-hint">Minimum ₺10, Maksimum ₺10.000</div>
+        </div>
+
+        <div style="background:#f8f8f8;border-radius:12px;padding:20px;margin-bottom:20px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;">💳 Kart Bilgileri</h3>
+          <div class="form-group">
+            <label class="form-label">Kart Numarası</label>
+            <input type="text" name="card_number" id="cardNumber" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kart Üzerindeki İsim</label>
+            <input type="text" name="card_name" class="form-control" placeholder="AD SOYAD" required>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group">
+              <label class="form-label">Son Kullanma</label>
+              <input type="text" name="expiry" id="cardExpiry" class="form-control" placeholder="AA/YY" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV</label>
+              <input type="text" name="cvv" class="form-control" placeholder="•••" maxlength="4" required>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px;font-size:0.85rem;color:#856404;margin-bottom:20px;">
+          <i class="fas fa-info-circle"></i> Bu bir demo sistemidir. Gerçek kart bilgilerini girmeyin. Herhangi bir tutar girebilirsiniz.
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg">
+          <i class="fas fa-credit-card"></i> Bakiye Yükle
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

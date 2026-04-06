@@ -1,0 +1,72 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="padding:40px 20px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+    <h1 style="font-size:1.6rem;font-weight:800;">📋 İlanlarım</h1>
+    <a href="/ilanlar/yeni/ekle" class="btn btn-primary"><i class="fas fa-plus"></i> Yeni İlan</a>
+  </div>
+
+  <% if (success === 'deleted') { %>
+    <div class="alert alert-success alert-auto-dismiss"><i class="fas fa-check-circle"></i> İlan silindi.</div>
+  <% } %>
+
+  <% if (listings.length === 0) { %>
+    <div style="text-align:center;padding:80px;background:white;border-radius:16px;border:1px solid #e0e0e0;">
+      <i class="fas fa-box-open" style="font-size:3rem;color:#ddd;margin-bottom:16px;display:block;"></i>
+      <h3 style="color:#666;margin-bottom:8px;">Henüz ilan yok</h3>
+      <p style="color:#999;margin-bottom:20px;">İlk ilanınızı oluşturarak satışa başlayın.</p>
+      <a href="/ilanlar/yeni/ekle" class="btn btn-primary">İlan Oluştur</a>
+    </div>
+  <% } else { %>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>İlan</th>
+              <th>Kategori</th>
+              <th>Fiyat</th>
+              <th>Görüntülenme</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% listings.forEach(l => { %>
+            <tr>
+              <td>
+                <a href="/ilanlar/<%= l.uuid %>" style="font-weight:600;display:block;max-width:250px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  <%= l.title %>
+                </a>
+                <% if (!l.approved) { %>
+                  <span style="font-size:0.75rem;color:var(--warning);">⏳ Onay Bekliyor</span>
+                <% } %>
+              </td>
+              <td style="color:#888;font-size:0.85rem;"><%= l.category_name %></td>
+              <td><strong>₺<%= parseFloat(l.price).toLocaleString('tr-TR') %></strong></td>
+              <td><%= l.view_count %> <i class="fas fa-eye" style="color:#ccc;font-size:0.75rem;"></i></td>
+              <td>
+                <span class="badge <%= l.status === 'active' ? 'badge-green' : l.status === 'sold' ? 'badge-blue' : 'badge-gray' %>">
+                  <%= l.status === 'active' ? 'Aktif' : l.status === 'sold' ? 'Satıldı' : l.status === 'paused' ? 'Durduruldu' : 'Silindi' %>
+                </span>
+              </td>
+              <td style="font-size:0.85rem;color:#888;"><%= new Date(l.created_at).toLocaleDateString('tr-TR') %></td>
+              <td>
+                <div style="display:flex;gap:6px;">
+                  <a href="/ilanlar/duzenle/<%= l.uuid %>" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
+                  <form action="/ilanlar/sil/<%= l.uuid %>" method="POST" style="display:inline;" onsubmit="return confirm('İlanı silmek istediğinizden emin misiniz?')">
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

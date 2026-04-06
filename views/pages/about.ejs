@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="max-width:800px;padding:60px 20px;">
+  <h1 style="font-size:2rem;font-weight:800;margin-bottom:24px;">Hakkımızda</h1>
+  <div class="card">
+    <div class="card-body">
+      <p style="margin-bottom:16px;">HesapSat, Türkiye'nin en güvenilir dijital hesap ve ürün pazaryeridir. 2024 yılında kurulan platformumuz, oyun hesapları, sosyal medya profilleri, yazılım lisansları ve daha pek çok dijital ürünü güvenle alıp satmanıza olanak tanır.</p>
+      <h2 style="font-size:1.3rem;font-weight:700;margin:24px 0 12px;">Misyonumuz</h2>
+      <p>Dijital ekonomide güven inşa etmek ve hem alıcı hem satıcılar için adil, şeffaf ve güvenli bir pazar ortamı oluşturmak.</p>
+      <h2 style="font-size:1.3rem;font-weight:700;margin:24px 0 12px;">Neden HesapSat?</h2>
+      <ul style="list-style:none;padding:0;">
+        <% const features = ['Güvenli ödeme altyapısı','7/24 müşteri desteği','Hızlı ve kolay ilan yayınlama','Şeffaf komisyon sistemi (%5)','Gelişmiş mesajlaşma sistemi','Satıcı değerlendirme sistemi']; %>
+        <% features.forEach(f => { %><li style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;"><i class="fas fa-check-circle" style="color:var(--success);"></i><%= f %></li><% }) %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

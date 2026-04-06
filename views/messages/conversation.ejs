@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="padding:30px 20px;max-width:900px;">
+  <div style="background:white;border:1px solid #e0e0e0;border-radius:16px;overflow:hidden;">
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid #e0e0e0;background:#fafafa;">
+      <a href="/mesajlar" style="color:#888;"><i class="fas fa-arrow-left"></i></a>
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;">
+        <%= otherUser.username.charAt(0).toUpperCase() %>
+      </div>
+      <div>
+        <div style="font-weight:700;"><%= otherUser.username %></div>
+        <% if (listing) { %>
+          <a href="/ilanlar/<%= listing.uuid %>" style="font-size:0.8rem;color:var(--primary);">📋 <%= listing.title %></a>
+        <% } %>
+      </div>
+      <div style="margin-left:auto;">
+        <a href="/profil/<%= otherUser.username %>" class="btn btn-outline btn-sm">Profili Gör</a>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div style="height:500px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;" id="chatMessages">
+      <% if (messages.length === 0) { %>
+        <div style="text-align:center;color:#888;padding:40px;">
+          <i class="fas fa-comment-dots" style="font-size:2.5rem;margin-bottom:12px;display:block;color:#ddd;"></i>
+          Henüz mesaj yok. İlk mesajı siz gönderin!
+        </div>
+      <% } %>
+      <% messages.forEach(msg => { %>
+        <div style="display:flex;flex-direction:column;align-items:<%= msg.sender_id === user.id ? 'flex-end' : 'flex-start' %>;">
+          <div style="max-width:70%;padding:10px 16px;border-radius:18px;font-size:0.9rem;line-height:1.5;word-break:break-word;
+            <%= msg.sender_id === user.id ? 'background:var(--primary);color:#111;border-bottom-right-radius:4px;' : 'background:#f0f0f0;color:#333;border-bottom-left-radius:4px;' %>">
+            <%= msg.content %>
+          </div>
+          <div style="font-size:0.7rem;color:#999;margin-top:4px;padding:0 4px;">
+            <%= new Date(msg.created_at).toLocaleString('tr-TR', {hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'}) %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:16px 20px;border-top:1px solid #e0e0e0;background:#fafafa;">
+      <form action="/mesajlar/<%= conversation.uuid %>/gonder" method="POST" style="display:flex;gap:12px;">
+        <input type="text" name="message" class="form-control" placeholder="Mesajınızı yazın..." required style="flex:1;border-radius:24px;">
+        <button type="submit" class="btn btn-primary" style="border-radius:24px;white-space:nowrap;">
+          <i class="fas fa-paper-plane"></i> Gönder
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scroll to bottom
+const chatDiv = document.getElementById('chatMessages');
+if (chatDiv) chatDiv.scrollTop = chatDiv.scrollHeight;
+</script>
+
+<%- include('../partials/footer') %>

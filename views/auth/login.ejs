@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h1 class="auth-title">Giriş Yap</h1>
+    <p class="auth-subtitle">Hesabınıza giriş yapın.</p>
+
+    <% const errorMessages = {
+      'login_required': 'Bu sayfaya erişmek için giriş yapmalısınız.',
+      'session_expired': 'Oturum süreniz doldu, lütfen tekrar giriş yapın.'
+    }; %>
+
+    <% if (error) { %>
+      <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> <%= errorMessages[error] || error %></div>
+    <% } %>
+    <% if (success === 'register') { %>
+      <div class="alert alert-success"><i class="fas fa-check-circle"></i> Hesabınız oluşturuldu, giriş yapabilirsiniz.</div>
+    <% } %>
+
+    <form action="/giris" method="POST">
+      <div class="form-group">
+        <label class="form-label">E-posta veya Kullanıcı Adı <span class="required">*</span></label>
+        <input type="text" name="email" class="form-control" placeholder="ornek@mail.com" required autofocus>
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between;">
+          <span>Şifre <span class="required">*</span></span>
+          <a href="#" style="font-size:0.8rem;color:var(--primary);">Şifremi Unuttum</a>
+        </label>
+        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+        <input type="checkbox" name="remember" id="remember" style="cursor:pointer;">
+        <label for="remember" style="font-size:0.9rem;cursor:pointer;">Beni Hatırla</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg">
+        <i class="fas fa-sign-in-alt"></i> Giriş Yap
+      </button>
+    </form>
+
+    <div class="auth-divider">veya</div>
+
+    <div style="text-align:center;font-size:0.9rem;">
+      Hesabınız yok mu? <a href="/kayit" style="color:var(--primary);font-weight:700;">Hemen Kayıt Ol</a>
+    </div>
+
+    <div style="margin-top:24px;padding:16px;background:#f8f8f8;border-radius:8px;font-size:0.8rem;color:#888;">
+      <strong>Demo Hesapları:</strong><br>
+      Admin: admin@hesapsat.net / Admin123!<br>
+      Kullanıcı: demo@hesapsat.net / Demo123!
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

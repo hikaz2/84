@@ -1,0 +1,89 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="max-width:800px;padding:40px 20px;">
+  <div class="card">
+    <div class="card-header" style="font-size:1.4rem;">
+      <i class="fas fa-plus-circle" style="color:var(--primary);"></i> İlan Ekle
+    </div>
+    <div class="card-body">
+      <% if (error) { %>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+      <% } %>
+
+      <form action="/ilanlar/yeni/ekle" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="form-label">İlan Başlığı <span class="required">*</span></label>
+          <input type="text" name="title" class="form-control" placeholder="Örn: League of Legends Diamond 1 Hesap" required maxlength="100" data-maxlength="100">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kategori <span class="required">*</span></label>
+          <select name="category_id" class="form-control" required>
+            <option value="">-- Kategori Seçin --</option>
+            <% let currentParent = null; %>
+            <% categories.filter(c => !c.parent_id).forEach(parent => { %>
+              <optgroup label="<%= parent.icon %> <%= parent.name %>">
+              <% categories.filter(c => c.parent_id === parent.id).forEach(sub => { %>
+                <option value="<%= sub.id %>"><%= sub.icon %> <%= sub.name %></option>
+              <% }) %>
+              </optgroup>
+            <% }) %>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">Fiyat (₺) <span class="required">*</span></label>
+            <input type="number" name="price" id="priceInput" class="form-control" placeholder="0.00" required min="1" step="0.01">
+            <div class="form-hint" id="pricePreview"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Teslimat Türü</label>
+            <select name="delivery_type" class="form-control">
+              <option value="digital">⚡ Dijital Teslimat</option>
+              <option value="physical">📦 Fiziksel Teslimat</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Açıklama <span class="required">*</span></label>
+          <textarea name="description" class="form-control" rows="6" placeholder="İlanınız hakkında detaylı bilgi verin. Ne içeriyor, hangi özellikler var, garantisi var mı gibi bilgileri ekleyin." required maxlength="2000" data-maxlength="2000"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Resimler (En fazla 5)</label>
+          <input type="file" name="images" class="form-control" accept="image/*" multiple>
+          <div class="form-hint">JPG, PNG, WebP formatında, her biri max 5MB</div>
+          <div id="imagePreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Etiketler</label>
+          <input type="text" name="tags" class="form-control" placeholder="diamond, lol, hesap (virgülle ayırın)">
+          <div class="form-hint">Arama sonuçlarında görünmek için etiket ekleyin.</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;padding:14px;background:#fff8e1;border-radius:8px;border:1px solid #ffe082;">
+          <input type="checkbox" name="is_urgent" id="is_urgent">
+          <label for="is_urgent" style="cursor:pointer;font-size:0.9rem;">
+            🔥 <strong>Acil İlan</strong> - İlanınız öne çıkacak şekilde işaretlensin
+          </label>
+        </div>
+
+        <div style="background:#f0f9ff;border:1px solid #bee3f8;border-radius:8px;padding:16px;margin-bottom:24px;font-size:0.85rem;color:#2c5282;">
+          <i class="fas fa-info-circle"></i> İlanlar yayınlanmadan önce moderatörlerimiz tarafından incelenir. Bu süreç genellikle birkaç saat içinde tamamlanır.
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-paper-plane"></i> İlanı Yayınla
+          </button>
+          <a href="/ilanlar" class="btn btn-outline btn-lg">İptal</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
