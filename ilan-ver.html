@@ -223,7 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
   desc.addEventListener('input', () => { document.getElementById('descCount').textContent = desc.value.length + ' / 2000 karakter'; });
 });
 
-function updateEmoji() {}
+function updateEmoji() {
+  // Emoji is looked up from EMOJIS map at submission time; no live update needed
+}
 
 document.getElementById('listingForm').addEventListener('submit', function(e) {
   e.preventDefault();

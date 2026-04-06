@@ -89,9 +89,17 @@ function getUsers() {
 }
 function saveUsers(u) { localStorage.setItem(KEYS.users, JSON.stringify(u)); }
 
+// Simple deterministic hash for demo purposes (not for production use)
+function hashPass(p) {
+  let h = 5381;
+  for (let i = 0; i < p.length; i++) { h = ((h << 5) + h) ^ p.charCodeAt(i); h >>>= 0; }
+  return 'hh$' + h.toString(16) + '$' + p.length.toString(16);
+}
+
 function login(id, pass) {
   const users = getUsers();
-  const u = users.find(u => (u.email === id || u.username === id) && u.password === pass);
+  const hashed = hashPass(pass);
+  const u = users.find(u => (u.email === id || u.username === id) && u.password === hashed);
   if (u) {
     const { password: _, ...safe } = u;
     localStorage.setItem(KEYS.currentUser, JSON.stringify(safe));
@@ -104,7 +112,7 @@ function register(data) {
   const users = getUsers();
   if (users.some(u => u.email === data.email)) return { success: false, message: 'Bu e-posta adresi zaten kullanılıyor.' };
   if (users.some(u => u.username === data.username)) return { success: false, message: 'Bu kullanıcı adı zaten alınmış.' };
-  const nu = { id: Date.now(), username: data.username, email: data.email, password: data.password, phone: data.phone || '', avatar: null, memberSince: new Date().toISOString(), rating: 5.0, ratingCount: 1 };
+  const nu = { id: Date.now(), username: data.username, email: data.email, password: hashPass(data.password), phone: data.phone || '', avatar: null, memberSince: new Date().toISOString(), rating: 5.0, ratingCount: 1 };
   users.push(nu);
   saveUsers(users);
   const { password: _, ...safe } = nu;
@@ -139,8 +147,8 @@ function changePassword(cur, next) {
   if (!user) return { success: false };
   const users = getUsers();
   const u = users.find(x => x.id === user.id);
-  if (!u || u.password !== cur) return { success: false, message: 'Mevcut şifre hatalı.' };
-  u.password = next;
+  if (!u || u.password !== hashPass(cur)) return { success: false, message: 'Mevcut şifre hatalı.' };
+  u.password = hashPass(next);
   saveUsers(users);
   return { success: true };
 }
@@ -252,7 +260,12 @@ function doSearch() {
 
 // ===== REQUIRE AUTH =====
 function requireAuth() {
-  if (!isLoggedIn()) { window.location.href = 'giris.html?redirect=' + encodeURIComponent(window.location.href); return false; }
+  if (!isLoggedIn()) {
+    // Only pass the filename part to avoid exposing full URL in redirect param
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    window.location.href = 'giris.html?redirect=' + encodeURIComponent(page);
+    return false;
+  }
   return true;
 }
 

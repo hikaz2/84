@@ -120,8 +120,10 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   if (result.success) {
     showToast('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
     const params = new URLSearchParams(window.location.search);
-    const redirect = params.get('redirect');
-    setTimeout(() => { window.location.href = redirect || 'index.html'; }, 800);
+    const rawRedirect = params.get('redirect') || '';
+    // Only allow relative same-origin redirects to prevent open redirect attacks
+    const safeRedirect = /^[a-zA-Z0-9_\-./]+\.html([?#].*)?$/.test(rawRedirect) ? rawRedirect : 'index.html';
+    setTimeout(() => { window.location.href = safeRedirect; }, 800);
   } else {
     err.textContent = result.message;
     err.style.display = 'flex';
