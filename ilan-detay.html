@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlan Detayı – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <div class="navbar-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="İlan ara..." id="searchInput">
+            <button class="btn" onclick="doSearch()">🔍</button>
+          </div>
+        </div>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:2rem;padding-bottom:3rem">
+    <div class="breadcrumb" style="margin-bottom:1.5rem">
+      <a href="index.html">Ana Sayfa</a> <span>›</span>
+      <a href="ilanlar.html">İlanlar</a> <span>›</span>
+      <span id="breadTitle">İlan Detayı</span>
+    </div>
+
+    <div id="notFound" style="display:none" class="empty-state">
+      <div class="empty-state-icon">😕</div>
+      <h3>İlan Bulunamadı</h3>
+      <p>Bu ilan silinmiş ya da mevcut değil.</p>
+      <a href="ilanlar.html" class="btn btn-primary">Tüm İlanlara Dön</a>
+    </div>
+
+    <div id="detailContent" class="listing-detail-grid">
+      <!-- LEFT -->
+      <div>
+        <div class="listing-gallery" id="listingGallery">📦</div>
+
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="card-body">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+              <div>
+                <div id="listingCategory" class="badge badge-primary" style="margin-bottom:.75rem;font-size:.8rem"></div>
+                <h1 style="font-size:1.5rem;margin-bottom:.5rem" id="listingTitle"></h1>
+                <div style="display:flex;align-items:center;gap:1rem;font-size:.875rem;color:var(--gray);flex-wrap:wrap">
+                  <span>📅 <span id="listingDate"></span></span>
+                  <span>👁 <span id="listingViews"></span> görüntülenme</span>
+                  <span id="featuredBadge" style="display:none"><span class="badge badge-warning">⭐ Öne Çıkan</span></span>
+                </div>
+              </div>
+              <button id="favBtn" onclick="handleDetailFav()" class="btn btn-outline" style="flex-shrink:0">🤍 Favorilere Ekle</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="card-header"><h3 style="margin:0;font-size:1rem">📋 İlan Açıklaması</h3></div>
+          <div class="card-body">
+            <p id="listingDesc" style="line-height:1.8;color:var(--dark-3)"></p>
+            <div id="featuresSection" style="margin-top:1.5rem;display:none">
+              <h4 style="font-size:.95rem;margin-bottom:.75rem">✨ Hesap Özellikleri</h4>
+              <div id="featuresList" style="display:flex;flex-wrap:wrap;gap:.5rem"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="card-header"><h3 style="margin:0;font-size:1rem">⚠️ Güvenli Alışveriş Kuralları</h3></div>
+          <div class="card-body">
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;font-size:.875rem;color:var(--dark-3)">
+              <li>🛡️ Ödemeyi her zaman platform üzerinden yapın</li>
+              <li>🔒 Hesap bilgilerini teslim almadan ödeme yapmayın</li>
+              <li>📞 Satıcıyla platform dışı iletişim kurmayın</li>
+              <li>✅ Hesabı aldıktan sonra şifreyi hemen değiştirin</li>
+              <li>❗ Şüpheli durumları destek ekibine bildirin</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Related -->
+        <div>
+          <h2 style="font-size:1.25rem;margin-bottom:1.25rem">🔗 Benzer İlanlar</h2>
+          <div class="listings-grid" id="relatedGrid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div>
+        <div class="listing-info-box">
+          <div class="listing-price" id="listingPrice"></div>
+          <div class="listing-price-label">Müzakereye açık fiyat</div>
+
+          <div id="statBox" style="background:var(--primary-light);border-radius:var(--radius);padding:1rem;margin-bottom:1.5rem;text-align:center;display:none">
+            <div style="font-size:1.75rem;font-weight:900;color:var(--primary)" id="statValue"></div>
+            <div style="font-size:.8rem;color:var(--gray)" id="statLabel"></div>
+          </div>
+
+          <div class="listing-actions">
+            <button class="btn btn-primary btn-lg btn-block" onclick="handleBuy()">💳 Satın Al</button>
+            <button class="btn btn-outline btn-block" onclick="handleMessage()">💬 Satıcıya Mesaj Gönder</button>
+            <button class="btn btn-ghost btn-block" onclick="handleDetailFav()" id="favBtnBottom">🤍 Favorilere Ekle</button>
+          </div>
+
+          <ul class="listing-meta-list">
+            <li><span class="meta-label">Kategori</span><span class="meta-value" id="metaCat"></span></li>
+            <li><span class="meta-label">İlan Tarihi</span><span class="meta-value" id="metaDate"></span></li>
+            <li><span class="meta-label">Görüntülenme</span><span class="meta-value" id="metaViews"></span></li>
+            <li><span class="meta-label">Durum</span><span class="meta-value"><span class="badge badge-success">Aktif</span></span></li>
+          </ul>
+
+          <div class="divider"></div>
+          <h4 style="font-size:.9rem;margin-bottom:.75rem">👤 Satıcı</h4>
+          <a href="#" class="seller-card" id="sellerCard">
+            <div class="seller-avatar" id="sellerInitial">?</div>
+            <div class="seller-info">
+              <div class="seller-name" id="sellerName"></div>
+              <div class="seller-rating"><span class="stars">★★★★★</span> 5.0 (Yeni Üye)</div>
+            </div>
+          </a>
+
+          <div style="margin-top:1rem;padding:1rem;background:var(--success-bg);border-radius:var(--radius);font-size:.8rem;color:#166534">
+            🛡️ Bu ilan HesapHub güvencesi altındadır. Güvenli ödeme ve alıcı koruması aktiftir.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="contactModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">💬 Satıcıya Mesaj Gönder</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mesajınız</label>
+      <textarea class="form-control" id="modalMsg" rows="5" placeholder="Merhaba, ilanınızla ilgili birkaç sorum var..."></textarea>
+    </div>
+    <div style="display:flex;gap:.75rem;margin-top:1rem">
+      <button class="btn btn-primary" onclick="sendMessage()" style="flex:1">Gönder</button>
+      <button class="btn btn-ghost" onclick="closeModal()">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- BUY MODAL -->
+<div class="modal-backdrop" id="buyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">💳 Satın Al</h3>
+      <button class="modal-close" onclick="closeBuyModal()">✕</button>
+    </div>
+    <div class="alert alert-info">ℹ️ Bu özellik yakında aktif olacak. Şimdilik satıcıyla mesajlaşarak anlaşma sağlayabilirsiniz.</div>
+    <div id="buyInfo" style="background:var(--light-2);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;margin-bottom:.5rem"><span>İlan Fiyatı:</span><strong id="buyPrice"></strong></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:.5rem"><span>Platform Komisyonu (%5):</span><strong id="buyCommission"></strong></div>
+      <div class="divider" style="margin:.75rem 0"></div>
+      <div style="display:flex;justify-content:space-between;font-size:1.1rem"><span><strong>Toplam:</strong></span><strong id="buyTotal" style="color:#16a34a"></strong></div>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="closeBuyModal()">Anladım, Satıcıya Mesaj Gönder</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;justify-content:center">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+const CAT_NAMES = { instagram:'Instagram', tiktok:'TikTok', youtube:'YouTube', twitter:'Twitter/X', facebook:'Facebook', oyun:'Oyun Hesabı', web:'Web Sitesi', diger:'Diğer' };
+let currentListing = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { showNotFound(); return; }
+  const listing = getListing(id);
+  if (!listing) { showNotFound(); return; }
+  currentListing = listing;
+  incrementViews(id);
+  renderDetail(listing);
+  loadRelated(listing);
+});
+
+function showNotFound() {
+  document.getElementById('notFound').style.display = 'block';
+  document.getElementById('detailContent').style.display = 'none';
+}
+
+function renderDetail(l) {
+  document.title = l.title + ' – HesapHub';
+  document.getElementById('breadTitle').textContent = l.title.substring(0,40) + (l.title.length>40?'...':'');
+  document.getElementById('listingGallery').textContent = l.emoji || '📦';
+  document.getElementById('listingGallery').style.fontSize = '8rem';
+  document.getElementById('listingTitle').textContent = l.title;
+  document.getElementById('listingCategory').textContent = (l.emoji||'') + ' ' + (CAT_NAMES[l.category]||l.category);
+  document.getElementById('listingDate').textContent = fmtDate(l.createdAt);
+  document.getElementById('listingViews').textContent = l.views || 0;
+  if (l.featured) document.getElementById('featuredBadge').style.display = 'inline';
+  document.getElementById('listingDesc').textContent = l.description;
+  document.getElementById('listingPrice').textContent = fmtPrice(l.price);
+  document.getElementById('metaCat').textContent = (CAT_NAMES[l.category]||l.category);
+  document.getElementById('metaDate').textContent = fmtDate(l.createdAt);
+  document.getElementById('metaViews').textContent = (l.views||0) + ' kez';
+  document.getElementById('sellerName').textContent = l.seller;
+  document.getElementById('sellerInitial').textContent = l.seller[0].toUpperCase();
+  document.getElementById('sellerCard').href = 'profil.html?user=' + l.seller;
+
+  if (l.stat) {
+    document.getElementById('statBox').style.display = 'block';
+    document.getElementById('statValue').textContent = l.stat;
+    document.getElementById('statLabel').textContent = l.statLabel || '';
+  }
+
+  if (l.features && l.features.length) {
+    document.getElementById('featuresSection').style.display = 'block';
+    document.getElementById('featuresList').innerHTML = l.features.map(f => `<span class="badge badge-success">✅ ${f}</span>`).join('');
+  }
+
+  // Buy modal prices
+  const price = l.price;
+  const comm = Math.round(price * 0.05);
+  document.getElementById('buyPrice').textContent = fmtPrice(price);
+  document.getElementById('buyCommission').textContent = fmtPrice(comm);
+  document.getElementById('buyTotal').textContent = fmtPrice(price + comm);
+
+  updateFavBtn();
+}
+
+function updateFavBtn() {
+  if (!currentListing) return;
+  const f = isFav(currentListing.id);
+  document.getElementById('favBtn').textContent = f ? '❤️ Favorilerde' : '🤍 Favorilere Ekle';
+  document.getElementById('favBtnBottom').textContent = f ? '❤️ Favorilerde' : '🤍 Favorilere Ekle';
+}
+
+function handleDetailFav() {
+  if (!currentListing) return;
+  toggleFav(currentListing.id);
+  updateFavBtn();
+}
+
+function handleMessage() {
+  if (!requireAuth()) return;
+  document.getElementById('contactModal').classList.add('show');
+}
+function closeModal() { document.getElementById('contactModal').classList.remove('show'); }
+function sendMessage() {
+  const msg = document.getElementById('modalMsg').value.trim();
+  if (!msg) { showToast('Mesaj boş olamaz.', 'error'); return; }
+  closeModal();
+  showToast('Mesajınız gönderildi! Satıcı en kısa sürede dönecektir.', 'success');
+}
+function handleBuy() {
+  if (!requireAuth()) return;
+  document.getElementById('buyModal').classList.add('show');
+}
+function closeBuyModal() { document.getElementById('buyModal').classList.remove('show'); }
+
+function loadRelated(listing) {
+  const all = getListings().filter(l => l.id !== listing.id && l.category === listing.category).slice(0,4);
+  const grid = document.getElementById('relatedGrid');
+  grid.innerHTML = all.length ? all.map(renderCard).join('') : '<p class="text-muted">Bu kategoride başka ilan bulunmamaktadır.</p>';
+}
+
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-backdrop')) { closeModal(); closeBuyModal(); }
+});
+</script>
+</body>
+</html>

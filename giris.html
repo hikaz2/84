@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş Yap – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="kayit.html">Kayıt Ol</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <a href="index.html"><span class="brand-icon">💼</span> HesapHub</a>
+    </div>
+    <h1 class="auth-title">Tekrar Hoş Geldiniz!</h1>
+    <p class="auth-subtitle">Hesabınıza giriş yapın</p>
+
+    <div id="errorAlert" class="alert alert-danger" style="display:none"></div>
+    <div id="successAlert" class="alert alert-success" style="display:none"></div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="loginId">Kullanıcı Adı veya E-posta <span>*</span></label>
+        <input type="text" class="form-control" id="loginId" placeholder="kullaniciadi veya email@örnek.com" required>
+        <div class="invalid-feedback">Bu alan zorunludur.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="loginPass">Şifre <span>*</span></label>
+        <div style="position:relative">
+          <input type="password" class="form-control" id="loginPass" placeholder="Şifrenizi girin" required style="padding-right:2.5rem">
+          <button type="button" onclick="togglePass('loginPass','eyeBtn')" id="eyeBtn" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--gray)">👁</button>
+        </div>
+        <div class="invalid-feedback">Bu alan zorunludur.</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
+        <label class="form-check">
+          <input type="checkbox" id="rememberMe">
+          <span>Beni hatırla</span>
+        </label>
+        <a href="#" style="font-size:.875rem;color:var(--primary)">Şifremi unuttum?</a>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Giriş Yap</button>
+    </form>
+
+    <div class="auth-divider">veya</div>
+
+    <div style="display:flex;flex-direction:column;gap:.75rem">
+      <button class="btn btn-outline btn-block" onclick="demoLogin()">🎭 Demo Hesabıyla Giriş</button>
+    </div>
+
+    <div class="auth-footer">
+      Hesabın yok mu? <a href="kayit.html">Kayıt Ol</a>
+    </div>
+  </div>
+</main>
+
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (isLoggedIn()) window.location.href = 'index.html';
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const id = document.getElementById('loginId').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const err = document.getElementById('errorAlert');
+  err.style.display = 'none';
+
+  let valid = true;
+  if (!id) { document.getElementById('loginId').classList.add('is-invalid'); valid = false; } else document.getElementById('loginId').classList.remove('is-invalid');
+  if (!pass) { document.getElementById('loginPass').classList.add('is-invalid'); valid = false; } else document.getElementById('loginPass').classList.remove('is-invalid');
+  if (!valid) return;
+
+  const result = login(id, pass);
+  if (result.success) {
+    showToast('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    setTimeout(() => { window.location.href = redirect || 'index.html'; }, 800);
+  } else {
+    err.textContent = result.message;
+    err.style.display = 'flex';
+  }
+});
+
+function demoLogin() {
+  const users = getUsers();
+  let demo = users.find(u => u.username === 'demo_kullanici');
+  if (!demo) {
+    register({ username: 'demo_kullanici', email: 'demo@hesaphub.com', password: 'demo123' });
+    demo = { username: 'demo_kullanici', password: 'demo123' };
+  }
+  const result = login('demo_kullanici', 'demo123');
+  if (result.success) {
+    showToast('Demo hesabıyla giriş yapıldı!', 'success');
+    setTimeout(() => { window.location.href = 'index.html'; }, 800);
+  }
+}
+
+function togglePass(id, btnId) {
+  const inp = document.getElementById(id);
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+</script>
+</body>
+</html>

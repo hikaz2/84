@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilim – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <div class="navbar-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="İlan ara..." id="searchInput">
+            <button class="btn" onclick="doSearch()">🔍</button>
+          </div>
+        </div>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <div class="container">
+      <div class="profile-info">
+        <div class="profile-avatar" id="profileAvatar">?</div>
+        <div class="profile-details">
+          <div class="profile-name" id="profileName">Kullanıcı</div>
+          <div class="profile-username" id="profileUsername">@kullanici</div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="badge badge-primary">✅ Üye</span>
+            <span class="badge badge-secondary" id="memberBadge">Yeni Üye</span>
+          </div>
+          <div class="profile-stats">
+            <div><span class="profile-stat-num" id="statIlanlar">0</span><span class="profile-stat-label">İlan</span></div>
+            <div><span class="profile-stat-num">5.0</span><span class="profile-stat-label">Puan</span></div>
+            <div><span class="profile-stat-num" id="statFavs">0</span><span class="profile-stat-label">Favori</span></div>
+          </div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap">
+          <a href="ayarlar.html" class="btn btn-outline-white btn-sm">⚙️ Ayarlar</a>
+          <a href="ilan-ver.html" class="btn btn-secondary btn-sm">➕ İlan Ver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:2rem;padding-bottom:3rem">
+    <!-- Not logged in warning -->
+    <div id="notLoggedIn" style="display:none" class="empty-state">
+      <div class="empty-state-icon">🔐</div>
+      <h3>Giriş Yapmanız Gerekiyor</h3>
+      <p>Profilinizi görüntülemek için giriş yapın.</p>
+      <a href="giris.html" class="btn btn-primary">Giriş Yap</a>
+    </div>
+
+    <div id="profileContent">
+      <!-- Tabs -->
+      <div class="tabs" id="profileTabs">
+        <button class="tab-btn active" onclick="switchTab('listings')">📋 İlanlarım</button>
+        <button class="tab-btn" onclick="switchTab('favorites')">❤️ Favorilerim</button>
+        <button class="tab-btn" onclick="switchTab('activity')">📊 Aktivite</button>
+      </div>
+
+      <!-- Tab: Listings -->
+      <div class="tab-content active" id="tab-listings">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+          <h2 style="font-size:1.25rem">Aktif İlanlarım</h2>
+          <a href="ilan-ver.html" class="btn btn-primary btn-sm">➕ Yeni İlan</a>
+        </div>
+        <div class="listings-grid" id="myListings"></div>
+        <div class="empty-state" id="noListings" style="display:none">
+          <div class="empty-state-icon">📝</div>
+          <h3>Henüz İlan Vermediniz</h3>
+          <p>İlk ilanınızı vererek satışa başlayın!</p>
+          <a href="ilan-ver.html" class="btn btn-primary">İlan Ver</a>
+        </div>
+      </div>
+
+      <!-- Tab: Favorites -->
+      <div class="tab-content" id="tab-favorites">
+        <h2 style="font-size:1.25rem;margin-bottom:1.5rem">Favori İlanlarım</h2>
+        <div class="listings-grid" id="myFavorites"></div>
+        <div class="empty-state" id="noFavorites" style="display:none">
+          <div class="empty-state-icon">🤍</div>
+          <h3>Favori İlan Yok</h3>
+          <p>İlanları favorilere ekleyerek takip edin.</p>
+          <a href="ilanlar.html" class="btn btn-primary">İlanları Gör</a>
+        </div>
+      </div>
+
+      <!-- Tab: Activity -->
+      <div class="tab-content" id="tab-activity">
+        <h2 style="font-size:1.25rem;margin-bottom:1.5rem">Hesap Bilgileri</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
+          <div class="card">
+            <div class="card-body" style="text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">📋</div>
+              <div style="font-size:2rem;font-weight:900;color:var(--primary)" id="actIlan">0</div>
+              <div style="font-size:.875rem;color:var(--gray)">Toplam İlan</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">❤️</div>
+              <div style="font-size:2rem;font-weight:900;color:var(--danger)" id="actFav">0</div>
+              <div style="font-size:.875rem;color:var(--gray)">Favori İlan</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">👁</div>
+              <div style="font-size:2rem;font-weight:900;color:var(--secondary)" id="actViews">0</div>
+              <div style="font-size:.875rem;color:var(--gray)">Toplam Görüntülenme</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body" style="text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:.5rem">⭐</div>
+              <div style="font-size:2rem;font-weight:900;color:var(--warning)">5.0</div>
+              <div style="font-size:.875rem;color:var(--gray)">Puan</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3 style="margin:0;font-size:1rem">👤 Hesap Bilgileri</h3></div>
+          <div class="card-body">
+            <div style="display:grid;gap:.75rem">
+              <div style="display:flex;justify-content:space-between;padding-bottom:.75rem;border-bottom:1px solid var(--border)">
+                <span style="color:var(--gray)">Kullanıcı Adı</span><strong id="infoUsername"></strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:.75rem;border-bottom:1px solid var(--border)">
+                <span style="color:var(--gray)">E-posta</span><strong id="infoEmail"></strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:.75rem;border-bottom:1px solid var(--border)">
+                <span style="color:var(--gray)">Üyelik Tarihi</span><strong id="infoMember"></strong>
+              </div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--gray)">Hesap Durumu</span><span class="badge badge-success">Aktif</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="ayarlar.html" class="btn btn-outline btn-sm">Bilgileri Düzenle ⚙️</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;justify-content:center">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const u = getUser();
+  if (!u) {
+    document.getElementById('notLoggedIn').style.display = 'block';
+    document.getElementById('profileContent').style.display = 'none';
+    return;
+  }
+  renderProfile(u);
+});
+
+function renderProfile(u) {
+  document.title = u.username + ' – HesapHub';
+  document.getElementById('profileAvatar').textContent = u.username[0].toUpperCase();
+  document.getElementById('profileName').textContent = u.username;
+  document.getElementById('profileUsername').textContent = '@' + u.username;
+  document.getElementById('infoUsername').textContent = u.username;
+  document.getElementById('infoEmail').textContent = u.email;
+  document.getElementById('infoMember').textContent = fmtDate(u.memberSince);
+
+  const myListings = getUserListings(u.username);
+  const myFavIds = getFavs();
+  const allListings = getListings();
+  const myFavListings = allListings.filter(l => myFavIds.includes(l.id));
+  const totalViews = myListings.reduce((s,l) => s + (l.views||0), 0);
+
+  document.getElementById('statIlanlar').textContent = myListings.length;
+  document.getElementById('statFavs').textContent = myFavListings.length;
+  document.getElementById('actIlan').textContent = myListings.length;
+  document.getElementById('actFav').textContent = myFavListings.length;
+  document.getElementById('actViews').textContent = totalViews;
+
+  const since = new Date(u.memberSince);
+  const months = Math.floor((new Date() - since) / (1000*60*60*24*30));
+  document.getElementById('memberBadge').textContent = months < 1 ? 'Yeni Üye' : months + ' Aydır Üye';
+
+  // Listings tab
+  const lg = document.getElementById('myListings');
+  if (myListings.length) { lg.innerHTML = myListings.map(renderCard).join(''); document.getElementById('noListings').style.display='none'; }
+  else { lg.innerHTML = ''; document.getElementById('noListings').style.display='block'; }
+
+  // Favorites tab
+  const fg = document.getElementById('myFavorites');
+  if (myFavListings.length) { fg.innerHTML = myFavListings.map(renderCard).join(''); document.getElementById('noFavorites').style.display='none'; }
+  else { fg.innerHTML = ''; document.getElementById('noFavorites').style.display='block'; }
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  const tabs = ['listings','favorites','activity'];
+  const idx = tabs.indexOf(name);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+</script>
+</body>
+</html>

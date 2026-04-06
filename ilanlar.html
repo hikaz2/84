@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlanlar – HesapHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="announcement-bar">🔥 Yeni ilanlar her gün ekleniyor! <a href="ilan-ver.html">İlan vermek için tıklayın →</a></div>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand"><span class="brand-icon">💼</span> HesapHub</a>
+        <div class="navbar-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="İlan ara..." id="searchInput">
+            <button class="btn" onclick="doSearch()">🔍</button>
+          </div>
+        </div>
+        <ul class="navbar-nav">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li id="ilanVerLink" style="display:none"><a href="ilan-ver.html">İlan Ver</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <div id="authButtons" style="display:flex;gap:.5rem">
+            <a href="giris.html" class="btn btn-outline-white btn-sm">Giriş Yap</a>
+            <a href="kayit.html" class="btn btn-secondary btn-sm">Kayıt Ol</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display:none">
+            <button class="user-menu-toggle" id="userMenuToggle">
+              <span class="user-avatar" id="userInitial">?</span>
+              <span id="userMenuName">Kullanıcı</span> ▾
+            </button>
+            <div class="dropdown-menu" id="userDropdown">
+              <a href="profil.html" class="dropdown-item">👤 Profilim</a>
+              <a href="ilan-ver.html" class="dropdown-item">➕ İlan Ver</a>
+              <a href="ayarlar.html" class="dropdown-item">⚙️ Ayarlar</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="logout()">🚪 Çıkış Yap</button>
+            </div>
+          </div>
+          <button class="navbar-toggle" id="navToggle">☰</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="category-bar">
+    <div class="container">
+      <div class="category-bar-inner">
+        <a href="ilanlar.html" class="cat-link">🌟 Tümü</a>
+        <a href="ilanlar.html?kategori=instagram" class="cat-link">📸 Instagram</a>
+        <a href="ilanlar.html?kategori=tiktok" class="cat-link">🎵 TikTok</a>
+        <a href="ilanlar.html?kategori=youtube" class="cat-link">🎬 YouTube</a>
+        <a href="ilanlar.html?kategori=twitter" class="cat-link">🐦 Twitter/X</a>
+        <a href="ilanlar.html?kategori=facebook" class="cat-link">📘 Facebook</a>
+        <a href="ilanlar.html?kategori=oyun" class="cat-link">🎮 Oyun Hesapları</a>
+        <a href="ilanlar.html?kategori=web" class="cat-link">💻 Web Siteleri</a>
+        <a href="ilanlar.html?kategori=diger" class="cat-link">📱 Diğer</a>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilanlar.html">İlanlar</a></li>
+      <li><a href="ilan-ver.html">İlan Ver</a></li>
+      <li><a href="giris.html">Giriş Yap</a></li>
+      <li><a href="kayit.html">Kayıt Ol</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <div class="container" style="padding-top:2rem;padding-bottom:3rem">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="index.html">Ana Sayfa</a> <span>›</span> <span id="breadcrumbCat">İlanlar</span>
+      </div>
+      <h1 class="page-title" id="pageTitle">Tüm İlanlar</h1>
+      <p class="page-subtitle" id="pageSubtitle">Güvenli hesap alım satımı için doğru adres</p>
+    </div>
+
+    <div class="page-with-sidebar">
+
+      <!-- SIDEBAR FILTERS -->
+      <aside class="filters-sidebar">
+        <div class="filter-group">
+          <div class="filter-title">📂 Kategoriler</div>
+          <div id="catFilters">
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="" checked onchange="applyFilters()"> 🌟 Tümü</label>
+              <span class="cnt" id="cntTumu">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="instagram" onchange="applyFilters()"> 📸 Instagram</label>
+              <span class="cnt" id="cntInstagram">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="tiktok" onchange="applyFilters()"> 🎵 TikTok</label>
+              <span class="cnt" id="cntTiktok">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="youtube" onchange="applyFilters()"> 🎬 YouTube</label>
+              <span class="cnt" id="cntYoutube">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="twitter" onchange="applyFilters()"> 🐦 Twitter/X</label>
+              <span class="cnt" id="cntTwitter">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="facebook" onchange="applyFilters()"> 📘 Facebook</label>
+              <span class="cnt" id="cntFacebook">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="oyun" onchange="applyFilters()"> 🎮 Oyun Hesapları</label>
+              <span class="cnt" id="cntOyun">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="web" onchange="applyFilters()"> 💻 Web Siteleri</label>
+              <span class="cnt" id="cntWeb">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="radio" name="cat" value="diger" onchange="applyFilters()"> 📱 Diğer</label>
+              <span class="cnt" id="cntDiger">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">💰 Fiyat Aralığı</div>
+          <div class="price-range">
+            <input type="number" id="minPrice" placeholder="Min ₺" min="0" onchange="applyFilters()">
+            <span>–</span>
+            <input type="number" id="maxPrice" placeholder="Max ₺" min="0" onchange="applyFilters()">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">⭐ İlan Türü</div>
+          <div class="filter-option">
+            <label><input type="checkbox" id="featuredOnly" onchange="applyFilters()"> Sadece öne çıkanlar</label>
+          </div>
+        </div>
+
+        <button class="btn btn-outline btn-block" onclick="resetFilters()" style="margin-top:.5rem">🔄 Filtreleri Sıfırla</button>
+      </aside>
+
+      <!-- LISTINGS -->
+      <div>
+        <div class="sort-bar">
+          <div class="sort-bar-left">
+            <strong id="resultCount">0</strong> ilan bulundu
+          </div>
+          <div class="sort-bar-right">
+            <label style="font-size:.875rem;color:var(--gray)">Sırala:</label>
+            <select id="sortSelect" onchange="applyFilters()">
+              <option value="newest">En Yeni</option>
+              <option value="oldest">En Eski</option>
+              <option value="priceAsc">Fiyat: Düşük → Yüksek</option>
+              <option value="priceDesc">Fiyat: Yüksek → Düşük</option>
+              <option value="views">En Çok Görüntülenen</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="listingsGrid" class="listings-grid"></div>
+
+        <div class="empty-state" id="emptyState" style="display:none">
+          <div class="empty-state-icon">🔍</div>
+          <h3>İlan Bulunamadı</h3>
+          <p>Arama kriterlerinize uygun ilan bulunamadı. Filtreleri değiştirmeyi deneyin.</p>
+          <button class="btn btn-primary" onclick="resetFilters()">Filtreleri Temizle</button>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;justify-content:center">
+      <p>© 2024 HesapHub. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+const PER_PAGE = 12;
+let currentPage = 1;
+let filteredListings = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const kat = params.get('kategori');
+  const q = params.get('q');
+
+  if (kat) {
+    const radio = document.querySelector(`input[name="cat"][value="${kat}"]`);
+    if (radio) radio.checked = true;
+    const catTitle = { instagram:'Instagram', tiktok:'TikTok', youtube:'YouTube', twitter:'Twitter/X', facebook:'Facebook', oyun:'Oyun Hesapları', web:'Web Siteleri', diger:'Diğer' };
+    document.getElementById('pageTitle').textContent = (catTitle[kat] || kat) + ' İlanları';
+    document.getElementById('breadcrumbCat').textContent = catTitle[kat] || kat;
+  }
+  if (q) {
+    document.getElementById('searchInput').value = q;
+    document.getElementById('pageTitle').textContent = '"' + q + '" için sonuçlar';
+  }
+
+  updateCounts();
+  applyFilters();
+});
+
+function updateCounts() {
+  const counts = getCatCounts();
+  const total = getListings().length;
+  document.getElementById('cntTumu').textContent = total;
+  ['instagram','tiktok','youtube','twitter','facebook','oyun','web','diger'].forEach(c => {
+    const el = document.getElementById('cnt' + c.charAt(0).toUpperCase() + c.slice(1));
+    if (el) el.textContent = counts[c] || 0;
+  });
+}
+
+function applyFilters() {
+  const cat = document.querySelector('input[name="cat"]:checked')?.value || '';
+  const minP = parseFloat(document.getElementById('minPrice').value) || 0;
+  const maxP = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+  const featOnly = document.getElementById('featuredOnly').checked;
+  const sort = document.getElementById('sortSelect').value;
+  const q = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+  const urlQ = new URLSearchParams(window.location.search).get('q')?.toLowerCase() || '';
+  const query = q || urlQ;
+
+  let list = getListings();
+  if (cat) list = list.filter(l => l.category === cat);
+  if (query) list = list.filter(l => l.title.toLowerCase().includes(query) || l.description.toLowerCase().includes(query) || (CAT_NAMES[l.category] || '').toLowerCase().includes(query));
+  if (minP) list = list.filter(l => l.price >= minP);
+  if (maxP !== Infinity) list = list.filter(l => l.price <= maxP);
+  if (featOnly) list = list.filter(l => l.featured);
+
+  if (sort === 'newest') list.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  else if (sort === 'oldest') list.sort((a,b) => new Date(a.createdAt) - new Date(b.createdAt));
+  else if (sort === 'priceAsc') list.sort((a,b) => a.price - b.price);
+  else if (sort === 'priceDesc') list.sort((a,b) => b.price - a.price);
+  else if (sort === 'views') list.sort((a,b) => (b.views||0) - (a.views||0));
+
+  filteredListings = list;
+  currentPage = 1;
+  renderPage();
+}
+
+const CAT_NAMES = { instagram:'Instagram', tiktok:'TikTok', youtube:'YouTube', twitter:'Twitter/X', facebook:'Facebook', oyun:'Oyun Hesabı', web:'Web Sitesi', diger:'Diğer' };
+
+function renderPage() {
+  const grid = document.getElementById('listingsGrid');
+  const empty = document.getElementById('emptyState');
+  const countEl = document.getElementById('resultCount');
+  const total = filteredListings.length;
+  countEl.textContent = total;
+
+  if (total === 0) { grid.innerHTML = ''; empty.style.display = 'block'; renderPagination(0); return; }
+  empty.style.display = 'none';
+
+  const start = (currentPage - 1) * PER_PAGE;
+  const page = filteredListings.slice(start, start + PER_PAGE);
+  grid.innerHTML = page.map(renderCard).join('');
+  renderPagination(Math.ceil(total / PER_PAGE));
+}
+
+function renderPagination(totalPages) {
+  const el = document.getElementById('pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  let html = '';
+  html += `<a class="page-link${currentPage===1?' disabled':''}" onclick="changePage(${currentPage-1})">‹</a>`;
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage-1 && i <= currentPage+1)) {
+      html += `<a class="page-link${i===currentPage?' active':''}" onclick="changePage(${i})">${i}</a>`;
+    } else if (i === currentPage-2 || i === currentPage+2) {
+      html += `<span class="page-link disabled">…</span>`;
+    }
+  }
+  html += `<a class="page-link${currentPage===totalPages?' disabled':''}" onclick="changePage(${currentPage+1})">›</a>`;
+  el.innerHTML = html;
+}
+
+function changePage(p) {
+  const totalPages = Math.ceil(filteredListings.length / PER_PAGE);
+  if (p < 1 || p > totalPages) return;
+  currentPage = p;
+  renderPage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetFilters() {
+  document.querySelector('input[name="cat"][value=""]').checked = true;
+  document.getElementById('minPrice').value = '';
+  document.getElementById('maxPrice').value = '';
+  document.getElementById('featuredOnly').checked = false;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value = 'newest';
+  history.replaceState(null,'','ilanlar.html');
+  document.getElementById('pageTitle').textContent = 'Tüm İlanlar';
+  document.getElementById('breadcrumbCat').textContent = 'İlanlar';
+  applyFilters();
+}
+</script>
+</body>
+</html>
