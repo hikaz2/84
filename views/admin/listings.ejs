@@ -1,0 +1,110 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('./partials/sidebar') %>
+  <div class="admin-content">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <h1 style="font-size:1.5rem;font-weight:800;">📋 İlan Yönetimi</h1>
+      <span style="color:#888;font-size:0.9rem;"><%= total %> ilan</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-body" style="padding:16px;">
+        <form method="GET" action="/admin/ilanlar" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <input type="text" name="arama" class="form-control" placeholder="İlan veya kullanıcı ara..." value="<%= arama || '' %>" style="flex:1;min-width:200px;">
+          <select name="durum" class="form-control" style="width:auto;">
+            <option value="">Tüm Durumlar</option>
+            <option value="pending" <%= durum === 'pending' ? 'selected' : '' %>>Onay Bekliyor</option>
+            <option value="active" <%= durum === 'active' ? 'selected' : '' %>>Aktif</option>
+            <option value="sold" <%= durum === 'sold' ? 'selected' : '' %>>Satıldı</option>
+          </select>
+          <button type="submit" class="btn btn-primary">Filtrele</button>
+          <a href="/admin/ilanlar" class="btn btn-outline">Sıfırla</a>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>İlan</th>
+              <th>Kullanıcı</th>
+              <th>Kategori</th>
+              <th>Fiyat</th>
+              <th>Görüntü</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% listings.forEach(l => { %>
+            <tr style="<%= !l.approved && l.status !== 'rejected' ? 'background:#fffbf0;' : '' %>">
+              <td style="max-width:200px;">
+                <a href="/ilanlar/<%= l.uuid %>" target="_blank" style="font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  <%= l.title %>
+                </a>
+                <% if (!l.approved && l.status === 'active') { %>
+                  <span style="font-size:0.7rem;color:var(--warning);font-weight:700;">⏳ ONAY BEKLİYOR</span>
+                <% } %>
+                <% if (l.is_featured) { %>
+                  <span style="font-size:0.7rem;color:var(--primary);">⭐ Öne Çıkan</span>
+                <% } %>
+              </td>
+              <td><a href="/profil/<%= l.username %>" style="color:var(--primary);font-weight:600;"><%= l.username %></a></td>
+              <td style="font-size:0.85rem;color:#888;"><%= l.category_name %></td>
+              <td><strong>₺<%= parseFloat(l.price).toFixed(2) %></strong></td>
+              <td style="font-size:0.85rem;"><%= l.view_count %></td>
+              <td>
+                <span class="badge 
+                  <%= l.status === 'active' && l.approved ? 'badge-green' : 
+                     l.status === 'sold' ? 'badge-blue' : 
+                     l.status === 'rejected' ? 'badge-red' : 'badge-yellow' %>">
+                  <%= l.status === 'active' && l.approved ? 'Aktif' : 
+                     l.status === 'sold' ? 'Satıldı' : 
+                     l.status === 'rejected' ? 'Reddedildi' : 'Bekliyor' %>
+                </span>
+              </td>
+              <td style="font-size:0.8rem;color:#888;"><%= new Date(l.created_at).toLocaleDateString('tr-TR') %></td>
+              <td>
+                <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                  <% if (!l.approved && l.status === 'active') { %>
+                    <form action="/admin/ilanlar/<%= l.id %>/onayla" method="POST">
+                      <button class="btn btn-success btn-sm" title="Onayla"><i class="fas fa-check"></i></button>
+                    </form>
+                    <form action="/admin/ilanlar/<%= l.id %>/reddet" method="POST" onsubmit="var r=prompt('Reddetme sebebi?');if(!r)return false;this.querySelector('input[name=reason]').value=r;">
+                      <input type="hidden" name="reason" value="Uygunsuz içerik">
+                      <button class="btn btn-danger btn-sm" title="Reddet"><i class="fas fa-times"></i></button>
+                    </form>
+                  <% } %>
+                  <form action="/admin/ilanlar/<%= l.id %>/one-cikan" method="POST">
+                    <button class="btn btn-outline btn-sm" title="<%= l.is_featured ? 'Öne Çıkan Kaldır' : 'Öne Çıkar' %>">⭐</button>
+                  </form>
+                  <form action="/admin/ilanlar/<%= l.id %>/sil" method="POST" onsubmit="return confirm('İlanı silmek istediğinizden emin misiniz?')">
+                    <button class="btn btn-danger btn-sm" title="Sil"><i class="fas fa-trash"></i></button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <% if (totalPages > 1) { %>
+      <div class="card-footer">
+        <div class="pagination" style="margin-top:0;">
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="?sayfa=<%= i %>&arama=<%= arama||'' %>&durum=<%= durum||'' %>" class="page-link <%= i === page ? 'active' : '' %>"><%= i %></a>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

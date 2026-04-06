@@ -1,0 +1,23 @@
+<aside class="admin-sidebar">
+  <div style="padding:16px 20px 8px;font-size:0.75rem;font-weight:700;color:#F5C518;letter-spacing:1px;text-transform:uppercase;">Yönetici</div>
+  <a href="/admin" class="admin-nav-item <%= currentPath === '/admin' ? 'active' : '' %>">
+    <i class="fas fa-tachometer-alt"></i> Dashboard
+  </a>
+  <div class="admin-nav-label">YÖNETİM</div>
+  <a href="/admin/kullanicilar" class="admin-nav-item <%= currentPath.startsWith('/admin/kullanicilar') ? 'active' : '' %>">
+    <i class="fas fa-users"></i> Kullanıcılar
+  </a>
+  <a href="/admin/ilanlar" class="admin-nav-item <%= currentPath.startsWith('/admin/ilanlar') ? 'active' : '' %>">
+    <i class="fas fa-list"></i> İlanlar
+  </a>
+  <a href="/admin/islemler" class="admin-nav-item <%= currentPath.startsWith('/admin/islemler') ? 'active' : '' %>">
+    <i class="fas fa-exchange-alt"></i> İşlemler
+  </a>
+  <div class="admin-nav-label">SİSTEM</div>
+  <a href="/admin/ayarlar" class="admin-nav-item <%= currentPath.startsWith('/admin/ayarlar') ? 'active' : '' %>">
+    <i class="fas fa-cogs"></i> Site Ayarları
+  </a>
+  <div class="admin-nav-label">KISA YOLLAR</div>
+  <a href="/" class="admin-nav-item"><i class="fas fa-home"></i> Siteye Dön</a>
+  <a href="/cikis" class="admin-nav-item" style="color:#ff6b6b;"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+</aside>

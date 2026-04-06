@@ -1,0 +1,76 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('./partials/sidebar') %>
+  <div class="admin-content">
+    <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:24px;">⚙️ Site Ayarları</h1>
+
+    <% if (success) { %>
+      <div class="alert alert-success alert-auto-dismiss"><i class="fas fa-check-circle"></i> Ayarlar kaydedildi.</div>
+    <% } %>
+
+    <form action="/admin/ayarlar" method="POST">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card">
+          <div class="card-header">🌐 Genel Ayarlar</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Site Adı</label>
+              <input type="text" name="site_name" class="form-control" value="<%= settings.site_name || 'HesapSat' %>">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Site Açıklaması</label>
+              <textarea name="site_description" class="form-control" rows="3"><%= settings.site_description || '' %></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">İlan Süresi (Gün)</label>
+              <input type="number" name="listing_duration_days" class="form-control" value="<%= settings.listing_duration_days || 30 %>" min="1" max="365">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">💰 Ödeme Ayarları</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Platform Komisyonu (%)</label>
+              <input type="number" name="platform_fee" class="form-control" value="<%= settings.platform_fee || 5 %>" min="0" max="50" step="0.5">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Minimum Çekim Tutarı (₺)</label>
+              <input type="number" name="min_withdrawal" class="form-control" value="<%= settings.min_withdrawal || 50 %>" min="1">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">🔧 Sistem Ayarları</div>
+          <div class="card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:14px;background:#f8f8f8;border-radius:8px;">
+              <div>
+                <div style="font-weight:600;">Bakım Modu</div>
+                <div style="font-size:0.8rem;color:#888;">Aktif olduğunda sadece adminler erişebilir</div>
+              </div>
+              <input type="checkbox" name="maintenance_mode" <%= settings.maintenance_mode === '1' ? 'checked' : '' %> style="width:20px;height:20px;cursor:pointer;">
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:#f8f8f8;border-radius:8px;">
+              <div>
+                <div style="font-weight:600;">Üye Kayıtları</div>
+                <div style="font-size:0.8rem;color:#888;">Yeni üye kayıtlarına izin ver</div>
+              </div>
+              <input type="checkbox" name="registration_open" <%= settings.registration_open !== '0' ? 'checked' : '' %> style="width:20px;height:20px;cursor:pointer;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <button type="submit" class="btn btn-primary btn-lg">
+          <i class="fas fa-save"></i> Ayarları Kaydet
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

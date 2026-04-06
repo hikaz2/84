@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<div class="admin-layout">
+  <%- include('./partials/sidebar') %>
+  <div class="admin-content">
+    <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:24px;">💸 İşlem Yönetimi</h1>
+
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>İlan</th>
+              <th>Alıcı</th>
+              <th>Satıcı</th>
+              <th>Tutar</th>
+              <th>Komisyon</th>
+              <th>Yöntem</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% transactions.forEach(t => { %>
+            <tr>
+              <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;font-size:0.85rem;"><%= t.listing_title %></td>
+              <td style="font-size:0.85rem;"><%= t.buyer_name %></td>
+              <td style="font-size:0.85rem;"><%= t.seller_name %></td>
+              <td><strong>₺<%= parseFloat(t.amount).toFixed(2) %></strong></td>
+              <td style="color:#888;font-size:0.85rem;">₺<%= parseFloat(t.platform_fee || 0).toFixed(2) %></td>
+              <td style="font-size:0.8rem;"><span class="badge badge-blue"><%= t.payment_method || 'balance' %></span></td>
+              <td>
+                <span class="badge <%= t.status === 'completed' ? 'badge-green' : t.status === 'pending' ? 'badge-yellow' : 'badge-red' %>">
+                  <%= t.status === 'completed' ? 'Tamamlandı' : t.status === 'pending' ? 'Bekliyor' : 'İptal' %>
+                </span>
+              </td>
+              <td style="font-size:0.8rem;color:#888;"><%= new Date(t.created_at).toLocaleString('tr-TR') %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <% if (totalPages > 1) { %>
+      <div class="card-footer">
+        <div class="pagination" style="margin-top:0;">
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="?sayfa=<%= i %>" class="page-link <%= i === page ? 'active' : '' %>"><%= i %></a>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

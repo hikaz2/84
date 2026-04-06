@@ -1,0 +1,107 @@
+<%- include('../partials/header') %>
+
+<div style="padding:40px 0;" class="container">
+  <!-- Filters -->
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start;">
+    <!-- Sidebar Filters -->
+    <aside>
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🔍 Filtrele</div>
+        <div class="sidebar-card-body">
+          <form method="GET" action="/ilanlar" id="filterForm">
+            <div class="form-group">
+              <label class="form-label">Kategori</label>
+              <select name="kategori" class="form-control" onchange="document.getElementById('filterForm').submit()">
+                <option value="">Tüm Kategoriler</option>
+                <% categories.forEach(cat => { %>
+                  <option value="<%= cat.slug %>" <%= kategori === cat.slug ? 'selected' : '' %>>
+                    <%= cat.icon %> <%= cat.name %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Fiyat Aralığı</label>
+              <div style="display:flex;gap:8px;">
+                <input type="number" name="min_fiyat" class="form-control" placeholder="Min ₺" value="<%= min_fiyat || '' %>" min="0">
+                <input type="number" name="max_fiyat" class="form-control" placeholder="Max ₺" value="<%= max_fiyat || '' %>" min="0">
+              </div>
+            </div>
+            <% if (arama) { %>
+              <input type="hidden" name="arama" value="<%= arama %>">
+            <% } %>
+            <button type="submit" class="btn btn-primary btn-full">Filtrele</button>
+            <a href="/ilanlar" class="btn btn-outline btn-full mt-1">Sıfırla</a>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Listings -->
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h1 style="font-size:1.4rem;font-weight:800;">
+            <% if (arama) { %>"<%= arama %>" için sonuçlar<% } else if (kategori) { %>İlanlar<% } else { %>Tüm İlanlar<% } %>
+          </h1>
+          <p style="color:#888;font-size:0.9rem;"><%= total %> ilan bulundu</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <label style="font-size:0.9rem;color:#666;">Sırala:</label>
+          <select class="form-control" style="width:auto;" onchange="sortListings(this.value)">
+            <option value="yeni" <%= siralama === 'yeni' || !siralama ? 'selected' : '' %>>En Yeni</option>
+            <option value="ucuz" <%= siralama === 'ucuz' ? 'selected' : '' %>>En Ucuz</option>
+            <option value="pahali" <%= siralama === 'pahali' ? 'selected' : '' %>>En Pahalı</option>
+            <option value="populer" <%= siralama === 'populer' ? 'selected' : '' %>>En Popüler</option>
+            <option value="one_cikan" <%= siralama === 'one_cikan' ? 'selected' : '' %>>Öne Çıkan</option>
+          </select>
+        </div>
+      </div>
+
+      <% if (listings.length > 0) { %>
+        <div class="listings-grid">
+          <% listings.forEach(listing => { %>
+            <%- include('../partials/listing-card', { listing }) %>
+          <% }) %>
+        </div>
+
+        <!-- Pagination -->
+        <% if (totalPages > 1) { %>
+        <div class="pagination">
+          <% if (page > 1) { %>
+            <a href="?sayfa=<%= page-1 %>&kategori=<%= kategori||'' %>&arama=<%= arama||'' %>&siralama=<%= siralama||'' %>&min_fiyat=<%= min_fiyat||'' %>&max_fiyat=<%= max_fiyat||'' %>" class="page-link">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+          <% } %>
+          <% for (let i = Math.max(1, page-2); i <= Math.min(totalPages, page+2); i++) { %>
+            <a href="?sayfa=<%= i %>&kategori=<%= kategori||'' %>&arama=<%= arama||'' %>&siralama=<%= siralama||'' %>&min_fiyat=<%= min_fiyat||'' %>&max_fiyat=<%= max_fiyat||'' %>"
+               class="page-link <%= i === page ? 'active' : '' %>"><%= i %></a>
+          <% } %>
+          <% if (page < totalPages) { %>
+            <a href="?sayfa=<%= page+1 %>&kategori=<%= kategori||'' %>&arama=<%= arama||'' %>&siralama=<%= siralama||'' %>&min_fiyat=<%= min_fiyat||'' %>&max_fiyat=<%= max_fiyat||'' %>" class="page-link">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          <% } %>
+        </div>
+        <% } %>
+      <% } else { %>
+        <div style="text-align:center;padding:80px 20px;background:white;border-radius:16px;border:1px solid #e0e0e0;">
+          <i class="fas fa-search" style="font-size:3rem;color:#ddd;margin-bottom:16px;display:block;"></i>
+          <h3 style="color:#666;margin-bottom:8px;">İlan bulunamadı</h3>
+          <p style="color:#999;">Farklı filtreler deneyebilir veya <a href="/ilanlar/yeni/ekle" style="color:var(--primary);">yeni ilan ekleyebilirsiniz</a>.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<script>
+function sortListings(val) {
+  const url = new URL(window.location);
+  url.searchParams.set('siralama', val);
+  url.searchParams.delete('sayfa');
+  window.location = url;
+}
+</script>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,123 @@
+<%- include('../partials/header') %>
+
+<div style="background:var(--dark);padding:40px 0;margin-bottom:0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="width:90px;height:90px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#111;border:4px solid var(--primary);flex-shrink:0;">
+        <%= profileUser.username.charAt(0).toUpperCase() %>
+      </div>
+      <div>
+        <h1 style="color:white;font-size:1.8rem;font-weight:800;"><%= profileUser.username %></h1>
+        <div style="color:#aaa;font-size:0.9rem;margin-top:6px;display:flex;gap:20px;flex-wrap:wrap;">
+          <span><i class="fas fa-star" style="color:var(--primary);"></i> <%= parseFloat(profileUser.rating || 0).toFixed(1) %> değerlendirme</span>
+          <span><i class="fas fa-shopping-bag" style="color:var(--primary);"></i> <%= profileUser.total_sales %> satış</span>
+          <span><i class="fas fa-calendar" style="color:var(--primary);"></i> <%= new Date(profileUser.created_at).toLocaleDateString('tr-TR', {month:'long',year:'numeric'}) %></span>
+          <span><i class="fas fa-wallet" style="color:var(--primary);"></i> <strong style="color:var(--primary);">₺<%= parseFloat(profileUser.balance || 0).toFixed(2) %></strong></span>
+        </div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:12px;">
+        <a href="/profil/duzenle" class="btn btn-primary"><i class="fas fa-edit"></i> Düzenle</a>
+        <a href="/bakiye/yukle" class="btn btn-dark" style="border:1px solid #444;"><i class="fas fa-plus"></i> Bakiye Yükle</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding:30px 20px;">
+  <!-- Quick Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon yellow">💰</div>
+      <div class="stat-info">
+        <div class="value">₺<%= parseFloat(profileUser.balance || 0).toFixed(2) %></div>
+        <div class="label">Bakiye</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">📦</div>
+      <div class="stat-info">
+        <div class="value"><%= listings.length %></div>
+        <div class="label">Aktif İlan</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue">🛒</div>
+      <div class="stat-info">
+        <div class="value"><%= profileUser.total_purchases || 0 %></div>
+        <div class="label">Satın Alma</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow">⭐</div>
+      <div class="stat-info">
+        <div class="value"><%= parseFloat(profileUser.rating || 0).toFixed(1) %></div>
+        <div class="label">Ortalama Puan</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:0;">
+    <!-- Recent Listings -->
+    <div class="card">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>📋 Son İlanlarım</span>
+        <a href="/profil/ilanlarim" style="font-size:0.8rem;color:var(--primary);">Tümünü Gör</a>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <% if (listings.length === 0) { %>
+          <div style="padding:24px;text-align:center;color:#888;font-size:0.9rem;">
+            Henüz ilan yok. <a href="/ilanlar/yeni/ekle" style="color:var(--primary);">İlan Ekle</a>
+          </div>
+        <% } else { %>
+          <% listings.forEach(l => { %>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f0f0;">
+            <div style="flex:1;overflow:hidden;">
+              <a href="/ilanlar/<%= l.uuid %>" style="font-weight:600;font-size:0.9rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><%= l.title %></a>
+              <div style="font-size:0.8rem;color:#888;"><%= l.category_name %></div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-weight:700;">₺<%= parseFloat(l.price).toLocaleString('tr-TR') %></div>
+              <span class="badge <%= l.status === 'active' ? 'badge-green' : 'badge-gray' %>" style="font-size:0.7rem;"><%= l.status === 'active' ? 'Aktif' : l.status === 'sold' ? 'Satıldı' : 'Pasif' %></span>
+            </div>
+          </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card">
+      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>💸 Son İşlemler</span>
+        <a href="/profil/islemler" style="font-size:0.8rem;color:var(--primary);">Tümünü Gör</a>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <% if (transactions.length === 0) { %>
+          <div style="padding:24px;text-align:center;color:#888;font-size:0.9rem;">Henüz işlem yok.</div>
+        <% } else { %>
+          <% transactions.forEach(t => { %>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f0f0f0;">
+            <div style="flex:1;overflow:hidden;">
+              <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><%= t.listing_title %></div>
+              <div style="font-size:0.8rem;color:#888;"><%= t.buyer_id === profileUser.id ? '🛒 Satın Aldım' : '💸 Sattım' %></div>
+            </div>
+            <div style="text-align:right;font-weight:700;color:<%= t.buyer_id === profileUser.id ? 'var(--danger)' : 'var(--success)' %>;">
+              <%= t.buyer_id === profileUser.id ? '-' : '+' %>₺<%= parseFloat(t.amount).toFixed(2) %>
+            </div>
+          </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+    <a href="/ilanlar/yeni/ekle" class="btn btn-primary"><i class="fas fa-plus"></i> İlan Ekle</a>
+    <a href="/mesajlar" class="btn btn-dark"><i class="fas fa-envelope"></i> Mesajlar</a>
+    <a href="/profil/favorilerim" class="btn btn-outline"><i class="fas fa-heart"></i> Favorilerim</a>
+    <a href="/profil/bildirimler" class="btn btn-outline"><i class="fas fa-bell"></i> Bildirimler</a>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

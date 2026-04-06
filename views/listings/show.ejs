@@ -1,0 +1,214 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="listing-detail-layout">
+    <!-- Left: Listing Details -->
+    <div>
+      <!-- Breadcrumb -->
+      <nav style="margin:24px 0;font-size:0.85rem;color:#888;">
+        <a href="/" style="color:#888;">Ana Sayfa</a> /
+        <a href="/ilanlar" style="color:#888;">İlanlar</a> /
+        <a href="/ilanlar?kategori=<%= listing.category_slug %>" style="color:#888;"><%= listing.category_name %></a> /
+        <span style="color:#333;"><%= listing.title.substring(0, 30) %><% if (listing.title.length > 30) { %>...<% } %></span>
+      </nav>
+
+      <!-- Images -->
+      <div class="listing-images">
+        <div class="main-image" id="mainImageContainer">
+          <% if (listing.images.length > 0) { %>
+            <img id="mainImage" src="<%= listing.images[0] %>" alt="<%= listing.title %>" style="width:100%;height:400px;object-fit:cover;border-radius:16px;">
+          <% } else { %>
+            <div style="width:100%;height:400px;background:linear-gradient(135deg,#222,#333);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:6rem;">🎮</div>
+          <% } %>
+        </div>
+        <% if (listing.images.length > 1) { %>
+        <div class="thumb-images" style="margin-top:12px;">
+          <% listing.images.forEach((img, i) => { %>
+            <img src="<%= img %>" class="thumb-image <%= i === 0 ? 'active' : '' %>" onclick="document.getElementById('mainImage').src='<%= img %>'" style="width:80px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;" alt="">
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+
+      <!-- Title & Info -->
+      <div style="background:white;border:1px solid #e0e0e0;border-radius:16px;padding:28px;margin-bottom:24px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+          <div>
+            <span class="badge badge-yellow"><%= listing.category_name %></span>
+            <% if (listing.is_urgent) { %><span class="badge badge-red" style="margin-left:6px;">🔥 Acil</span><% } %>
+            <% if (listing.is_featured) { %><span class="badge" style="margin-left:6px;background:var(--primary-light);color:#856404;">⭐ Öne Çıkan</span><% } %>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.85rem;color:#888;">
+            <span><i class="fas fa-eye"></i> <%= listing.view_count %> görüntülenme</span>
+            <span><i class="fas fa-heart"></i> <%= listing.favorite_count %> favori</span>
+          </div>
+        </div>
+        
+        <h1 style="font-size:1.7rem;font-weight:800;color:#111;margin-bottom:16px;"><%= listing.title %></h1>
+        
+        <div style="background:#f8f8f8;border-radius:8px;padding:20px;margin-bottom:20px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:#333;">📋 İlan Açıklaması</h3>
+          <p style="line-height:1.8;color:#555;white-space:pre-wrap;"><%= listing.description %></p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+          <div style="background:#f8f8f8;border-radius:8px;padding:14px;">
+            <div style="font-size:0.75rem;color:#888;margin-bottom:4px;">TESLİMAT</div>
+            <div style="font-weight:700;font-size:0.9rem;">
+              <%= listing.delivery_type === 'digital' ? '⚡ Dijital Teslimat' : '📦 Fiziksel Teslimat' %>
+            </div>
+          </div>
+          <div style="background:#f8f8f8;border-radius:8px;padding:14px;">
+            <div style="font-size:0.75rem;color:#888;margin-bottom:4px;">İLAN TARİHİ</div>
+            <div style="font-weight:700;font-size:0.9rem;"><%= new Date(listing.created_at).toLocaleDateString('tr-TR') %></div>
+          </div>
+          <div style="background:#f8f8f8;border-radius:8px;padding:14px;">
+            <div style="font-size:0.75rem;color:#888;margin-bottom:4px;">DURUM</div>
+            <div style="font-weight:700;font-size:0.9rem;color:var(--success);">✓ Aktif</div>
+          </div>
+        </div>
+
+        <% if (listing.tags.length > 0) { %>
+        <div style="margin-top:20px;">
+          <div style="font-size:0.85rem;color:#888;margin-bottom:8px;">Etiketler:</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <% listing.tags.forEach(tag => { %>
+              <a href="/ilanlar?arama=<%= tag %>" style="background:#f0f0f0;color:#555;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">#<%= tag %></a>
+            <% }) %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <!-- Reviews -->
+      <% if (reviews.length > 0) { %>
+      <div style="background:white;border:1px solid #e0e0e0;border-radius:16px;padding:28px;margin-bottom:24px;">
+        <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:20px;">⭐ Değerlendirmeler</h2>
+        <% reviews.forEach(review => { %>
+        <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0;">
+          <div style="width:40px;height:40px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;color:#111;">
+            <%= review.reviewer_username ? review.reviewer_username.charAt(0).toUpperCase() : '?' %>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <strong><%= review.reviewer_username %></strong>
+              <div style="color:var(--primary);">
+                <% for(let i = 0; i < review.rating; i++) { %>⭐<% } %>
+              </div>
+            </div>
+            <p style="color:#555;font-size:0.9rem;"><%= review.comment || 'Yorum yok.' %></p>
+            <div style="font-size:0.75rem;color:#999;margin-top:4px;"><%= new Date(review.created_at).toLocaleDateString('tr-TR') %></div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+
+      <!-- Similar Listings -->
+      <% if (similar.length > 0) { %>
+      <div>
+        <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:20px;">Benzer İlanlar</h2>
+        <div class="listings-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+          <% similar.forEach(s => { %>
+            <%- include('../partials/listing-card', { listing: s }) %>
+          <% }) %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Right: Purchase Box -->
+    <div>
+      <div style="position:sticky;top:80px;">
+        <!-- Price Box -->
+        <div class="price-box" style="margin-bottom:16px;">
+          <div class="price-label">Satış Fiyatı</div>
+          <div class="price">₺<%= parseFloat(listing.price).toLocaleString('tr-TR') %></div>
+          <div style="font-size:0.8rem;color:#aaa;margin-top:6px;">Platform komisyonu dahil değildir</div>
+        </div>
+
+        <% if (listing.status === 'sold') { %>
+          <div class="alert alert-danger" style="text-align:center;">Bu ilan satıldı.</div>
+        <% } else if (user && user.id === listing.user_id) { %>
+          <a href="/ilanlar/duzenle/<%= listing.uuid %>" class="btn btn-dark btn-full btn-lg" style="margin-bottom:10px;">
+            <i class="fas fa-edit"></i> İlanı Düzenle
+          </a>
+          <form action="/ilanlar/sil/<%= listing.uuid %>" method="POST" onsubmit="return confirm('İlanı silmek istediğinizden emin misiniz?')">
+            <button type="submit" class="btn btn-danger btn-full">
+              <i class="fas fa-trash"></i> İlanı Sil
+            </button>
+          </form>
+        <% } else { %>
+          <% if (user) { %>
+            <a href="/odeme/<%= listing.uuid %>" class="btn btn-primary btn-full btn-lg" style="margin-bottom:10px;">
+              <i class="fas fa-shopping-cart"></i> Satın Al
+            </a>
+            <form action="/mesajlar/yeni" method="POST">
+              <input type="hidden" name="receiver_id" value="<%= listing.user_id %>">
+              <input type="hidden" name="listing_uuid" value="<%= listing.uuid %>">
+              <input type="hidden" name="message" value="Merhaba, '<%= listing.title %>' ilanınızla ilgileniyorum.">
+              <button type="submit" class="btn btn-outline btn-full" style="margin-bottom:10px;">
+                <i class="fas fa-comment"></i> Mesaj Gönder
+              </button>
+            </form>
+            <form action="/ilanlar/favori/<%= listing.uuid %>" method="POST">
+              <button type="submit" class="btn btn-outline btn-full <%= isFavorited ? 'active' : '' %>">
+                <i class="fas fa-heart" style="color:<%= isFavorited ? 'var(--danger)' : '#888' %>;"></i>
+                <%= isFavorited ? 'Favorilerden Çıkar' : 'Favorilere Ekle' %>
+              </button>
+            </form>
+          <% } else { %>
+            <a href="/giris" class="btn btn-primary btn-full btn-lg" style="margin-bottom:10px;">
+              <i class="fas fa-sign-in-alt"></i> Satın Almak İçin Giriş Yap
+            </a>
+          <% } %>
+        <% } %>
+
+        <!-- Seller Card -->
+        <div class="seller-card" style="margin-top:20px;">
+          <div class="seller-info">
+            <div style="width:56px;height:56px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#111;flex-shrink:0;">
+              <%= listing.username.charAt(0).toUpperCase() %>
+            </div>
+            <div>
+              <a href="/profil/<%= listing.username %>" class="seller-name" style="display:block;font-size:1rem;"><%= listing.username %></a>
+              <div class="seller-meta">
+                <div class="rating">
+                  <span class="stars">
+                    <% for(let i = 0; i < Math.round(listing.rating || 0); i++) { %>⭐<% } %>
+                  </span>
+                  <span><%= parseFloat(listing.rating || 0).toFixed(1) %> (<%= listing.rating_count %> değerlendirme)</span>
+                </div>
+              </div>
+              <div class="seller-meta" style="margin-top:4px;">
+                <i class="fas fa-check-circle" style="color:var(--success);"></i> <%= listing.total_sales %> başarılı satış
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#888;padding-top:16px;border-top:1px solid #f0f0f0;">
+            <i class="fas fa-calendar"></i>
+            Üyelik: <%= new Date(listing.member_since).toLocaleDateString('tr-TR', {month:'long',year:'numeric'}) %>
+          </div>
+          <div style="margin-top:12px;">
+            <a href="/profil/<%= listing.username %>" class="btn btn-outline btn-full btn-sm">
+              Profili Gör
+            </a>
+          </div>
+        </div>
+
+        <!-- Safety Box -->
+        <div style="background:#f8f8f8;border-radius:12px;padding:16px;margin-top:16px;">
+          <div style="font-weight:700;margin-bottom:10px;font-size:0.9rem;">🛡️ Güvenli Alışveriş</div>
+          <ul style="list-style:none;font-size:0.8rem;color:#666;">
+            <li style="margin-bottom:6px;"><i class="fas fa-check" style="color:var(--success);margin-right:6px;"></i> Ödeme güvence altında</li>
+            <li style="margin-bottom:6px;"><i class="fas fa-check" style="color:var(--success);margin-right:6px;"></i> 7/24 müşteri desteği</li>
+            <li style="margin-bottom:6px;"><i class="fas fa-check" style="color:var(--success);margin-right:6px;"></i> Şifreli ödeme altyapısı</li>
+            <li><i class="fas fa-check" style="color:var(--success);margin-right:6px;"></i> İptal & iade imkânı</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

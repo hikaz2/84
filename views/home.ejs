@@ -1,0 +1,155 @@
+<%- include('partials/header') %>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Dijital Hesap & Ürün<br><span>Güvenli Pazaryeri</span></h1>
+    <p>Oyun hesabı, sosyal medya, yazılım ve daha fazlasını güvenle al veya sat.</p>
+    
+    <div class="hero-search">
+      <form action="/ara" method="GET" style="display:flex;width:100%;">
+        <input type="text" name="q" placeholder="Ne aramak istiyorsunuz? (LoL hesap, Steam, Instagram...)" style="flex:1;padding:18px 24px;font-size:1rem;border:none;border-radius:8px 0 0 8px;outline:none;">
+        <button type="submit" style="padding:18px 32px;background:var(--primary);color:var(--dark);font-weight:700;border:none;border-radius:0 8px 8px 0;cursor:pointer;font-size:1rem;white-space:nowrap;">
+          <i class="fas fa-search"></i> Ara
+        </button>
+      </form>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="number"><%= stats.users.toLocaleString('tr-TR') %>+</span>
+        <span class="label">Kayıtlı Üye</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number"><%= stats.listings.toLocaleString('tr-TR') %>+</span>
+        <span class="label">Aktif İlan</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number"><%= stats.transactions.toLocaleString('tr-TR') %>+</span>
+        <span class="label">Başarılı İşlem</span>
+      </div>
+      <div class="hero-stat">
+        <span class="number">%100</span>
+        <span class="label">Güvenli Ödeme</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (success) { %>
+<div class="container" style="padding-top:20px;">
+  <div class="alert alert-success alert-auto-dismiss">
+    <i class="fas fa-check-circle"></i>
+    <% if (success === 'register') { %>Hoş geldiniz! Hesabınız başarıyla oluşturuldu.
+    <% } else if (success === 'logout') { %>Başarıyla çıkış yaptınız.
+    <% } else { %>İşlem başarılı.<% } %>
+  </div>
+</div>
+<% } %>
+
+<!-- CATEGORIES -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-header">
+      <h2>Kategoriler</h2>
+      <a href="/ilanlar" class="view-all">Tümünü Gör <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="categories-grid">
+      <% categories.forEach(cat => { %>
+      <a href="/ilanlar?kategori=<%= cat.slug %>" class="category-card">
+        <span class="icon"><%= cat.icon %></span>
+        <div class="name"><%= cat.name %></div>
+        <div class="count"><%= cat.listing_count %> ilan</div>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED LISTINGS -->
+<% if (featured.length > 0) { %>
+<section class="section" style="background:var(--white);padding:60px 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2>⭐ Öne <span>Çıkan</span> İlanlar</h2>
+      <a href="/ilanlar?siralama=one_cikan" class="view-all">Tümünü Gör <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="listings-grid">
+      <% featured.forEach(listing => { %>
+        <%- include('partials/listing-card', { listing }) %>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- RECENT LISTINGS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>🆕 Son <span>Eklenenler</span></h2>
+      <a href="/ilanlar" class="view-all">Tümünü Gör <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <% if (recent.length > 0) { %>
+    <div class="listings-grid">
+      <% recent.forEach(listing => { %>
+        <%- include('partials/listing-card', { listing }) %>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div style="text-align:center;padding:60px;color:#888;">
+      <i class="fas fa-box-open" style="font-size:3rem;margin-bottom:16px;display:block;"></i>
+      <p>Henüz ilan yok. <a href="/ilanlar/yeni/ekle" style="color:var(--primary);font-weight:600;">İlk ilanı sen ekle!</a></p>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background:var(--dark);padding:80px 0;">
+  <div class="container">
+    <div class="section-header" style="justify-content:center;text-align:center;">
+      <h2 style="color:#fff;">Nasıl <span>Çalışır?</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:48px;">
+      <div style="text-align:center;color:#fff;">
+        <div style="width:72px;height:72px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;">📝</div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px;">1. İlan Oluştur</h3>
+        <p style="color:#999;font-size:0.9rem;">Satmak istediğin hesabı veya ürünü kolayca listele. Fiyatını belirle.</p>
+      </div>
+      <div style="text-align:center;color:#fff;">
+        <div style="width:72px;height:72px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;">💬</div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px;">2. Alıcı ile Konuş</h3>
+        <p style="color:#999;font-size:0.9rem;">Alıcılar ilan üzerinden sana mesaj gönderir. Detayları görüşün.</p>
+      </div>
+      <div style="text-align:center;color:#fff;">
+        <div style="width:72px;height:72px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;">🔒</div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px;">3. Güvenli Öde</h3>
+        <p style="color:#999;font-size:0.9rem;">Ödeme güvence altında yapılır. Ürün teslim alınana kadar ödeme bekler.</p>
+      </div>
+      <div style="text-align:center;color:#fff;">
+        <div style="width:72px;height:72px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;">⭐</div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px;">4. Değerlendir</h3>
+        <p style="color:#999;font-size:0.9rem;">İşlem tamamlandıktan sonra satıcıyı değerlendir, topluluğu güçlendir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container" style="text-align:center;">
+    <h2 style="font-size:2rem;font-weight:900;margin-bottom:16px;">Hemen Başla</h2>
+    <p style="color:#666;margin-bottom:32px;font-size:1.1rem;">Ücretsiz hesap oluştur ve dijital hesap alım satımına başla.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/kayit" class="btn btn-primary btn-lg">
+        <i class="fas fa-user-plus"></i> Üye Ol
+      </a>
+      <a href="/ilanlar" class="btn btn-dark btn-lg">
+        <i class="fas fa-search"></i> İlanları Gözat
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

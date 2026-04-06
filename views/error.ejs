@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+<div style="text-align:center;padding:100px 20px;min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <div style="font-size:5rem;margin-bottom:20px;">😕</div>
+  <h1 style="font-size:2rem;font-weight:800;color:#222;margin-bottom:12px;"><%= title %></h1>
+  <p style="color:#888;font-size:1.1rem;margin-bottom:32px;max-width:400px;"><%= message %></p>
+  <div style="display:flex;gap:12px;">
+    <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Ana Sayfa</a>
+    <a href="javascript:history.back()" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Geri Dön</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

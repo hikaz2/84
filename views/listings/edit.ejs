@@ -1,0 +1,92 @@
+<%- include('../partials/header') %>
+
+<div class="container" style="max-width:800px;padding:40px 20px;">
+  <div class="card">
+    <div class="card-header" style="font-size:1.4rem;">
+      <i class="fas fa-edit" style="color:var(--primary);"></i> İlanı Düzenle
+    </div>
+    <div class="card-body">
+      <% if (error) { %>
+        <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+      <% } %>
+
+      <form action="/ilanlar/duzenle/<%= listing.uuid %>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="form-label">İlan Başlığı <span class="required">*</span></label>
+          <input type="text" name="title" class="form-control" value="<%= listing.title %>" required maxlength="100">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kategori <span class="required">*</span></label>
+          <select name="category_id" class="form-control" required>
+            <option value="">-- Kategori Seçin --</option>
+            <% categories.filter(c => !c.parent_id).forEach(parent => { %>
+              <optgroup label="<%= parent.icon %> <%= parent.name %>">
+              <% categories.filter(c => c.parent_id === parent.id).forEach(sub => { %>
+                <option value="<%= sub.id %>" <%= sub.id === listing.category_id ? 'selected' : '' %>><%= sub.icon %> <%= sub.name %></option>
+              <% }) %>
+              </optgroup>
+            <% }) %>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">Fiyat (₺) <span class="required">*</span></label>
+            <input type="number" name="price" class="form-control" value="<%= listing.price %>" required min="1" step="0.01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Teslimat Türü</label>
+            <select name="delivery_type" class="form-control">
+              <option value="digital" <%= listing.delivery_type === 'digital' ? 'selected' : '' %>>⚡ Dijital</option>
+              <option value="physical" <%= listing.delivery_type === 'physical' ? 'selected' : '' %>>📦 Fiziksel</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Durum</label>
+            <select name="status" class="form-control">
+              <option value="active" <%= listing.status === 'active' ? 'selected' : '' %>>Aktif</option>
+              <option value="paused" <%= listing.status === 'paused' ? 'selected' : '' %>>Durduruldu</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Açıklama <span class="required">*</span></label>
+          <textarea name="description" class="form-control" rows="6" required maxlength="2000"><%= listing.description %></textarea>
+        </div>
+
+        <% if (listing.images.length > 0) { %>
+        <div class="form-group">
+          <label class="form-label">Mevcut Resimler</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <% listing.images.forEach(img => { %>
+              <img src="<%= img %>" style="width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid #e0e0e0;" alt="">
+            <% }) %>
+          </div>
+        </div>
+        <% } %>
+
+        <div class="form-group">
+          <label class="form-label">Yeni Resimler Ekle</label>
+          <input type="file" name="images" class="form-control" accept="image/*" multiple>
+          <div id="imagePreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Etiketler</label>
+          <input type="text" name="tags" class="form-control" value="<%= listing.tags.join(', ') %>" placeholder="diamond, lol, hesap">
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-save"></i> Değişiklikleri Kaydet
+          </button>
+          <a href="/ilanlar/<%= listing.uuid %>" class="btn btn-outline btn-lg">İptal</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
