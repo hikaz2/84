@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aracını Değerlendir | OTOSELL</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --dark: #1a1a1a;
+            --light-bg: #f8f8f8;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --white: #fff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.08);
+            --error: #e53e3e;
+            --success: #38a169;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 60px 15px 50px;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.15rem;
+            opacity: 0.85;
+        }
+
+        .highlight-yellow {
+            color: var(--primary-yellow);
+        }
+
+        /* STEPS BAR */
+        .steps-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .step.active {
+            color: var(--dark);
+        }
+
+        .step.done {
+            color: var(--success);
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step.active .step-num {
+            background: var(--primary-yellow);
+            color: var(--dark);
+        }
+
+        .step.done .step-num {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .step-arrow {
+            color: var(--border);
+            font-size: 1.2rem;
+            margin: 0 0.2rem;
+        }
+
+        /* MAIN FORM AREA */
+        .form-area {
+            padding: 50px 15px 80px;
+        }
+
+        .form-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem 3rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .form-card h2 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-card .sub {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.97rem;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        .field-group-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* FORM GRID */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+        }
+
+        .form-grid.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-field label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-field label span.req {
+            color: var(--error);
+            margin-left: 2px;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.97rem;
+            color: var(--text);
+            background: var(--light-bg);
+            transition: border-color 0.25s, box-shadow 0.25s;
+            font-family: inherit;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.18);
+            background: var(--white);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* CHECKBOX GROUP */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.7rem;
+            margin-top: 0.2rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            cursor: pointer;
+            font-size: 0.93rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-yellow);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        /* RANGE SLIDER */
+        .range-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+
+        .range-value {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary-yellow);
+            height: 6px;
+            cursor: pointer;
+        }
+
+        /* CONDITION CARDS */
+        .condition-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .condition-card {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .condition-card:hover {
+            border-color: var(--primary-yellow);
+        }
+
+        .condition-card.selected {
+            border-color: var(--primary-yellow);
+            background: rgba(255, 215, 0, 0.08);
+        }
+
+        .condition-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .condition-card .label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--dark);
+        }
+
+        .condition-card .desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 0.2rem;
+        }
+
+        /* HIDDEN STEPS */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        /* NAVIGATION BUTTONS */
+        .form-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 13px 36px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffed4e 100%);
+            color: var(--dark);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(255,215,0,0.4);
+        }
+
+        .btn-secondary {
+            background: var(--light-bg);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--dark);
+            color: var(--dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* SUCCESS / RESULT PANEL */
+        .result-panel {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .result-panel.show {
+            display: block;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-panel h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .result-panel p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .estimated-value {
+            background: linear-gradient(120deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
+            border: 2px solid var(--primary-yellow);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 420px;
+        }
+
+        .estimated-value .label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .estimated-value .amount {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.1;
+        }
+
+        .estimated-value .note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .result-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            background: rgba(255,215,0,0.08);
+            border-left: 4px solid var(--primary-yellow);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        /* SIDEBAR */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            padding-top: 0;
+        }
+
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.05rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-yellow);
+            padding-bottom: 0.6rem;
+        }
+
+        .sidebar-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-card ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-card ul li .icon {
+            color: var(--primary-yellow);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contact-mini {
+            font-size: 0.9rem;
+        }
+
+        .contact-mini p {
+            margin-bottom: 0.6rem;
+            color: var(--text-light);
+        }
+
+        .contact-mini strong {
+            color: var(--dark);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            color: #999;
+            padding: 2rem 15px;
+            text-align: center;
+            border-top: 1px solid rgba(255,215,0,0.1);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary-yellow);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--white);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid.three-col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-card {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .form-grid.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                gap: 0.2rem;
+            }
+
+            .step {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .condition-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--border);
+            border-top-color: var(--primary-yellow);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner.show {
+            display: block;
+        }
+
+        /* validation */
+        .field-error {
+            font-size: 0.8rem;
+            color: var(--error);
+            margin-top: 2px;
+            display: none;
+        }
+
+        .form-field.has-error input,
+        .form-field.has-error select,
+        .form-field.has-error textarea {
+            border-color: var(--error);
+        }
+
+        .form-field.has-error .field-error {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="/" class="logo">OTOSELL</a>
+            <nav>
+                <a href="/#hakkimizda">Hakkımızda</a>
+                <a href="/#iletisim">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <h1>Aracını <span class="highlight-yellow">Değerlendir</span></h1>
+        <p>Aşağıdaki formu doldur, uzmanlarımız sana en kısa sürede teklif iletsin!</p>
+    </section>
+
+    <!-- STEPS BAR -->
+    <div class="steps-bar">
+        <div class="container">
+            <div class="steps">
+                <div class="step active" id="step-indicator-1">
+                    <span class="step-num" id="step-num-1">1</span>
+                    <span>Araç Bilgileri</span>
+                </div>
+                <span class="step-arrow">›</span>
+                <div class="step" id="step-indicator-2">
+                    <span class="step-num" id="step-num-2">2</span>
+                    <span>Durum & Özellikler</span>
+                </div>
+                <span class="step-arrow">›</span>
+                <div class="step" id="step-indicator-3">
+                    <span class="step-num" id="step-num-3">3</span>
+                    <span>İletişim Bilgileri</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM AREA -->
+    <section class="form-area">
+        <div class="container">
+            <div class="page-layout">
+
+                <!-- FORM CARD -->
+                <div>
+                    <div class="form-card">
+
+                        <!-- STEP 1: Araç Bilgileri -->
+                        <div class="form-step active" id="step-1">
+                            <h2>🚗 Araç Bilgileri</h2>
+                            <p class="sub">Aracınızla ilgili temel bilgileri girin.</p>
+
+                            <div class="form-grid">
+                                <div class="form-field" id="field-marka">
+                                    <label>Marka <span class="req">*</span></label>
+                                    <select id="marka" onchange="updateModels()">
+                                        <option value="">Seçiniz...</option>
+                                        <option>Audi</option>
+                                        <option>BMW</option>
+                                        <option>Chevrolet</option>
+                                        <option>Dacia</option>
+                                        <option>Fiat</option>
+                                        <option>Ford</option>
+                                        <option>Honda</option>
+                                        <option>Hyundai</option>
+                                        <option>Kia</option>
+                                        <option>Mercedes-Benz</option>
+                                        <option>Mitsubishi</option>
+                                        <option>Nissan</option>
+                                        <option>Opel</option>
+                                        <option>Peugeot</option>
+                                        <option>Renault</option>
+                                        <option>Seat</option>
+                                        <option>Skoda</option>
+                                        <option>Suzuki</option>
+                                        <option>Toyota</option>
+                                        <option>Volkswagen</option>
+                                        <option>Volvo</option>
+                                        <option>Diğer</option>
+                                    </select>
+                                    <span class="field-error">Lütfen marka seçiniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-model">
+                                    <label>Model <span class="req">*</span></label>
+                                    <input type="text" id="model" placeholder="Örn: Corolla, Clio, Golf...">
+                                    <span class="field-error">Lütfen model giriniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-yil">
+                                    <label>Model Yılı <span class="req">*</span></label>
+                                    <select id="yil">
+                                        <option value="">Seçiniz...</option>
+                                    </select>
+                                    <span class="field-error">Lütfen model yılı seçiniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-yakit">
+                                    <label>Yakıt Türü <span class="req">*</span></label>
+                                    <select id="yakit">
+                                        <option value="">Seçiniz...</option>
+                                        <option>Benzin</option>
+                                        <option>Dizel</option>
+                                        <option>LPG (Dönüşümlü)</option>
+                                        <option>Hibrit</option>
+                                        <option>Tam Elektrik</option>
+                                    </select>
+                                    <span class="field-error">Lütfen yakıt türü seçiniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-vites">
+                                    <label>Vites <span class="req">*</span></label>
+                                    <select id="vites">
+                                        <option value="">Seçiniz...</option>
+                                        <option>Manuel</option>
+                                        <option>Otomatik</option>
+                                        <option>Yarı Otomatik</option>
+                                    </select>
+                                    <span class="field-error">Lütfen vites türü seçiniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-kasa">
+                                    <label>Kasa Tipi <span class="req">*</span></label>
+                                    <select id="kasa">
+                                        <option value="">Seçiniz...</option>
+                                        <option>Sedan</option>
+                                        <option>Hatchback</option>
+                                        <option>SUV / Crossover</option>
+                                        <option>Station Wagon (Kombi)</option>
+                                        <option>Coupe</option>
+                                        <option>Cabrio</option>
+                                        <option>Minivan / MPV</option>
+                                        <option>Pick-up</option>
+                                        <option>Van / Panelvan</option>
+                                    </select>
+                                    <span class="field-error">Lütfen kasa tipi seçiniz.</span>
+                                </div>
+                            </div>
+
+                            <hr class="section-divider">
+
+                            <p class="field-group-title">📏 Kilometre Bilgisi</p>
+                            <div class="range-wrapper">
+                                <div class="range-value" id="km-display">50.000 km</div>
+                                <input type="range" id="km-slider" min="0" max="500000" step="5000" value="50000"
+                                    oninput="updateKmDisplay(this.value)">
+                                <div class="range-labels">
+                                    <span>0 km</span>
+                                    <span>500.000 km</span>
+                                </div>
+                            </div>
+                            <input type="hidden" id="km-value" value="50000">
+
+                            <div class="form-nav">
+                                <span></span>
+                                <button class="btn btn-primary" onclick="nextStep(1)">Devam Et →</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: Durum & Özellikler -->
+                        <div class="form-step" id="step-2">
+                            <h2>🔍 Durum &amp; Özellikler</h2>
+                            <p class="sub">Aracınızın durumunu ve ekstra özelliklerini belirtin.</p>
+
+                            <p class="field-group-title">🏷️ Genel Durum</p>
+                            <div class="condition-cards">
+                                <div class="condition-card" onclick="selectCondition('mukemmel', this)">
+                                    <div class="icon">⭐</div>
+                                    <div class="label">Mükemmel</div>
+                                    <div class="desc">Sıfır gibi, kusursuz</div>
+                                </div>
+                                <div class="condition-card" onclick="selectCondition('cok-iyi', this)">
+                                    <div class="icon">👍</div>
+                                    <div class="label">Çok İyi</div>
+                                    <div class="desc">Küçük aşınmalar var</div>
+                                </div>
+                                <div class="condition-card" onclick="selectCondition('iyi', this)">
+                                    <div class="icon">✅</div>
+                                    <div class="label">İyi</div>
+                                    <div class="desc">Görünür izler mevcut</div>
+                                </div>
+                                <div class="condition-card" onclick="selectCondition('orta', this)">
+                                    <div class="icon">⚙️</div>
+                                    <div class="label">Orta</div>
+                                    <div class="desc">Bakım / onarım gerekli</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="durum-value">
+                            <div class="field-error" id="durum-error" style="margin-top:6px;">Lütfen araç durumunu seçiniz.</div>
+
+                            <hr class="section-divider">
+
+                            <p class="field-group-title">🔧 Hasar / Tramer Durumu</p>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label>Tramer Kaydı</label>
+                                    <select id="tramer">
+                                        <option value="">Seçiniz...</option>
+                                        <option value="yok">Tramer yok (temiz)</option>
+                                        <option value="hafif">Hafif hasar (50.000 TL altı)</option>
+                                        <option value="orta">Orta hasar (50.000 – 200.000 TL)</option>
+                                        <option value="agir">Ağır hasar (200.000 TL+)</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Boya Durumu</label>
+                                    <select id="boya">
+                                        <option value="">Seçiniz...</option>
+                                        <option value="fabrika">Komple fabrika boyası</option>
+                                        <option value="kismi">Kısmi boya yapılmış</option>
+                                        <option value="komple">Komple yeniden boyalı</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr class="section-divider">
+
+                            <p class="field-group-title">✨ Ekstra Özellikler &amp; Donanım</p>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="sunroof"> Sunroof / Panoramik
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="geri-kamera"> Geri Görüş Kamerası
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="navigasyon"> Navigasyon / Ekran
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="park-sensoru"> Park Sensörü
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="koltuk-isitma"> Koltuk Isıtma
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="deri-koltuk"> Deri Koltuk
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="klima"> Klima / Otomatik İklim
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="kor-nokta"> Kör Nokta Uyarısı
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="led-far"> LED Farlar
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="anahtar-birakmadan"> Anahtarsız Giriş
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="hiz-sabitleyici"> Hız Sabitleyici (Cruise)
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="4wd"> 4WD / AWD
+                                </label>
+                            </div>
+
+                            <hr class="section-divider">
+
+                            <div class="form-grid full">
+                                <div class="form-field">
+                                    <label>Ek Notlar (İsteğe Bağlı)</label>
+                                    <textarea id="notlar" placeholder="Araçla ilgili belirtmek istediğiniz özel bilgiler, son yapılan bakımlar, orijinal parçalar vb."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-nav">
+                                <button class="btn btn-secondary" onclick="prevStep(2)">← Geri</button>
+                                <button class="btn btn-primary" onclick="nextStep(2)">Devam Et →</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: İletişim Bilgileri -->
+                        <div class="form-step" id="step-3">
+                            <h2>📋 İletişim Bilgileri</h2>
+                            <p class="sub">Teklifin size iletilmesi için iletişim bilgilerinizi girin.</p>
+
+                            <div class="form-grid">
+                                <div class="form-field" id="field-ad">
+                                    <label>Adınız <span class="req">*</span></label>
+                                    <input type="text" id="ad" placeholder="Adınızı giriniz">
+                                    <span class="field-error">Lütfen adınızı giriniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-soyad">
+                                    <label>Soyadınız <span class="req">*</span></label>
+                                    <input type="text" id="soyad" placeholder="Soyadınızı giriniz">
+                                    <span class="field-error">Lütfen soyadınızı giriniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-telefon">
+                                    <label>Telefon Numarası <span class="req">*</span></label>
+                                    <input type="tel" id="telefon" placeholder="05XX XXX XX XX" maxlength="11" oninput="formatPhone(this)">
+                                    <span class="field-error">Geçerli bir telefon numarası giriniz.</span>
+                                </div>
+
+                                <div class="form-field" id="field-email">
+                                    <label>E-posta Adresi</label>
+                                    <input type="email" id="email" placeholder="ornek@email.com">
+                                </div>
+
+                                <div class="form-field" id="field-sehir">
+                                    <label>Şehir <span class="req">*</span></label>
+                                    <select id="sehir">
+                                        <option value="">Seçiniz...</option>
+                                        <option>Adana</option><option>Adıyaman</option><option>Afyonkarahisar</option>
+                                        <option>Ağrı</option><option>Amasya</option><option>Ankara</option>
+                                        <option>Antalya</option><option>Artvin</option><option>Aydın</option>
+                                        <option>Balıkesir</option><option>Bilecik</option><option>Bingöl</option>
+                                        <option>Bitlis</option><option>Bolu</option><option>Burdur</option>
+                                        <option>Bursa</option><option>Çanakkale</option><option>Çankırı</option>
+                                        <option>Çorum</option><option>Denizli</option><option>Diyarbakır</option>
+                                        <option>Edirne</option><option>Elazığ</option><option>Erzincan</option>
+                                        <option>Erzurum</option><option>Eskişehir</option><option>Gaziantep</option>
+                                        <option>Giresun</option><option>Gümüşhane</option><option>Hakkari</option>
+                                        <option>Hatay</option><option>Isparta</option><option>İçel (Mersin)</option>
+                                        <option>İstanbul</option><option>İzmir</option><option>Kars</option>
+                                        <option>Kastamonu</option><option>Kayseri</option><option>Kırklareli</option>
+                                        <option>Kırşehir</option><option>Kocaeli</option><option>Konya</option>
+                                        <option>Kütahya</option><option>Malatya</option><option>Manisa</option>
+                                        <option>Kahramanmaraş</option><option>Mardin</option><option>Muğla</option>
+                                        <option>Muş</option><option>Nevşehir</option><option>Niğde</option>
+                                        <option>Ordu</option><option>Rize</option><option>Sakarya</option>
+                                        <option>Samsun</option><option>Siirt</option><option>Sinop</option>
+                                        <option>Sivas</option><option>Tekirdağ</option><option>Tokat</option>
+                                        <option>Trabzon</option><option>Tunceli</option><option>Şanlıurfa</option>
+                                        <option>Uşak</option><option>Van</option><option>Yozgat</option>
+                                        <option>Zonguldak</option><option>Aksaray</option><option>Bayburt</option>
+                                        <option>Karaman</option><option>Kırıkkale</option><option>Batman</option>
+                                        <option>Şırnak</option><option>Bartın</option><option>Ardahan</option>
+                                        <option>Iğdır</option><option>Yalova</option><option>Karabük</option>
+                                        <option>Kilis</option><option>Osmaniye</option><option>Düzce</option>
+                                    </select>
+                                    <span class="field-error">Lütfen şehir seçiniz.</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label>Tercihli İletişim Saati</label>
+                                    <select id="saat">
+                                        <option value="">Fark etmez</option>
+                                        <option>09:00 – 11:00</option>
+                                        <option>11:00 – 13:00</option>
+                                        <option>13:00 – 15:00</option>
+                                        <option>15:00 – 17:00</option>
+                                        <option>17:00 – 19:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                ℹ️ Bilgileriniz yalnızca teklif iletimi amacıyla kullanılır ve üçüncü taraflarla paylaşılmaz.
+                            </div>
+
+                            <div class="form-nav">
+                                <button class="btn btn-secondary" onclick="prevStep(3)">← Geri</button>
+                                <button class="btn btn-primary" onclick="submitForm()">Teklif Al 🚀</button>
+                            </div>
+                        </div>
+
+                        <!-- LOADING -->
+                        <div class="spinner" id="spinner"></div>
+
+                        <!-- RESULT PANEL -->
+                        <div class="result-panel" id="result-panel">
+                            <div class="result-icon">🎉</div>
+                            <h2>Değerlendirme Talebiniz Alındı!</h2>
+                            <p>Uzman ekibimiz aracınızı inceleyerek en kısa sürede size ulaşacak.</p>
+
+                            <div class="estimated-value">
+                                <div class="label">Tahmini Piyasa Değeri</div>
+                                <div class="amount" id="estimated-amount">—</div>
+                                <div class="note">* Bu değer tahminidir. Kesin teklif uzmanımızdan gelecektir.</div>
+                            </div>
+
+                            <p>Telefon numaranıza kısa süre içinde dönüş yapılacaktır.<br>
+                            Acil durumlar için <strong>+90 (544) 601-1480</strong> numarasını arayabilirsiniz.</p>
+
+                            <div class="result-actions">
+                                <a href="/" class="btn btn-primary">Ana Sayfaya Dön 🏠</a>
+                                <button class="btn btn-secondary" onclick="resetForm()">Yeni Değerlendirme</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SIDEBAR -->
+                <aside class="sidebar">
+
+                    <div class="sidebar-card">
+                        <h3>⚡ Neden OTOSELL?</h3>
+                        <ul>
+                            <li><span class="icon">✔</span> Ücretsiz ve bağlayıcı olmayan değerlendirme</li>
+                            <li><span class="icon">✔</span> 24 saat içinde uzman geri dönüşü</li>
+                            <li><span class="icon">✔</span> Piyasa fiyatına en yakın teklif</li>
+                            <li><span class="icon">✔</span> Güvenli ve hızlı satış süreci</li>
+                            <li><span class="icon">✔</span> Tüm evrak işlemlerinde yardım</li>
+                            <li><span class="icon">✔</span> Binlerce memnun müşteri</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>📞 Doğrudan Ulaşın</h3>
+                        <div class="contact-mini">
+                            <p><strong>Telefon:</strong><br>+90 (544) 601-1480</p>
+                            <p><strong>E-posta:</strong><br>destek@otosell.com</p>
+                            <p><strong>Çalışma Saatleri:</strong><br>Pazartesi – Cuma: 09:00 – 18:00</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>💡 Teklif Almadan Önce</h3>
+                        <ul>
+                            <li><span class="icon">📄</span> Ruhsat ve belgeleri hazırlayın</li>
+                            <li><span class="icon">🔧</span> Bakım kayıtlarını toplayın</li>
+                            <li><span class="icon">🚿</span> Aracı temizleyip fotoğraflayın</li>
+                            <li><span class="icon">🔑</span> Yedek anahtarların olduğundan emin olun</li>
+                        </ul>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 OTOSELL | Aracınızı güvenle satın!</p>
+        <p>Tüm Hakları Saklıdır. <a href="#">Gizlilik Politikası</a> | <a href="#">Kullanım Şartları</a></p>
+    </footer>
+
+    <script>
+        // ─── Year Dropdown ───────────────────────────────────────────
+        (function populateYears() {
+            const select = document.getElementById('yil');
+            const currentYear = new Date().getFullYear();
+            for (let y = currentYear; y >= 1990; y--) {
+                const opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                select.appendChild(opt);
+            }
+        })();
+
+        // ─── KM Slider ───────────────────────────────────────────────
+        function updateKmDisplay(val) {
+            document.getElementById('km-value').value = val;
+            document.getElementById('km-display').textContent =
+                parseInt(val).toLocaleString('tr-TR') + ' km';
+        }
+
+        // ─── Condition Cards ─────────────────────────────────────────
+        function selectCondition(val, el) {
+            document.querySelectorAll('.condition-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('durum-value').value = val;
+            document.getElementById('durum-error').style.display = 'none';
+        }
+
+        // ─── Phone Formatter ─────────────────────────────────────────
+        function formatPhone(el) {
+            el.value = el.value.replace(/\D/g, '').slice(0, 11);
+        }
+
+        // ─── Step Navigation ─────────────────────────────────────────
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function showStep(n) {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById('step-' + i).classList.remove('active');
+                const ind = document.getElementById('step-indicator-' + i);
+                ind.classList.remove('active', 'done');
+                const num = document.getElementById('step-num-' + i);
+                num.textContent = i;
+            }
+            document.getElementById('step-' + n).classList.add('active');
+            for (let i = 1; i < n; i++) {
+                const ind = document.getElementById('step-indicator-' + i);
+                ind.classList.add('done');
+                document.getElementById('step-num-' + i).textContent = '✓';
+            }
+            document.getElementById('step-indicator-' + n).classList.add('active');
+            currentStep = n;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setFieldError(fieldId, hasError) {
+            const el = document.getElementById(fieldId);
+            if (!el) return;
+            if (hasError) {
+                el.classList.add('has-error');
+            } else {
+                el.classList.remove('has-error');
+            }
+        }
+
+        function validateStep1() {
+            let valid = true;
+            const required = ['marka', 'model', 'yil', 'yakit', 'vites', 'kasa'];
+            required.forEach(id => {
+                const el = document.getElementById(id);
+                const fieldId = 'field-' + id;
+                if (!el || !el.value.trim()) {
+                    setFieldError(fieldId, true);
+                    valid = false;
+                } else {
+                    setFieldError(fieldId, false);
+                }
+            });
+            return valid;
+        }
+
+        function validateStep2() {
+            const durum = document.getElementById('durum-value').value;
+            if (!durum) {
+                document.getElementById('durum-error').style.display = 'block';
+                return false;
+            }
+            document.getElementById('durum-error').style.display = 'none';
+            return true;
+        }
+
+        function validateStep3() {
+            let valid = true;
+            const fields = [
+                { id: 'ad', fieldId: 'field-ad' },
+                { id: 'soyad', fieldId: 'field-soyad' },
+                { id: 'sehir', fieldId: 'field-sehir' },
+            ];
+            fields.forEach(({ id, fieldId }) => {
+                const el = document.getElementById(id);
+                if (!el || !el.value.trim()) {
+                    setFieldError(fieldId, true);
+                    valid = false;
+                } else {
+                    setFieldError(fieldId, false);
+                }
+            });
+
+            const tel = document.getElementById('telefon').value.replace(/\D/g, '');
+            if (tel.length !== 11) {
+                setFieldError('field-telefon', true);
+                valid = false;
+            } else {
+                setFieldError('field-telefon', false);
+            }
+
+            return valid;
+        }
+
+        function nextStep(current) {
+            if (current === 1 && !validateStep1()) return;
+            if (current === 2 && !validateStep2()) return;
+            showStep(current + 1);
+        }
+
+        function prevStep(current) {
+            showStep(current - 1);
+        }
+
+        // ─── Estimated Value Calculator ──────────────────────────────
+        function calcEstimate() {
+            const yil = parseInt(document.getElementById('yil').value) || 2015;
+            const km = parseInt(document.getElementById('km-value').value) || 50000;
+            const durum = document.getElementById('durum-value').value;
+
+            const age = new Date().getFullYear() - yil;
+            let base = 1200000;
+
+            // Age depreciation
+            base -= age * 60000;
+            // KM depreciation (per 10k km)
+            base -= Math.floor(km / 10000) * 20000;
+            // Condition factor
+            const condMap = { mukemmel: 1.15, 'cok-iyi': 1.0, iyi: 0.88, orta: 0.72 };
+            base *= (condMap[durum] || 1.0);
+
+            base = Math.max(base, 150000);
+            base = Math.round(base / 5000) * 5000;
+
+            const low = (base * 0.93).toLocaleString('tr-TR');
+            const high = (base * 1.07).toLocaleString('tr-TR');
+            return low + ' – ' + high + ' ₺';
+        }
+
+        // ─── Form Submit ─────────────────────────────────────────────
+        function submitForm() {
+            if (!validateStep3()) return;
+
+            const estimate = calcEstimate();
+
+            // Hide step, show spinner
+            document.getElementById('step-3').classList.remove('active');
+            document.getElementById('spinner').classList.add('show');
+
+            setTimeout(() => {
+                document.getElementById('spinner').classList.remove('show');
+                document.getElementById('estimated-amount').textContent = estimate;
+                document.getElementById('result-panel').classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 2000);
+        }
+
+        // ─── Reset Form ──────────────────────────────────────────────
+        function resetForm() {
+            document.getElementById('result-panel').classList.remove('show');
+            document.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"], textarea')
+                .forEach(el => el.value = '');
+            document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+            document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+            document.querySelectorAll('.condition-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('durum-value').value = '';
+            document.getElementById('km-slider').value = 50000;
+            updateKmDisplay(50000);
+            showStep(1);
+        }
+
+        // ─── Model auto-suggest hint ─────────────────────────────────
+        const brandModels = {
+            Audi: 'A3, A4, A6, Q5, Q7',
+            BMW: '3 Serisi, 5 Serisi, X5, 1 Serisi',
+            Chevrolet: 'Cruze, Spark, Captiva, Aveo',
+            Dacia: 'Sandero, Logan, Duster, Spring',
+            Fiat: 'Egea, Doblo, Tipo, 500',
+            Ford: 'Focus, Fiesta, Kuga, Mondeo',
+            Honda: 'Civic, CR-V, Jazz, HR-V',
+            Hyundai: 'i20, i30, Tucson, Santa Fe',
+            Kia: 'Picanto, Rio, Sportage, Sorento',
+            'Mercedes-Benz': 'C Serisi, E Serisi, GLC, A Serisi',
+            Mitsubishi: 'ASX, Outlander, Eclipse Cross, L200',
+            Nissan: 'Micra, Qashqai, Juke, X-Trail',
+            Opel: 'Astra, Corsa, Insignia, Mokka',
+            Peugeot: '208, 308, 3008, 5008',
+            Renault: 'Clio, Megane, Symbol, Kadjar',
+            Seat: 'Ibiza, Leon, Ateca, Arona',
+            Skoda: 'Fabia, Octavia, Superb, Kodiaq',
+            Suzuki: 'Swift, Vitara, S-Cross, Jimny',
+            Toyota: 'Corolla, Yaris, RAV4, Camry',
+            Volkswagen: 'Golf, Polo, Passat, Tiguan',
+            Volvo: 'S60, S90, XC40, XC60',
+        };
+
+        function updateModels() {
+            const marka = document.getElementById('marka').value;
+            const modelInput = document.getElementById('model');
+            if (brandModels[marka]) {
+                modelInput.placeholder = 'Örn: ' + brandModels[marka];
+            } else {
+                modelInput.placeholder = 'Örn: Corolla, Clio, Golf...';
+            }
+        }
+
+        // Initialize km display
+        updateKmDisplay(50000);
+    </script>
+</body>
+</html>
