@@ -1,6 +1,6 @@
 # HesapSat – Dijital Hesap Al & Sat Platformu
 
-**HesapSat**, [hesapsat.net](https://hesapsat.net) benzeri bir **Türkçe dijital hesap pazaryeri** platformudur.  
+**HesapSat**, [hesapsat.net](https://hesapsat.net) benzeri bir **Türkçe dijital hesap pazar yeri** platformudur.  
 Oyun hesapları, sosyal medya, streaming ve yazılım lisanslarının güvenli şekilde alınıp satıldığı tek sayfalık bir web uygulamasıdır.
 
 ---
